@@ -16,7 +16,7 @@ public class PlayerDeathListener : MonoBehaviour
 	{
 		Debug.Log("Player " + pde.Kille + " was killed by " + pde.KilledBy + " using " + pde.KilledWith + ".");
 		_cf.RemoveTarget(pde.PlayerGo.transform);
-		GameManager.Instance.RemovePlayer(pde.PlayerGo);
+		//GameManager.Instance.RemovePlayer(pde.PlayerGo);
 		pde.PlayerGo.SetActive(false);
 	}
 

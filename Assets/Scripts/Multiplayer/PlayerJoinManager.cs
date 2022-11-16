@@ -20,7 +20,7 @@ public class PlayerJoinManager : PlayerSpawnManager
         // Set the player ID, add one to the index to start at Player 1
         playerInput.gameObject.GetComponent<PlayerDetails>().playerID = playerInput.playerIndex + 1;
         //
-        scoreManager.AddPlayers(playerInput.gameObject);
+        GameManager.Instance.AddPLayer(playerInput.gameObject);
         listOfPlayers.Add(playerInput);
         Debug.Log("PlayerInput ID: " + playerInput.playerIndex);
 
