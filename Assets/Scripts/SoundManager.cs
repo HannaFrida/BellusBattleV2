@@ -18,14 +18,22 @@ public class SoundManager : MonoBehaviour
     [Header("music & ambience")]
     [SerializeField] private AudioSource musicSource;
     [SerializeField] private AudioClip[] allMusicSounds;
+    [SerializeField] private AudioSource hazardSource;
+    [SerializeField] private AudioClip[] allHazardSounds;
     [SerializeField] private AudioClip victoryMusic;
     [SerializeField] private AudioSource ambience;
     [SerializeField] private AudioClip[] allAmbienceSounds;
+
     [Header("foliage")]
     [SerializeField] private AudioSource doorToggleSource;
-    private AudioSource subtitlesSoundSource;
+    [SerializeField] private AudioSource bellRingSource;
+    [SerializeField] private AudioSource startGameBellSource;
     private AudioSource pickUpSoundSource;
-   
+
+    [Header("UI sounds")]
+    [SerializeField] private AudioSource howerMenuSource;
+    [SerializeField] private AudioSource pressMenuSource;
+
 
     private float volLowRan = 0.3f;
     private float volHighRan = 1.0f;
@@ -57,94 +65,51 @@ public class SoundManager : MonoBehaviour
         StartCoroutine(FadeMixerGroup.StartFade(overallMixer, "MusicMixerGroup", 2, 0f));
     }
 
-    public void SoundPlaying(string clip)
-    { //hanterar vilket ljud som spelas. kallas på i andra scripts.
-
-        if (clip == "intenseSnapshot")
-        {
-         //   intenseSnapshot.TransitionTo(0.0f);
-         //   if (!intenseMusic.isPlaying)
-          //      intenseMusic.Play();
-            Debug.Log("intenseMusic");
-        }
-        if (clip == "normalSnapshot")
-        {
-         //   normalSnapshot.TransitionTo(0.0f);
-         //   intenseMusic.Stop();
-            //Debug.Log("normalMusic");
-        }
-        if (clip == "shootSound") //Weapon
-        {
-            Shoot();
-        }
-        if (clip == "reload") //Weapon
-        {
-            ReloadSound();
-        }
-        if (clip == "meleeAttack") //Weapon
-        {
-            MeleeAttackSound();
-            Debug.Log("meleeAttackSounds");
-        }
-        if (clip == "pickUp") //Interactor
-        {
-            PickUp();
-        }
-        if (clip == "subtitlesSound") //SubsScript
-        {
-            Subtitles();
-        }
-        if (clip == "zombieDeathSound") //enemyAI
-        {
-            ZombieDeathSound();
-            Debug.Log("zombieDiedd");
-        }
-        if (clip == "zombieDamagedSound") //enemyAI
-        {
-            ZombieDamagedSound();
-        }
-        if (clip == "headshotSound") //enemyAI
-        {
-            ZombieHeadshotSound();
-        }
-        if (clip == "generatorOn") //Generator
-        {
-            GeneratorTurnedOn();
-            Debug.Log("generator turned on");
-        }
-        if (clip == "generatorOff") //Generator
-        {
-            GeneratorBroke();
-            Debug.Log("generator broke");
-        }
-        if (clip == "newWave") //Generator
-        {
-            NewWave();
-        }
-        if (clip == "danHit") //Dan take damage
-        {
-        //    RandomClip(danHitSounds, danHitSoundSource);
-            DanHitSound();
-        }
-        if (clip == "kateHit") //Kate take damage
-        {
-       //     RandomClip(kateHitSounds, kateHitSoundSource);
-            KateHitSound();
-        }
-        if (clip == "toggleDoor") //Doors
-        {
-            ToggleDoorSound();
-        }
-        if (clip == "zombieAttack")
-        {
-         //   RandomClip(zombieAttackSounds, zombieAttackSoundSource);
-            ZombieAttackSound();
-        }
-    }
-    private void Shoot()
+    public void FadeInHazard(AudioClip hazard)
     {
-    //    shootSoundSource.pitch = Random.Range(0.6f, highPitchRan);//kanske ska ha samma pitch hela tiden?
-    //    shootSoundSource.PlayOneShot(shootSound);
+        PlaySound("Hazards", hazard);
+        StartCoroutine(FadeMixerGroup.StartFade(overallMixer, "HazardMixerGroup", 2, 0.5f));
+    }
+    public void FadeOutHazard()
+    {
+        RandomClipPlayer(allMusicSounds, musicSource);
+        StartCoroutine(FadeMixerGroup.StartFade(overallMixer, "HazardMixerGroup", 2, 0f));
+    }
+    public void PlayerOnPlay_Sound()
+    {
+        bellRingSource.pitch = Random.Range(0.8f, highPitchRan);//kanske ska ha samma pitch hela tiden?
+        bellRingSource.Play();
+    }
+    public void AllPlayersOnPlay_Sound()
+    {
+        startGameBellSource.Play();
+    }
+    public void HowerUiSound()
+    {
+        howerMenuSource.pitch = Random.Range(0.95f, highPitchRan);
+        howerMenuSource.Play();
+    }
+    public void PressUiSound()
+    {
+        pressMenuSource.Play();
+    }
+    public void PlaySound(string mixerName,AudioClip soundToPlay)
+    { //hanterar vilket ljud som spelas. kallas på i andra scripts.
+        if (mixerName == "Hazards")
+        {
+            PlayLavaHazard(soundToPlay);
+        }
+        //if (soundToPlay == "intenseSnapshot")
+        //{
+        //   intenseSnapshot.TransitionTo(0.0f);
+        //   if (!intenseMusic.isPlaying)
+        //      intenseMusic.Play();
+        //    Debug.Log("intenseMusic");
+        // }
+    }
+    private void PlayLavaHazard(AudioClip hazardSound)
+    {
+        hazardSource.PlayOneShot(hazardSound);
     }
     private void MeleeAttackSound()
     {
@@ -156,43 +121,12 @@ public class SoundManager : MonoBehaviour
         pickUpSoundSource.pitch = Random.Range(0.8f, highPitchRan);//kanske ska ha samma pitch hela tiden?
     //    pickUpSoundSource.PlayOneShot(pickUpSound);
     }
-
-    private void Subtitles()
-    {
-        subtitlesSoundSource.pitch = Random.Range(0.8f, highPitchRan);//kanske ska ha samma pitch hela tiden?
-  //      subtitlesSoundSource.PlayOneShot(subtitlesSound);
-    }
     private void ZombieDeathSound()
     {
         float vol = Random.Range(volLowRan, volHighRan);
     //    zombieDeathSource.pitch = Random.Range(lowPitchRan, highPitchRan);
     //    zombieDeathSource.PlayOneShot(zombieDeathSound, vol);
     }
-    private void ZombieDamagedSound()
-    {
-        float vol = Random.Range(volLowRan, volHighRan);
-   //     zombieTakesDamageSoundSource.pitch = Random.Range(lowPitchRan, highPitchRan);
-  //      zombieTakesDamageSoundSource.PlayOneShot(zombieTakesDamageSound, vol);
-    }
-    private void ZombieHeadshotSound()
-    {
-        float vol = Random.Range(volLowRan, volHighRan);
-   //     zombieTakesDamageSoundSource.pitch = Random.Range(0.8f, 1.2f);
-    //    zombieTakesDamageSoundSource.PlayOneShot(headshotSound, vol);
-
-
-    }
-    private void ReloadSound()
-    {
-        //reloadSoundSource.pitch = Random.Range(0.6f, highPitchRan);
-    //    reloadSoundSource.PlayOneShot(reloadSound);
-    }
-    private void NewWave()
-    {
-  //      newWaveAudioSource.pitch = Random.Range(0.8f, highPitchRan);
-    //    newWaveAudioSource.PlayOneShot(newWave);
-    }
-
     private void RandomiseSoundPlayback()
     { //Gör att ett ljud körs random.
      //   if (!zombieRoarSoundSource.isPlaying)
@@ -203,39 +137,7 @@ public class SoundManager : MonoBehaviour
 
         }
     }
-    private void GeneratorTurnedOn()
-    {
-      //  generatorSourceOn.pitch = Random.Range(0.8f, highPitchRan);
-     //   generatorSourceOn.PlayOneShot(generatorOnSound);
-    }
-    private void GeneratorBroke()
-    {
-    //    generatorSource.pitch = Random.Range(0.8f, highPitchRan);
-   //     generatorSource.time = 4;
-   //     generatorSource.PlayOneShot(generatorOffSound);
-    }
-
-    private void DanHitSound()
-    {
-     //   danHitSoundSource.pitch = Random.Range(0.8f, highPitchRan);
-     //   danHitSoundSource.PlayOneShot(danHitSoundSource.clip);
-    }
-
-    private void KateHitSound()
-    {
-       // kateHitSoundSource.pitch = Random.Range(0.8f, highPitchRan);
-      //  kateHitSoundSource.PlayOneShot(kateHitSoundSource.clip);
-    }
-
-    private void ZombieAttackSound()
-    {
-      //  if (!zombieAttackSoundSource.isPlaying)
-        {
-      //      zombieAttackSoundSource.pitch = Random.Range(0.8f, highPitchRan);
-      //      zombieAttackSoundSource.PlayOneShot(zombieAttackSoundSource.clip);
-        }
-    }
-
+   
 
     private void ToggleDoorSound()
     {
@@ -245,9 +147,6 @@ public class SoundManager : MonoBehaviour
        //     doorToggleSource.PlayOneShot(doorToggleSound);
         }
     }
-
-    //Nyman
-    //Returns random clip and make sure the same clip does not repeat
     private void RandomClipPlayer(AudioClip[] sounds, AudioSource source)
     {
         int randomIndex = Random.Range(0, sounds.Length);
@@ -258,7 +157,6 @@ public class SoundManager : MonoBehaviour
         source.clip = sounds[randomIndex];
         source.Play();
     }
-
     public static class FadeMixerGroup
     {
         public static IEnumerator StartFade(AudioMixer audioMixer, string exposedParam, float duration, float targetVolume)
@@ -278,16 +176,6 @@ public class SoundManager : MonoBehaviour
             yield break;
         }
     }
-        public void MuteSource(string sourceName)
-    {
-        if (sourceName == "subtitles")
-        {
-            subtitlesSoundSource.Stop();
-        }
-        else if (sourceName == "generatorOn")
-        {
-     //       generatorSourceOn.Stop();
-        }
-    }
+       
 
 }
