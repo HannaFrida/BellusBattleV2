@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlatformAttach : MonoBehaviour
+public class MovingPlatform : MonoBehaviour
 {
     [SerializeField] private List<Collider> attachedColliders = new List<Collider>();
     [SerializeField] private BoxCollider attachZone;
