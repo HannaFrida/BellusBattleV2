@@ -9,6 +9,7 @@ public class HazardMover : MonoBehaviour
     [SerializeField] private float movingSpeed;
     [SerializeField] private float smoothTime;
     private BoxCollider boxCollider;
+    private SoundManager soundManager;
     private float lowestPoint;
     private float timer;
     private Vector3 moveVector;
@@ -18,6 +19,7 @@ public class HazardMover : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
         boxCollider = GetComponent<BoxCollider>();
         lowestPoint = boxCollider.bounds.max.y; ;
         moveVector = new Vector3(0f, movingSpeed, 0f);
@@ -45,8 +47,9 @@ public class HazardMover : MonoBehaviour
     }
     private void MoveHazard()
     {
+        soundManager.FadeInHazard();
         //Debug.Log(moveVector);
-        if(hasReachedHighestPoint == false)
+        if (hasReachedHighestPoint == false)
         {
             transform.position = Vector3.SmoothDamp(transform.position, highestPosition, ref moveVector, smoothTime);
             if (boxCollider.bounds.max.y >= highestPoint.position.y)
@@ -67,6 +70,7 @@ public class HazardMover : MonoBehaviour
                 //Debug.Log("yoo");
                 hasReachedHighestPoint = false;
                 runTimer = true;
+                soundManager.FadeOutHazard();
             }
         }
     }

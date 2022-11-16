@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     [SerializeField] private List<GameObject> players = new List<GameObject>();
     [SerializeField] private List<GameObject> playersAlive = new List<GameObject>();
+    [SerializeField] private SoundManager soundManager;
     private bool gameHasStarted;
 
     [Header("Poängrelaterat")]
@@ -36,7 +37,9 @@ public class GameManager : MonoBehaviour
     private int sceneCount;
     private enum WhichScenesListToPlay { ScenesFromBuild, ScenesFromList, ScenesFromBuildAndList };
     private enum WhichOrderToPlayScenes { Random, NumiricalOrder };
-
+    private string nextLevel;
+    [SerializeField] private float transitionTime = 5f;
+    AsyncOperation asyncLoad;
 
     public List<string> scenesToChooseFrom = new List<string>();
     public List<string> scenesToRemove = new List<string>();
@@ -51,7 +54,7 @@ public class GameManager : MonoBehaviour
             giveScoreTimer = 0f;
             gameHasStarted = true;
             playersAlive = new List<GameObject>(players);
-        }
+        }     
 
     }
     private void Awake()
@@ -75,7 +78,7 @@ public class GameManager : MonoBehaviour
         if (hasOnePlayerLeft && !hasGivenScore && gameHasStarted)
         {
             GiveScoreAfterTimer();
-        }
+        }           
 
     }
 
@@ -84,6 +87,7 @@ public class GameManager : MonoBehaviour
         sceneCount = SceneManager.sceneCountInBuildSettings;
         scenesToRemove.Add("MainMenu");
         scenesToRemove.Add("The_End");
+        scenesToRemove.Add("TransitionScene");
         LoadScenesList();
         if (SceneManager.GetActiveScene().buildIndex == 0) CreateLevelsUI();
     }
@@ -114,6 +118,8 @@ public class GameManager : MonoBehaviour
         if (playersAlive.Count <= 1)
         {
             hasOnePlayerLeft = true;
+            soundManager.FadeOutMusic();
+            soundManager.FadeOutHazard();
         }
         else if (playersAlive.Count > 1)
         {
@@ -157,6 +163,7 @@ public class GameManager : MonoBehaviour
 
         if (playersAlive.Count != 0)
         {
+            
             GameObject winner = playersAlive[0];
             AddScore(playersAlive[0]);
             hasGivenScore = true;
@@ -240,6 +247,8 @@ public class GameManager : MonoBehaviour
 
     public void LoadNextScene()
     {
+        SceneManager.LoadScene("TransitionScene");
+
         if (scenesToChooseFrom.Count <= 0)
         {
             Application.OpenURL("https://www.youtube.com/watch?v=WEEM2Qc9sUg");
@@ -250,8 +259,13 @@ public class GameManager : MonoBehaviour
         if (scenesToChooseFrom.Count <= 0)
         {
             LoadScenesList();
+
         }
+        
+        StartCoroutine(AsynchronousLoad());
+        soundManager.FadeInMusic();
     }
+    /*
     private void LoadNextSceneInNumericalOrder()
     {
         SceneManager.LoadScene(scenesToChooseFrom.ElementAt(0));
@@ -262,6 +276,21 @@ public class GameManager : MonoBehaviour
         int randomNumber = Random.Range(0, scenesToChooseFrom.Count);
         SceneManager.LoadScene(scenesToChooseFrom.ElementAt(randomNumber));
         scenesToChooseFrom.RemoveAt(randomNumber);
+    }
+    */
+
+    private string LoadNextSceneInNumericalOrder()
+    {
+        nextLevel = scenesToChooseFrom.ElementAt(0);
+        scenesToChooseFrom.RemoveAt(0);
+        return nextLevel;
+    }
+    private string LoadNextSceneInRandomOrder()
+    {
+        int randomNumber = Random.Range(0, scenesToChooseFrom.Count);
+        nextLevel = scenesToChooseFrom.ElementAt(randomNumber);
+        scenesToChooseFrom.RemoveAt(randomNumber);
+        return nextLevel;
     }
     public void Finish(GameObject destroyMe)
     {
@@ -281,7 +310,28 @@ public class GameManager : MonoBehaviour
         return winnerID;
     }
 
+    // The Application loads the Scene in the background as the current Scene runs.
+    // transitionTime is how long the TransitionScene is shown before continuing
+    private IEnumerator AsynchronousLoad()
+    {
+        yield return new WaitForSeconds(transitionTime);
 
+        Application.backgroundLoadingPriority = ThreadPriority.High;
 
+        asyncLoad = SceneManager.LoadSceneAsync(nextLevel);
+        asyncLoad.allowSceneActivation = false;
+        while (!asyncLoad.isDone)
+        {
+            if (Mathf.Approximately(asyncLoad.progress, 0.9f))
+            {
+                asyncLoad.allowSceneActivation = true;
+            }
+            yield return null;
+        }
 
+        Application.backgroundLoadingPriority = ThreadPriority.BelowNormal;
+
+        yield return new WaitForEndOfFrame();
+        yield return null;
+    }
 }

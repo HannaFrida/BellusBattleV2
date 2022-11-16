@@ -10,6 +10,7 @@ public class Grenade : Projectile
 	private float explosionSize = 5.0f;
 	private CameraFocus cf; //shitfx
 	[SerializeField] private GameObject objectToBoom;
+	[SerializeField] private AudioSource explosionSound;
 	[SerializeField] private GameObject bombMesh;
 
 	private void Start(){
@@ -35,6 +36,7 @@ public class Grenade : Projectile
         if (bombMesh != null)
         {
 			bombMesh.SetActive(false);
+			explosionSound.Play();
 			GameObject spawnVfx = Instantiate(objectToBoom, transform);
 		}
 		

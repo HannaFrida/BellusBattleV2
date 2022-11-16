@@ -5701,7 +5701,7 @@ Transform:
   m_GameObject: {fileID: 6431588530169345916}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.1, y: 1.1, z: 1.1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 550519761581017672}
@@ -5738,13 +5738,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 837ef830bb7cb304d9f92158dee6a699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 15
-  jumpForce: 19
-  airDeceleration: 25
-  groundDeceleration: 80
-  airResistance: 72
-  downwardForce: -22.5
-  acceleration: 35245
+  moveSpeed: 16.69
+  jumpForce: 21.19
+  airDeceleration: 30.9
+  groundDeceleration: 150
+  airResistance: 72.5
+  downwardForce: -22.7
+  acceleration: 35444
   doubleJumpDecreaser: 0.94
   downwardInputBound: -0.75
   edgeControlAmount: 0.5
@@ -6130,14 +6130,14 @@ TrailRenderer:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.6729535
-        value: 1
-        inSlope: -0
-        outSlope: -0
+        time: 0.41425002
+        value: 0.33529386
+        inSlope: -1.4622746
+        outSlope: -1.4622746
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.15898989
-        outWeight: 0.32914698
+        outWeight: 0.09670773
       - serializedVersion: 3
         time: 0.8257253
         value: 0.068570614
@@ -8149,7 +8149,7 @@ PrefabInstance:
     - target: {fileID: 1952737545159249948, guid: c4626a2bd3e247f41ad1ce76bb68ac1a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.000062040286
+      value: 0.00006203842
       objectReference: {fileID: 0}
     - target: {fileID: 1952737545159249948, guid: c4626a2bd3e247f41ad1ce76bb68ac1a,
         type: 3}
@@ -8379,7 +8379,17 @@ PrefabInstance:
     - target: {fileID: 3476690299495660232, guid: c4626a2bd3e247f41ad1ce76bb68ac1a,
         type: 3}
       propertyPath: rotations
-      value: 0
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3476690299495660232, guid: c4626a2bd3e247f41ad1ce76bb68ac1a,
+        type: 3}
+      propertyPath: rotationsOverride
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3476690299495660232, guid: c4626a2bd3e247f41ad1ce76bb68ac1a,
+        type: 3}
+      propertyPath: amountOfFixedAgnles
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3491017541839909693, guid: c4626a2bd3e247f41ad1ce76bb68ac1a,
         type: 3}
