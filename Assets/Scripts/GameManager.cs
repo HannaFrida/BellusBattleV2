@@ -36,6 +36,8 @@ public class GameManager : MonoBehaviour
     private int sceneCount;
     private enum WhichScenesListToPlay { ScenesFromBuild, ScenesFromList, ScenesFromBuildAndList };
     private enum WhichOrderToPlayScenes { Random, NumiricalOrder };
+    private string nextLevel;
+    public string NextLevel { get => nextLevel; }
 
 
     public List<string> scenesToChooseFrom = new List<string>();
@@ -84,6 +86,7 @@ public class GameManager : MonoBehaviour
         sceneCount = SceneManager.sceneCountInBuildSettings;
         scenesToRemove.Add("MainMenu");
         scenesToRemove.Add("The_End");
+        scenesToRemove.Add("TransitionScene");
         LoadScenesList();
         if (SceneManager.GetActiveScene().buildIndex == 0) CreateLevelsUI();
     }
@@ -177,6 +180,7 @@ public class GameManager : MonoBehaviour
 
     public void LoadScenesList()
     {
+        SceneManager.LoadScene("TransitionScene");
         if (scenceToPlay == WhichScenesListToPlay.ScenesFromBuild) CreateListOfScenesFromBuild();
         else if (scenceToPlay == WhichScenesListToPlay.ScenesFromList) CreateListOfScenesFromList();
         else if (scenceToPlay == WhichScenesListToPlay.ScenesFromBuildAndList) { CreateListOfScenesFromBuild(); CreateListOfScenesFromList(); }
@@ -248,6 +252,7 @@ public class GameManager : MonoBehaviour
             LoadScenesList();
         }
     }
+    /*
     private void LoadNextSceneInNumericalOrder()
     {
         SceneManager.LoadScene(scenesToChooseFrom.ElementAt(0));
@@ -258,6 +263,21 @@ public class GameManager : MonoBehaviour
         int randomNumber = Random.Range(0, scenesToChooseFrom.Count);
         SceneManager.LoadScene(scenesToChooseFrom.ElementAt(randomNumber));
         scenesToChooseFrom.RemoveAt(randomNumber);
+    }
+    */
+
+    private string LoadNextSceneInNumericalOrder()
+    {
+        nextLevel = scenesToChooseFrom.ElementAt(0);
+        scenesToChooseFrom.RemoveAt(0);
+        return nextLevel;
+    }
+    private string LoadNextSceneInRandomOrder()
+    {
+        int randomNumber = Random.Range(0, scenesToChooseFrom.Count);
+        nextLevel = scenesToChooseFrom.ElementAt(randomNumber);
+        scenesToChooseFrom.RemoveAt(randomNumber);
+        return nextLevel;
     }
     public void Finish(GameObject destroyMe)
     {
