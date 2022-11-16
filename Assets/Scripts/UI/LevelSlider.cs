@@ -42,7 +42,7 @@ public class LevelSlider : MonoBehaviour
     }
     public void OnPlay()
     {
-        scoreManager.SetPointsToWin(nmrOfLevels);
-        levelManager.LoadNextScene();
+        GameManager.Instance.SetPointsToWin(nmrOfLevels);
+        GameManager.Instance.LoadNextScene();
     }
 }
