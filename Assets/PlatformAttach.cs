@@ -6,7 +6,7 @@ public class PlatformAttach : MonoBehaviour
 {
     public GameObject Player;
 
-    private void OnTriggerEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.tag == "Player")
         {
