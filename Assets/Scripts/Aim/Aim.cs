@@ -5,10 +5,12 @@ using UnityEngine.InputSystem;
 
 public class Aim : MonoBehaviour
 {
-    enum AngleRotations{ FullAngleRotation, HalvAngleRotation, EightFixedAnglesRotation, FourFixedAnglesRotation }
+    enum AngleRotations{ FullAngleRotation, HalvAngleRotation, FixedAnglesRotation }
     [SerializeField] private AngleRotations rotations;
     [SerializeField] private AngleRotations rotationsOverride;
-
+    [SerializeField] private int amountOfFixedAgnles;
+    private const float FULLCIRCLE = 360f;
+    private const float HALFCIRCLE = 180f;
     private Vector3 mousePos;
     private Vector3 direction;
     private Quaternion rotation;
@@ -61,11 +63,8 @@ public class Aim : MonoBehaviour
             case AngleRotations.HalvAngleRotation:
                 HalvAngleRotation();
                 break;
-            case AngleRotations.EightFixedAnglesRotation:
-                EightFixedAnglesRotation();
-                break;
-            case AngleRotations.FourFixedAnglesRotation:
-                FourFixedAnglesRotation();
+            case AngleRotations.FixedAnglesRotation:
+                FixedAnglesRotation(amountOfFixedAgnles);
                 break;
             default: break;
         }
@@ -80,33 +79,21 @@ public class Aim : MonoBehaviour
         else if (angle < -90) rotation = Quaternion.AngleAxis(-90, Vector3.forward);
         else rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
-    private void EightFixedAnglesRotation()
+    private void FixedAnglesRotation(float amount)
     {
-        if ((angle >= -180 && angle < -157.5) || (angle >= 157.5 && angle < 180))
+        float x = FULLCIRCLE / amount;
+        float y = x / 2;
+        float z = HALFCIRCLE - y;
+        if ((angle >= -HALFCIRCLE && angle < -z) || (angle >= z && angle < HALFCIRCLE))
         {
             rotation = Quaternion.AngleAxis(-180, Vector3.forward);
             return;
         }
-        for (float i = -157.5f; i < 157.5; i += 45)
+        for (float i = -z; i < z; i += x)
         {
-            if (angle >= i && angle < i +45)
+            if (angle >= i && angle < i + x)
             {
-                rotation = Quaternion.AngleAxis(i + 22.5f , Vector3.forward);
-            }
-        }
-    }
-    private void FourFixedAnglesRotation()
-    {
-        if ((angle >= -180 && angle < -135) || (angle >= 135 && angle < 180))
-        {
-            rotation = Quaternion.AngleAxis(-180, Vector3.forward);
-            return;
-        }
-        for (int i = -135; i < 135; i+= 90)
-        {
-            if (angle >= i && angle < i + 90)
-            {
-                rotation = Quaternion.AngleAxis(i+45, Vector3.forward);
+                rotation = Quaternion.AngleAxis(i + y, Vector3.forward);
             }
         }
     }
