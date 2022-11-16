@@ -252,6 +252,10 @@ MonoBehaviour:
   attachedColliders: []
   attachZone: {fileID: 8302718577839596319}
   animator: {fileID: 7648801655929530178}
+  moveSpeed: 0
+  targetOne: {fileID: 0}
+  targetTwo: {fileID: 0}
+  movementDirection: {x: 0, y: 0}
 --- !u!65 &8302718577839596319
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -263,8 +267,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 6.037368, y: 0.57469684, z: 4.101138}
-  m_Center: {x: -0.09440422, y: 0.1782243, z: -0.07985306}
+  m_Size: {x: 6.6, y: 0.61903334, z: 4.1}
+  m_Center: {x: 0.03000001, y: 0.3595168, z: 0}
 --- !u!1 &7648801657002616033
 GameObject:
   m_ObjectHideFlags: 0

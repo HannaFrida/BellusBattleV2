@@ -12,6 +12,7 @@ public class PlatformAttach : MonoBehaviour
     [SerializeField] Transform targetTwo;
     private Collider[] collidersOnPlatform;
     private Transform currentTarget;
+    [SerializeField] private Vector2 movementDirection;
 
     private void OnLevelWasLoaded(int level)
     {
@@ -22,6 +23,7 @@ public class PlatformAttach : MonoBehaviour
     private void Start()
     {
         currentTarget = targetOne;
+        CreateDirectionVector();
     }
 
     private void Update()
@@ -67,7 +69,16 @@ public class PlatformAttach : MonoBehaviour
     {
         foreach(Collider col in attachedColliders)
         {
-            col.GetComponent<PlayerMovement>().AddExternalForce(new Vector2(moveSpeed, 0f));
+            Vector2 addedForce;
+            if(currentTarget == targetOne)
+            {
+                addedForce = -movementDirection;
+            }
+            else
+            {
+                addedForce = movementDirection;
+            }
+            col.GetComponent<PlayerMovement>().AddConstantExternalForce(addedForce * moveSpeed);
         }
     }
 
@@ -75,7 +86,7 @@ public class PlatformAttach : MonoBehaviour
     {
         if(transform.position != currentTarget.position)
         {
-            transform.position = Vector3.MoveTowards(transform.position, currentTarget.position, moveSpeed);
+            transform.position = Vector3.MoveTowards(transform.position, currentTarget.position, moveSpeed * Time.deltaTime);
         }
         else
         {
@@ -85,5 +96,10 @@ public class PlatformAttach : MonoBehaviour
 
         if (attachedColliders.Count == 0) return;
         MovePlayers();
+    }
+
+    private void CreateDirectionVector()
+    {
+        movementDirection = (transform.position - currentTarget.position).normalized;
     }
 }
