@@ -8,7 +8,7 @@ public class Aim : MonoBehaviour
     enum AngleRotations{ FullAngleRotation, HalvAngleRotation, FixedAnglesRotation }
     [SerializeField] private AngleRotations rotations;
     [SerializeField] private AngleRotations rotationsOverride;
-    [SerializeField] private int amountOfFixedAgnles;
+    [Range (1, 64)][SerializeField] private int amountOfFixedAgnles;
     private const float FULLCIRCLE = 360f;
     private const float HALFCIRCLE = 180f;
     private Vector3 mousePos;
