@@ -150,7 +150,7 @@ public class DashAdvanced : MonoBehaviour
         movement = GetComponent<PlayerMovement>();
         health = GetComponent<PlayerHealth>();
         gravity = movement.DownwardForce;
-        tr.time = dashingDuration;
+       // tr.time = dashingDuration;
     }
     void Update()
     {
@@ -205,7 +205,8 @@ public class DashAdvanced : MonoBehaviour
         canDash = false;
         isDashing = true;
         dashEvent.Invoke();
-        tr.emitting = true; //See variable TrailRenderer tr
+        //tr.emitting = true; //See variable TrailRenderer tr
+        gameObject.GetComponent<AfterImg>().StartTrail();
         if (stopGravityWhileDashing)
         {
             movement.DownwardForce = 0f;
@@ -217,7 +218,7 @@ public class DashAdvanced : MonoBehaviour
     }
     private void EndDashProtocol()
     {
-        tr.emitting = false; //See variable TrailRenderer tr
+        //SSAtr.emitting = false; //See variable TrailRenderer tr
         currentDashingDistace = dashingDistace;
         currentDashingDuration = dashingDuration;
         currentCanDashDown = canDashDown;
