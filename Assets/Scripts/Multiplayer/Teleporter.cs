@@ -45,4 +45,5 @@ public class Teleporter : MonoBehaviour
             playerAmountOnTeleporter--;
         }
     }
+    
 }

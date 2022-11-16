@@ -4,8 +4,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Unity.VisualScripting;
 using UnityEngine.Events;
-using UnityEditor.Rendering.LookDev;
-using UnityEditor.SceneManagement;
+//using UnityEditor.Rendering.LookDev;
+//using UnityEditor.SceneManagement;
 using UnityEngine.UIElements;
 #if UNITY_EDITOR
 using UnityEditor;
@@ -38,10 +38,13 @@ public class DashAdvanced : MonoBehaviour
     [SerializeField] private float deadZoneAngleRange = 90;
     [Header("Extra")]
     [SerializeField] private float dashingActivationCooldown = 1f;
+    [SerializeField] private TrailRenderer tr;
+    [Header("Sounds")]
+    [SerializeField] private AudioSource dashSound;
 
     private Vector3 direction;
     private Vector3 velocity;
-    private PlayerMovement movement;
+    [SerializeField] private PlayerMovement movement;
     private PlayerHealth health;
     private float currentDashingDistace;
     private float currentDashingDuration;
@@ -136,6 +139,7 @@ public class DashAdvanced : MonoBehaviour
     }
     public void CheckDashWithJoystickDirection(InputAction.CallbackContext context)
     {
+        Flip();
         direction = context.ReadValue<Vector2>();
     }
     private void Start()
@@ -146,10 +150,10 @@ public class DashAdvanced : MonoBehaviour
         movement = GetComponent<PlayerMovement>();
         health = GetComponent<PlayerHealth>();
         gravity = movement.DownwardForce;
+        tr.time = dashingDuration;
     }
     void Update()
     {
-        Flip();
         //DashWithKeyboard();
     }
 
@@ -189,7 +193,6 @@ public class DashAdvanced : MonoBehaviour
     {
         StartDashProtocol();
         velocity = new Vector3(direction.x * currentDashingDistace, 0f, 0f);
-        //tr.emitting = true; //See variable TrailRenderer tr
         yield return new WaitForSeconds(currentDashingDuration);
         EndDashProtocol();
         yield return new WaitForSeconds(dashingActivationCooldown);
@@ -197,10 +200,13 @@ public class DashAdvanced : MonoBehaviour
     }
     private void StartDashProtocol()
     {
+        currentDashingDuration *= 2;
+        dashSound.Play();
         CheckForCollision();
         canDash = false;
         isDashing = true;
         dashEvent.Invoke();
+        tr.emitting = true; //See variable TrailRenderer tr
         if (stopGravityWhileDashing)
         {
             movement.DownwardForce = 0f;
@@ -212,10 +218,10 @@ public class DashAdvanced : MonoBehaviour
     }
     private void EndDashProtocol()
     {
-        //tr.emitting = false; //See variable TrailRenderer tr
+        tr.emitting = false; //See variable TrailRenderer tr
         currentDashingDistace = dashingDistace;
         currentDashingDuration = dashingDuration;
-        currentCanDashDown = canDash;
+        currentCanDashDown = canDashDown;
         movement.DownwardForce = gravity;
         isDashing = false;
         onControlOverride = false;
@@ -239,21 +245,20 @@ public class DashAdvanced : MonoBehaviour
         angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; // -90 degrees
         if(direction.x != 0 && direction.y != 0)
         {
+            onControlOverride = true;
             if (angle >= dashUpAngle - dashUpAngleRange && angle <= dashUpAngle + dashUpAngleRange)
             {
-                onControlOverride = true;
                 direction = Vector3.up;
                 StartCoroutine(UpDashAction());
                 return;
             }
             else if (currentCanDashDown && angle >= dashDownAngle - dashDownAngleRange && angle <= dashDownAngle + dashDownAngleRange)
             {
-                onControlOverride = true;
                 direction = Vector3.down;
                 StartCoroutine(UpDashAction());
                 return;
             }
-            else if(onGigaChadMode)
+            else if(onGigaChadMode && (direction.y >= 0|| currentCanDashDown))
             {
                 StartCoroutine(GigaChadDashAction());
                 return;
@@ -264,8 +269,7 @@ public class DashAdvanced : MonoBehaviour
     private IEnumerator UpDashAction()
     {
         StartDashProtocol();
-        velocity = new Vector3(0f, direction.y * currentDashingDistace, 0f);
-        //tr.emitting = true; //See variable TrailRenderer tr
+        velocity = new Vector3(0f, direction.y * currentDashingDistace - movement.Velocity.y, 0f);
         yield return new WaitForSeconds(currentDashingDuration);
         EndDashProtocol();
         yield return new WaitForSeconds(dashingActivationCooldown);
@@ -274,8 +278,7 @@ public class DashAdvanced : MonoBehaviour
     private IEnumerator GigaChadDashAction()
     {
         StartDashProtocol();
-        velocity = new Vector3(direction.x * currentDashingDistace, direction.y * currentDashingDistace, 0f);
-        //tr.emitting = true; //See variable TrailRenderer tr
+        velocity = new Vector3(direction.x * currentDashingDistace - movement.Velocity.x, direction.y * currentDashingDistace - movement.Velocity.y, 0f);
         yield return new WaitForSeconds(currentDashingDuration);
         EndDashProtocol();
         yield return new WaitForSeconds(dashingActivationCooldown);
@@ -283,7 +286,7 @@ public class DashAdvanced : MonoBehaviour
     }
     private void CheckIfGrounded()
     {
-        if (!movement.CheckIsGrounded())
+        if (!movement.IsGrounded)
         {
             currentCanDashDown = true;
             currentDashingDistace = airDashingDistace;
@@ -300,15 +303,20 @@ public class DashAdvanced : MonoBehaviour
     private void CheckForCollision()
     {
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, direction, out hit, currentDashingDistace / 4, movement.CollisionLayer)) //4 is a the number that make dash distance works correct 
+        if (Physics.Raycast(transform.position, direction, out hit, currentDashingDistace*currentDashingDuration + 5 , movement.CollisionLayer)) //10 is a the number that make dash distance works correct 
         {
-            if (hit.distance * 4 < 1)
+            if (hit.distance < 1f)
             {
                 currentDashingDistace = 0;
             }
+            else if(onControlOverride)
+            {
+                currentDashingDistace = hit.distance/ currentDashingDuration - Mathf.Sqrt( Mathf.Pow(movement.Velocity.x, 2) + Mathf.Pow(movement.Velocity.y, 2)) - Mathf.Abs(movement.Velocity.x) - Mathf.Abs(movement.Velocity.y);
+            }
             else
             {
-                currentDashingDistace = hit.distance * 7f; /// 4 is a the number that make dash distance works correct // 1f är Players halv storlek
+                currentDashingDistace = hit.distance / currentDashingDuration - 2*Mathf.Abs(movement.Velocity.x) - 5;
+                //currentDashingDuration = currentDashingDuration * ((hit.distance / currentDashingDuration - 2 * Mathf.Abs(movement.Velocity.x)-7) / dashingDistace);
             }
         }
     }

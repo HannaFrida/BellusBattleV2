@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WeaponSpawner : MonoBehaviour
 {
-    [SerializeField]private Weapon[] weapons;
+    [SerializeField]private Gun[] weapons;
     private WeaponSpawnerManager manager;
 
     void Start()
@@ -21,4 +21,17 @@ public class WeaponSpawner : MonoBehaviour
         manager.AddEmptySpawnerToChooseFrom(this);
     }
 
+    public bool HasWeapons()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, 1f);
+        foreach(Collider col in colliders)
+        {
+            if (col.gameObject.tag.Equals("Weapon"))
+            {
+                return true;
+            }
+        }
+        return false;
+        
+    }
 }

@@ -8,10 +8,12 @@ public class Grenade : Projectile
 	private float fuse = 5.0f;
 	[SerializeField] [Tooltip("Size of the explosion.")]
 	private float explosionSize = 5.0f;
-
-	[SerializeField] PickUp_ProtoV1 pickUp_Proto;
+	private CameraFocus cf; //shitfx
+	[SerializeField] private GameObject objectToBoom;
+	[SerializeField] private GameObject bombMesh;
 
 	private void Start(){
+		cf = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFocus>(); //shitfix
 		StartCoroutine(StartFuse());
 	}
 
@@ -28,15 +30,23 @@ public class Grenade : Projectile
 		}
 	}
 
-	private void Explode(){
+	private void Explode()
+	{
+        if (bombMesh != null)
+        {
+			bombMesh.SetActive(false);
+			GameObject spawnVfx = Instantiate(objectToBoom, transform);
+		}
+		
 
 		Collider[] hits = Physics.OverlapSphere(transform.position, explosionSize);
 		for (int i = 0; i < hits.Length; i++){
 			if (hits[i].CompareTag("Player"))
 			{
 				PlayerHealth ph = hits[i].GetComponent<PlayerHealth>();
-				ph.TakeDamage(1);
-				pickUp_Proto.isHoldingWeapon = false;
+				ph.TakeDamage(damage);
+				cf.RemoveTarget(hits[i].transform); //shitfix
+				//pickUp_Proto.isHoldingWeapon = false;
 
 				/*
 				PlayerDeathEvent pde = new PlayerDeathEvent{
@@ -52,8 +62,15 @@ public class Grenade : Projectile
             {
 				hits[i].GetComponent<Door>().DestroyDoor();
             }
+			if (hits[i].CompareTag("Breakable"))
+			{
+				Destroy(hits[i].gameObject);
+			}
 		}
-		Destroy(gameObject);
+
+		
+		// Delay before destroy
+		Destroy(gameObject, 1f);
 		//Die();
 	}
 

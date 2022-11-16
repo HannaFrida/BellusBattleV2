@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,11 +8,11 @@ public class PlayerJoinManager : PlayerSpawnManager
 {
     [SerializeField] private Camera camera;
     [SerializeField] GameObject characterLow;
-    [SerializeField] GameObject[] accessorites;
-    [SerializeField] GameObject accessoritesSlot;
+    //[SerializeField] GameObject[] accessorites;
+    //[SerializeField] GameObject accessoritesSlot;
 
     public List<PlayerInput> listOfPlayers = new List<PlayerInput>();
-    public Material[] colors;
+    //public Material[] colors;
 
     void OnPlayerJoined(PlayerInput playerInput)
     {
@@ -19,7 +20,7 @@ public class PlayerJoinManager : PlayerSpawnManager
         // Set the player ID, add one to the index to start at Player 1
         playerInput.gameObject.GetComponent<PlayerDetails>().playerID = playerInput.playerIndex + 1;
         //
-        scoreManager.AddPlayers(playerInput.gameObject);
+        GameManager.Instance.AddPLayer(playerInput.gameObject);
         listOfPlayers.Add(playerInput);
         Debug.Log("PlayerInput ID: " + playerInput.playerIndex);
 
@@ -31,12 +32,22 @@ public class PlayerJoinManager : PlayerSpawnManager
 
         AddPlayerInFocus(playerInput.transform);
 
+        
+
         // Changes the texture/material of the player
-        playerInput.gameObject.GetComponentInChildren<SkinnedMeshRenderer>().material = colors[playerInput.playerIndex];
+        //playerInput.gameObject.GetComponentInChildren<SkinnedMeshRenderer>().material = colors[playerInput.playerIndex];
         // Finds where the accessory should be placed (HeadSlot)
         //accessoritesSlot = GameObject.FindGameObjectWithTag("HeadSlot");
+        PlayerDetails playerDetails = playerInput.gameObject.GetComponent<PlayerDetails>();
         // Put the accessory on the HeadSlot
-        //Instantiate(accessorites[playerInput.playerIndex], accessoritesSlot.transform);
+        //GameObject accessory = Instantiate(accessorites[playerInput.playerIndex], playerDetails.HeadGearSlot());//accessoritesSlot.transform);
+        //accessory.transform.SetParent(playerInput.gameObject.transform);
+
+        Renderer renderer = playerInput.gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
+        TextMeshPro indicatorText = playerInput.gameObject.GetComponentInChildren<TextMeshPro>();
+        //Activates Player characteraccessories and assigns material based on characterIndex
+        playerInput.gameObject.GetComponentInChildren<CharacterCustimization>().ActivateAccessories(playerInput.playerIndex, renderer, indicatorText);
+
     }
     private void AddPlayerInFocus(Transform player)
     {

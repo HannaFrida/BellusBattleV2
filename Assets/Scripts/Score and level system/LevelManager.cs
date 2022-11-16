@@ -8,6 +8,7 @@ using Random = UnityEngine.Random;
 
 public class LevelManager : MonoBehaviour
 {
+    /*
     private enum WhichScenesListToPlay{ ScenesFromBuild, ScenesFromList, ScenesFromBuildAndList };
     [SerializeField] WhichScenesListToPlay scenceToPlay;
     private enum WhichOrderToPlayScenes { Random, NumiricalOrder };
@@ -21,6 +22,7 @@ public class LevelManager : MonoBehaviour
 
 
     public List<string> scenesToChooseFrom = new List<string>();
+    public List<string> scenesToRemove = new List<string>();
     public List<string> GetScencesList()
     {
         return scenesToChooseFrom;
@@ -28,6 +30,9 @@ public class LevelManager : MonoBehaviour
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
+        sceneCount = SceneManager.sceneCountInBuildSettings;
+        scenesToRemove.Add("MainMenu");
+        scenesToRemove.Add("The_End");
         LoadScenesList();
         if(SceneManager.GetActiveScene().buildIndex == 0) CreateLevelsUI();
     }
@@ -36,32 +41,30 @@ public class LevelManager : MonoBehaviour
         if (scenceToPlay == WhichScenesListToPlay.ScenesFromBuild) CreateListOfScenesFromBuild();
         else if (scenceToPlay == WhichScenesListToPlay.ScenesFromList) CreateListOfScenesFromList();
         else if (scenceToPlay == WhichScenesListToPlay.ScenesFromBuildAndList) { CreateListOfScenesFromBuild(); CreateListOfScenesFromList(); }
-        scenesToChooseFrom.Remove("MainMenu");
-        scenesToChooseFrom.Remove("The_End");
+        foreach(string scene in scenesToRemove)
+        {
+            scenesToChooseFrom.Remove(scene);
+        }
     }
+    // ahhaa
     private void CreateListOfScenesFromBuild()
     {
-        string tempStr = "";
-        GameObject g;
-        sceneCount = SceneManager.sceneCountInBuildSettings;
         for (int i = 0; i < sceneCount; i++)
         {
-            tempStr = System.IO.Path.GetFileNameWithoutExtension(SceneUtility.GetScenePathByBuildIndex(i));
+            string tempStr = System.IO.Path.GetFileNameWithoutExtension(SceneUtility.GetScenePathByBuildIndex(i));
             scenesToChooseFrom.Add(tempStr);
         }
         if (scenesToChooseFrom.Count <= 0) Debug.LogError("There is no scenes in build. please put scenes in build or choose ScencesFromList from " + gameObject);
     }
     private void CreateLevelsUI ()
     {
-        string tempStr = "";
-        GameObject g;
-        sceneCount = SceneManager.sceneCountInBuildSettings;
-        for (int i = 0; i < sceneCount; i++)
+        for (int i = 0; i < sceneCount-1; i++)
         {
-            tempStr = System.IO.Path.GetFileNameWithoutExtension(SceneUtility.GetScenePathByBuildIndex(i));
+            string tempStr = System.IO.Path.GetFileNameWithoutExtension(SceneUtility.GetScenePathByBuildIndex(i));
             if (i != 0)
             {
-                g = Instantiate(levelXPrefab);
+                Debug.Log("hahahah");
+                GameObject g = Instantiate(levelXPrefab);
                 g.transform.parent = content.transform;
                 levels.Add(g.GetComponent<LevelDetails>());
                 levels.ElementAt(i - 1).SetName(tempStr);
@@ -83,13 +86,22 @@ public class LevelManager : MonoBehaviour
         if (scene.GetToggle() && scenesToChooseFrom.Count > 0)
         {
             scenesToChooseFrom.Remove(scene.GetName());
-            Debug.Log("I work " + scene.GetName());
+            scenesToRemove.Add(scene.GetName());
         }
-        else scenesToChooseFrom.Add(scene.GetName());
+        else 
+        {
+            scenesToChooseFrom.Add(scene.GetName());
+            scenesToRemove.Remove(scene.GetName());
+        }
     }
 
     public void LoadNextScene()
     {
+        if (scenesToChooseFrom.Count <= 0)
+        {
+            Application.OpenURL("https://www.youtube.com/watch?v=WEEM2Qc9sUg");
+            return;
+        }
         if (playingScenesOrder == WhichOrderToPlayScenes.Random) LoadNextSceneInRandomOrder();
         else if (playingScenesOrder == WhichOrderToPlayScenes.NumiricalOrder) LoadNextSceneInNumericalOrder();
         if (scenesToChooseFrom.Count <= 0)
@@ -120,6 +132,7 @@ public class LevelManager : MonoBehaviour
         Destroy(gameObject);
         SceneManager.LoadScene(System.IO.Path.GetFileNameWithoutExtension(SceneUtility.GetScenePathByBuildIndex(0)));
     }
+    */
 }
 
 

@@ -11,7 +11,7 @@ public class SceneChangeListener : MonoBehaviour
 	private void ChangeScene(SceneChangeEvent sce)
 	{
 		SceneManager.LoadScene(sce.scene);
-		GameManager.Instance.UpdateGameState(sce.state);
+		//GameManager.Instance.UpdateGameState(sce.state);
 	}
 
 	private void OnDestroy()

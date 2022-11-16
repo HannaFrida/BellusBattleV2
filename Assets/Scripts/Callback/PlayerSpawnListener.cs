@@ -14,7 +14,7 @@ public class PlayerSpawnListener : MonoBehaviour
 	{
 		GameObject go = pse.PlayerInput.gameObject;
 		go.GetComponent<PlayerDetails>().playerID = pse.PlayerInput.playerIndex + 1;
-		GameManager.Instance.AddPlayer(pse.Player);
+		//GameManager.Instance.AddPlayer(pse.Player);
 		pse.PlayerInput.gameObject.GetComponent<PlayerDetails>().startPos = spawnLocations[pse.PlayerInput.playerIndex].position;
 	}
 
