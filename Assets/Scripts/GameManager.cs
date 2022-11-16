@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     [SerializeField] private List<GameObject> players = new List<GameObject>();
     [SerializeField] private List<GameObject> playersAlive = new List<GameObject>();
+    [SerializeField] private SoundManager soundManager;
     private bool gameHasStarted;
 
     [Header("Poängrelaterat")]
@@ -117,6 +118,7 @@ public class GameManager : MonoBehaviour
         if (playersAlive.Count <= 1)
         {
             hasOnePlayerLeft = true;
+            soundManager.FadeOutMusic();
         }
         else if (playersAlive.Count > 1)
         {
@@ -156,6 +158,7 @@ public class GameManager : MonoBehaviour
 
         if (playersAlive.Count != 0)
         {
+            
             GameObject winner = playersAlive[0];
             AddScore(playersAlive[0]);
             hasGivenScore = true;
@@ -180,7 +183,7 @@ public class GameManager : MonoBehaviour
 
     public void LoadScenesList()
     {
-        SceneManager.LoadScene("TransitionScene");
+        //SceneManager.LoadScene("TransitionScene");
         if (scenceToPlay == WhichScenesListToPlay.ScenesFromBuild) CreateListOfScenesFromBuild();
         else if (scenceToPlay == WhichScenesListToPlay.ScenesFromList) CreateListOfScenesFromList();
         else if (scenceToPlay == WhichScenesListToPlay.ScenesFromBuildAndList) { CreateListOfScenesFromBuild(); CreateListOfScenesFromList(); }
@@ -240,6 +243,7 @@ public class GameManager : MonoBehaviour
 
     public void LoadNextScene()
     {
+        //SceneManager.LoadScene("TransitionScene");
         if (scenesToChooseFrom.Count <= 0)
         {
             Application.OpenURL("https://www.youtube.com/watch?v=WEEM2Qc9sUg");
@@ -250,9 +254,11 @@ public class GameManager : MonoBehaviour
         if (scenesToChooseFrom.Count <= 0)
         {
             LoadScenesList();
+
         }
+        soundManager.FadeInMusic();
     }
-    /*
+    
     private void LoadNextSceneInNumericalOrder()
     {
         SceneManager.LoadScene(scenesToChooseFrom.ElementAt(0));
@@ -264,7 +270,7 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(scenesToChooseFrom.ElementAt(randomNumber));
         scenesToChooseFrom.RemoveAt(randomNumber);
     }
-    */
+    /*
 
     private string LoadNextSceneInNumericalOrder()
     {
@@ -278,7 +284,7 @@ public class GameManager : MonoBehaviour
         nextLevel = scenesToChooseFrom.ElementAt(randomNumber);
         scenesToChooseFrom.RemoveAt(randomNumber);
         return nextLevel;
-    }
+    }*/
     public void Finish(GameObject destroyMe)
     {
         SceneManager.LoadScene("The_End");

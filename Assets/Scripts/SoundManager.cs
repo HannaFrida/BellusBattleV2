@@ -12,9 +12,7 @@ using UnityEngine.Audio;
 public class SoundManager : MonoBehaviour
 {
     [Header("audio mixers")]
-
     [SerializeField] private AudioMixer overallMixer;
-  
     [Header("music & ambience")]
     [SerializeField] private AudioSource musicSource;
     [SerializeField] private AudioClip[] allMusicSounds;
@@ -23,18 +21,13 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip victoryMusic;
     [SerializeField] private AudioSource ambience;
     [SerializeField] private AudioClip[] allAmbienceSounds;
-
     [Header("foliage")]
     [SerializeField] private AudioSource doorToggleSource;
     [SerializeField] private AudioSource bellRingSource;
     [SerializeField] private AudioSource startGameBellSource;
-    private AudioSource pickUpSoundSource;
-
     [Header("UI sounds")]
     [SerializeField] private AudioSource howerMenuSource;
     [SerializeField] private AudioSource pressMenuSource;
-
-
     private float volLowRan = 0.3f;
     private float volHighRan = 1.0f;
     private float lowPitchRan = 0.3f;
@@ -43,13 +36,13 @@ public class SoundManager : MonoBehaviour
     private float maxHumDelay = 200.0f;
     void Start()
     {
-
+        DontDestroyOnLoad(gameObject);
         //ambienceDay.time = Random.Range(0, 60);
         //pianoMusic.time = Random.Range(0, 60);
 
         //SoundPlaying("normalSnapshot");
        
-        FadeInMusic();
+       // FadeInMusic();
     }
     void Update()
     {
@@ -58,16 +51,21 @@ public class SoundManager : MonoBehaviour
     public void FadeInMusic()
     {
         RandomClipPlayer(allMusicSounds, musicSource);
-        StartCoroutine(FadeMixerGroup.StartFade(overallMixer, "MusicMixerGroup", 2, 0.5f));
+        StartCoroutine(FadeMixerGroup.StartFade(overallMixer, "MusicMixerGroup", 2f, 0.5f));
     }
     public void FadeOutMusic()
     {
-        StartCoroutine(FadeMixerGroup.StartFade(overallMixer, "MusicMixerGroup", 2, 0f));
+        StartCoroutine(FadeMixerGroup.StartFade(overallMixer, "MusicMixerGroup", 1f, 0f));
     }
 
     public void FadeInHazard(AudioClip hazard)
     {
         PlaySound("Hazards", hazard);
+        StartCoroutine(FadeMixerGroup.StartFade(overallMixer, "HazardMixerGroup", 2, 0.5f));
+    }
+    public void HazardWarningSound()
+    {
+       // PlaySound("Hazards", hazard);
         StartCoroutine(FadeMixerGroup.StartFade(overallMixer, "HazardMixerGroup", 2, 0.5f));
     }
     public void FadeOutHazard()
@@ -118,7 +116,7 @@ public class SoundManager : MonoBehaviour
     }
     private void PickUp()
     {
-        pickUpSoundSource.pitch = Random.Range(0.8f, highPitchRan);//kanske ska ha samma pitch hela tiden?
+       // pickUpSoundSource.pitch = Random.Range(0.8f, highPitchRan);//kanske ska ha samma pitch hela tiden?
     //    pickUpSoundSource.PlayOneShot(pickUpSound);
     }
     private void ZombieDeathSound()
