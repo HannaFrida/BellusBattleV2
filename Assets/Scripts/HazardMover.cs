@@ -23,7 +23,7 @@ public class HazardMover : MonoBehaviour
         moveVector = new Vector3(0f, movingSpeed, 0f);
         lowestPosition = new Vector3(transform.position.x, transform.position.y + boxCollider.size.y / 2, 0f);
         highestPosition = new Vector3(transform.position.x, highestPoint.transform.position.y - boxCollider.size.y / 2, 0f);
-        Debug.Log(lowestPoint);
+        //Debug.Log(lowestPoint);
     }
 
     // Update is called once per frame
@@ -52,19 +52,19 @@ public class HazardMover : MonoBehaviour
             if (boxCollider.bounds.max.y >= highestPoint.position.y)
             {
                 moveVector = Vector3.zero;
-                Debug.Log(boxCollider.bounds.max.y);
+                //Debug.Log(boxCollider.bounds.max.y);
                 hasReachedHighestPoint = true;
             }
         }
         else
         {
-            Debug.Log("dada");
+            //Debug.Log("dada");
             transform.position = Vector3.SmoothDamp(transform.position, lowestPosition, ref moveVector, smoothTime);
-            Debug.Log(boxCollider.bounds.max.y + " lowest: " + lowestPoint);
+            //Debug.Log(boxCollider.bounds.max.y + " lowest: " + lowestPoint);
             if (transform.position.y <= lowestPosition.y + 1f)
             {
                 moveVector = Vector3.zero;
-                Debug.Log("yoo");
+                //Debug.Log("yoo");
                 hasReachedHighestPoint = false;
                 runTimer = true;
             }

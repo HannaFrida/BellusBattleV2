@@ -10,6 +10,7 @@ public class Grenade : Projectile
 	private float explosionSize = 5.0f;
 	private CameraFocus cf; //shitfx
 	[SerializeField] private GameObject objectToBoom;
+	[SerializeField] private AudioSource explosionSound;
 	[SerializeField] private GameObject bombMesh;
 
 	private void Start(){
@@ -32,8 +33,13 @@ public class Grenade : Projectile
 
 	private void Explode()
 	{
-		bombMesh.SetActive(false);
-		GameObject spawnVfx = Instantiate(objectToBoom, transform);
+        if (bombMesh != null)
+        {
+			bombMesh.SetActive(false);
+			explosionSound.Play();
+			GameObject spawnVfx = Instantiate(objectToBoom, transform);
+		}
+		
 
 		Collider[] hits = Physics.OverlapSphere(transform.position, explosionSize);
 		for (int i = 0; i < hits.Length; i++){

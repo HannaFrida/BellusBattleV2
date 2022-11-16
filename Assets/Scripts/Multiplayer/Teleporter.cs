@@ -8,10 +8,8 @@ public class Teleporter : MonoBehaviour
     private int playerAmountOnTeleporter = 0; // Amount of players on the Teleporter
     [SerializeField] private PlayerJoinManager playerJoinManager; // Keeps track of players in game
     [SerializeField] private LevelManager manager; // Keeps track of players in game
-    //[SerializeField] private string startSceneName; // The name of the scene that is the beginner scene
+    [SerializeField] private SoundManager soundManager;
     [SerializeField] private GameObject playPanel;
-
-    
 
     private void Start()
     {
@@ -24,6 +22,7 @@ public class Teleporter : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             playerAmountOnTeleporter++;
+            soundManager.PlayerOnPlay_Sound();
         }
 
         // There needs to be at least two players in the scene
@@ -31,9 +30,10 @@ public class Teleporter : MonoBehaviour
         if (playerJoinManager.listOfPlayers.Count >= 1 && playerAmountOnTeleporter == playerJoinManager.listOfPlayers.Count)//playerSpawnManager.listOfPlayers.Count >= 2 && playerAmountOnTeleporter == playerSpawnManager.listOfPlayers.Count)
         {
             playPanel.SetActive(true);
-            
-
-            //SceneManager.LoadScene(startSceneName);
+        }
+        if(playerAmountOnTeleporter == playerJoinManager.listOfPlayers.Count)
+        {
+            soundManager.AllPlayersOnPlay_Sound();
         }
     }
 

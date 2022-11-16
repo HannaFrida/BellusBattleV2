@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class CharacterCustimization : MonoBehaviour
@@ -12,6 +13,7 @@ public class CharacterCustimization : MonoBehaviour
         [SerializeField] private string characterName;
         public List<GameObject> accessoryItems;
         public Material characterMaterial;
+        public Material indicatorMaterial;
         public int characterIndex;
         public bool isAvailable;
 
@@ -22,7 +24,7 @@ public class CharacterCustimization : MonoBehaviour
     }
 
     //Loops through acceossories list and activates accessories based on the CharacterIndex
-    public void ActivateAccessories(int characterId, Renderer CharacterRenderer)
+    public void ActivateAccessories(int characterId, Renderer CharacterRenderer, TextMeshPro indicatorText)
     {
         foreach (CharacterItem item in characterItems)
         {
@@ -31,6 +33,9 @@ public class CharacterCustimization : MonoBehaviour
                 item.SetIsAvailable(false);
                 ToggleItemsInList(item.accessoryItems, true);
                 CharacterRenderer.material = item.characterMaterial;
+                //indicator assignment
+                indicatorText.text = "P" + (item.characterIndex+1);
+                indicatorText.renderer.material = item.indicatorMaterial;
             }
             else
             {

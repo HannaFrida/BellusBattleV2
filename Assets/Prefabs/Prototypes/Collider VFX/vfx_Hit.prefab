@@ -82,10 +82,10 @@ VisualEffect:
   m_PropertySheet:
     m_Float:
       m_Array:
-      - m_Value: 1.3
+      - m_Value: 1.2
         m_Name: SmokeSize
         m_Overridden: 1
-      - m_Value: 0.6
+      - m_Value: 0.15
         m_Name: TrailsSize
         m_Overridden: 1
       - m_Value: 1
@@ -100,26 +100,41 @@ VisualEffect:
       - m_Value: 0.6
         m_Name: DecalSize
         m_Overridden: 1
-      - m_Value: 4.5
+      - m_Value: 0
         m_Name: FlashSize
         m_Overridden: 1
-      - m_Value: 0.8
+      - m_Value: 0
         m_Name: FlashLifetime
         m_Overridden: 1
-      - m_Value: 4
+      - m_Value: 2.5
         m_Name: SmokeSize 1
         m_Overridden: 1
       - m_Value: 10
         m_Name: ParticlesRate
         m_Overridden: 1
-      - m_Value: 0.7
+      - m_Value: 0.3
         m_Name: ParticlesLifetime
+        m_Overridden: 1
+      - m_Value: 2
+        m_Name: ParticlesSize
+        m_Overridden: 1
+      - m_Value: 0
+        m_Name: ShockwaveSize
+        m_Overridden: 1
+      - m_Value: 0.2
+        m_Name: ShockwaveLifetime
+        m_Overridden: 1
+      - m_Value: 0.2
+        m_Name: SmokeLifetime
+        m_Overridden: 1
+      - m_Value: 0.2
+        m_Name: TrailsLifetime
         m_Overridden: 1
     m_Vector2f:
       m_Array: []
     m_Vector3f:
       m_Array:
-      - m_Value: {x: -4, y: 9, z: -6}
+      - m_Value: {x: -5, y: 14, z: -5}
         m_Name: ParticlesVelocity
         m_Overridden: 1
     m_Vector4f:
@@ -132,6 +147,12 @@ VisualEffect:
         m_Overridden: 1
       - m_Value: {x: 0, y: 0, z: 0, w: 0}
         m_Name: SmokeColor01
+        m_Overridden: 1
+      - m_Value: {x: 45.254833, y: 9.405907, z: 0, w: 1}
+        m_Name: SmokeColor02
+        m_Overridden: 1
+      - m_Value: {x: 0, y: 0, z: 0, w: 1}
+        m_Name: ParticlesColor
         m_Overridden: 1
     m_Uint:
       m_Array: []

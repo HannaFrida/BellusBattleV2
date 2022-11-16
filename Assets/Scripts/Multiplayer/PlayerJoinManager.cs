@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -19,7 +20,7 @@ public class PlayerJoinManager : PlayerSpawnManager
         // Set the player ID, add one to the index to start at Player 1
         playerInput.gameObject.GetComponent<PlayerDetails>().playerID = playerInput.playerIndex + 1;
         //
-        scoreManager.AddPlayers(playerInput.gameObject);
+        GameManager.Instance.AddPLayer(playerInput.gameObject);
         listOfPlayers.Add(playerInput);
         Debug.Log("PlayerInput ID: " + playerInput.playerIndex);
 
@@ -43,8 +44,9 @@ public class PlayerJoinManager : PlayerSpawnManager
         //accessory.transform.SetParent(playerInput.gameObject.transform);
 
         Renderer renderer = playerInput.gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
+        TextMeshPro indicatorText = playerInput.gameObject.GetComponentInChildren<TextMeshPro>();
         //Activates Player characteraccessories and assigns material based on characterIndex
-        playerInput.gameObject.GetComponentInChildren<CharacterCustimization>().ActivateAccessories(playerInput.playerIndex, renderer);
+        playerInput.gameObject.GetComponentInChildren<CharacterCustimization>().ActivateAccessories(playerInput.playerIndex, renderer, indicatorText);
 
     }
     private void AddPlayerInFocus(Transform player)

@@ -9,6 +9,7 @@ using System.Linq;
 [ExecuteAlways]
 public class ContentX : MonoBehaviour
 {
+    /*
     [SerializeField] private GameObject prefab;
     [SerializeField] private GameObject spawnPoint;
     [SerializeField, Range(1, 10)] private int widthInGridUnits = 1;
@@ -78,4 +79,5 @@ public class ContentX : MonoBehaviour
             }
         }
     }
+    */
 }

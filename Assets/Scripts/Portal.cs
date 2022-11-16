@@ -4,29 +4,50 @@ using UnityEngine;
 
 public class Portal : MonoBehaviour
 {
-    [SerializeField] private GameObject teleportDestination;
-    [SerializeField] private List<GameObject> teleportedPlayers;
-    // Start is called before the first frame update
+    [SerializeField] private Portal teleportDestination;
+    [SerializeField] private float teleportCoolDownTime;
+    private float timer;
+    [SerializeField]private bool canTeleport;
+
+
+    public bool CanTeleport
+    {
+        get => canTeleport;
+        set => canTeleport = value;
+    }
+
+    private void Update()
+    {
+        teleporterCoolDown();
+    }
 
 
     private void OnTriggerEnter(Collider other)
     {
+
+        if (canTeleport == false) return;
         Debug.Log("hohoho");
-        if (other.gameObject.tag == "Player" && teleportedPlayers.Contains(other.gameObject) == false)
+        if (other.gameObject.tag == "Player" || other.gameObject.tag.Equals("Grenade") || other.gameObject.tag.Equals("Bullet"))
         {
             Debug.Log("hahaha");
-            teleportedPlayers.Add(other.gameObject);
             other.gameObject.transform.position = teleportDestination.transform.position;
+            teleportDestination.CanTeleport = false;
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    private void teleporterCoolDown()
     {
-        teleportedPlayers.Remove(other.gameObject);
+        if (canTeleport) return;
+
+        timer += Time.deltaTime;
+        if(timer >= teleportCoolDownTime)
+        {
+            canTeleport = true;
+            timer = 0f;
+        }
     }
 
-    private void OnDestroy()
-    {
-        teleportedPlayers.Clear();
-    }
+
+
+   
 }

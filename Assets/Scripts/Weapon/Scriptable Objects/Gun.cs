@@ -6,52 +6,56 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// Put on every weapon
+/// </summary>
 public class Gun : MonoBehaviour
 {
-    /**
-     * Put on every weapon
-    **/
     [Header("References")]
     [SerializeField] private WeaponData weaponData; // The data of the weapon
     [SerializeField] private PlayerShoot playerShoot; // Actions
     [SerializeField] private int ownerID; // Player ID
     [SerializeField] private WeaponManager weaponManager;
-
-    public int OwnerID { get => ownerID; }
+    [SerializeField] private Transform muzzle;
 
     [Tooltip("What projectile is being fired.")]
     private GameObject projectile;
-
     private Projectile _projectile;
-    [SerializeField] private Transform muzzle;
     [Tooltip("Used for FireRate")]
     private float timeSinceLastShot;
     private float _nextTimeToFire;
 
     [Header("Sounds")]
     [SerializeField, Tooltip("Sound made when weapon out of ammo")]
-    //public AudioSource emptyGunSound;
+    public AudioSource emptyGunSound;
+    [SerializeField, Tooltip("Sound made when weapon shoots")]
     public AudioSource shootSound;
 
-    [SerializeField] private PlayerMovement player;
-    [SerializeField] public Aim aim; // test to make bullet shoot in correct direction
-
+    [Header("Info")]
     [SerializeField] bool isPickedUp;
-
     [SerializeField] int gunsAmmo;
-    [SerializeField] GameObject swordMesh;
 
     [Header("Dropping")]
-    bool isStartTimerForDrop;
     [Tooltip("time before the weapon can be picked up again")]
     [SerializeField] float timeToWaitForPickup = 2f;
+    bool isStartTimerForDrop;
     float dropTimer;
+    bool isDropped;
 
     [Header("DeSpawning")]
-    bool isStartTimerForDeSpawn;
     [Tooltip("time before the weapon can be picked up again")]
     [SerializeField] float timeToWaitForDeSpawn = 2f;
+    bool isStartTimerForDeSpawn;
     float deSpawnTimer;
+
+    [Header("Special cases")]
+    [SerializeField] GameObject swordMesh;
+
+    /// <summary>
+    /// Gets the ID of the one who is currently holding the weapon
+    /// </summary>
+    public int OwnerID { get => ownerID; }
+
 
     private void Start()
     {
@@ -64,11 +68,17 @@ public class Gun : MonoBehaviour
             _projectile = projectile.GetComponent<Projectile>();
         }
 
-        dropTimer = 0f;
-        deSpawnTimer = 0f;
+        //dropTimer = 0f;
+        //deSpawnTimer = 0f;
         //Drop();
+    }
 
-        
+    private void OnLevelWasLoaded(int level)
+    {
+        if (isDropped)
+        {
+            Despawn();
+        }
     }
 
     private void Update()
@@ -79,47 +89,45 @@ public class Gun : MonoBehaviour
         {
             // Might need to change calculation
             _nextTimeToFire = timeSinceLastShot / (weaponData.fireRate / 60f);
+            // = timeSinceLastShot + (1f / weaponData.fireRate);
         }
 
-        if (gunsAmmo == 0 && weaponData.name != "BasicSword")
-        {
-            // Placeholder för när vi fixat riktiga drop
-            Drop();
-        }
-
-        /*
-        // USED FOR DE-SPAWNING
-        if (!isStartTimerForDeSpawn)
-        {
-            return;
-        }
-        deSpawnTimer += Time.deltaTime;
-        //Debug.Log("Despawn: " + deSpawnTimer);
-        if (deSpawnTimer >= timeToWaitForDeSpawn && gunsAmmo == 0) // No ammo && Time runs out
-        {
-            isStartTimerForDeSpawn = false;
-            deSpawnTimer = 0f;
-            // Delete this gun
-            Drop();
-            gameObject.SetActive(false);
-            gameObject.GetComponent<BoxCollider>().enabled = false;
-        }
-       */
-        /*
         // USED FOR DROP
-        if (!isStartTimerForDrop)
+        if (isStartTimerForDrop)
         {
-            return;
+            dropTimer += Time.deltaTime;
+            //Debug.Log("droppper: " + dropTimer + " poda " + timeToWaitForPickup);
+            if (dropTimer >= timeToWaitForPickup)
+            {
+                dropTimer = 0;
+                isStartTimerForDrop = false;
+                gameObject.GetComponent<BoxCollider>().enabled = true;
+            }
         }
-        dropTimer += Time.deltaTime;
-        //Debug.Log("droppper: " + dropTimer +" poda " + timeToWaitForPickup);
-        if (dropTimer >= timeToWaitForPickup)
+        
+
+
+        // USED FOR DE-SPAWNING
+        if (isStartTimerForDeSpawn)
         {
-            dropTimer = 0;
-            isStartTimerForDrop = false;
-            gameObject.GetComponent<BoxCollider>().enabled = true;
+            deSpawnTimer += Time.deltaTime;
+            //Debug.Log("Despawn: " + deSpawnTimer);
+            // No ammo && Time runs out
+            if (deSpawnTimer >= timeToWaitForDeSpawn && gunsAmmo == 0)
+            {
+                deSpawnTimer = 0f;
+                isStartTimerForDeSpawn = false;
+                Despawn();
+            }
         }
-        */
+
+
+        // SPECIAL CASES
+        if (gunsAmmo == 0 && weaponData.name == "Grenade")
+        {
+            Despawn();
+        }
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -138,8 +146,14 @@ public class Gun : MonoBehaviour
                 {
                     playerShoot.shootInput += Shoot;
                     playerShoot.dropInput += Drop;
+                    
                     weaponManager.EquipWeapon(weaponData, gameObject);
+
+                    isStartTimerForDrop = false;
+                    isStartTimerForDeSpawn = false;
                     deSpawnTimer = 0f;
+                    dropTimer = 0f;
+
                     isPickedUp = true;
 
                     //gunsAmmo = weaponData.Ammo;
@@ -149,23 +163,35 @@ public class Gun : MonoBehaviour
         }
     }
 
+    private void Despawn()
+    {
+        //Drop();
+        gameObject.SetActive(false);
+        gameObject.GetComponent<BoxCollider>().enabled = false;
+        gameObject.GetComponent<Gun>().enabled = false;
+    }
+
     private bool CanShoot() => timeSinceLastShot > 1f / (weaponData.fireRate / 60f) && gunsAmmo > 0 && isPickedUp;//!gunData.reloading && timeSinceLastShot > 1f / (gunData.fireRate / 60f); //weaponData.Ammo > 0
 
     private void Shoot()
     {
+        /*
         if (gunsAmmo == 0 || weaponData.name != "BasicSword")
         {
-            // Play click sound to indicate no ammo left
-           // if (emptyGunSound != null)
-         //   {
-          //      emptyGunSound.Play();
-                
-          //  }
-            //Debug.Log("Click clack");
+             // Play click sound to indicate no ammo left
+             if (emptyGunSound != null)
+               {
+                  emptyGunSound.Play();
+
+              }
+            Debug.Log("Click clack");
         }
+        */
+
+        /*
 
         // Basic sword special case
-        
+
         if (weaponData.name == "BasicSword" && timeSinceLastShot > 1f / (weaponData.fireRate / 60f) && isPickedUp)
         {
             BasicSwordBehaviour bsb = swordMesh.GetComponent<BasicSwordBehaviour>();
@@ -180,7 +206,6 @@ public class Gun : MonoBehaviour
             //VFX
             if (weaponData.MuzzleFlashGameObject != null)
             {
-                Debug.Log("kddfsordsoO");
                 GameObject MuzzleFlashIns = Instantiate(weaponData.MuzzleFlashGameObject, muzzle.transform.position, transform.rotation);
                 MuzzleFlashIns.transform.Rotate(Vector3.up * 90);
                 Destroy(MuzzleFlashIns, 4f);
@@ -192,16 +217,18 @@ public class Gun : MonoBehaviour
 
 
         }
-        
+
+        */
+
         if (CanShoot())
         {
             gunsAmmo--;
             //Debug.Log(gunsAmmo);
-            if(shootSound != null)
+            if (shootSound != null)
             {
                 shootSound.Play();
             }
-            
+
             //Sound
             if (weaponData.shootAttackSound != null)
             {
@@ -212,18 +239,13 @@ public class Gun : MonoBehaviour
             //if (weaponData.MuzzleFlash != null) { weaponData.MuzzleFlash.Play(); }
             if (weaponData.MuzzleFlashGameObject != null)
             {
-                Debug.Log("YOOOO");
+                //Debug.Log("YOOOO");
                 GameObject MuzzleFlashIns = Instantiate(weaponData.MuzzleFlashGameObject, muzzle.transform.position, transform.rotation);
                 MuzzleFlashIns.transform.Rotate(Vector3.up * 90);
                 Destroy(MuzzleFlashIns, 4f);
             }
 
-
-
             GameObject firedProjectile = Instantiate(weaponData.projectile, muzzle.transform.position, transform.rotation);
-            //emptyGunSound.Play();
-            // mainly used for Lobby gun atm
-            //firedProjectile.GetComponent<Bullet>().SetDamage(weaponData.damage);
 
             float forceForwrd = weaponData.projectileForce;
             float aimx = muzzle.transform.forward.x;
@@ -244,25 +266,35 @@ public class Gun : MonoBehaviour
         {
             weaponManager.UnEquipWeapon(gameObject);
         }
+
+        isStartTimerForDrop = true;
+        if (gunsAmmo == 0)
+        {
+            isStartTimerForDeSpawn = true;
+        }
         
         gameObject.transform.SetParent(null);
+        isDropped = true;
         // Otherwise it stays in DontDestroyOnLoad
         //SceneManager.MoveGameObjectToScene(gameObject, SceneManager.GetActiveScene());
-        isStartTimerForDrop = true;
-        isStartTimerForDeSpawn = true;
         //gameObject.GetComponent<Gun>().enabled = false;
+        //gameObject.transform.position = new Vector2(999999, 999999);
+        //gameObject.SetActive(false);
+        //ExecuteAfterTime(1f);
+        //Debug.Log("fuck");
+        //gameObject.GetComponent<BoxCollider>().enabled = true;
 
-        gameObject.transform.position = new Vector2(999999, 999999);
 
-        //ExecuteAfterTime(2f);
-        gameObject.SetActive(false);
-        Debug.Log("fuck");
-        //gameObject.GetComponent<BoxCollider>().enabled = false;
+        // So that the previous owner can't shoot this gun
+        playerShoot.shootInput = null;
+        playerShoot.dropInput = null;
     }
+    /*
     IEnumerator ExecuteAfterTime(float time)
     {
         yield return new WaitForSeconds(time);
         gameObject.SetActive(false);
     }
+    */
 
 }

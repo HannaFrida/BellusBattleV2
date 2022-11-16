@@ -75,15 +75,24 @@ public class PlayerHealth : MonoBehaviour
 
     public void KillPlayer()
     {
-        CF.RemoveTarget(gameObject.transform);
+        //CF.RemoveTarget(gameObject.transform);
         //gameObject.transform.position = deathPosition.position;
+        GameManager.Instance.PlayerDeath(gameObject);
         boxCollider.enabled = false;
         bloodSplatter.Play();
         hips.SetActive(true);
         anime.enabled = false;
-        pm.enabled = false;
+        if (pm != null)
+        {
+            pm.enabled = false;
+        }
+        
         dash.enabled = false;
-        gameObject.GetComponentInChildren<Gun>().Drop();
+        if (gameObject.GetComponentInChildren<Gun>() != null)
+        {
+            gameObject.GetComponentInChildren<Gun>().Drop();
+        }
+        
         /*
         boxCollider.enabled = false;
         rightArm.SetActive(false);
@@ -95,14 +104,18 @@ public class PlayerHealth : MonoBehaviour
 
     public void UnkillPlayer()
     {
+        health = 1f;
         skr.enabled = true;
         anime.enabled = true;
         hips.SetActive(false);
         hips.SetActive(true);
-        hips.SetActive(false);
         hips.transform.position = Vector3.zero;
+        hips.SetActive(false);
         boxCollider.enabled = true;
-        pm.enabled = true;
+        if (pm != null)
+        {
+            pm.enabled = true;
+        }
         dash.enabled = true;
         /*
         boxCollider.enabled = true;

@@ -16,12 +16,12 @@ public class PlayerSpawnManager : MonoBehaviour
 
     private void Start()
     {
-        scoreManager = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>();
-        foreach (GameObject player in scoreManager.players)
+        //scoreManager = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>();
+        foreach (GameObject player in GameManager.Instance.GetAllPlayers())
         {
             player.SetActive(true);
         }
-        players = GameObject.FindGameObjectsWithTag("Player"); // Used for when changing level
+        players = GameManager.Instance.GetAllPlayers().ToArray(); // Used for when changing level
         
         for(int i = 0; i < players.Length; i++)
         {

@@ -2,14 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Gun", menuName = "Weapon/Gun")]
+[CreateAssetMenu(fileName = "New Weapon", menuName = "Weapon/New Weapon")]
 public class WeaponData : ScriptableObject
 {
-    
+    /*
     [Header("Pooling")]
     private Queue<GameObject> spawnedObjs;
     public int amountToSpawn;
     private Transform parent;
+    */
 
     [Header("Info")]
     public new string name;
@@ -25,7 +26,7 @@ public class WeaponData : ScriptableObject
     [SerializeField, Tooltip("The amount of force placed on the projectile.")]
     public float projectileForce;
 
-    [Header("Reloading")]
+    [Header("Ammo")]
     public int currentAmmo;
     public int initialAmmo;
     public int magSize;
@@ -50,7 +51,7 @@ public class WeaponData : ScriptableObject
     
     public GameObject MuzzleFlashGameObject { get => muzzleFlashGameObject; }
     
-    public Queue<GameObject> SpawnedObjs { get => spawnedObjs; }
+    //public Queue<GameObject> SpawnedObjs { get => spawnedObjs; }
 
     /*
     // Metods
@@ -114,8 +115,10 @@ public class WeaponData : ScriptableObject
     }
     */
 
+    /*
     public void ResetAmmo()
     {
         currentAmmo = initialAmmo;
     }
+    */
 }

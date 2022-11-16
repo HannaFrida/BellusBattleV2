@@ -5,6 +5,7 @@ using UnityEngine.Rendering.Universal;
 
 public class BackgroundMaterialHolder : MonoBehaviour
 {
+    /*
     [Header("Level 3")]
     [SerializeField] private List<MeshRenderer> M01 = new List<MeshRenderer>();
     [SerializeField] private List<MeshRenderer> M11 = new List<MeshRenderer>();
@@ -73,4 +74,5 @@ public class BackgroundMaterialHolder : MonoBehaviour
             M11[i].material = darkenMaterial1[1];
         }
     }
+    */
 }

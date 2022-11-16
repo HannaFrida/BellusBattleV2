@@ -16,7 +16,7 @@ public class LevelDetails : MonoBehaviour
     private TextMeshProUGUI textMesh;
     private void Start()
     {
-        levelManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
+        //levelManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
         toggle = GetComponent<Toggle>();
         image = GetComponent<Image>();
         textMesh = GetComponentInChildren<TextMeshProUGUI>();
@@ -37,7 +37,7 @@ public class LevelDetails : MonoBehaviour
     }
     public void ToggleValueChanged()
     {
-        levelManager.ChangeScenesToChooseFrom(this);
+        GameManager.Instance.ChangeScenesToChooseFrom(this);
         if(toggle.isOn)image.color = color1;
         else image.color = color2;
     }

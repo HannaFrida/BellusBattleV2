@@ -9,7 +9,8 @@ public class Bullet : Projectile
 	CameraFocus cf;
 	[SerializeField, Tooltip("Sound made when bullet hits something")]
 	public AudioSource[] hitSounds;
-	[SerializeField] private GameObject collideVFX;
+	[SerializeField] private GameObject colliderWallVFX;
+	[SerializeField] private GameObject colliderPlayerVFX;
 
 	//public float bulletDamage;
 
@@ -23,6 +24,12 @@ public class Bullet : Projectile
 		GameObject playerGo = other.gameObject;
 		if (playerGo.CompareTag("Player")) // && Shooter != playerGo)
 		{
+			Debug.Log("Obstacle");
+			ContactPoint contact = other.contacts[0];
+			Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
+			Vector3 pos = contact.point;
+			GameObject MuzzleFlashIns = Instantiate(colliderPlayerVFX, pos, rot);
+			Destroy(MuzzleFlashIns, 3f);
 			playerGo.GetComponent<PlayerHealth>().TakeDamage(damage);
 			Debug.Log("Hit player");
 
@@ -54,7 +61,7 @@ public class Bullet : Projectile
 			ContactPoint contact = other.contacts[0];
 			Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
 			Vector3 pos = contact.point;
-			GameObject MuzzleFlashIns = Instantiate(collideVFX, pos, rot);
+			GameObject MuzzleFlashIns = Instantiate(colliderWallVFX, pos, rot);
 			Destroy(MuzzleFlashIns, 3f);
 
 			//GameObject MuzzleFlashIns = Instantiate(collideVFX, gameObject.transform.position, transform.rotation);
