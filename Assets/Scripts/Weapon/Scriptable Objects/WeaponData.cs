@@ -44,13 +44,18 @@ public class WeaponData : ScriptableObject
     [SerializeField] private GameObject muzzleFlashGameObject;
     //[SerializeField] private ParticleSystem muzzleFlashVFX;
 
+    [Header("Crosshair")]
+    [SerializeField] private GameObject crosshair;
+
     // Getters
     public int Ammo { get => currentAmmo; }
 
     //public ParticleSystem MuzzleFlash { get => muzzleFlashVFX; }
     
     public GameObject MuzzleFlashGameObject { get => muzzleFlashGameObject; }
-    
+
+    public GameObject Crosshair { get => crosshair; }
+
     //public Queue<GameObject> SpawnedObjs { get => spawnedObjs; }
 
     /*
@@ -100,7 +105,7 @@ public class WeaponData : ScriptableObject
         return obj;
     }
     */
-    
+
 
 
     /*
