@@ -38,8 +38,8 @@ public class GameManager : MonoBehaviour
     private enum WhichScenesListToPlay { ScenesFromBuild, ScenesFromList, ScenesFromBuildAndList };
     private enum WhichOrderToPlayScenes { Random, NumiricalOrder };
     private string nextLevel;
-    public string NextLevel { get => nextLevel; }
-
+    [SerializeField] private float transitionTime = 5f;
+    AsyncOperation asyncLoad;
 
     public List<string> scenesToChooseFrom = new List<string>();
     public List<string> scenesToRemove = new List<string>();
@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
             giveScoreTimer = 0f;
             gameHasStarted = true;
             playersAlive = new List<GameObject>(players);
-        }
+        }     
 
     }
     private void Awake()
@@ -78,7 +78,7 @@ public class GameManager : MonoBehaviour
         if (hasOnePlayerLeft && !hasGivenScore && gameHasStarted)
         {
             GiveScoreAfterTimer();
-        }
+        }           
 
     }
 
@@ -183,7 +183,6 @@ public class GameManager : MonoBehaviour
 
     public void LoadScenesList()
     {
-        //SceneManager.LoadScene("TransitionScene");
         if (scenceToPlay == WhichScenesListToPlay.ScenesFromBuild) CreateListOfScenesFromBuild();
         else if (scenceToPlay == WhichScenesListToPlay.ScenesFromList) CreateListOfScenesFromList();
         else if (scenceToPlay == WhichScenesListToPlay.ScenesFromBuildAndList) { CreateListOfScenesFromBuild(); CreateListOfScenesFromList(); }
@@ -243,7 +242,8 @@ public class GameManager : MonoBehaviour
 
     public void LoadNextScene()
     {
-        //SceneManager.LoadScene("TransitionScene");
+        SceneManager.LoadScene("TransitionScene");
+
         if (scenesToChooseFrom.Count <= 0)
         {
             Application.OpenURL("https://www.youtube.com/watch?v=WEEM2Qc9sUg");
@@ -256,9 +256,11 @@ public class GameManager : MonoBehaviour
             LoadScenesList();
 
         }
+        
+        StartCoroutine(AsynchronousLoad());
         soundManager.FadeInMusic();
     }
-    
+    /*
     private void LoadNextSceneInNumericalOrder()
     {
         SceneManager.LoadScene(scenesToChooseFrom.ElementAt(0));
@@ -270,7 +272,7 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(scenesToChooseFrom.ElementAt(randomNumber));
         scenesToChooseFrom.RemoveAt(randomNumber);
     }
-    /*
+    */
 
     private string LoadNextSceneInNumericalOrder()
     {
@@ -284,7 +286,7 @@ public class GameManager : MonoBehaviour
         nextLevel = scenesToChooseFrom.ElementAt(randomNumber);
         scenesToChooseFrom.RemoveAt(randomNumber);
         return nextLevel;
-    }*/
+    }
     public void Finish(GameObject destroyMe)
     {
         SceneManager.LoadScene("The_End");
@@ -303,7 +305,28 @@ public class GameManager : MonoBehaviour
         return winnerID;
     }
 
+    // The Application loads the Scene in the background as the current Scene runs.
+    // transitionTime is how long the TransitionScene is shown before continuing
+    private IEnumerator AsynchronousLoad()
+    {
+        yield return new WaitForSeconds(transitionTime);
 
+        Application.backgroundLoadingPriority = ThreadPriority.High;
 
+        asyncLoad = SceneManager.LoadSceneAsync(nextLevel);
+        asyncLoad.allowSceneActivation = false;
+        while (!asyncLoad.isDone)
+        {
+            if (Mathf.Approximately(asyncLoad.progress, 0.9f))
+            {
+                asyncLoad.allowSceneActivation = true;
+            }
+            yield return null;
+        }
 
+        Application.backgroundLoadingPriority = ThreadPriority.BelowNormal;
+
+        yield return new WaitForEndOfFrame();
+        yield return null;
+    }
 }
