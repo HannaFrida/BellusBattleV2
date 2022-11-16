@@ -9,7 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7648801655613879618}
-  m_Layer: 0
+  - component: {fileID: 225273541775232171}
+  m_Layer: 7
   m_Name: passable_platform
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -33,6 +34,19 @@ Transform:
   m_Father: {fileID: 7648801655929530183}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &225273541775232171
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7648801655613879621}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 6.216418, y: 0.4101733, z: 4.084537}
+  m_Center: {x: 0.11588851, y: 0.059092216, z: -0.009798765}
 --- !u!1 &7648801655899189364
 GameObject:
   m_ObjectHideFlags: 0
@@ -127,10 +141,9 @@ GameObject:
   - component: {fileID: 7648801655929530183}
   - component: {fileID: 7648801655929530177}
   - component: {fileID: 7648801655929530176}
-  - component: {fileID: 7648801655929530179}
   - component: {fileID: 7648801655929530178}
-  - component: {fileID: 7648801655929530181}
   - component: {fileID: 7648801655929530180}
+  - component: {fileID: 8302718577839596319}
   m_Layer: 7
   m_Name: MovingPlatform
   m_TagString: Obstacle
@@ -146,7 +159,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7648801655929530182}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: -39.3, y: 6.6, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.6, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -204,19 +217,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &7648801655929530179
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7648801655929530182}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 6, y: 0.52958703, z: 4}
-  m_Center: {x: 0, y: 0, z: -0.00000023841858}
 --- !u!95 &7648801655929530178
 Animator:
   serializedVersion: 4
@@ -237,19 +237,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!65 &7648801655929530181
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7648801655929530182}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 5.843939, y: 1, z: 4.0341425}
-  m_Center: {x: -0.017681519, y: 0.76, z: -0.12577271}
 --- !u!114 &7648801655929530180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -262,7 +249,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96c326aec2848a844a723222039eeaa6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 6431588530169345916, guid: b1192d4dc8bc4b442b24e1abf65dd17e, type: 3}
+  attachedColliders: []
+  attachZone: {fileID: 8302718577839596319}
+  animator: {fileID: 7648801655929530178}
+--- !u!65 &8302718577839596319
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7648801655929530182}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 6.037368, y: 0.57469684, z: 4.101138}
+  m_Center: {x: -0.09440422, y: 0.1782243, z: -0.07985306}
 --- !u!1 &7648801657002616033
 GameObject:
   m_ObjectHideFlags: 0

@@ -449,8 +449,9 @@ public class PlayerMovement : MonoBehaviour
 
     public void AddExternalForce(Vector2 force)
     {
-        hasBeenKnockedBack = true;
-        knockBackTimer = 0f;
+        Debug.Log("jdjada");
+        //hasBeenKnockedBack = true;
+        //knockBackTimer = 0f;
         movementY = force.y;
         movementX = force.x;
         

@@ -150,6 +150,10 @@ public class GameManager : MonoBehaviour
         giveScoreTimer += Time.deltaTime;
         if (giveScoreTimer <= giveScoreTime) return;
 
+        foreach(GameObject player in players)
+        {
+            
+        }
 
         if (playersAlive.Count != 0)
         {
