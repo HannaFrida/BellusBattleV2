@@ -185,8 +185,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 55971454}
-  m_LocalRotation: {x: -0.04304112, y: 0.0008698545, z: 0.000037474256, w: 0.99907297}
-  m_LocalPosition: {x: 1.259561, y: 2.8860612, z: -23.39}
+  m_LocalRotation: {x: -0.051234953, y: -0.01377246, z: -0.0007066266, w: 0.9985914}
+  m_LocalPosition: {x: 2.0248861, y: 2.3384545, z: -23.39}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -236,9 +236,6 @@ MonoBehaviour:
   - target: {fileID: 408571374}
     weight: 1
     radius: 1
-  - target: {fileID: 1073855116}
-    weight: 1
-    radius: 1
 --- !u!4 &182676743
 Transform:
   m_ObjectHideFlags: 0
@@ -247,7 +244,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 182676741}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.259561, y: 2.8860612, z: 0}
+  m_LocalPosition: {x: 2.0248861, y: 2.3384545, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -492,8 +489,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 427497890}
-  m_LocalRotation: {x: -0.04304112, y: 0.0008698545, z: 0.000037474256, w: 0.99907297}
-  m_LocalPosition: {x: 1.259561, y: 2.8860612, z: -23.39}
+  m_LocalRotation: {x: -0.051234953, y: -0.01377246, z: -0.0007066266, w: 0.9985914}
+  m_LocalPosition: {x: 2.0248861, y: 2.3384545, z: -23.39}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -738,12 +735,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 15cd8619e406ab44fa1ac55a851cb409, type: 3}
---- !u!4 &1073855116 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7465268806252847977, guid: 15cd8619e406ab44fa1ac55a851cb409,
-    type: 3}
-  m_PrefabInstance: {fileID: 1073855115}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1155685515
 GameObject:
   m_ObjectHideFlags: 3
@@ -804,8 +795,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_BindingMode: 1
   m_FollowOffset: {x: 0, y: 0, z: -23.39}
-  m_XDamping: 10
-  m_YDamping: 10
+  m_XDamping: 7
+  m_YDamping: 7
   m_ZDamping: 1
   m_AngularDampingMode: 0
   m_PitchDamping: 0
@@ -832,8 +823,8 @@ MonoBehaviour:
   m_VerticalDamping: 5
   m_ScreenX: 0.5
   m_ScreenY: 0.5
-  m_DeadZoneWidth: 0.2
-  m_DeadZoneHeight: 0.2
+  m_DeadZoneWidth: 0.1
+  m_DeadZoneHeight: 0.1
   m_SoftZoneWidth: 0.8
   m_SoftZoneHeight: 0.8
   m_BiasX: 0
