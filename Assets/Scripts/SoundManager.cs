@@ -87,9 +87,20 @@ public class SoundManager : MonoBehaviour
         howerMenuSource.pitch = Random.Range(0.95f, highPitchRan);
         howerMenuSource.Play();
     }
+    
     public void PressUiSound()
     {
         pressMenuSource.Play();
+    }
+    public void OpenDoorSound()
+    {
+        howerMenuSource.pitch = Random.Range(0.95f, highPitchRan);
+        howerMenuSource.Play();
+    }
+    public void CloseDoorSound()
+    {
+        howerMenuSource.pitch = Random.Range(0.95f, highPitchRan);
+        howerMenuSource.Play();
     }
     public void PlaySound(string mixerName,AudioClip soundToPlay)
     { //hanterar vilket ljud som spelas. kallas på i andra scripts.
