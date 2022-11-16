@@ -58,20 +58,20 @@ public class SoundManager : MonoBehaviour
         StartCoroutine(FadeMixerGroup.StartFade(overallMixer, "MusicMixerGroup", 1f, 0f));
     }
 
-    public void FadeInHazard(AudioClip hazard)
-    {
-        PlaySound("Hazards", hazard);
-        StartCoroutine(FadeMixerGroup.StartFade(overallMixer, "HazardMixerGroup", 2, 0.5f));
-    }
-    public void HazardWarningSound()
+    public void FadeInHazard()
     {
        // PlaySound("Hazards", hazard);
         StartCoroutine(FadeMixerGroup.StartFade(overallMixer, "HazardMixerGroup", 2, 0.5f));
     }
     public void FadeOutHazard()
     {
-        RandomClipPlayer(allMusicSounds, musicSource);
+        
         StartCoroutine(FadeMixerGroup.StartFade(overallMixer, "HazardMixerGroup", 2, 0f));
+    }
+    public void HazardWarningSound()
+    {
+        // PlaySound("Hazards", hazard);
+        StartCoroutine(FadeMixerGroup.StartFade(overallMixer, "HazardMixerGroup", 2, 0.5f));
     }
     public void PlayerOnPlay_Sound()
     {

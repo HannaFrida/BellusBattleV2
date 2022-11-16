@@ -119,6 +119,7 @@ public class GameManager : MonoBehaviour
         {
             hasOnePlayerLeft = true;
             soundManager.FadeOutMusic();
+            soundManager.FadeOutHazard();
         }
         else if (playersAlive.Count > 1)
         {
