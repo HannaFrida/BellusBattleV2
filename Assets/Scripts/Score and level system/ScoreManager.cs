@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
+    /*
     [SerializeField] private static Dictionary<GameObject, int> scoreDic = new Dictionary<GameObject, int>();
     [SerializeField] private CameraFocus cameraFocus;
     [SerializeField] private LevelManager levelManager;
@@ -141,6 +142,7 @@ public class ScoreManager : MonoBehaviour
 
 
     }
+    */
 
 
 }

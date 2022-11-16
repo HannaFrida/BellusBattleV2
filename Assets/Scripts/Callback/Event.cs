@@ -40,7 +40,7 @@ public class SceneChangeEvent : Event<SceneChangeEvent>
 {
 	public GameObject[] players;
 	public String scene;
-	public GameManager.GameState state;
+	//public GameManager.GameState state;
 }
 
 public class ExplodeEvent : Event<ExplodeEvent>
