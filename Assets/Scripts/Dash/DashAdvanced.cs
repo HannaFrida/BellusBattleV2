@@ -200,6 +200,7 @@ public class DashAdvanced : MonoBehaviour
     }
     private void StartDashProtocol()
     {
+        currentDashingDuration *= 2;
         dashSound.Play();
         CheckForCollision();
         canDash = false;
