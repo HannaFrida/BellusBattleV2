@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -163,7 +164,7 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public int getScore(GameObject player)
+    public int GetScore(GameObject player)
     {
         return !scoreDic.ContainsKey(player) ? 0 : scoreDic[player];
     }
@@ -187,7 +188,7 @@ public class GameManager : MonoBehaviour
             winnerID = winner.GetComponent<PlayerDetails>().playerID;
             AddScore(playersAlive[0]);
             hasGivenScore = true;
-            if (getScore(winner) == scoreToWin)
+            if (GetScore(winner) == scoreToWin)
             {
                 ClearScore();
                 Finish(gameObject);
@@ -357,10 +358,9 @@ public class GameManager : MonoBehaviour
 
     public void MoveUpPlayer()
     {
-        //GameObject winnah = transPosDic[winnerID];
         if (winnerID == 0)
         {
-            Debug.Log("fuck oyu");
+            Debug.Log("draw or something");
         }
         else if(winnerID == 1)
         {
@@ -370,6 +370,7 @@ public class GameManager : MonoBehaviour
             RectTransform picture1 = trans.getImage1.GetComponent<RectTransform>();
             picture1.transform.position = pos1;
             pos1 = new Vector2(picture1.position.x, picture1.position.y + 20);
+            trans.getWinScore1.SetText(scoreDic[playersAlive[0]] + "");
         }
         else if (winnerID == 2)
         {
@@ -377,7 +378,6 @@ public class GameManager : MonoBehaviour
             Debug.Log("ahhhhhhh");
             imageDic[winnerID] = trans.getImage2;
             RectTransform picture2 = trans.getImage2.GetComponent<RectTransform>();
-            //pos1 = picture.transform.position;
             picture2.transform.position = pos2;
             pos2 = new Vector2(picture2.position.x, picture2.position.y + 20);
         }
@@ -385,7 +385,6 @@ public class GameManager : MonoBehaviour
         {
             imageDic[winnerID] = trans.getImage3;
             RectTransform picture3 = trans.getImage3.GetComponent<RectTransform>();
-            //pos1 = picture.transform.position;
             picture3.transform.position = pos3;
             pos3 = new Vector2(picture3.position.x, picture3.position.y + 20);
         }
@@ -393,18 +392,8 @@ public class GameManager : MonoBehaviour
         {
             imageDic[winnerID] = trans.getImage4;
             RectTransform picture4 = trans.getImage4.GetComponent<RectTransform>();
-            //pos1 = picture.transform.position;
             picture4.transform.position = pos4;
             pos4 = new Vector2(picture4.position.x, picture4.position.y + 20);
         }
-
-
-        //winner = gameManager.GetWinnerID();
-        //image1.transform.position = timesTransitionHappen;
-        //RectTransform picture = image1.GetComponent<RectTransform>();
-        //pos1 = picture.transform.position;
-        //picture.transform.position = pos1;
-        //pos1 = new Vector2(picture.position.x, picture.position.y + 20);
-        //picture.position = new Vector2(picture.position.x, picture.position.y + 20);
     }
 }

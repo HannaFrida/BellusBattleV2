@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class Transition : MonoBehaviour
 {
@@ -10,6 +11,12 @@ public class Transition : MonoBehaviour
     [SerializeField] Image image2; // Baloons
     [SerializeField] Image image3; // Baloons
     [SerializeField] Image image4; // Baloons
+
+    [SerializeField] TextMeshProUGUI winScore1; // scrores
+    [SerializeField] TextMeshProUGUI winScore2; // scrores
+    [SerializeField] TextMeshProUGUI winScore3; // scrores
+    [SerializeField] TextMeshProUGUI winScore4; // scrores
+
     GameManager gameManager;
     int winner;
     public static Transition Instance;
@@ -20,6 +27,11 @@ public class Transition : MonoBehaviour
     public Image getImage2 { get => image2; }
     public Image getImage3 { get => image3; }
     public Image getImage4 { get => image4; }
+
+    public TextMeshProUGUI getWinScore1 { get => winScore1; }
+    public TextMeshProUGUI getWinScore2 { get => winScore2; }
+    public TextMeshProUGUI getWinScore3 { get => winScore3; }
+    public TextMeshProUGUI getWinScore4 { get => winScore4; }
 
     private void Start()
     {
