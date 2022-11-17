@@ -61,6 +61,12 @@ public class PlayerMovement : MonoBehaviour
         get => CheckIsGrounded(); 
     }
 
+    public bool IsMovedByPLatform
+    {
+        get => isMovedByPLatform;
+        set => isMovedByPLatform = value;
+    }
+
     private Vector2 velocity;
     private Vector2 rayCastBottomLeft, rayCastBottomRight, rayCastTopRight, rayCastTopLeft;
 
@@ -98,6 +104,7 @@ public class PlayerMovement : MonoBehaviour
     private bool hasJumpBuffer;
     private bool hasBeenKnockedBack;
     private bool isGrounded;
+    private bool isMovedByPLatform;
     
   
     void Start()
@@ -159,8 +166,11 @@ public class PlayerMovement : MonoBehaviour
             HandleHorizontalCollisions(ref velocity);
         }
         transform.Translate(velocity * Time.deltaTime);
+        Debug.Log(movementAmount);
         
-        playerAnimator.SetFloat("Speed", movementX);
+        playerAnimator.SetFloat("Speed", movementAmount);
+        
+        
     }
 
     public void OnMove(InputAction.CallbackContext ctx)
@@ -182,6 +192,11 @@ public class PlayerMovement : MonoBehaviour
         {
             isMovingRight = false;
             isMovingLeft = false;
+        }
+
+        if(movementAmount < 0.1f && movementAmount > -0.1f)
+        {
+            movementAmount = 0f;
         }
 
     }
@@ -304,6 +319,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
+            if (isMovedByPLatform) return;
             movementX = Mathf.MoveTowards(movementX, 0, deceleration * Time.deltaTime);
         }
     }
@@ -460,22 +476,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void AddConstantExternalForce(Vector2 force)
     {
-        /*
-        Debug.Log(force.x);
-        if(force.x > 0 && movementX < force.x || force.x < 0 && movementX > force.x)
-        {
-            movementX = force.x;
-        }
-     
-
-        if (force.y > 0 && movementY < force.y || force.y < 0 && movementY > force.y)
-        {
-            movementY += force.y;
-        }
-        */
         movementX = force.x;
-        movementY += force.y;
-        
+        movementY += force.y;  
     }
 
 }

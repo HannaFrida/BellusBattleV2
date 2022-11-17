@@ -57,6 +57,7 @@ public class MovingPlatform : MonoBehaviour
         {
             if(currentColliders.Contains(attachedColliders[i]) == false)
             {
+                attachedColliders[i].GetComponent<PlayerMovement>().IsMovedByPLatform = false;
                 //attachedColliders[i].gameObject.transform.parent = null;
                 attachedColliders.RemoveAt(i);
                 
@@ -78,7 +79,9 @@ public class MovingPlatform : MonoBehaviour
             {
                 addedForce = movementDirection;
             }
-            col.GetComponent<PlayerMovement>().AddConstantExternalForce(addedForce * moveSpeed);
+            PlayerMovement playerMovement = col.GetComponent<PlayerMovement>();
+            playerMovement.AddConstantExternalForce(addedForce * moveSpeed);
+            playerMovement.IsMovedByPLatform = true;
         }
     }
 
