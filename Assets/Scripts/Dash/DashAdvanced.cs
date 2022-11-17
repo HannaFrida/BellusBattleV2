@@ -313,6 +313,7 @@ public class DashAdvanced : MonoBehaviour
             else if(onControlOverride)
             {
                 currentDashingDistace = hit.distance/ currentDashingDuration - Mathf.Sqrt( Mathf.Pow(movement.Velocity.x, 2) + Mathf.Pow(movement.Velocity.y, 2)) - Mathf.Abs(movement.Velocity.x) - Mathf.Abs(movement.Velocity.y);
+                currentDashingDistace = Mathf.Abs(currentDashingDistace);
             }
             else
             {
