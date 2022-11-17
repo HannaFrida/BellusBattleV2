@@ -5681,6 +5681,7 @@ GameObject:
   - component: {fileID: 7687228209419224627}
   - component: {fileID: 151876198800240814}
   - component: {fileID: 3527575535608260496}
+  - component: {fileID: 545699144991103134}
   - component: {fileID: 7204374830010860157}
   - component: {fileID: 1079757518853252576}
   - component: {fileID: 761715777191676976}
@@ -5740,10 +5741,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 16.69
-  jumpForce: 21.19
+  jumpForce: 20.82
   airDeceleration: 30.9
   groundDeceleration: 150
-  airResistance: 72.5
+  airResistance: 75
   downwardForce: -22.7
   acceleration: 35444
   doubleJumpDecreaser: 0.94
@@ -5760,11 +5761,9 @@ MonoBehaviour:
   oneWayLayer:
     serializedVersion: 2
     m_Bits: 128
+  playerSoundManager: {fileID: 545699144991103134}
   playerAnimator: {fileID: 8727384561011662934}
   doubleJumpVFX: {fileID: 8357581948437241007}
-  JumpSound: {fileID: 7204374830010860157}
-  landSound: {fileID: 761715777191676976}
-  doubleJumpSound: {fileID: 761715777191676976}
   jumpEvent:
     m_PersistentCalls:
       m_Calls:
@@ -6040,11 +6039,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canDash: 1
   stopGravityWhileDashing: 0
-  isInvincibileWhileDashing: 1
-  dashingDistace: 48
-  dashingDuration: 0.1
-  airDashingDistace: 48
-  airDashingDuration: 0.1
+  isInvincibileWhileDashing: 0
+  dashingDistace: 45
+  dashingDuration: 0.05
+  airDashingDistace: 45
+  airDashingDuration: 0.05
   dashUpAngle: 90
   dashUpAngleRange: 3
   canDashDown: 0
@@ -6052,9 +6051,9 @@ MonoBehaviour:
   dashDownAngleRange: 3
   deadZoneAngle: -90
   deadZoneAngleRange: 85
-  dashingActivationCooldown: 0.7
+  dashingActivationCooldown: 0.67
   tr: {fileID: 7687228209419224627}
-  dashSound: {fileID: 1079757518853252576}
+  playerSoundManager: {fileID: 545699144991103134}
   movement: {fileID: 6431588530169345917}
   dashEvent:
     m_PersistentCalls:
@@ -6224,6 +6223,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponSlot: {fileID: 300225489857970639}
   equippedWeapon: {fileID: 0}
+--- !u!114 &545699144991103134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6431588530169345916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 909f654e401622245bd58a9978153c7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpSound: {fileID: 7204374830010860157}
+  doubleJumpSound: {fileID: 7204374830010860157}
+  landSound: {fileID: 761715777191676976}
+  dashSound: {fileID: 1079757518853252576}
 --- !u!82 &7204374830010860157
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6235,7 +6250,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -1882101160383270893, guid: 66b12940d28b0d94ea93cc1bea189c8b,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: db8712dff4df9bd4da57131b18994aae, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 478c8f88813693941aa283194f36d553, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -6243,7 +6258,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 135
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -6429,7 +6444,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 6991506972303938642, guid: 66b12940d28b0d94ea93cc1bea189c8b,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: 8c8e23b0550039945bcef6c1541b6205, type: 3}
+  m_audioClip: {fileID: 8300000, guid: b2805e269b37111478e5ca8e10ec7ada, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -8751,7 +8766,7 @@ PrefabInstance:
     - target: {fileID: 1952737545159249948, guid: c4626a2bd3e247f41ad1ce76bb68ac1a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.007938604
+      value: -0.007938603
       objectReference: {fileID: 0}
     - target: {fileID: 1952737545159249948, guid: c4626a2bd3e247f41ad1ce76bb68ac1a,
         type: 3}
