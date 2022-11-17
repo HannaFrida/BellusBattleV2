@@ -39,8 +39,14 @@ public class GameManager : MonoBehaviour
     private enum WhichScenesListToPlay { ScenesFromBuild, ScenesFromList, ScenesFromBuildAndList };
     private enum WhichOrderToPlayScenes { Random, NumiricalOrder };
     private string nextLevel;
+
+    [Header("Transition")]
     [SerializeField] private float transitionTime = 5f;
     AsyncOperation asyncLoad;
+    [SerializeField] Transition trans;
+    static Vector2 pos1, pos2, pos3, pos4;
+    private static Dictionary<int, GameObject> transPosDic = new Dictionary<int, GameObject>();
+    private static Dictionary<int, Image> imageDic = new Dictionary<int, Image>();
 
     public List<string> scenesToChooseFrom = new List<string>();
     public List<string> scenesToRemove = new List<string>();
@@ -56,8 +62,19 @@ public class GameManager : MonoBehaviour
             gameHasStarted = true;
             playersAlive = new List<GameObject>(players);
         }
-        MoveUpPlayer();
 
+        //trans = Transition.Instance;
+        /*
+        if (SceneManager.GetActiveScene().name == "TransitionScene")
+        {
+            trans.gameObject.SetActive(true);
+            MoveUpPlayer();
+        }
+        else
+        {
+            trans.gameObject.SetActive(false);
+        }
+        */
     }
     private void Awake()
     {
@@ -69,7 +86,12 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-
+        //trans = Transition.Instance;
+        //trans.gameObject.SetActive(false);
+        pos1 = new Vector2(-409f, 160f);
+        pos2 = new Vector2(-163f, 160f);
+        pos3 = new Vector2(163f, 160f);
+        pos4 = new Vector2(409f, 160f);
     }
 
     private void Update()
@@ -162,11 +184,11 @@ public class GameManager : MonoBehaviour
         {
             
             GameObject winner = playersAlive[0];
+            winnerID = winner.GetComponent<PlayerDetails>().playerID;
             AddScore(playersAlive[0]);
             hasGivenScore = true;
             if (getScore(winner) == scoreToWin)
             {
-                winnerID = winner.GetComponent<PlayerDetails>().playerID;
                 ClearScore();
                 Finish(gameObject);
                 //Nån har vunnit!
@@ -175,6 +197,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            winnerID = 0;
             Debug.Log("Its a draaaaw!");
         }
         hasGivenScore = false;
@@ -332,21 +355,56 @@ public class GameManager : MonoBehaviour
         yield return null;
     }
 
-
-    [SerializeField] Image image1; // Baloons
-    [SerializeField] Image image2; // Baloons
-    [SerializeField] Image image3; // Baloons
-    [SerializeField] Image image4; // Baloons
-
-    void MoveUpPlayer()
+    public void MoveUpPlayer()
     {
-        if (SceneManager.GetActiveScene().name == "TransitionScene")
+        //GameObject winnah = transPosDic[winnerID];
+        if (winnerID == 0)
         {
-            image1 = GameObject.Find("P1").GetComponent<Image>();
+            Debug.Log("fuck oyu");
         }
+        else if(winnerID == 1)
+        {
+            Debug.Log(winnerID);
+            Debug.Log("winnah");
+            imageDic[winnerID] = trans.getImage1;
+            RectTransform picture1 = trans.getImage1.GetComponent<RectTransform>();
+            picture1.transform.position = pos1;
+            pos1 = new Vector2(picture1.position.x, picture1.position.y + 20);
+        }
+        else if (winnerID == 2)
+        {
+            Debug.Log(winnerID);
+            Debug.Log("ahhhhhhh");
+            imageDic[winnerID] = trans.getImage2;
+            RectTransform picture2 = trans.getImage2.GetComponent<RectTransform>();
+            //pos1 = picture.transform.position;
+            picture2.transform.position = pos2;
+            pos2 = new Vector2(picture2.position.x, picture2.position.y + 20);
+        }
+        else if (winnerID == 3)
+        {
+            imageDic[winnerID] = trans.getImage3;
+            RectTransform picture3 = trans.getImage3.GetComponent<RectTransform>();
+            //pos1 = picture.transform.position;
+            picture3.transform.position = pos3;
+            pos3 = new Vector2(picture3.position.x, picture3.position.y + 20);
+        }
+        else if (winnerID == 4)
+        {
+            imageDic[winnerID] = trans.getImage4;
+            RectTransform picture4 = trans.getImage4.GetComponent<RectTransform>();
+            //pos1 = picture.transform.position;
+            picture4.transform.position = pos4;
+            pos4 = new Vector2(picture4.position.x, picture4.position.y + 20);
+        }
+
+
         //winner = gameManager.GetWinnerID();
         //image1.transform.position = timesTransitionHappen;
-        RectTransform picture = image1.GetComponent<RectTransform>();
-        picture.position = new Vector2(picture.position.x, picture.position.y + 20);
+        //RectTransform picture = image1.GetComponent<RectTransform>();
+        //pos1 = picture.transform.position;
+        //picture.transform.position = pos1;
+        //pos1 = new Vector2(picture.position.x, picture.position.y + 20);
+        //picture.position = new Vector2(picture.position.x, picture.position.y + 20);
     }
 }

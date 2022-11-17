@@ -14,18 +14,38 @@ public class Transition : MonoBehaviour
     int winner;
     public static Transition Instance;
     int timesTransitionHappen;
+    [SerializeField] GameObject panel;
+
+    public Image getImage1 { get => image1; }
+    public Image getImage2 { get => image2; }
+    public Image getImage3 { get => image3; }
+    public Image getImage4 { get => image4; }
 
     private void Start()
-    { 
-        gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
+    {
+        DontDestroyOnLoad(gameObject);
+        gameManager = GameManager.Instance;
         timesTransitionHappen++;
-       
+
+        
+        Instance = this;
+        panel.SetActive(false);
     }
     
 
     private void OnLevelWasLoaded(int level)
     {
-       // MoveUpPlayer();
+        // MoveUpPlayer();
+        if (SceneManager.GetActiveScene().name == "TransitionScene")
+        {
+            panel.SetActive(true);
+            gameManager.MoveUpPlayer();
+        }
+        else
+        {
+            panel.SetActive(false);
+        }
+
     }
 
     private void Update()
