@@ -7,6 +7,7 @@ public class Door : MonoBehaviour
     [SerializeField] private GameObject anchor;
     [SerializeField] private Collider[] colliders;
     [SerializeField] private int doorHealth;
+    private SoundManager soundManager;
     private List<Collider> colliderList = new List<Collider>();
     private BoxCollider boxCollider;
     private GameObject currentPlayer;
@@ -20,6 +21,7 @@ public class Door : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
         boxCollider = GetComponent<BoxCollider>();
     }
     private void FixedUpdate()
@@ -46,17 +48,22 @@ public class Door : MonoBehaviour
                 if(col.bounds.center.x > boxCollider.bounds.center.x)
                 {
                     RotateAnchor(90f);
+                    soundManager.OpenDoorSound();
                 }
                 else if(col.bounds.center.x < boxCollider.bounds.center.x)
                 {
                     RotateAnchor(-90f);
+                    soundManager.OpenDoorSound();
                 }
                 return;
             }
-            else if( currentPlayer == null)
+            else if( currentPlayer == null && anchor.transform.localRotation.y != 0f)
             {
                 anchor.transform.localEulerAngles = Vector3.zero;
+                soundManager.CloseDoorSound();
+
             }
+           
         }
         
     }

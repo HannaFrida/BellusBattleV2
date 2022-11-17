@@ -128,6 +128,7 @@ public class GameManager : MonoBehaviour
     }
 
 
+
     private void ClearScore()
     {
         scoreDic.Clear();
@@ -144,6 +145,7 @@ public class GameManager : MonoBehaviour
         {
             hasOnePlayerLeft = true;
             soundManager.FadeOutMusic();
+            soundManager.FadeOutHazard();
         }
         else if (playersAlive.Count > 1)
         {
@@ -180,6 +182,10 @@ public class GameManager : MonoBehaviour
         giveScoreTimer += Time.deltaTime;
         if (giveScoreTimer <= giveScoreTime) return;
 
+        foreach(GameObject player in players)
+        {
+            
+        }
 
         if (playersAlive.Count != 0)
         {
