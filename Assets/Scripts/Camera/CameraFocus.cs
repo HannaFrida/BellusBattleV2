@@ -29,7 +29,7 @@ public class CameraFocus : MonoBehaviour
 			foreach (GameObject tr in players)
 			{
 				_targets.Add(tr.transform);
-                _targetGroup.AddMember(tr.transform, 1, 1);
+                //_targetGroup.AddMember(tr.transform, 1, 1);
             }
             hasReachedTime = true;
 		}
