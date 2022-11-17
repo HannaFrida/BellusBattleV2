@@ -8,11 +8,12 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 using TMPro;
+using Cinemachine;
 
 public class GameManager : MonoBehaviour
 {
 
-    [SerializeField] private CameraFocus camera;
+    [SerializeField] private CinemachineTargetGroup targetGroup;
     public static GameManager Instance;
     [SerializeField] private List<GameObject> players = new List<GameObject>();
     [SerializeField] private List<GameObject> playersAlive = new List<GameObject>();
@@ -62,6 +63,7 @@ public class GameManager : MonoBehaviour
             giveScoreTimer = 0f;
             gameHasStarted = true;
             playersAlive = new List<GameObject>(players);
+            //Array.Clear(targetGroup.GetComponent<CinemachineTargetGroup>().m_Targets, 0, targetGroup.GetComponent<CinemachineTargetGroup>().m_Targets.Length);
             SpawnPlayers();
         }
 
@@ -88,6 +90,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        //targetGroup = GameObject.FindGameObjectWithTag("targets");
         //trans = Transition.Instance;
         //trans.gameObject.SetActive(false);
         pos1 = new Vector2(477f, 160f); 
@@ -128,27 +131,18 @@ public class GameManager : MonoBehaviour
         Transform[] spawnPoints= GameObject.FindGameObjectWithTag("PlayerSpawnManager").GetComponent<PlayerSpawnManager>().SpawnLocations;
         for(int i = 0; i < players.Count; i++)
         {
+            targetGroup.AddMember(players[i].transform, 1, 5);
             players[i].SetActive(true);
             players[i].gameObject.SetActive(true);
             players[i].GetComponent<Dash>().ResetValues();
             players[i].transform.position = spawnPoints[i].position;
         }
-        // Used for when changing level
-        /*
-        for (int i = 0; i < players.Length; i++)
-        {
-            players[i].gameObject.SetActive(true);
-            players[i].GetComponent<Dash>().ResetValues();
-            //players[i].GetComponent<PlayerHealth>().UnkillPlayer();
-            players[i].transform.position = spawnLocations[i].position;
-
-        }
-        */
     }
 
     public void PlayerDeath(GameObject deadPlayer)
     {
         playersAlive.Remove(deadPlayer);
+        targetGroup.GetComponent<CinemachineTargetGroup>().RemoveMember(deadPlayer.transform);
     }
 
 

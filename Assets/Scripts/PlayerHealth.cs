@@ -45,10 +45,12 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        Debug.Log("ajajaj" + " " + gameObject.GetComponent<PlayerDetails>().playerID);
         //if(isInvinsable) return;
         health -= damage;
         if (health <= 0)
         {
+            Debug.Log("ajajaj" + " " + gameObject.GetComponent<PlayerDetails>().playerID + " dEAD " + Health);
             KillPlayer();
             playerDeathSound.Play();
             //onGameOver.Invoke();
@@ -75,6 +77,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void KillPlayer()
     {
+        Debug.Log("jjajajajaj" + " " + gameObject.GetComponent<PlayerDetails>().playerID + " i am dEAD " + Health);
         //CF.RemoveTarget(gameObject.transform);
         //gameObject.transform.position = deathPosition.position;
         GameManager.Instance.PlayerDeath(gameObject);
@@ -92,7 +95,8 @@ public class PlayerHealth : MonoBehaviour
         {
             gameObject.GetComponentInChildren<Gun>().Drop();
         }
-        
+        Debug.Log("dufucjhedfjsujsuj" + " " + gameObject.GetComponent<PlayerDetails>().playerID + " i am dEAD aaginsss " + Health);
+
         /*
         boxCollider.enabled = false;
         rightArm.SetActive(false);
