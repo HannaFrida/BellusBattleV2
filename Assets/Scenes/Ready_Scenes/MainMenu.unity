@@ -6497,7 +6497,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1091961803}
   m_HandleRect: {fileID: 1091961802}
   m_Direction: 0
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -6983,6 +6983,24 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 681432075}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &682416603 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1560262140249139055, guid: 98306453c69b65f4bb8f311be8e643a4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1682350065}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &682416604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 682416603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfc8e92834043c54caf4a5a706662189, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &700486830
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14026,6 +14044,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1073243639, guid: 98306453c69b65f4bb8f311be8e643a4, type: 3}
+      propertyPath: m_FollowOffset.z
+      value: -100
+      objectReference: {fileID: 0}
+    - target: {fileID: 1560262139375586738, guid: 98306453c69b65f4bb8f311be8e643a4,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -106.26355
+      objectReference: {fileID: 0}
+    - target: {fileID: 1560262139540937367, guid: 98306453c69b65f4bb8f311be8e643a4,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -106.26355
+      objectReference: {fileID: 0}
     - target: {fileID: 1560262140249139054, guid: 98306453c69b65f4bb8f311be8e643a4,
         type: 3}
       propertyPath: m_RootOrder
@@ -14085,6 +14117,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: CMPackage
+      objectReference: {fileID: 0}
+    - target: {fileID: 1560262140489648280, guid: 98306453c69b65f4bb8f311be8e643a4,
+        type: 3}
+      propertyPath: m_MinimumFOV
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 98306453c69b65f4bb8f311be8e643a4, type: 3}

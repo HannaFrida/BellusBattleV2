@@ -52,6 +52,6 @@ public class PlayerJoinManager : PlayerSpawnManager
     }
     private void AddPlayerInFocus(Transform player)
     {
-        targetGroup.GetComponent<CinemachineTargetGroup>().AddMember(player, 1, 1);
+        targetGroup.GetComponent<CinemachineTargetGroup>().AddMember(player, 1, 5);
     }
 }
