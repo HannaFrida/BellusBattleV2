@@ -166,7 +166,7 @@ public class PlayerMovement : MonoBehaviour
             HandleHorizontalCollisions(ref velocity);
         }
         transform.Translate(velocity * Time.deltaTime);
-        Debug.Log(movementAmount);
+        //Debug.Log(movementAmount);
         
         playerAnimator.SetFloat("Speed", movementAmount);
         
