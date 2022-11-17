@@ -57,12 +57,13 @@ public class Door : MonoBehaviour
                 }
                 return;
             }
-            else if( currentPlayer == null)
+            else if( currentPlayer == null && anchor.transform.localRotation.y != 0f)
             {
                 anchor.transform.localEulerAngles = Vector3.zero;
-                
+                soundManager.CloseDoorSound();
+
             }
-            soundManager.CloseDoorSound();
+           
         }
         
     }
