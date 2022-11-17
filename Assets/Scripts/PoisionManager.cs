@@ -5,6 +5,8 @@ using UnityEngine;
 public class PoisionManager : MonoBehaviour
 {
     [SerializeField] private PoisonZone[] poisionZones;
+    private SoundManager soundManager;
+    [SerializeField] private AudioClip posionSound;
     [SerializeField] private float poisionDuration;
     [SerializeField] private float waitBetweenPoision;
     [SerializeField, Tooltip("Aktiverar en random poisionzon istället för att aktivera alla")] private bool chooseRandomZone;
@@ -13,7 +15,8 @@ public class PoisionManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        foreach(PoisonZone poisionZone in poisionZones)
+        soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
+        foreach (PoisonZone poisionZone in poisionZones)
         {
             poisionZone.gameObject.SetActive(false);
         }
@@ -36,11 +39,13 @@ public class PoisionManager : MonoBehaviour
             if(isPoisionActive == false && isPoisionActive == false)
             {
                 poisionZone.gameObject.SetActive(true);
+                soundManager.FadeInPoisionHazard("poisonRainHazard");
             }
             else
             {
                 poisionZone.Clear();
                 poisionZone.gameObject.SetActive(false);
+                soundManager.FadeOutHazard();
             }
         }
     }

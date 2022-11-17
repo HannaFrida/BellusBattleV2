@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
@@ -14,6 +15,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     [SerializeField] private List<GameObject> players = new List<GameObject>();
     [SerializeField] private List<GameObject> playersAlive = new List<GameObject>();
+    [SerializeField] private SoundManager soundManager;
     private bool gameHasStarted;
 
     [Header("Poängrelaterat")]
@@ -37,8 +39,8 @@ public class GameManager : MonoBehaviour
     private enum WhichScenesListToPlay { ScenesFromBuild, ScenesFromList, ScenesFromBuildAndList };
     private enum WhichOrderToPlayScenes { Random, NumiricalOrder };
     private string nextLevel;
-    public string NextLevel { get => nextLevel; }
-
+    [SerializeField] private float transitionTime = 5f;
+    AsyncOperation asyncLoad;
 
     public List<string> scenesToChooseFrom = new List<string>();
     public List<string> scenesToRemove = new List<string>();
@@ -54,6 +56,7 @@ public class GameManager : MonoBehaviour
             gameHasStarted = true;
             playersAlive = new List<GameObject>(players);
         }
+        MoveUpPlayer();
 
     }
     private void Awake()
@@ -77,7 +80,7 @@ public class GameManager : MonoBehaviour
         if (hasOnePlayerLeft && !hasGivenScore && gameHasStarted)
         {
             GiveScoreAfterTimer();
-        }
+        }           
 
     }
 
@@ -117,6 +120,8 @@ public class GameManager : MonoBehaviour
         if (playersAlive.Count <= 1)
         {
             hasOnePlayerLeft = true;
+            soundManager.FadeOutMusic();
+            soundManager.FadeOutHazard();
         }
         else if (playersAlive.Count > 1)
         {
@@ -153,9 +158,14 @@ public class GameManager : MonoBehaviour
         giveScoreTimer += Time.deltaTime;
         if (giveScoreTimer <= giveScoreTime) return;
 
+        foreach(GameObject player in players)
+        {
+            
+        }
 
         if (playersAlive.Count != 0)
         {
+            
             GameObject winner = playersAlive[0];
             AddScore(playersAlive[0]);
             hasGivenScore = true;
@@ -180,7 +190,6 @@ public class GameManager : MonoBehaviour
 
     public void LoadScenesList()
     {
-        SceneManager.LoadScene("TransitionScene");
         if (scenceToPlay == WhichScenesListToPlay.ScenesFromBuild) CreateListOfScenesFromBuild();
         else if (scenceToPlay == WhichScenesListToPlay.ScenesFromList) CreateListOfScenesFromList();
         else if (scenceToPlay == WhichScenesListToPlay.ScenesFromBuildAndList) { CreateListOfScenesFromBuild(); CreateListOfScenesFromList(); }
@@ -240,6 +249,8 @@ public class GameManager : MonoBehaviour
 
     public void LoadNextScene()
     {
+        SceneManager.LoadScene("TransitionScene");
+
         if (scenesToChooseFrom.Count <= 0)
         {
             Application.OpenURL("https://www.youtube.com/watch?v=WEEM2Qc9sUg");
@@ -250,7 +261,11 @@ public class GameManager : MonoBehaviour
         if (scenesToChooseFrom.Count <= 0)
         {
             LoadScenesList();
+
         }
+        
+        StartCoroutine(AsynchronousLoad());
+        soundManager.FadeInMusic();
     }
     /*
     private void LoadNextSceneInNumericalOrder()
@@ -297,7 +312,46 @@ public class GameManager : MonoBehaviour
         return winnerID;
     }
 
+    // The Application loads the Scene in the background as the current Scene runs.
+    // transitionTime is how long the TransitionScene is shown before continuing
+    private IEnumerator AsynchronousLoad()
+    {
+        yield return new WaitForSeconds(transitionTime);
+
+        Application.backgroundLoadingPriority = ThreadPriority.High;
+
+        asyncLoad = SceneManager.LoadSceneAsync(nextLevel);
+        asyncLoad.allowSceneActivation = false;
+        while (!asyncLoad.isDone)
+        {
+            if (Mathf.Approximately(asyncLoad.progress, 0.9f))
+            {
+                asyncLoad.allowSceneActivation = true;
+            }
+            yield return null;
+        }
+
+        Application.backgroundLoadingPriority = ThreadPriority.BelowNormal;
+
+        yield return new WaitForEndOfFrame();
+        yield return null;
+    }
 
 
+    [SerializeField] Image image1; // Baloons
+    [SerializeField] Image image2; // Baloons
+    [SerializeField] Image image3; // Baloons
+    [SerializeField] Image image4; // Baloons
 
+    void MoveUpPlayer()
+    {
+        if (SceneManager.GetActiveScene().name == "TransitionScene")
+        {
+            image1 = GameObject.Find("P1").GetComponent<Image>();
+        }
+        //winner = gameManager.GetWinnerID();
+        //image1.transform.position = timesTransitionHappen;
+        RectTransform picture = image1.GetComponent<RectTransform>();
+        picture.position = new Vector2(picture.position.x, picture.position.y + 20);
+    }
 }

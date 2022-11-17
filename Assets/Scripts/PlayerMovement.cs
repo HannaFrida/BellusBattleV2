@@ -98,6 +98,7 @@ public class PlayerMovement : MonoBehaviour
     private bool hasJumpBuffer;
     private bool hasBeenKnockedBack;
     private bool isGrounded;
+    
   
     void Start()
     {
@@ -449,10 +450,31 @@ public class PlayerMovement : MonoBehaviour
 
     public void AddExternalForce(Vector2 force)
     {
+        Debug.Log("jdjada");
         hasBeenKnockedBack = true;
         knockBackTimer = 0f;
         movementY = force.y;
         movementX = force.x;
+        
+    }
+
+    public void AddConstantExternalForce(Vector2 force)
+    {
+        /*
+        Debug.Log(force.x);
+        if(force.x > 0 && movementX < force.x || force.x < 0 && movementX > force.x)
+        {
+            movementX = force.x;
+        }
+     
+
+        if (force.y > 0 && movementY < force.y || force.y < 0 && movementY > force.y)
+        {
+            movementY += force.y;
+        }
+        */
+        movementX = force.x;
+        movementY += force.y;
         
     }
 

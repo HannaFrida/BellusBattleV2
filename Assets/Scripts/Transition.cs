@@ -6,54 +6,38 @@ using UnityEngine.UI;
 
 public class Transition : MonoBehaviour
 {
-    Image image1; // Baloons
-    Image image2; // Baloons
+    [SerializeField] Image image1; // Baloons
+    [SerializeField] Image image2; // Baloons
+    [SerializeField] Image image3; // Baloons
+    [SerializeField] Image image4; // Baloons
     GameManager gameManager;
     int winner;
+    public static Transition Instance;
+    int timesTransitionHappen;
 
     private void Start()
+    { 
+        gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
+        timesTransitionHappen++;
+       
+    }
+    
+
+    private void OnLevelWasLoaded(int level)
     {
-        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+       // MoveUpPlayer();
     }
 
     private void Update()
     {
-        // Use a coroutine to load the Scene in the background
-        StartCoroutine(LoadYourAsyncScene());
+        
     }
 
     void MoveUpPlayer()
     {
-        winner = gameManager.GetWinnerID();
-        
-    }
-
-    IEnumerator LoadYourAsyncScene()
-    {
-        // The Application loads the Scene in the background as the current Scene runs.
-        // This is particularly good for creating loading screens.
-        // You could also load the Scene by using sceneBuildIndex. In this case Scene2 has
-        // a sceneBuildIndex of 1 as shown in Build Settings.
-
-        StartCoroutine(ExampleCoroutine());
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(gameManager.NextLevel);
-
-        // Wait until the asynchronous scene fully loads
-        while (!asyncLoad.isDone)
-        {
-            yield return null;
-        }
-    }
-
-    IEnumerator ExampleCoroutine()
-    {
-        //Print the time of when the function is first called.
-        Debug.Log("Started Coroutine at timestamp : " + Time.time);
-
-        //yield on a new YieldInstruction that waits for 5 seconds.
-        yield return new WaitForSeconds(5);
-
-        //After we have waited 5 seconds print the time again.
-        Debug.Log("Finished Coroutine at timestamp : " + Time.time);
+        //winner = gameManager.GetWinnerID();
+        //image1.transform.position = timesTransitionHappen;
+        RectTransform picture = image1.GetComponent<RectTransform>();
+        picture.position = new Vector2(picture.position.x, picture.position.y + 20);
     }
 }
