@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7648801655613879618}
-  - component: {fileID: 225273541775232171}
   m_Layer: 7
   m_Name: passable_platform
   m_TagString: Obstacle
@@ -34,19 +33,6 @@ Transform:
   m_Father: {fileID: 7648801655929530183}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &225273541775232171
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7648801655613879621}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 6.216418, y: 0.4101733, z: 4.084537}
-  m_Center: {x: 0.11588851, y: 0.059092216, z: -0.009798765}
 --- !u!1 &7648801655899189364
 GameObject:
   m_ObjectHideFlags: 0
@@ -225,7 +211,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7648801655929530182}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 1f8519f9b3ccb7b49bf547aa2f2dac52, type: 2}
   m_CullingMode: 0
@@ -267,8 +253,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 6.6, y: 0.61903334, z: 4.1}
-  m_Center: {x: 0.03000001, y: 0.3595168, z: 0}
+  m_Size: {x: 6.6, y: 0.45477432, z: 4.1}
+  m_Center: {x: 0.03000001, y: 0.048515648, z: 0}
 --- !u!1 &7648801657002616033
 GameObject:
   m_ObjectHideFlags: 0
