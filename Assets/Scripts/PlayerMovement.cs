@@ -30,12 +30,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask oneWayLayer;
     
     [Header("Sound & VFX")]
+    [SerializeField] private PlayerSoundManager playerSoundManager;
     [SerializeField] private Animator playerAnimator;
     [SerializeField] private GameObject doubleJumpVFX;
     
-    [SerializeField] private AudioSource JumpSound;
-    [SerializeField] private AudioSource landSound;
-    [SerializeField] private AudioSource doubleJumpSound;
+   
+    
 
 
     public UnityEvent jumpEvent;
@@ -141,7 +141,8 @@ public class PlayerMovement : MonoBehaviour
             hasCoyoteTime = true;
             hasDoubleJump = true;
             hasJumpedOnGround = false;
-            landSound.Play();
+            playerSoundManager.PlayerLandSound();
+           
             
             
             if (hasJumpBuffer)
@@ -223,11 +224,13 @@ public class PlayerMovement : MonoBehaviour
             if (isGrounded)
             {
                 hasJumpedOnGround = true;
-                JumpSound.Play();
+                playerSoundManager.PlayerJumpSound();
+
+
             }
             if (!hasCoyoteTime && hasDoubleJump)
-            {
-                JumpSound.Play();
+            { 
+                playerSoundManager.PlayerDoubleJumpSound();
                 MuzzleFlashIns = Instantiate(doubleJumpVFX, transform.position, transform.rotation);
                 Destroy(MuzzleFlashIns, 1.5f);
                 StartCoroutine(VFXRemover());
