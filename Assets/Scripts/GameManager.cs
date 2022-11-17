@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
@@ -54,7 +55,8 @@ public class GameManager : MonoBehaviour
             giveScoreTimer = 0f;
             gameHasStarted = true;
             playersAlive = new List<GameObject>(players);
-        }     
+        }
+        MoveUpPlayer();
 
     }
     private void Awake()
@@ -333,5 +335,23 @@ public class GameManager : MonoBehaviour
 
         yield return new WaitForEndOfFrame();
         yield return null;
+    }
+
+
+    [SerializeField] Image image1; // Baloons
+    [SerializeField] Image image2; // Baloons
+    [SerializeField] Image image3; // Baloons
+    [SerializeField] Image image4; // Baloons
+
+    void MoveUpPlayer()
+    {
+        if (SceneManager.GetActiveScene().name == "TransitionScene")
+        {
+            image1 = GameObject.Find("P1").GetComponent<Image>();
+        }
+        //winner = gameManager.GetWinnerID();
+        //image1.transform.position = timesTransitionHappen;
+        RectTransform picture = image1.GetComponent<RectTransform>();
+        picture.position = new Vector2(picture.position.x, picture.position.y + 20);
     }
 }

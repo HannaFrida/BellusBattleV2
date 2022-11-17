@@ -2,32 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
-/*
-     * 
-     * @Author Simon Hessling Oscarson
-     * Används i Weapon.
-     * Används i enemyAI.
-     * Används i maleeWeapon
-     */
+   
 public class SoundManager : MonoBehaviour
 {
     [Header("audio mixers")]
     [SerializeField] private AudioMixer overallMixer;
+
     [Header("music & ambience")]
     [SerializeField] private AudioSource musicSource;
     [SerializeField] private AudioClip[] allMusicSounds;
-    [SerializeField] private AudioSource hazardSource;
-    [SerializeField] private AudioClip[] allHazardSounds;
     [SerializeField] private AudioClip victoryMusic;
     [SerializeField] private AudioSource ambience;
     [SerializeField] private AudioClip[] allAmbienceSounds;
+
+    [Header("hazards")]
+    [SerializeField] private AudioSource hazardSource;
+    [SerializeField] private AudioClip lavaHazardSound;
+    [SerializeField] private AudioClip poisonHazardSound;
+   
     [Header("foliage")]
-    [SerializeField] private AudioSource doorToggleSource;
+    [SerializeField] private AudioSource doorOpenSource;
+    [SerializeField] private AudioSource doorCloseSource;
     [SerializeField] private AudioSource bellRingSource;
     [SerializeField] private AudioSource startGameBellSource;
+
     [Header("UI sounds")]
     [SerializeField] private AudioSource howerMenuSource;
     [SerializeField] private AudioSource pressMenuSource;
+
     private float volLowRan = 0.3f;
     private float volHighRan = 1.0f;
     private float lowPitchRan = 0.3f;
@@ -39,9 +41,6 @@ public class SoundManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         //ambienceDay.time = Random.Range(0, 60);
         //pianoMusic.time = Random.Range(0, 60);
-
-        //SoundPlaying("normalSnapshot");
-       
        // FadeInMusic();
     }
     void Update()
@@ -58,9 +57,14 @@ public class SoundManager : MonoBehaviour
         StartCoroutine(FadeMixerGroup.StartFade(overallMixer, "MusicMixerGroup", 1f, 0f));
     }
 
-    public void FadeInHazard()
+    public void FadeInLavaHazard(string hazardName)
     {
-       // PlaySound("Hazards", hazard);
+        PlaySound(hazardName, lavaHazardSound);
+        StartCoroutine(FadeMixerGroup.StartFade(overallMixer, "HazardMixerGroup", 2, 0.5f));
+    }
+    public void FadeInPoisionHazard(string hazardName)
+    {
+        PlaySound(hazardName, poisonHazardSound);
         StartCoroutine(FadeMixerGroup.StartFade(overallMixer, "HazardMixerGroup", 2, 0.5f));
     }
     public void FadeOutHazard()
@@ -94,31 +98,24 @@ public class SoundManager : MonoBehaviour
     }
     public void OpenDoorSound()
     {
-        howerMenuSource.pitch = Random.Range(0.95f, highPitchRan);
-        howerMenuSource.Play();
+        doorOpenSource.pitch = Random.Range(0.95f, highPitchRan);
+        doorOpenSource.Play();
     }
     public void CloseDoorSound()
     {
-        howerMenuSource.pitch = Random.Range(0.95f, highPitchRan);
-        howerMenuSource.Play();
+        doorCloseSource.pitch = Random.Range(0.95f, highPitchRan);
+        doorCloseSource.Play();
     }
-    public void PlaySound(string mixerName,AudioClip soundToPlay)
-    { //hanterar vilket ljud som spelas. kallas på i andra scripts.
-        if (mixerName == "Hazards")
-        {
-            PlayLavaHazard(soundToPlay);
-        }
-        //if (soundToPlay == "intenseSnapshot")
-        //{
-        //   intenseSnapshot.TransitionTo(0.0f);
-        //   if (!intenseMusic.isPlaying)
-        //      intenseMusic.Play();
-        //    Debug.Log("intenseMusic");
-        // }
-    }
-    private void PlayLavaHazard(AudioClip hazardSound)
+    public void PlaySound(string soundName,AudioClip soundToPlay)
     {
-        hazardSource.PlayOneShot(hazardSound);
+        if (soundName == "lavaHazard")
+        {
+            hazardSource.PlayOneShot(soundToPlay);
+        }
+        if (soundName == "poisonRainHazard")
+        {
+            hazardSource.PlayOneShot(soundToPlay);
+        }
     }
     private void MeleeAttackSound()
     {
@@ -150,9 +147,9 @@ public class SoundManager : MonoBehaviour
 
     private void ToggleDoorSound()
     {
-        if (!doorToggleSource.isPlaying)
+      //  if (!doorToggleSource.isPlaying)
         {
-            doorToggleSource.pitch = Random.Range(0.8f, highPitchRan);
+       //     doorToggleSource.pitch = Random.Range(0.8f, highPitchRan);
        //     doorToggleSource.PlayOneShot(doorToggleSound);
         }
     }

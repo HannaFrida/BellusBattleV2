@@ -60,8 +60,9 @@ public class Door : MonoBehaviour
             else if( currentPlayer == null)
             {
                 anchor.transform.localEulerAngles = Vector3.zero;
-                soundManager.CloseDoorSound();
+                
             }
+            soundManager.CloseDoorSound();
         }
         
     }

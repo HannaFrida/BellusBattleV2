@@ -39,7 +39,7 @@ public class PoisionManager : MonoBehaviour
             if(isPoisionActive == false && isPoisionActive == false)
             {
                 poisionZone.gameObject.SetActive(true);
-                soundManager.FadeInHazard();
+                soundManager.FadeInPoisionHazard("poisonRainHazard");
             }
             else
             {
