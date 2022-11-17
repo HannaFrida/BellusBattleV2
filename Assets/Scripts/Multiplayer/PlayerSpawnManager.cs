@@ -16,6 +16,7 @@ public class PlayerSpawnManager : MonoBehaviour
 
     private void Start()
     {
+        /*
         //scoreManager = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>();
         foreach (GameObject player in GameManager.Instance.GetAllPlayers())
         {
@@ -31,6 +32,7 @@ public class PlayerSpawnManager : MonoBehaviour
             players[i].transform.position = spawnLocations[i].position;
             
         }
+        */
     }
 
     private void OnLevelWasLoaded(int level)
