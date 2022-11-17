@@ -105,6 +105,7 @@ public class GameManager : MonoBehaviour
     }
 
 
+
     private void ClearScore()
     {
         scoreDic.Clear();

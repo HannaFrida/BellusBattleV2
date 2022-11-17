@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -6,7 +7,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerJoinManager : PlayerSpawnManager
 {
-    [SerializeField] private Camera camera;
+    [SerializeField] private CinemachineTargetGroup targetGroup;
     [SerializeField] GameObject characterLow;
     //[SerializeField] GameObject[] accessorites;
     //[SerializeField] GameObject accessoritesSlot;
@@ -51,6 +52,6 @@ public class PlayerJoinManager : PlayerSpawnManager
     }
     private void AddPlayerInFocus(Transform player)
     {
-        camera.gameObject.GetComponent<CameraFocus>()._targets.Add(player);
+        targetGroup.GetComponent<CinemachineTargetGroup>().AddMember(player, 1, 1);
     }
 }
