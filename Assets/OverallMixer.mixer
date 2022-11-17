@@ -85,6 +85,25 @@ AudioMixerGroupController:
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
+--- !u!243 &-5257309450314568348
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: BellSounds
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: d80d9f97f3755324d944e3b2a75181c7
+  m_Children: []
+  m_Volume: 5307e66ce8b36654ba04e7888815fea2
+  m_Pitch: cb659697980e32143b02ca7168a955e1
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: -3499108083017090187}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
 --- !u!244 &-3896388952201279631
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
@@ -95,6 +114,20 @@ AudioMixerEffectController:
   m_EffectID: 150435608a7df0e408ca777e47e3a58d
   m_EffectName: Attenuation
   m_MixLevel: 718db3fe519d63a43839883ec1de6c92
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
+--- !u!244 &-3499108083017090187
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 1bf2b118f6dbae9468b065addfd67ab1
+  m_EffectName: Attenuation
+  m_MixLevel: 1dbc89b15ba97094f85f15cb63a59386
   m_Parameters: []
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
@@ -184,6 +217,7 @@ AudioMixerController:
     - bbf282f27e43a1a4697a3821a3e05117
     - 5c7c08473bca6534ea8afdf6e9506e09
     - ac4bdc23f1a4c304cb937bd98e0b73dd
+    - d80d9f97f3755324d944e3b2a75181c7
     name: View - Copy
   m_CurrentViewIndex: 1
   m_TargetSnapshot: {fileID: 24500006}
@@ -203,6 +237,7 @@ AudioMixerGroupController:
   - {fileID: 6773366925040199721}
   - {fileID: -7280877045666230864}
   - {fileID: 6562454693598069455}
+  - {fileID: -5257309450314568348}
   m_Volume: 10636771e468e4644a930c23d6d71cbb
   m_Pitch: 362baf92454809144bcfa9bcba89f8c4
   m_Send: 00000000000000000000000000000000
@@ -243,7 +278,7 @@ AudioMixerSnapshotController:
     d9a9de24827d4f34497697b34f2adf12: -0.02577656
     590c1d6658888e5489df4274c526f056: -5.3230715
     b592a60854e52e34aa26e1145b6dd82f: -80
-    bef14b489ae0e5c4685d54c547c8384b: 4.648096
+    bef14b489ae0e5c4685d54c547c8384b: -10.345207
     28bdd6bc1ccfc1d46bed12ba48bd5c5f: -80
     176dd51e753b1274998b2fda8197bdc7: -19.422968
     13952a7fcea297b4f98a09ddd08d39ac: -19.928478
