@@ -314,12 +314,14 @@ MonoBehaviour:
   overallMixer: {fileID: 0}
   musicSource: {fileID: 0}
   allMusicSounds: []
-  hazardSource: {fileID: 0}
-  allHazardSounds: []
   victoryMusic: {fileID: 0}
   ambience: {fileID: 0}
   allAmbienceSounds: []
-  doorToggleSource: {fileID: 0}
+  hazardSource: {fileID: 0}
+  lavaHazardSound: {fileID: 0}
+  poisonHazardSound: {fileID: 0}
+  doorOpenSource: {fileID: 0}
+  doorCloseSource: {fileID: 0}
   bellRingSource: {fileID: 0}
   startGameBellSource: {fileID: 0}
   howerMenuSource: {fileID: 0}
@@ -10758,19 +10760,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 207763876387153929, guid: f57560d1b0b0dd847a95dd2476d3b89e,
-        type: 3}
-      propertyPath: m_PlayOnAwake
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 771460134917488172, guid: f57560d1b0b0dd847a95dd2476d3b89e,
         type: 3}
       propertyPath: m_Name
-      value: SoundManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 771460134917488172, guid: f57560d1b0b0dd847a95dd2476d3b89e,
-        type: 3}
-      propertyPath: m_TagString
       value: SoundManager
       objectReference: {fileID: 0}
     - target: {fileID: 771460134917488178, guid: f57560d1b0b0dd847a95dd2476d3b89e,
@@ -10826,16 +10818,6 @@ PrefabInstance:
     - target: {fileID: 771460134917488178, guid: f57560d1b0b0dd847a95dd2476d3b89e,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 771460135015745015, guid: f57560d1b0b0dd847a95dd2476d3b89e,
-        type: 3}
-      propertyPath: m_PlayOnAwake
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5938187503359489482, guid: f57560d1b0b0dd847a95dd2476d3b89e,
-        type: 3}
-      propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

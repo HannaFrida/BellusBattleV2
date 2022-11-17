@@ -47,7 +47,7 @@ public class HazardMover : MonoBehaviour
     }
     private void MoveHazard()
     {
-        soundManager.FadeInHazard();
+        soundManager.FadeInLavaHazard("lavaHazard");
         //Debug.Log(moveVector);
         if (hasReachedHighestPoint == false)
         {
