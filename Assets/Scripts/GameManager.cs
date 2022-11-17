@@ -88,10 +88,10 @@ public class GameManager : MonoBehaviour
     {
         //trans = Transition.Instance;
         //trans.gameObject.SetActive(false);
-        pos1 = new Vector2(-409f, 160f);
-        pos2 = new Vector2(-163f, 160f);
-        pos3 = new Vector2(163f, 160f);
-        pos4 = new Vector2(409f, 160f);
+        pos1 = new Vector2(477f, 160f); 
+        pos2 = new Vector2(892f, 160f);
+        pos3 = new Vector2(1139f, 160f);
+        pos4 = new Vector2(1386f, 160f); // x = 977 - -409
     }
 
     private void Update()
