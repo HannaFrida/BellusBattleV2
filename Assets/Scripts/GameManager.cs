@@ -62,6 +62,7 @@ public class GameManager : MonoBehaviour
             giveScoreTimer = 0f;
             gameHasStarted = true;
             playersAlive = new List<GameObject>(players);
+            SpawnPlayers();
         }
 
         //trans = Transition.Instance;
@@ -120,6 +121,29 @@ public class GameManager : MonoBehaviour
     public void AddPLayer(GameObject player)
     {
         players.Add(player);
+    }
+
+    private void SpawnPlayers()
+    {
+        Transform[] spawnPoints= GameObject.FindGameObjectWithTag("PlayerSpawnManager").GetComponent<PlayerSpawnManager>().SpawnLocations;
+        for(int i = 0; i < players.Count; i++)
+        {
+            players[i].SetActive(true);
+            players[i].gameObject.SetActive(true);
+            players[i].GetComponent<Dash>().ResetValues();
+            players[i].transform.position = spawnPoints[i].position;
+        }
+        // Used for when changing level
+        /*
+        for (int i = 0; i < players.Length; i++)
+        {
+            players[i].gameObject.SetActive(true);
+            players[i].GetComponent<Dash>().ResetValues();
+            //players[i].GetComponent<PlayerHealth>().UnkillPlayer();
+            players[i].transform.position = spawnLocations[i].position;
+
+        }
+        */
     }
 
     public void PlayerDeath(GameObject deadPlayer)
