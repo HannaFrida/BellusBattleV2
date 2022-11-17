@@ -48,7 +48,7 @@ public class CameraFocus : MonoBehaviour
 		if (_targets.Contains(t) == false){return false;}
 		
 		_targets.Remove(t);
-        _targetGroup.RemoveMember(t);
+        //_targetGroup.RemoveMember(t);
         return true;
 	}
 }
