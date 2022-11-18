@@ -41,6 +41,8 @@ public class GameManager : MonoBehaviour
     private enum WhichScenesListToPlay { ScenesFromBuild, ScenesFromList, ScenesFromBuildAndList };
     private enum WhichOrderToPlayScenes { Random, NumiricalOrder };
     private string nextLevel;
+    [Header("UI")]
+    [SerializeField] private GameObject welcomePanel;
 
     [Header("Transition")]
     [SerializeField] private float transitionTime = 5f;
@@ -123,6 +125,7 @@ public class GameManager : MonoBehaviour
 
     public void AddPLayer(GameObject player)
     {
+        if(welcomePanel != null) welcomePanel.SetActive(false);
         players.Add(player);
         targetGroup.GetComponent<CinemachineTargetGroup>().AddMember(player.transform, 1, 5); //OBS GER ERROR!
     }
@@ -130,7 +133,7 @@ public class GameManager : MonoBehaviour
     {
         for (int i = 0; i < players.Count; i++)
         {
-            targetGroup.GetComponent<CinemachineTargetGroup>().RemoveMember(player.transform);
+            targetGroup.GetComponent<CinemachineTargetGroup>().RemoveMember(players[i].transform);
             targetGroup.GetComponent<CinemachineTargetGroup>().AddMember(players[i].transform, 1, 5); //OBS GER ERROR!
         }
     }
