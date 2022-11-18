@@ -31,7 +31,7 @@ public class PlayerJoinManager : PlayerSpawnManager
         playerInput.gameObject.GetComponent<PlayerDetails>().startPos = SpawnLocations[playerInput.playerIndex].position;
         //playerInput.gameObject.GetComponent<PlayerDetails>().startPos = LevelSpawnsDic[1][playerInput.playerIndex - 1].position;
 
-        AddPlayerInFocus(playerInput.transform);
+        //AddPlayerInFocus(playerInput.transform);
 
         
 

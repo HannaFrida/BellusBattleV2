@@ -45,12 +45,12 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        Debug.Log("ajajaj" + " " + gameObject.GetComponent<PlayerDetails>().playerID);
+        //Debug.Log("ajajaj" + " " + gameObject.GetComponent<PlayerDetails>().playerID);
         //if(isInvinsable) return;
         health -= damage;
         if (health <= 0)
         {
-            Debug.Log("ajajaj" + " " + gameObject.GetComponent<PlayerDetails>().playerID + " dEAD " + Health);
+            //Debug.Log("ajajaj" + " " + gameObject.GetComponent<PlayerDetails>().playerID + " dEAD " + Health);
             KillPlayer();
             playerDeathSound.Play();
             //onGameOver.Invoke();
@@ -77,7 +77,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void KillPlayer()
     {
-        Debug.Log("jjajajajaj" + " " + gameObject.GetComponent<PlayerDetails>().playerID + " i am dEAD " + Health);
+        //Debug.Log("jjajajajaj" + " " + gameObject.GetComponent<PlayerDetails>().playerID + " i am dEAD " + Health);
         //CF.RemoveTarget(gameObject.transform);
         //gameObject.transform.position = deathPosition.position;
         GameManager.Instance.PlayerDeath(gameObject);
@@ -108,6 +108,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void UnkillPlayer()
     {
+        //GameManager.Instance.RestorePLayer(gameObject);
         health = 1f;
         skr.enabled = true;
         anime.enabled = true;

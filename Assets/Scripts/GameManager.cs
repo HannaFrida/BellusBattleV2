@@ -124,6 +124,11 @@ public class GameManager : MonoBehaviour
     public void AddPLayer(GameObject player)
     {
         players.Add(player);
+        targetGroup.GetComponent<CinemachineTargetGroup>().AddMember(player.transform, 1, 5); //OBS GER ERROR!
+    }
+    public void RestorePLayer(GameObject player)
+    {
+        targetGroup.GetComponent<CinemachineTargetGroup>().AddMember(player.transform, 1, 5); //OBS GER ERROR!
     }
 
     /*
