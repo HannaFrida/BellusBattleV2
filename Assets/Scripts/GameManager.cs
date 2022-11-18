@@ -389,6 +389,7 @@ public class GameManager : MonoBehaviour
         }
         else if(winnerID == 1)
         {
+            Debug.Log(scoreDic[playersAlive[0]] + "");
             Debug.Log(winnerID);
             Debug.Log("winnah");
             imageDic[winnerID] = trans.getImage1;
@@ -399,12 +400,14 @@ public class GameManager : MonoBehaviour
         }
         else if (winnerID == 2)
         {
+            Debug.Log(scoreDic[playersAlive[0]] + "");
             Debug.Log(winnerID);
             Debug.Log("ahhhhhhh");
             imageDic[winnerID] = trans.getImage2;
             RectTransform picture2 = trans.getImage2.GetComponent<RectTransform>();
             picture2.transform.position = pos2;
             pos2 = new Vector2(picture2.position.x, picture2.position.y + 20);
+            trans.getWinScore2.SetText(scoreDic[playersAlive[0]] + "");
         }
         else if (winnerID == 3)
         {
@@ -412,6 +415,7 @@ public class GameManager : MonoBehaviour
             RectTransform picture3 = trans.getImage3.GetComponent<RectTransform>();
             picture3.transform.position = pos3;
             pos3 = new Vector2(picture3.position.x, picture3.position.y + 20);
+            trans.getWinScore3.SetText(scoreDic[playersAlive[0]] + "");
         }
         else if (winnerID == 4)
         {
@@ -419,6 +423,7 @@ public class GameManager : MonoBehaviour
             RectTransform picture4 = trans.getImage4.GetComponent<RectTransform>();
             picture4.transform.position = pos4;
             pos4 = new Vector2(picture4.position.x, picture4.position.y + 20);
+            trans.getWinScore4.SetText(scoreDic[playersAlive[0]] + "");
         }
     }
 }
