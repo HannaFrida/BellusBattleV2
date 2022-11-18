@@ -127,7 +127,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void UnkillPlayer()
     {
-        SetPlayerInvisable();
+        //SetPlayerInvisable();
         health = 1f;
         skr.enabled = true;
         anime.enabled = true;

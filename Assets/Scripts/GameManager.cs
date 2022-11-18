@@ -164,6 +164,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void ActivateMovement()
+    {
+        foreach (GameObject player in players)
+        {
+            player.GetComponent<PlayerMovement>().enabled = true;
+        }
+    }
+
     public List<GameObject> GetAllPlayers()
     {
         return players;

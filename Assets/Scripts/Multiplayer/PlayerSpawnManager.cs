@@ -9,11 +9,11 @@ public class PlayerSpawnManager : MonoBehaviour
     [SerializeField] private Transform[] spawnLocations; // Keeps track of all the possible spawn locations
     [SerializeField] private GameObject[] players;
     [SerializeField] protected ScoreManager scoreManager;
-    private bool runSpawner;
+    private bool runTimer;
     private int amountOfPlayer;
     private int spawnedPlayers;
     private float timer;
-    private float timeBetweenSpawn = 1f;
+    private float movementTurnOnDelay;
 
     public Transform[] SpawnLocations
     {
@@ -23,16 +23,26 @@ public class PlayerSpawnManager : MonoBehaviour
 
     private void OnLevelWasLoaded(int level)
     {
-        runSpawner = true;
-        timer = 0f;
+        
     }
 
     private void Start()
     {
-
+        runTimer = true;
+        timer = 0f;
+        amountOfPlayer = GameManager.Instance.GetAllPlayers().Count;
+        movementTurnOnDelay = amountOfPlayer;
         //scoreManager = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>();
         players = GameManager.Instance.GetAllPlayers().ToArray();
-        amountOfPlayer = GameManager.Instance.GetAllPlayers().Count;
+        for(int i = 0; i < players.Length; i++)
+        {
+            Debug.Log("spawnmePls");
+            //players[i].gameObject.SetActive(true);
+            players[i].GetComponent<Dash>().ResetValues();
+            players[i].transform.position = spawnLocations[i].position;
+            //spawnedPlayers++;
+        }
+        
 
 
     }
@@ -41,19 +51,14 @@ public class PlayerSpawnManager : MonoBehaviour
     private void Update()
     {
         
-        if (runSpawner == false) return;
+        if (runTimer == false) return;
         Debug.Log("runnnig");
 
 
-        if (spawnedPlayers == amountOfPlayer) 
+        if(timer >= movementTurnOnDelay)
         {
-            runSpawner = false;
-        }
-
-
-        if(timer >= timeBetweenSpawn)
-        {
-            SpawnPlayer();
+            GameManager.Instance.ActivateMovement();
+            runTimer = false;
             timer = 0f;
         }
         timer += Time.unscaledDeltaTime;
@@ -61,24 +66,5 @@ public class PlayerSpawnManager : MonoBehaviour
         
     }
 
-    private void SpawnPlayer()
-    {
-        
-        Debug.Log("spawnmePls");
-        players[spawnedPlayers].gameObject.SetActive(true);
-        players[spawnedPlayers].GetComponent<Dash>().ResetValues();
-        players[spawnedPlayers].GetComponent<PlayerHealth>().SetPlayerVisable();
-        //players[i].GetComponent<PlayerHealth>().UnkillPlayer();
-        players[spawnedPlayers].transform.position = spawnLocations[spawnedPlayers].position;
-        spawnedPlayers++;
-        
-    }
-
   
-
-    private IEnumerator waitTime(float wait)
-    {
-        print("wait");
-        yield return new WaitForSeconds(wait);
-    }
 }
