@@ -29,6 +29,8 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private GameObject hips;
     [SerializeField] private Animator anime;
     [SerializeField] private DashAdvanced dash;
+    [SerializeField] private GameObject playerBody;
+    [SerializeField] private GameObject accseroties;
 
 
     private void Start()
@@ -60,6 +62,23 @@ public class PlayerHealth : MonoBehaviour
     {
         isInvinsable = value;
     }
+
+    public void SetPlayerInvisable()
+    {
+        playerBody.SetActive(false);
+        accseroties.SetActive(false);
+    }
+
+    public void SetPlayerVisable()
+    {
+        playerBody.SetActive(true);
+        accseroties.SetActive(true);
+        if (pm != null)
+        {
+            pm.enabled = true;
+        }
+    }
+
 
     public void PlayPoisoned()
     {
@@ -108,6 +127,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void UnkillPlayer()
     {
+        SetPlayerInvisable();
         health = 1f;
         skr.enabled = true;
         anime.enabled = true;
@@ -116,10 +136,13 @@ public class PlayerHealth : MonoBehaviour
         hips.transform.position = Vector3.zero;
         hips.SetActive(false);
         boxCollider.enabled = true;
+        /*
         if (pm != null)
         {
             pm.enabled = true;
         }
+        */
+        
         dash.enabled = true;
         /*
         boxCollider.enabled = true;

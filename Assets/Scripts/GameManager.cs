@@ -60,9 +60,11 @@ public class GameManager : MonoBehaviour
     {
         if (level != 0)
         {
+            DeactivateMovement();
             giveScoreTimer = 0f;
             gameHasStarted = true;
             playersAlive = new List<GameObject>(players);
+            
             //Array.Clear(targetGroup.GetComponent<CinemachineTargetGroup>().m_Targets, 0, targetGroup.GetComponent<CinemachineTargetGroup>().m_Targets.Length);
             //SpawnPlayers();
         }
@@ -152,6 +154,14 @@ public class GameManager : MonoBehaviour
     private void ClearScore()
     {
         scoreDic.Clear();
+    }
+
+    private void DeactivateMovement()
+    {
+        foreach(GameObject player in players)
+        {
+            player.GetComponent<PlayerMovement>().enabled = false;
+        }
     }
 
     public List<GameObject> GetAllPlayers()

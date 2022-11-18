@@ -3,18 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+
 public class PlayerSpawnManager : MonoBehaviour
 {
     [SerializeField] private Transform[] spawnLocations; // Keeps track of all the possible spawn locations
     [SerializeField] private GameObject[] players;
     [SerializeField] protected ScoreManager scoreManager;
-    private bool hasSpawnedAllPlayers;
+    private bool runSpawner;
     private int amountOfPlayer;
     private int spawnedPlayers;
+    private float timer;
+    private float timeBetweenSpawn = 1f;
 
     public Transform[] SpawnLocations
     {
         get { return spawnLocations; }
+    }
+
+
+    private void OnLevelWasLoaded(int level)
+    {
+        runSpawner = true;
+        timer = 0f;
     }
 
     private void Start()
@@ -26,51 +36,45 @@ public class PlayerSpawnManager : MonoBehaviour
 
 
     }
+   
 
     private void Update()
     {
-        /*
-        foreach (GameObject player in GameManager.Instance.GetAllPlayers())
-        {
-            player.SetActive(true);
-        }
-        */
-        // Used for when changing level
-        if (spawnedPlayers == amountOfPlayer) return;
-        for (int i = 0; i < players.Length; i++)
-        {
-            Debug.Log("spawnmePls");
-            players[i].gameObject.SetActive(true);
-            players[i].GetComponent<Dash>().ResetValues();
-            //players[i].GetComponent<PlayerHealth>().UnkillPlayer();
-            players[i].transform.position = spawnLocations[i].position;
-            spawnedPlayers++;
-            //StartCoroutine(waitTime(10));
+        
+        if (runSpawner == false) return;
+        Debug.Log("runnnig");
 
 
+        if (spawnedPlayers == amountOfPlayer) 
+        {
+            runSpawner = false;
         }
+
+
+        if(timer >= timeBetweenSpawn)
+        {
+            SpawnPlayer();
+            timer = 0f;
+        }
+        timer += Time.unscaledDeltaTime;
+      
+        
     }
 
     private void SpawnPlayer()
     {
-        /*
+        
         Debug.Log("spawnmePls");
         players[spawnedPlayers].gameObject.SetActive(true);
         players[spawnedPlayers].GetComponent<Dash>().ResetValues();
+        players[spawnedPlayers].GetComponent<PlayerHealth>().SetPlayerVisable();
         //players[i].GetComponent<PlayerHealth>().UnkillPlayer();
-        players[spawnedPlayers].transform.position = spawnLocations[i].position;
+        players[spawnedPlayers].transform.position = spawnLocations[spawnedPlayers].position;
         spawnedPlayers++;
-        StartCoroutine(waitTime(10));
-        */
+        
     }
 
-    private void OnLevelWasLoaded(int level)
-    {
-        /*
-        for (int i = 0; i < players.Length; i++)
-            players[i].gameObject.SetActive(true);
-        */
-    }
+  
 
     private IEnumerator waitTime(float wait)
     {
