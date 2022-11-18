@@ -255,12 +255,11 @@ public class GameManager : MonoBehaviour
     }
     private void CreateLevelsUI()
     {
-        for (int i = 0; i < sceneCount - 1; i++)
+        for (int i = 0; i < sceneCount - 2; i++)
         {
             string tempStr = System.IO.Path.GetFileNameWithoutExtension(SceneUtility.GetScenePathByBuildIndex(i));
             if (i != 0)
             {
-                Debug.Log("hahahah");
                 GameObject g = Instantiate(levelXPrefab);
                 g.transform.parent = content.transform;
                 levels.Add(g.GetComponent<LevelDetails>());
