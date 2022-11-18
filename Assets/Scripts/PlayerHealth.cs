@@ -108,7 +108,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void UnkillPlayer()
     {
-        //GameManager.Instance.RestorePLayer(gameObject);
+        GameManager.Instance.RestorePLayer(gameObject);
         health = 1f;
         skr.enabled = true;
         anime.enabled = true;
