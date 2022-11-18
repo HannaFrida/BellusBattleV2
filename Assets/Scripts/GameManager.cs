@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour
             gameHasStarted = true;
             playersAlive = new List<GameObject>(players);
             //Array.Clear(targetGroup.GetComponent<CinemachineTargetGroup>().m_Targets, 0, targetGroup.GetComponent<CinemachineTargetGroup>().m_Targets.Length);
-            SpawnPlayers();
+            //SpawnPlayers();
         }
 
         //trans = Transition.Instance;
@@ -126,6 +126,7 @@ public class GameManager : MonoBehaviour
         players.Add(player);
     }
 
+    /*
     private void SpawnPlayers()
     {
         Transform[] spawnPoints= GameObject.FindGameObjectWithTag("PlayerSpawnManager").GetComponent<PlayerSpawnManager>().SpawnLocations;
@@ -138,11 +139,12 @@ public class GameManager : MonoBehaviour
             players[i].transform.position = spawnPoints[i].position;
         }
     }
+    */
 
     public void PlayerDeath(GameObject deadPlayer)
     {
         playersAlive.Remove(deadPlayer);
-        targetGroup.GetComponent<CinemachineTargetGroup>().RemoveMember(deadPlayer.transform);
+        //targetGroup.GetComponent<CinemachineTargetGroup>().RemoveMember(deadPlayer.transform); //OBS GER ERROR!
     }
 
 

@@ -36,7 +36,7 @@ public class Grenade : Projectile
 	{
         if (bombMesh != null)
         {
-			//bombMesh.SetActive(false);
+			bombMesh.SetActive(false);
 			explosionSound.Play();
 			GameObject spawnVfx = Instantiate(objectToBoom, transform);
 			
@@ -51,7 +51,7 @@ public class Grenade : Projectile
 				PlayerHealth ph = hits[i].GetComponent<PlayerHealth>();
 				ph.TakeDamage(damage);
 				Debug.Log("playerfound");
-				cf.RemoveTarget(hits[i].transform); //shitfix
+				//cf.RemoveTarget(hits[i].transform); //shitfix
 				//pickUp_Proto.isHoldingWeapon = false;
 
 				/*
