@@ -13,22 +13,22 @@ public class PlayerSoundManager : MonoBehaviour
     // Start is called before the first frame update
     public void PlayerJumpSound()
     {
-        jumpSound.pitch = Random.Range(lowPitchRan, highPitchRan);//kanske ska ha samma pitch hela tiden?
+        jumpSound.pitch = Random.Range(lowPitchRan, highPitchRan);
         jumpSound.Play();
     }
     public void PlayerDoubleJumpSound()
     {
-        jumpSound.pitch = Random.Range(lowPitchRan, highPitchRan);//kanske ska ha samma pitch hela tiden?
+        jumpSound.pitch = Random.Range(lowPitchRan, highPitchRan);
         jumpSound.Play();
     }
     public void PlayerLandSound()
     {
-        landSound.pitch = Random.Range(lowPitchRan, highPitchRan);//kanske ska ha samma pitch hela tiden?
+        landSound.pitch = Random.Range(lowPitchRan, highPitchRan);
         landSound.Play();
     }
     public void PlayerDashSound()
     {
-        dashSound.pitch = Random.Range(lowPitchRan, highPitchRan);//kanske ska ha samma pitch hela tiden?
+        dashSound.pitch = Random.Range(lowPitchRan, highPitchRan);
         dashSound.Play();
     }
 }

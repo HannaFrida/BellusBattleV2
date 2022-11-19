@@ -14,7 +14,7 @@ public class PoisonZone : MonoBehaviour
     
     void Start()
     {
-        cameraFocus = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFocus>(); //shitfix
+        //cameraFocus = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFocus>(); //shitfix
       
     }
 
@@ -82,7 +82,8 @@ public class PoisonZone : MonoBehaviour
             //Debug.Log(poisonDic[player]);
             if(poisonDic[player] >= timeToKill)
             {
-                cameraFocus.RemoveTarget(player.transform); //shitfix
+                //cameraFocus.RemoveTarget(player.transform); //shitfix
+                GameManager.Instance.PlayerDeath(player);
                 player.GetComponent<PlayerHealth>().KillPlayer();
             }
         }

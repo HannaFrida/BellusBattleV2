@@ -22,12 +22,17 @@ public class MovingPlatform : MonoBehaviour
 
     private void Start()
     {
+        if (targetOne == null) return;
+        
         currentTarget = targetOne;
+        
+        
         CreateDirectionVector();
     }
 
     private void Update()
     {
+        if (targetOne == null || targetTwo == null) return;
         MovePlatform();
         AttachPlayers();
         DetachPlayer();

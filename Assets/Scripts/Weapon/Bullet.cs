@@ -33,21 +33,6 @@ public class Bullet : Projectile
 			playerGo.GetComponent<PlayerHealth>().TakeDamage(damage);
 			Debug.Log("Hit player");
 
-			if (playerGo.GetComponent<PlayerHealth>().Health <= 0)
-			{
-				//playerGo.SetActive(false);
-				//playerGo.GetComponent<PlayerHealth>().KillPlayer();
-				cf.RemoveTarget(playerGo.transform);
-			}
-			/*
-			PlayerDeathEvent pde = new PlayerDeathEvent{
-				PlayerGo = other.gameObject,
-				Kille = other.name,
-				KilledBy = "No Idea-chan",
-				KilledWith = "Bullets",
-			};
-			pde.FireEvent();
-			*/
 			Die();
 		}
 		else if (playerGo.CompareTag("AI"))
