@@ -163,7 +163,12 @@ public class PlayerMovement : MonoBehaviour
         {
             HandleVerticalCollisions(ref velocity);
         }
-        HandleHorizontalCollisions(ref velocity);
+
+        if (velocity.x != 0)
+        {
+            HandleHorizontalCollisions(ref velocity);
+        }
+        
         
         transform.Translate(velocity * Time.deltaTime);
         //Debug.Log(movementAmount);
