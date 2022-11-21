@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1553263964355448363}
   - component: {fileID: 1298431034502118128}
+  - component: {fileID: 615147525693207714}
   - component: {fileID: -387110191634700887}
   - component: {fileID: 2859355100740442453}
   - component: {fileID: -8253128035794468108}
@@ -57,7 +58,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &-387110191634700887
+--- !u!114 &615147525693207714
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -65,6 +66,25 @@ MonoBehaviour:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2217352063105504401}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90660ea4de421514983888705b1ebf07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fuse: 1.5
+  explosionSize: 5
+  objectToBoom: {fileID: 8576383740616002590, guid: 90797a69d3bc9a943a92774b5f629b77,
+    type: 3}
+  explosionSound: {fileID: -8099395198417228163}
+  bombMesh: {fileID: 1465621190059617142}
+  hits: []
+--- !u!114 &-387110191634700887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2217352063105504401}
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ee1cf0900b2d24b4885dfeed19dc3e60, type: 3}
   m_Name: 
@@ -75,6 +95,7 @@ MonoBehaviour:
     type: 3}
   explosionSound: {fileID: -8099395198417228163}
   bombMesh: {fileID: 1465621190059617142}
+  hits: []
 --- !u!54 &2859355100740442453
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -85,7 +106,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 3
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0.4
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0

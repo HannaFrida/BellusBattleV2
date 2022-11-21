@@ -40,8 +40,7 @@ public class DashAdvanced : MonoBehaviour
     [SerializeField] private float dashingActivationCooldown = 1f;
     [SerializeField] private TrailRenderer tr;
     [Header("Sounds")]
-    [SerializeField] private AudioSource dashSound;
-
+    [SerializeField] private PlayerSoundManager playerSoundManager;
     private Vector3 direction;
     private Vector3 velocity;
     [SerializeField] private PlayerMovement movement;
@@ -150,7 +149,7 @@ public class DashAdvanced : MonoBehaviour
         movement = GetComponent<PlayerMovement>();
         health = GetComponent<PlayerHealth>();
         gravity = movement.DownwardForce;
-        tr.time = dashingDuration;
+       // tr.time = dashingDuration;
     }
     void Update()
     {
@@ -201,12 +200,13 @@ public class DashAdvanced : MonoBehaviour
     private void StartDashProtocol()
     {
         currentDashingDuration *= 2;
-        dashSound.Play();
+        playerSoundManager.PlayerDashSound();
         CheckForCollision();
         canDash = false;
         isDashing = true;
         dashEvent.Invoke();
-        tr.emitting = true; //See variable TrailRenderer tr
+        //tr.emitting = true; //See variable TrailRenderer tr
+        gameObject.GetComponent<AfterImg>().StartTrail();
         if (stopGravityWhileDashing)
         {
             movement.DownwardForce = 0f;
@@ -218,7 +218,7 @@ public class DashAdvanced : MonoBehaviour
     }
     private void EndDashProtocol()
     {
-        tr.emitting = false; //See variable TrailRenderer tr
+        //SSAtr.emitting = false; //See variable TrailRenderer tr
         currentDashingDistace = dashingDistace;
         currentDashingDuration = dashingDuration;
         currentCanDashDown = canDashDown;
@@ -312,6 +312,7 @@ public class DashAdvanced : MonoBehaviour
             else if(onControlOverride)
             {
                 currentDashingDistace = hit.distance/ currentDashingDuration - Mathf.Sqrt( Mathf.Pow(movement.Velocity.x, 2) + Mathf.Pow(movement.Velocity.y, 2)) - Mathf.Abs(movement.Velocity.x) - Mathf.Abs(movement.Velocity.y);
+                currentDashingDistace = Mathf.Abs(currentDashingDistace);
             }
             else
             {

@@ -30,12 +30,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask oneWayLayer;
     
     [Header("Sound & VFX")]
+    [SerializeField] private PlayerSoundManager playerSoundManager;
     [SerializeField] private Animator playerAnimator;
     [SerializeField] private GameObject doubleJumpVFX;
     
-    [SerializeField] private AudioSource JumpSound;
-    [SerializeField] private AudioSource landSound;
-    [SerializeField] private AudioSource doubleJumpSound;
+   
+    
 
 
     public UnityEvent jumpEvent;
@@ -59,6 +59,12 @@ public class PlayerMovement : MonoBehaviour
     public bool IsGrounded
     {
         get => CheckIsGrounded(); 
+    }
+
+    public bool IsMovedByPLatform
+    {
+        get => isMovedByPLatform;
+        set => isMovedByPLatform = value;
     }
 
     private Vector2 velocity;
@@ -85,6 +91,7 @@ public class PlayerMovement : MonoBehaviour
     private float verticalRayLength, horizontalRayLength;
     private float movementAmount;
     private float initialSpeed;
+    private float movementAnimationSpeed;
     private float playerHeight;
 
     private float knockBackTime = 0.2f;
@@ -98,6 +105,7 @@ public class PlayerMovement : MonoBehaviour
     private bool hasJumpBuffer;
     private bool hasBeenKnockedBack;
     private bool isGrounded;
+    private bool isMovedByPLatform;
     
   
     void Start()
@@ -129,12 +137,9 @@ public class PlayerMovement : MonoBehaviour
         if (isGrounded && velocity.y < 0)
         {
 
-            movementY = 0;
-            coyoteTimer = 0;
-            hasCoyoteTime = true;
-            hasDoubleJump = true;
-            hasJumpedOnGround = false;
-            landSound.Play();
+            
+            playerSoundManager.PlayerLandSound();
+           
             
             
             if (hasJumpBuffer)
@@ -154,13 +159,28 @@ public class PlayerMovement : MonoBehaviour
         {
             HandleVerticalCollisions(ref velocity);
         }
+
         if (velocity.x != 0)
         {
             HandleHorizontalCollisions(ref velocity);
         }
-        transform.Translate(velocity * Time.deltaTime);
         
-        playerAnimator.SetFloat("Speed", movementX);
+        
+        transform.Translate(velocity * Time.deltaTime);
+        //Debug.Log(movementAmount);
+        movementAnimationSpeed = movementX;
+        if (isMovedByPLatform == true && movementAmount == 0f)
+        {
+            playerAnimator.SetFloat("Speed", 0f);
+        }
+        else
+        {
+            playerAnimator.SetFloat("Speed", movementX);
+        }
+        
+        
+        
+        
     }
 
     public void OnMove(InputAction.CallbackContext ctx)
@@ -182,6 +202,11 @@ public class PlayerMovement : MonoBehaviour
         {
             isMovingRight = false;
             isMovingLeft = false;
+        }
+
+        if(movementAmount < 0.1f && movementAmount > -0.1f)
+        {
+            movementAmount = 0f;
         }
 
     }
@@ -208,11 +233,13 @@ public class PlayerMovement : MonoBehaviour
             if (isGrounded)
             {
                 hasJumpedOnGround = true;
-                JumpSound.Play();
+                playerSoundManager.PlayerJumpSound();
+
+
             }
             if (!hasCoyoteTime && hasDoubleJump)
-            {
-                JumpSound.Play();
+            { 
+                playerSoundManager.PlayerDoubleJumpSound();
                 MuzzleFlashIns = Instantiate(doubleJumpVFX, transform.position, transform.rotation);
                 Destroy(MuzzleFlashIns, 1.5f);
                 StartCoroutine(VFXRemover());
@@ -228,6 +255,15 @@ public class PlayerMovement : MonoBehaviour
             runBufferTimer = true;
             bufferTimer = 0;
         }
+    }
+
+    private void ResetValuesOnGrounded()
+    {
+        //movementY = 0;
+        coyoteTimer = 0;
+        hasCoyoteTime = true;
+        hasDoubleJump = true;
+        hasJumpedOnGround = false;
     }
     private IEnumerator VFXRemover()
     {
@@ -265,15 +301,15 @@ public class PlayerMovement : MonoBehaviour
 
     private void EdgeControl(RaycastHit hit)
     {
-        float hitColliderBuffer = 0.2f; // Avståndet spelaren kommer att placeras över den träffade colliderns största y-värde
+        float hitColliderBuffer = 0.1f; // Avståndet spelaren kommer att placeras över den träffade colliderns största y-värde
         float hitpointY = hit.point.y;
         Collider platformCollider = hit.collider;
         Bounds col = platformCollider.bounds;
 
         float colliderDif = col.max.y - hitpointY;
-        //Debug.Log(colliderDif);
+        Debug.Log(colliderDif);
 
-        if (colliderDif > 0 && colliderDif < edgeControlAmount)
+        if (colliderDif >= -.01f && colliderDif <= edgeControlAmount)
         {
             if (velocity.x < 0f)
             {
@@ -304,6 +340,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
+            if (isMovedByPLatform) return;
             movementX = Mathf.MoveTowards(movementX, 0, deceleration * Time.deltaTime);
         }
     }
@@ -362,6 +399,11 @@ public class PlayerMovement : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(rayOrigin, Vector2.up * directionY, out hit, verticalRayLength, collisionLayer))
             {
+                if(velocity.y < 0f)
+                {
+                    transform.position = new Vector2(transform.position.x, hit.collider.bounds.max.y);
+                    ResetValuesOnGrounded();
+                }
                 velocity.y = 0;
                 movementY = 0f;  
             }
@@ -369,11 +411,17 @@ public class PlayerMovement : MonoBehaviour
             {
                 if (velocity.y > 0) return;
 
-                if (hit.collider.bounds.max.y < boxCollider.bounds.min.y)
+                if (velocity.y < 0f)
                 {
-                    velocity.y = 0;
-                    movementY = 0;
+                    transform.position = new Vector2(transform.position.x, hit.collider.bounds.max.y);
+                    ResetValuesOnGrounded();
                 }
+                velocity.y = 0;
+                movementY = 0;
+
+
+
+
             } 
         }
     }
@@ -460,22 +508,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void AddConstantExternalForce(Vector2 force)
     {
-        /*
-        Debug.Log(force.x);
-        if(force.x > 0 && movementX < force.x || force.x < 0 && movementX > force.x)
-        {
-            movementX = force.x;
-        }
-     
-
-        if (force.y > 0 && movementY < force.y || force.y < 0 && movementY > force.y)
-        {
-            movementY += force.y;
-        }
-        */
         movementX = force.x;
-        movementY += force.y;
-        
+        movementY += force.y;  
     }
 
 }

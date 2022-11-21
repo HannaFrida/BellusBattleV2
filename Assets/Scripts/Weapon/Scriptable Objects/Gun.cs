@@ -125,6 +125,7 @@ public class Gun : MonoBehaviour
         // SPECIAL CASES
         if (gunsAmmo == 0 && weaponData.name == "Grenade")
         {
+            Drop();
             Despawn();
         }
 
@@ -155,6 +156,7 @@ public class Gun : MonoBehaviour
                     dropTimer = 0f;
 
                     isPickedUp = true;
+
 
                     //gunsAmmo = weaponData.Ammo;
                 }

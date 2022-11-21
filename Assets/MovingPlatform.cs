@@ -22,12 +22,18 @@ public class MovingPlatform : MonoBehaviour
 
     private void Start()
     {
+        CheckTargetsVerticalPosition();
+        if (targetOne == null) return;
+        
         currentTarget = targetOne;
+        
+        
         CreateDirectionVector();
     }
 
     private void Update()
     {
+        if (targetOne == null || targetTwo == null) return;
         MovePlatform();
         AttachPlayers();
         DetachPlayer();
@@ -36,7 +42,7 @@ public class MovingPlatform : MonoBehaviour
 
     private void AttachPlayers()
     {
-        collidersOnPlatform = Physics.OverlapBox(attachZone.bounds.center, attachZone.transform.localScale / 2);
+        collidersOnPlatform = Physics.OverlapBox(attachZone.bounds.center, attachZone.size / 2);
 
         foreach(Collider col in collidersOnPlatform)
         {
@@ -57,6 +63,7 @@ public class MovingPlatform : MonoBehaviour
         {
             if(currentColliders.Contains(attachedColliders[i]) == false)
             {
+                attachedColliders[i].GetComponent<PlayerMovement>().IsMovedByPLatform = false;
                 //attachedColliders[i].gameObject.transform.parent = null;
                 attachedColliders.RemoveAt(i);
                 
@@ -78,7 +85,9 @@ public class MovingPlatform : MonoBehaviour
             {
                 addedForce = movementDirection;
             }
-            col.GetComponent<PlayerMovement>().AddConstantExternalForce(addedForce * moveSpeed);
+            PlayerMovement playerMovement = col.GetComponent<PlayerMovement>();
+            playerMovement.AddConstantExternalForce(addedForce * moveSpeed);
+            playerMovement.IsMovedByPLatform = true;
         }
     }
 
@@ -101,5 +110,11 @@ public class MovingPlatform : MonoBehaviour
     private void CreateDirectionVector()
     {
         movementDirection = (transform.position - currentTarget.position).normalized;
+    }
+
+    private void CheckTargetsVerticalPosition()
+    {
+        targetOne.position = new Vector2(targetOne.position.x, transform.position.y);
+        targetTwo.position = new Vector2(targetTwo.position.x, transform.position.y);
     }
 }
