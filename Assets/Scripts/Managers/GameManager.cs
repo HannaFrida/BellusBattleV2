@@ -142,25 +142,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
-
-   
-
-    /*
-    private void SpawnPlayers()
-    {
-        Transform[] spawnPoints= GameObject.FindGameObjectWithTag("PlayerSpawnManager").GetComponent<PlayerSpawnManager>().SpawnLocations;
-        for(int i = 0; i < players.Count; i++)
-        {
-            targetGroup.AddMember(players[i].transform, 1, 5);
-            players[i].SetActive(true);
-            players[i].gameObject.SetActive(true);
-            players[i].GetComponent<Dash>().ResetValues();
-            players[i].transform.position = spawnPoints[i].position;
-        }
-    }
-    */
-
     public void PlayerDeath(GameObject deadPlayer)
     {
         playersAlive.Remove(deadPlayer);

@@ -6,11 +6,12 @@ using UnityEngine;
 public class PoisonZone : MonoBehaviour
 {
     [SerializeField] private float timeToKill;
-    
     private static Dictionary<GameObject, float> poisonDic = new Dictionary<GameObject, float>();
     private static Dictionary<GameObject, bool> isInZoneDic = new Dictionary<GameObject, bool>();
+    
     private List<GameObject> playersInZone = new List<GameObject>();
     private List<Collider> objectsInZone = new List<Collider>();
+    
     void Update()
     {
         LookForPLayers();
@@ -25,7 +26,6 @@ public class PoisonZone : MonoBehaviour
             }
         }
     }
-
     private void LookForPLayers()
     {
         objectsInZone = new List<Collider>(Physics.OverlapBox(transform.position, transform.localScale / 2, Quaternion.identity)); 
@@ -75,7 +75,6 @@ public class PoisonZone : MonoBehaviour
             Debug.Log(poisonDic[player]);
             if(poisonDic[player] >= timeToKill)
             {
-                //cameraFocus.RemoveTarget(player.transform); //shitfix
                 GameManager.Instance.PlayerDeath(player);
                 player.GetComponent<PlayerHealth>().KillPlayer();
             }
