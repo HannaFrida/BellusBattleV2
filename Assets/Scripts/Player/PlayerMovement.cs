@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField, Range(10f, 300f)] private float airResistance;
     [SerializeField, Range(-100f, 0f)] private float downwardForce;
     [SerializeField, Range(1f, 50000f)] private float acceleration;
-    [SerializeField, Range(1f, 500f)] private float fallForce;
+    [SerializeField, Range(-1f, -50000f)] private float fallForce;
    
     [Header("Jump & Edgecontrol")]
     [SerializeField, Range(0f, 1f)] private float doubleJumpDecreaser;
@@ -55,6 +55,12 @@ public class PlayerMovement : MonoBehaviour
     {
         get => downwardForce;
         set => downwardForce = value; 
+    }
+
+    public float FallForce
+    {
+        get => fallForce;
+        set => fallForce = value;
     }
 
     public bool IsGrounded
@@ -123,6 +129,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(DownwardForce);
         isGrounded = IsGrounded;
         UpdateRayCastOrgins();
         UpdateMovementForce();
@@ -211,11 +218,24 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // Hold down to fall faster
-        if (!IsGrounded && downwardInput > 0.1f)
+        if (!IsGrounded && -downwardInput > 0.1f)
         {
-            DownwardForce += -fallForce;
+            float temp = DownwardForce;
+            temp = fallForce;
+            DownwardForce = temp;
+        }
+        else
+        {
+            SetDownwardForce(downwardForce, DownwardForce);    
         }
 
+    }
+
+    public static void SetDownwardForce(float value, float downfroce)
+    {
+        float temp = downfroce;
+        temp = value;
+        downfroce = temp;
     }
 
     public void OnJump(InputAction.CallbackContext ctx)
