@@ -68,8 +68,10 @@ public class BoneRotation : MonoBehaviour
 
     void HandleRotation(Vector2 joystickPos)
     {
+        if (!isFacingRight) joystickPos = new Vector3(joystickPos.x*-1, joystickPos.y);
         angle = Mathf.Atan2(joystickPos.y, joystickPos.x) * Mathf.Rad2Deg;
-        //angle = ClampRotation(angle);
+        if (angle > maxRotation && usingOverride || angle < -maxRotation && usingOverride) FlipObjects();
+        if (usingOverride) { ClampRotation(angle); }
 
         //Debug.Log(angle);
 
@@ -113,6 +115,7 @@ public class BoneRotation : MonoBehaviour
 
     private void FlipObjects()
     {
+        if (usingOverride) { return; }
         if (!isFacingRight)
         {
             foreach (GameObject objectsToFlip in flipObjects) objectsToFlip.transform.localScale = new Vector3(-1, 1, 1);
@@ -130,10 +133,10 @@ public class BoneRotation : MonoBehaviour
 
     private float ClampRotation(float angleSum)
     {
-        /*if (angleSum > maxRotation || angleSum < -maxRotation)
+        if (angleSum > maxRotation || angleSum < -maxRotation)
         {
             angleSum = Mathf.Clamp(angleSum, -maxRotation, maxRotation);
-        }*/
+        }
 
         return angleSum;
 
