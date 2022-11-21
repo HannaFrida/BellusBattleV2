@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class PoisonZone : MonoBehaviour
 {
     [SerializeField] private float timeToKill;
+    
     private static Dictionary<GameObject, float> poisonDic = new Dictionary<GameObject, float>();
     private static Dictionary<GameObject, bool> isInZoneDic = new Dictionary<GameObject, bool>();
     private List<GameObject> playersInZone = new List<GameObject>();

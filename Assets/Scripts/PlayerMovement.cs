@@ -405,7 +405,8 @@ public class PlayerMovement : MonoBehaviour
                     ResetValuesOnGrounded();
                 }
                 velocity.y = 0;
-                movementY = 0f;  
+                movementY = 0f;
+                return;
             }
             if (Physics.Raycast(rayOrigin, Vector2.up * directionY, out hit, verticalRayLength, oneWayLayer))
             {
