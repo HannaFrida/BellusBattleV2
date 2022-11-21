@@ -146,22 +146,31 @@ VisualEffect:
             inWeight: 0
             outWeight: 0
           - serializedVersion: 3
-            time: 0.3982354
-            value: 1
-            inSlope: 0.084101714
-            outSlope: 0.084101714
+            time: 0.5115577
+            value: 0.24252996
+            inSlope: 1.5895971
+            outSlope: 1.5895971
             tangentMode: 0
             weightedMode: 0
             inWeight: 0.33333334
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 0.6112419
+            value: 0.91413224
+            inSlope: 1.8084027
+            outSlope: 1.8084027
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.45762184
             outWeight: 0.09095589
           - serializedVersion: 3
             time: 0.9974365
             value: 1
-            inSlope: 0.1825654
-            outSlope: 0.1825654
+            inSlope: 1.4250681
+            outSlope: 1.4250681
             tangentMode: 0
             weightedMode: 0
-            inWeight: 0.11707626
+            inWeight: 0.119294025
             outWeight: 0
           m_PreInfinity: 2
           m_PostInfinity: 2
@@ -366,22 +375,31 @@ VisualEffect:
             inWeight: 0
             outWeight: 0
           - serializedVersion: 3
-            time: 0.3982354
-            value: 1
-            inSlope: 0.084101714
-            outSlope: 0.084101714
+            time: 0.5115577
+            value: 0.24252996
+            inSlope: 1.5895971
+            outSlope: 1.5895971
             tangentMode: 0
             weightedMode: 0
             inWeight: 0.33333334
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 0.6112419
+            value: 0.91413224
+            inSlope: 1.8084027
+            outSlope: 1.8084027
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.45762184
             outWeight: 0.09095589
           - serializedVersion: 3
             time: 0.9974365
             value: 1
-            inSlope: 0.1825654
-            outSlope: 0.1825654
+            inSlope: 1.4250681
+            outSlope: 1.4250681
             tangentMode: 0
             weightedMode: 0
-            inWeight: 0.11707626
+            inWeight: 0.119294025
             outWeight: 0
           m_PreInfinity: 2
           m_PostInfinity: 2
@@ -450,9 +468,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5167775749961452405}
   - component: {fileID: 6184370278961461672}
-  - component: {fileID: 1372682019943790834}
   - component: {fileID: 5134385707468802731}
-  - component: {fileID: 7455813140304912229}
+  - component: {fileID: 145624440088507490}
+  - component: {fileID: 4953645508378710751}
+  - component: {fileID: 2498149669663868746}
   m_Layer: 0
   m_Name: vfx_Xnade
   m_TagString: Untagged
@@ -467,7 +486,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5167775749961452402}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.5, y: 0.5, z: -0.5, w: 0.5}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -479,7 +498,7 @@ Transform:
   - {fileID: 4944561294601838990}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 90, z: 0}
 --- !u!65 &6184370278961461672
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -491,21 +510,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 0
   serializedVersion: 2
-  m_Size: {x: 115.44191, y: 1, z: 1}
-  m_Center: {x: 0.7869644, y: 0, z: 0}
---- !u!65 &1372682019943790834
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5167775749961452402}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 115.4419}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 115.44191, y: 0.38347238, z: 0.535975}
+  m_Center: {x: 0.7869644, y: -0.06783709, z: 0.025663145}
 --- !u!114 &5134385707468802731
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -518,12 +524,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2963c68e68754754cb04f648418eaa06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifeSpan: 2
+  lifeSpan: 1.5
   hitSounds: []
   colliderWallVFX: {fileID: 0}
   colliderPlayerVFX: {fileID: 0}
   col: {fileID: 6184370278961461672}
---- !u!54 &7455813140304912229
+--- !u!136 &145624440088507490
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5167775749961452402}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &4953645508378710751
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5167775749961452402}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 115.4419}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &2498149669663868746
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -531,13 +564,13 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5167775749961452402}
   serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Mass: 2
+  m_Drag: 1
+  m_AngularDrag: 2
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 64
+  m_Constraints: 56
   m_CollisionDetection: 0
 --- !u!1 &5167775750080484567
 GameObject:
@@ -685,22 +718,31 @@ VisualEffect:
             inWeight: 0
             outWeight: 0
           - serializedVersion: 3
-            time: 0.3982354
-            value: 1
-            inSlope: 0.084101714
-            outSlope: 0.084101714
+            time: 0.5115577
+            value: 0.24252996
+            inSlope: 1.5895971
+            outSlope: 1.5895971
             tangentMode: 0
             weightedMode: 0
             inWeight: 0.33333334
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 0.6112419
+            value: 0.91413224
+            inSlope: 1.8084027
+            outSlope: 1.8084027
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.45762184
             outWeight: 0.09095589
           - serializedVersion: 3
             time: 0.9974365
             value: 1
-            inSlope: 0.1825654
-            outSlope: 0.1825654
+            inSlope: 1.4250681
+            outSlope: 1.4250681
             tangentMode: 0
             weightedMode: 0
-            inWeight: 0.11707626
+            inWeight: 0.119294025
             outWeight: 0
           m_PreInfinity: 2
           m_PostInfinity: 2
@@ -905,22 +947,31 @@ VisualEffect:
             inWeight: 0
             outWeight: 0
           - serializedVersion: 3
-            time: 0.3982354
-            value: 1
-            inSlope: 0.084101714
-            outSlope: 0.084101714
+            time: 0.5115577
+            value: 0.24252996
+            inSlope: 1.5895971
+            outSlope: 1.5895971
             tangentMode: 0
             weightedMode: 0
             inWeight: 0.33333334
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 0.6112419
+            value: 0.91413224
+            inSlope: 1.8084027
+            outSlope: 1.8084027
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.45762184
             outWeight: 0.09095589
           - serializedVersion: 3
             time: 0.9974365
             value: 1
-            inSlope: 0.1825654
-            outSlope: 0.1825654
+            inSlope: 1.4250681
+            outSlope: 1.4250681
             tangentMode: 0
             weightedMode: 0
-            inWeight: 0.11707626
+            inWeight: 0.119294025
             outWeight: 0
           m_PreInfinity: 2
           m_PostInfinity: 2
