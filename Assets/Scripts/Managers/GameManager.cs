@@ -413,9 +413,9 @@ public class GameManager : MonoBehaviour
         }
         else if(winnerID == 1)
         {
-            Debug.Log(scoreDic[playersAlive[0]] + "");
-            Debug.Log(winnerID);
-            Debug.Log("winnah");
+            //Debug.Log(scoreDic[playersAlive[0]] + "");
+            //Debug.Log(winnerID);
+            //Debug.Log("winnah");
             imageDic[winnerID] = trans.getImage1;
             RectTransform picture1 = trans.getImage1.GetComponent<RectTransform>();
             picture1.transform.position = pos1;
@@ -424,9 +424,9 @@ public class GameManager : MonoBehaviour
         }
         else if (winnerID == 2)
         {
-            Debug.Log(scoreDic[playersAlive[0]] + "");
-            Debug.Log(winnerID);
-            Debug.Log("ahhhhhhh");
+            //Debug.Log(scoreDic[playersAlive[0]] + "");
+            //Debug.Log(winnerID);
+            //Debug.Log("ahhhhhhh");
             imageDic[winnerID] = trans.getImage2;
             RectTransform picture2 = trans.getImage2.GetComponent<RectTransform>();
             picture2.transform.position = pos2;
