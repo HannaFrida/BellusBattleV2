@@ -26,6 +26,11 @@ public class WeaponData : ScriptableObject
     [SerializeField, Tooltip("The amount of force placed on the projectile.")]
     public float projectileForce;
 
+    [Header("Spread")]
+    public bool usesSpread;
+    public int spreadFactor;
+    public int pelletCount;
+
     [Header("Ammo")]
     public int currentAmmo;
     public int initialAmmo;

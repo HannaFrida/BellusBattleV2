@@ -129,7 +129,6 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(DownwardForce);
         isGrounded = IsGrounded;
         UpdateRayCastOrgins();
         UpdateMovementForce();
