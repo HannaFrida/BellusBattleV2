@@ -96,7 +96,7 @@ public class GameManager : MonoBehaviour
 
         if (hasOnePlayerLeft && !hasGivenScore && gameHasStarted)
         {
-            //GiveScoreAfterTimer();
+            GiveScoreAfterTimer();
         }           
 
     }
