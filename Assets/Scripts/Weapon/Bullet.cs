@@ -73,7 +73,7 @@ public class Bullet : Projectile
 		}
 
 	}
-	/*private void OnTriggerEnter(Collider other)
+	private void OnTriggerEnter(Collider other)
 	{
 		GameObject playerGo = other.gameObject;
 		if (playerGo.CompareTag("Player") && Shooter != playerGo)
@@ -110,13 +110,13 @@ public class Bullet : Projectile
 		if (other.gameObject.tag == "Obstacle")
 		{
 			Debug.Log("Obstacle");
-			GameObject MuzzleFlashIns = Instantiate(collideVFX, other.gameObject.GetComponent<Collider>().ClosestPoint(transform.position), other.transform.rotation);
+			//GameObject MuzzleFlashIns = Instantiate(collideVFX, other.gameObject.GetComponent<Collider>().ClosestPoint(transform.position), other.transform.rotation);
 			//MuzzleFlashIns.transform.Rotate(Vector3.left * 90);
-			Destroy(gameObject);
-			return;
+			//Destroy(gameObject);
+			//return;
 		}
 
-        if (other.gameObject.CompareTag("Breakable"))
+		if (other.gameObject.CompareTag("Breakable"))
         {
 			Destroy(other.gameObject);
 			Destroy(gameObject);
@@ -127,7 +127,7 @@ public class Bullet : Projectile
 			hitSounds[UnityEngine.Random.Range(0, hitSounds.Length)].Play();
 		}
 
-	}*/
+	}
 
 	/*
 	public void SetDamage(float setTo)
