@@ -100,6 +100,8 @@ public class PoisionManager : MonoBehaviour
 
     private void DisplayWarning(bool toggle)
     {
+        if (warningIcon == null) return;
+
         isShowingWarning = toggle;
         warningIcon.enabled = toggle;  
     }
