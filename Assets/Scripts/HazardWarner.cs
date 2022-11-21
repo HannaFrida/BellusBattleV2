@@ -10,6 +10,10 @@ public class HazardWarner : MonoBehaviour
     private float blinkTime = 0.3f;
     private bool isShowingWarning;
 
+    private void Start()
+    {
+        DisplayWarning(false);
+    }
     void Update()
     {
         if (isShowingWarning == true)
@@ -42,6 +46,7 @@ public class HazardWarner : MonoBehaviour
 
     private void RunBlinkTimer()
     {
+        Debug.Log("blink");
         blinkTimer += Time.deltaTime;
 
         if (blinkTimer >= blinkTime)

@@ -23,7 +23,6 @@ public class PoisionManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        hazardWarner.DisplayWarning(false);
         soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
         foreach (PoisonZone poisionZone in poisionZones)
         {

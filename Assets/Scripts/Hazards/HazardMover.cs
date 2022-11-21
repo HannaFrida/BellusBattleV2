@@ -4,33 +4,36 @@ using UnityEngine;
 
 public class HazardMover : MonoBehaviour
 {
+    [SerializeField] private HazardWarner hazardWarner; //OBS om det finns flera movingdeathzones är det bara en som kan ha en hazardWarner!
     [SerializeField] private Transform highestPoint;
     [SerializeField] private float timeBetweenMoving;
     [SerializeField] private float movingSpeed;
     [SerializeField] private float smoothTime;
     private BoxCollider boxCollider;
     private SoundManager soundManager;
-    private float lowestPoint;
     private float timer;
     private Vector3 moveVector;
     private Vector3 lowestPosition, highestPosition;
     [SerializeField] private bool hasReachedHighestPoint;
     private bool runTimer = true;
+    private float warningTime = 3f;
     // Start is called before the first frame update
     void Start()
     {
         soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
         boxCollider = GetComponent<BoxCollider>();
-        lowestPoint = boxCollider.bounds.max.y; ;
         moveVector = new Vector3(0f, movingSpeed, 0f);
         lowestPosition = new Vector3(transform.position.x, transform.position.y + boxCollider.size.y / 2, 0f);
         highestPosition = new Vector3(transform.position.x, highestPoint.transform.position.y - boxCollider.size.y / 2, 0f);
-        //Debug.Log(lowestPoint);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(timeBetweenMoving - timer <= warningTime)
+        {
+            ToggleHazardWarner(true);
+        }
         if (runTimer == true)
         {
             timer += Time.deltaTime;
@@ -47,31 +50,33 @@ public class HazardMover : MonoBehaviour
     }
     private void MoveHazard()
     {
+        ToggleHazardWarner(false);
         soundManager.FadeInLavaHazard("lavaHazard");
-        //Debug.Log(moveVector);
         if (hasReachedHighestPoint == false)
         {
             transform.position = Vector3.SmoothDamp(transform.position, highestPosition, ref moveVector, smoothTime);
             if (boxCollider.bounds.max.y >= highestPoint.position.y)
             {
                 moveVector = Vector3.zero;
-                //Debug.Log(boxCollider.bounds.max.y);
                 hasReachedHighestPoint = true;
             }
         }
         else
         {
-            //Debug.Log("dada");
             transform.position = Vector3.SmoothDamp(transform.position, lowestPosition, ref moveVector, smoothTime);
-            //Debug.Log(boxCollider.bounds.max.y + " lowest: " + lowestPoint);
             if (transform.position.y <= lowestPosition.y + 1f)
             {
                 moveVector = Vector3.zero;
-                //Debug.Log("yoo");
                 hasReachedHighestPoint = false;
                 runTimer = true;
                 soundManager.FadeOutHazard();
             }
         }
+    }
+
+    private void ToggleHazardWarner(bool toggle)
+    {
+        if (hazardWarner == null) return;
+        hazardWarner.DisplayWarning(toggle);
     }
 }
