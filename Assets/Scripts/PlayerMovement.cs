@@ -91,6 +91,7 @@ public class PlayerMovement : MonoBehaviour
     private float verticalRayLength, horizontalRayLength;
     private float movementAmount;
     private float initialSpeed;
+    private float movementAnimationSpeed;
     private float playerHeight;
 
     private float knockBackTime = 0.2f;
@@ -162,14 +163,26 @@ public class PlayerMovement : MonoBehaviour
         {
             HandleVerticalCollisions(ref velocity);
         }
+
         if (velocity.x != 0)
         {
             HandleHorizontalCollisions(ref velocity);
         }
+        
+        
         transform.Translate(velocity * Time.deltaTime);
         //Debug.Log(movementAmount);
+        movementAnimationSpeed = movementX;
+        if (isMovedByPLatform == true && movementAmount == 0f)
+        {
+            playerAnimator.SetFloat("Speed", 0f);
+        }
+        else
+        {
+            playerAnimator.SetFloat("Speed", movementX);
+        }
         
-        playerAnimator.SetFloat("Speed", movementAmount);
+        
         
         
     }
