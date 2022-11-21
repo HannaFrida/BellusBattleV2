@@ -2,12 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
-using TMPro;
 using Cinemachine;
 
 public class GameManager : MonoBehaviour
@@ -20,7 +18,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private SoundManager soundManager;
     private bool gameHasStarted;
 
-    [Header("Poängrelaterat")]
+    [Header("Points")]
     private static Dictionary<GameObject, int> scoreDic = new Dictionary<GameObject, int>();
     [SerializeField] private int scoreToWin;
     [SerializeField] private bool hasGivenScore;
@@ -29,7 +27,7 @@ public class GameManager : MonoBehaviour
     [SerializeField, Tooltip("Amount of time until the last player alive recieves their score")] private float giveScoreTime;
     private int winnerID;
 
-    [Header("LevelRelaterat")]
+    [Header("Levels")]
     [SerializeField] WhichScenesListToPlay scenceToPlay;
     [SerializeField] WhichOrderToPlayScenes playingScenesOrder;
     [SerializeField] private string[] scenes;
@@ -41,6 +39,8 @@ public class GameManager : MonoBehaviour
     private enum WhichScenesListToPlay { ScenesFromBuild, ScenesFromList, ScenesFromBuildAndList };
     private enum WhichOrderToPlayScenes { Random, NumiricalOrder };
     private string nextLevel;
+    [Header("UI")]
+    [SerializeField] private GameObject welcomePanel;
 
     [Header("Transition")]
     [SerializeField] private float transitionTime = 5f;
@@ -60,25 +60,15 @@ public class GameManager : MonoBehaviour
     {
         if (level != 0)
         {
+            DeactivateMovement();
             giveScoreTimer = 0f;
             gameHasStarted = true;
             playersAlive = new List<GameObject>(players);
+            
             //Array.Clear(targetGroup.GetComponent<CinemachineTargetGroup>().m_Targets, 0, targetGroup.GetComponent<CinemachineTargetGroup>().m_Targets.Length);
             //SpawnPlayers();
         }
 
-        //trans = Transition.Instance;
-        /*
-        if (SceneManager.GetActiveScene().name == "TransitionScene")
-        {
-            trans.gameObject.SetActive(true);
-            MoveUpPlayer();
-        }
-        else
-        {
-            trans.gameObject.SetActive(false);
-        }
-        */
     }
     private void Awake()
     {
@@ -123,8 +113,38 @@ public class GameManager : MonoBehaviour
 
     public void AddPLayer(GameObject player)
     {
+        if(welcomePanel != null) welcomePanel.SetActive(false);
         players.Add(player);
+        targetGroup.GetComponent<CinemachineTargetGroup>().AddMember(player.transform, 1, 5); //OBS GER ERROR!
     }
+    public void RestorePLayer(GameObject player)
+    {
+        for (int i = 0; i < players.Count; i++)
+        {
+            targetGroup.GetComponent<CinemachineTargetGroup>().RemoveMember(players[i].transform);
+            targetGroup.GetComponent<CinemachineTargetGroup>().AddMember(players[i].transform, 1, 5); //OBS GER ERROR!
+        }
+    }
+
+    private void DeactivateMovement()
+    {
+        foreach (GameObject player in players)
+        {
+            player.GetComponent<PlayerMovement>().enabled = false;
+        }
+    }
+
+    public void ActivateMovement()
+    {
+        foreach (GameObject player in players)
+        {
+            player.GetComponent<PlayerMovement>().enabled = true;
+        }
+    }
+
+
+
+   
 
     /*
     private void SpawnPlayers()
@@ -144,7 +164,7 @@ public class GameManager : MonoBehaviour
     public void PlayerDeath(GameObject deadPlayer)
     {
         playersAlive.Remove(deadPlayer);
-        //targetGroup.GetComponent<CinemachineTargetGroup>().RemoveMember(deadPlayer.transform); //OBS GER ERROR!
+        targetGroup.GetComponent<CinemachineTargetGroup>().RemoveMember(deadPlayer.transform); //OBS GER ERROR!
     }
 
 
@@ -153,6 +173,8 @@ public class GameManager : MonoBehaviour
     {
         scoreDic.Clear();
     }
+
+
 
     public List<GameObject> GetAllPlayers()
     {
@@ -201,11 +223,6 @@ public class GameManager : MonoBehaviour
 
         giveScoreTimer += Time.deltaTime;
         if (giveScoreTimer <= giveScoreTime) return;
-
-        foreach(GameObject player in players)
-        {
-            
-        }
 
         if (playersAlive.Count != 0)
         {
@@ -300,14 +317,21 @@ public class GameManager : MonoBehaviour
             Application.OpenURL("https://www.youtube.com/watch?v=WEEM2Qc9sUg");
             return;
         }
-        if (playingScenesOrder == WhichOrderToPlayScenes.Random) LoadNextSceneInRandomOrder();
-        else if (playingScenesOrder == WhichOrderToPlayScenes.NumiricalOrder) LoadNextSceneInNumericalOrder();
+        if (playingScenesOrder == WhichOrderToPlayScenes.Random)
+        {
+            LoadNextSceneInRandomOrder();
+        }
+
+        else if (playingScenesOrder == WhichOrderToPlayScenes.NumiricalOrder)
+        {
+            LoadNextSceneInNumericalOrder();
+        }
+        
         if (scenesToChooseFrom.Count <= 0)
         {
             LoadScenesList();
 
         }
-        
         StartCoroutine(AsynchronousLoad());
         soundManager.FadeInMusic();
     }
@@ -389,6 +413,7 @@ public class GameManager : MonoBehaviour
         }
         else if(winnerID == 1)
         {
+            Debug.Log(scoreDic[playersAlive[0]] + "");
             Debug.Log(winnerID);
             Debug.Log("winnah");
             imageDic[winnerID] = trans.getImage1;
@@ -399,12 +424,14 @@ public class GameManager : MonoBehaviour
         }
         else if (winnerID == 2)
         {
+            Debug.Log(scoreDic[playersAlive[0]] + "");
             Debug.Log(winnerID);
             Debug.Log("ahhhhhhh");
             imageDic[winnerID] = trans.getImage2;
             RectTransform picture2 = trans.getImage2.GetComponent<RectTransform>();
             picture2.transform.position = pos2;
             pos2 = new Vector2(picture2.position.x, picture2.position.y + 20);
+            trans.getWinScore2.SetText(scoreDic[playersAlive[0]] + "");
         }
         else if (winnerID == 3)
         {
@@ -412,6 +439,7 @@ public class GameManager : MonoBehaviour
             RectTransform picture3 = trans.getImage3.GetComponent<RectTransform>();
             picture3.transform.position = pos3;
             pos3 = new Vector2(picture3.position.x, picture3.position.y + 20);
+            trans.getWinScore3.SetText(scoreDic[playersAlive[0]] + "");
         }
         else if (winnerID == 4)
         {
@@ -419,6 +447,7 @@ public class GameManager : MonoBehaviour
             RectTransform picture4 = trans.getImage4.GetComponent<RectTransform>();
             picture4.transform.position = pos4;
             pos4 = new Vector2(picture4.position.x, picture4.position.y + 20);
+            trans.getWinScore4.SetText(scoreDic[playersAlive[0]] + "");
         }
     }
 }

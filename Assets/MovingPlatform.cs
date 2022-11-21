@@ -22,6 +22,7 @@ public class MovingPlatform : MonoBehaviour
 
     private void Start()
     {
+        CheckTargetsVerticalPosition();
         if (targetOne == null) return;
         
         currentTarget = targetOne;
@@ -41,7 +42,7 @@ public class MovingPlatform : MonoBehaviour
 
     private void AttachPlayers()
     {
-        collidersOnPlatform = Physics.OverlapBox(attachZone.bounds.center, attachZone.transform.localScale / 2);
+        collidersOnPlatform = Physics.OverlapBox(attachZone.bounds.center, attachZone.size / 2);
 
         foreach(Collider col in collidersOnPlatform)
         {
@@ -109,5 +110,11 @@ public class MovingPlatform : MonoBehaviour
     private void CreateDirectionVector()
     {
         movementDirection = (transform.position - currentTarget.position).normalized;
+    }
+
+    private void CheckTargetsVerticalPosition()
+    {
+        targetOne.position = new Vector2(targetOne.position.x, transform.position.y);
+        targetTwo.position = new Vector2(targetTwo.position.x, transform.position.y);
     }
 }
