@@ -71,7 +71,7 @@ public class BoneRotation : MonoBehaviour
         if (!isFacingRight) joystickPos = new Vector3(joystickPos.x*-1, joystickPos.y);
         angle = Mathf.Atan2(joystickPos.y, joystickPos.x) * Mathf.Rad2Deg;
         if (angle > maxRotation && usingOverride || angle < -maxRotation && usingOverride) FlipObjects();
-        if (usingOverride) { ClampRotation(angle); }
+        angle = ClampRotation(angle);
 
         //Debug.Log(angle);
 
