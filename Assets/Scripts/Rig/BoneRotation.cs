@@ -37,17 +37,7 @@ public class BoneRotation : MonoBehaviour
 
     private void Start()
     {
-        isFacingRight = true;
-    }
-
-    void SetRotation()
-    {
-        foreach(RotationObject rotObj in rotationObjects)
-        {
-            Quaternion rot = rotObj.objectToRotate.transform.rotation;
-            rot = new Quaternion(rot.x,rot.y, rot.z,rot.w);
-
-        }
+        isFacingRight = false;
     }
 
     public void CalculateRotation(InputAction.CallbackContext context)
@@ -79,7 +69,7 @@ public class BoneRotation : MonoBehaviour
     void HandleRotation(Vector2 joystickPos)
     {
         angle = Mathf.Atan2(joystickPos.y, joystickPos.x) * Mathf.Rad2Deg;
-        angle = ClampRotation(angle);
+        //angle = ClampRotation(angle);
 
         //Debug.Log(angle);
 
@@ -140,10 +130,10 @@ public class BoneRotation : MonoBehaviour
 
     private float ClampRotation(float angleSum)
     {
-        if (angleSum > maxRotation || angleSum < -maxRotation)
+        /*if (angleSum > maxRotation || angleSum < -maxRotation)
         {
             angleSum = Mathf.Clamp(angleSum, -maxRotation, maxRotation);
-        }
+        }*/
 
         return angleSum;
 
