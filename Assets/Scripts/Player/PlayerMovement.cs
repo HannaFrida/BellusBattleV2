@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField, Range(10f, 300f)] private float airResistance;
     [SerializeField, Range(-100f, 0f)] private float downwardForce;
     [SerializeField, Range(1f, 50000f)] private float acceleration;
+    [SerializeField, Range(1f, 500f)] private float fallForce;
    
     [Header("Jump & Edgecontrol")]
     [SerializeField, Range(0f, 1f)] private float doubleJumpDecreaser;
@@ -177,8 +178,8 @@ public class PlayerMovement : MonoBehaviour
         {
             playerAnimator.SetFloat("Speed", movementX);
         }
-        
-        
+
+
         
         
     }
@@ -207,6 +208,12 @@ public class PlayerMovement : MonoBehaviour
         if(movementAmount < 0.1f && movementAmount > -0.1f)
         {
             movementAmount = 0f;
+        }
+
+        // Hold down to fall faster
+        if (!IsGrounded && downwardInput > 0.1f)
+        {
+            DownwardForce += -fallForce;
         }
 
     }
@@ -405,7 +412,8 @@ public class PlayerMovement : MonoBehaviour
                     ResetValuesOnGrounded();
                 }
                 velocity.y = 0;
-                movementY = 0f;  
+                movementY = 0f;
+                return;
             }
             if (Physics.Raycast(rayOrigin, Vector2.up * directionY, out hit, verticalRayLength, oneWayLayer))
             {
