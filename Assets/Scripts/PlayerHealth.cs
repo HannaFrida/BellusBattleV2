@@ -29,8 +29,6 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private GameObject hips;
     [SerializeField] private Animator anime;
     [SerializeField] private DashAdvanced dash;
-    [SerializeField] private GameObject playerBody;
-    [SerializeField] private GameObject accseroties;
 
 
     private void Start()
@@ -47,12 +45,12 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        Debug.Log("ajajaj" + " " + gameObject.GetComponent<PlayerDetails>().playerID);
+        //Debug.Log("ajajaj" + " " + gameObject.GetComponent<PlayerDetails>().playerID);
         //if(isInvinsable) return;
         health -= damage;
         if (health <= 0)
         {
-            Debug.Log("ajajaj" + " " + gameObject.GetComponent<PlayerDetails>().playerID + " dEAD " + Health);
+            //Debug.Log("ajajaj" + " " + gameObject.GetComponent<PlayerDetails>().playerID + " dEAD " + Health);
             KillPlayer();
             playerDeathSound.Play();
             //onGameOver.Invoke();
@@ -62,23 +60,6 @@ public class PlayerHealth : MonoBehaviour
     {
         isInvinsable = value;
     }
-
-    public void SetPlayerInvisable()
-    {
-        playerBody.SetActive(false);
-        accseroties.SetActive(false);
-    }
-
-    public void SetPlayerVisable()
-    {
-        playerBody.SetActive(true);
-        accseroties.SetActive(true);
-        if (pm != null)
-        {
-            pm.enabled = true;
-        }
-    }
-
 
     public void PlayPoisoned()
     {
@@ -96,7 +77,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void KillPlayer()
     {
-        Debug.Log("jjajajajaj" + " " + gameObject.GetComponent<PlayerDetails>().playerID + " i am dEAD " + Health);
+        //Debug.Log("jjajajajaj" + " " + gameObject.GetComponent<PlayerDetails>().playerID + " i am dEAD " + Health);
         //CF.RemoveTarget(gameObject.transform);
         //gameObject.transform.position = deathPosition.position;
         GameManager.Instance.PlayerDeath(gameObject);
@@ -127,7 +108,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void UnkillPlayer()
     {
-        //SetPlayerInvisable();
+        GameManager.Instance.RestorePLayer(gameObject);
         health = 1f;
         skr.enabled = true;
         anime.enabled = true;
@@ -136,13 +117,10 @@ public class PlayerHealth : MonoBehaviour
         hips.transform.position = Vector3.zero;
         hips.SetActive(false);
         boxCollider.enabled = true;
-        /*
         if (pm != null)
         {
             pm.enabled = true;
         }
-        */
-        
         dash.enabled = true;
         /*
         boxCollider.enabled = true;
