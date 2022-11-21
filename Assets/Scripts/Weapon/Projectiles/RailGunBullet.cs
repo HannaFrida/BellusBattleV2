@@ -13,7 +13,7 @@ public class RailGunBullet : Projectile
 	[SerializeField] private GameObject colliderWallVFX;
 	[SerializeField] private GameObject colliderPlayerVFX;
 	[SerializeField] private Collider col;
-
+	[SerializeField] private float colOn = 0.015f;
 	//public float bulletDamage;
 
 	private void Start()
@@ -45,7 +45,7 @@ public class RailGunBullet : Projectile
 			};
 			pde.FireEvent();
 
-			Die();
+			//Die();
 		}
 		else if (playerGo.CompareTag("AI"))
 		{
@@ -88,7 +88,7 @@ public class RailGunBullet : Projectile
 
 	private IEnumerator Shoot(float seconds)
 	{
-		yield return new WaitForSeconds(1.8f);
+		yield return new WaitForSeconds(colOn);
 		killcol();
 		yield return new WaitForSeconds(seconds);
 		Die();
