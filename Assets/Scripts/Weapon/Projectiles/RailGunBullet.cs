@@ -88,7 +88,7 @@ public class RailGunBullet : Projectile
 
 	private IEnumerator Shoot(float seconds)
 	{
-		yield return new WaitForSeconds(2.985f);
+		yield return new WaitForSeconds(1.485f);
 		killcol();
 		yield return new WaitForSeconds(seconds);
 		Die();
