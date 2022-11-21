@@ -2,12 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
-using TMPro;
 using Cinemachine;
 
 public class GameManager : MonoBehaviour
@@ -20,7 +18,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private SoundManager soundManager;
     private bool gameHasStarted;
 
-    [Header("Poängrelaterat")]
+    [Header("Points")]
     private static Dictionary<GameObject, int> scoreDic = new Dictionary<GameObject, int>();
     [SerializeField] private int scoreToWin;
     [SerializeField] private bool hasGivenScore;
@@ -29,7 +27,7 @@ public class GameManager : MonoBehaviour
     [SerializeField, Tooltip("Amount of time until the last player alive recieves their score")] private float giveScoreTime;
     private int winnerID;
 
-    [Header("LevelRelaterat")]
+    [Header("Levels")]
     [SerializeField] WhichScenesListToPlay scenceToPlay;
     [SerializeField] WhichOrderToPlayScenes playingScenesOrder;
     [SerializeField] private string[] scenes;
@@ -62,25 +60,15 @@ public class GameManager : MonoBehaviour
     {
         if (level != 0)
         {
+            DeactivateMovement();
             giveScoreTimer = 0f;
             gameHasStarted = true;
             playersAlive = new List<GameObject>(players);
+            
             //Array.Clear(targetGroup.GetComponent<CinemachineTargetGroup>().m_Targets, 0, targetGroup.GetComponent<CinemachineTargetGroup>().m_Targets.Length);
             //SpawnPlayers();
         }
 
-        //trans = Transition.Instance;
-        /*
-        if (SceneManager.GetActiveScene().name == "TransitionScene")
-        {
-            trans.gameObject.SetActive(true);
-            MoveUpPlayer();
-        }
-        else
-        {
-            trans.gameObject.SetActive(false);
-        }
-        */
     }
     private void Awake()
     {
@@ -138,6 +126,26 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void DeactivateMovement()
+    {
+        foreach (GameObject player in players)
+        {
+            player.GetComponent<PlayerMovement>().enabled = false;
+        }
+    }
+
+    public void ActivateMovement()
+    {
+        foreach (GameObject player in players)
+        {
+            player.GetComponent<PlayerMovement>().enabled = true;
+        }
+    }
+
+
+
+   
+
     /*
     private void SpawnPlayers()
     {
@@ -165,6 +173,8 @@ public class GameManager : MonoBehaviour
     {
         scoreDic.Clear();
     }
+
+
 
     public List<GameObject> GetAllPlayers()
     {
@@ -213,11 +223,6 @@ public class GameManager : MonoBehaviour
 
         giveScoreTimer += Time.deltaTime;
         if (giveScoreTimer <= giveScoreTime) return;
-
-        foreach(GameObject player in players)
-        {
-            
-        }
 
         if (playersAlive.Count != 0)
         {
@@ -312,14 +317,21 @@ public class GameManager : MonoBehaviour
             Application.OpenURL("https://www.youtube.com/watch?v=WEEM2Qc9sUg");
             return;
         }
-        if (playingScenesOrder == WhichOrderToPlayScenes.Random) LoadNextSceneInRandomOrder();
-        else if (playingScenesOrder == WhichOrderToPlayScenes.NumiricalOrder) LoadNextSceneInNumericalOrder();
+        if (playingScenesOrder == WhichOrderToPlayScenes.Random)
+        {
+            LoadNextSceneInRandomOrder();
+        }
+
+        else if (playingScenesOrder == WhichOrderToPlayScenes.NumiricalOrder)
+        {
+            LoadNextSceneInNumericalOrder();
+        }
+        
         if (scenesToChooseFrom.Count <= 0)
         {
             LoadScenesList();
 
         }
-        
         StartCoroutine(AsynchronousLoad());
         soundManager.FadeInMusic();
     }
