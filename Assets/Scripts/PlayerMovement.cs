@@ -137,11 +137,7 @@ public class PlayerMovement : MonoBehaviour
         if (isGrounded && velocity.y < 0)
         {
 
-            movementY = 0;
-            coyoteTimer = 0;
-            hasCoyoteTime = true;
-            hasDoubleJump = true;
-            hasJumpedOnGround = false;
+            
             playerSoundManager.PlayerLandSound();
            
             
@@ -260,6 +256,15 @@ public class PlayerMovement : MonoBehaviour
             bufferTimer = 0;
         }
     }
+
+    private void ResetValuesOnGrounded()
+    {
+        //movementY = 0;
+        coyoteTimer = 0;
+        hasCoyoteTime = true;
+        hasDoubleJump = true;
+        hasJumpedOnGround = false;
+    }
     private IEnumerator VFXRemover()
     {
         yield return new WaitForSeconds(1f);
@@ -296,15 +301,15 @@ public class PlayerMovement : MonoBehaviour
 
     private void EdgeControl(RaycastHit hit)
     {
-        float hitColliderBuffer = 0.2f; // Avståndet spelaren kommer att placeras över den träffade colliderns största y-värde
+        float hitColliderBuffer = 0.1f; // Avståndet spelaren kommer att placeras över den träffade colliderns största y-värde
         float hitpointY = hit.point.y;
         Collider platformCollider = hit.collider;
         Bounds col = platformCollider.bounds;
 
         float colliderDif = col.max.y - hitpointY;
-        //Debug.Log(colliderDif);
+        Debug.Log(colliderDif);
 
-        if (colliderDif > 0 && colliderDif < edgeControlAmount)
+        if (colliderDif >= -.01f && colliderDif <= edgeControlAmount)
         {
             if (velocity.x < 0f)
             {
@@ -394,6 +399,11 @@ public class PlayerMovement : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(rayOrigin, Vector2.up * directionY, out hit, verticalRayLength, collisionLayer))
             {
+                if(velocity.y < 0f)
+                {
+                    transform.position = new Vector2(transform.position.x, hit.collider.bounds.max.y);
+                    ResetValuesOnGrounded();
+                }
                 velocity.y = 0;
                 movementY = 0f;  
             }
@@ -401,11 +411,17 @@ public class PlayerMovement : MonoBehaviour
             {
                 if (velocity.y > 0) return;
 
-                if (hit.collider.bounds.max.y < boxCollider.bounds.min.y)
+                if (velocity.y < 0f)
                 {
-                    velocity.y = 0;
-                    movementY = 0;
+                    transform.position = new Vector2(transform.position.x, hit.collider.bounds.max.y);
+                    ResetValuesOnGrounded();
                 }
+                velocity.y = 0;
+                movementY = 0;
+
+
+
+
             } 
         }
     }
