@@ -50,18 +50,15 @@ public class PlayerSpawnManager : MonoBehaviour
 
     private void Update()
     {
-        
         if (runTimer == false) return;
         Debug.Log("runnnig");
-
-
         if(timer >= movementTurnOnDelay)
         {
             GameManager.Instance.ActivateMovement();
             runTimer = false;
             timer = 0f;
         }
-        timer += Time.unscaledDeltaTime;
+        timer += Time.deltaTime;
       
         
     }
