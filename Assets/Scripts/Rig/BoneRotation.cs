@@ -14,6 +14,8 @@ public class BoneRotation : MonoBehaviour
 
     private bool isFacingRight, usingOverride;
 
+    [SerializeField] private GameObject target;
+
 
     [SerializeField] private List<GameObject> flipObjects;
     [SerializeField] private float maxRotation = 90f;
@@ -23,7 +25,7 @@ public class BoneRotation : MonoBehaviour
     {
         public GameObject objectToRotate;
         public axisToRotate axis;
-        [Tooltip("Determines how big influence this rotationobject has on the total rotation on the rig. max 180 degrees. Expected value between 0-1")]
+        [Tooltip("Determines how big influence this rotationobject has on the total rotation on the rig. max 180 degrees. Expected total sum of 1")]
         public float rotationWeight;
     }
 
@@ -38,6 +40,15 @@ public class BoneRotation : MonoBehaviour
         isFacingRight = true;
     }
 
+    void SetRotation()
+    {
+        foreach(RotationObject rotObj in rotationObjects)
+        {
+            Quaternion rot = rotObj.objectToRotate.transform.rotation;
+            rot = new Quaternion(rot.x,rot.y, rot.z,rot.w);
+
+        }
+    }
 
     public void CalculateRotation(InputAction.CallbackContext context)
     {
@@ -55,7 +66,7 @@ public class BoneRotation : MonoBehaviour
     {
         Debug.Log("Overriding");
         Vector2 joystickPosition = context.ReadValue<Vector2>();
-        if(joystickPosition.x == 0 && joystickPosition.y == 0)
+        if (joystickPosition.x == 0 && joystickPosition.y == 0)
         {
             usingOverride = false;
             return;
@@ -129,15 +140,7 @@ public class BoneRotation : MonoBehaviour
 
     private float ClampRotation(float angleSum)
     {
-        if (isFacingRight)
-        {
-            angleSum = Mathf.Clamp(angleSum, -maxRotation, maxRotation);
-        }
-        else if(!isFacingRight && angle > maxRotation)
-        {
-            angleSum = Mathf.Clamp(angleSum, maxRotation, maxRotation*2);
-        }
-        else if(!isFacingRight && angle < -maxRotation)
+        if (angleSum > maxRotation || angleSum < -maxRotation)
         {
             angleSum = Mathf.Clamp(angleSum, -maxRotation, maxRotation);
         }
