@@ -5747,6 +5747,7 @@ MonoBehaviour:
   airResistance: 75
   downwardForce: -22.7
   acceleration: 35444
+  fallForce: 20
   doubleJumpDecreaser: 0.94
   downwardInputBound: -0.75
   edgeControlAmount: 0.5
@@ -6025,8 +6026,6 @@ MonoBehaviour:
   hips: {fileID: 2842460971312104397}
   anime: {fileID: 8727384561011662934}
   dash: {fileID: 7604770547986073551}
-  playerBody: {fileID: 7611016251194114904}
-  accseroties: {fileID: 6998119037449280601}
 --- !u!114 &7604770547986073551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8768,7 +8767,7 @@ PrefabInstance:
     - target: {fileID: 1952737545159249948, guid: c4626a2bd3e247f41ad1ce76bb68ac1a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.007938603
+      value: -0.007938604
       objectReference: {fileID: 0}
     - target: {fileID: 1952737545159249948, guid: c4626a2bd3e247f41ad1ce76bb68ac1a,
         type: 3}
@@ -10942,12 +10941,6 @@ Transform:
 --- !u!4 &7600359564593042094 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1952737545159249948, guid: c4626a2bd3e247f41ad1ce76bb68ac1a,
-    type: 3}
-  m_PrefabInstance: {fileID: 8241695838658003634}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &7611016251194114904 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2017507381837038058, guid: c4626a2bd3e247f41ad1ce76bb68ac1a,
     type: 3}
   m_PrefabInstance: {fileID: 8241695838658003634}
   m_PrefabAsset: {fileID: 0}
