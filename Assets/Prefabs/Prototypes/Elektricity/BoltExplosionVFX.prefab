@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 7555042882257320724}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7555042882393070736}
@@ -41,7 +41,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7555042882257320724}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 3.7586665
@@ -102,7 +102,7 @@ VisualEffect:
       - m_Value: 1
         m_Name: ElectricBeamDistortionAmount
         m_Overridden: 1
-      - m_Value: 3
+      - m_Value: 1
         m_Name: TrailsSize
         m_Overridden: 1
       - m_Value: 10
@@ -114,10 +114,10 @@ VisualEffect:
       - m_Value: 16
         m_Name: ElectricFlashSize
         m_Overridden: 1
-      - m_Value: 0.08
+      - m_Value: 0.05
         m_Name: TrailsLifetime
         m_Overridden: 1
-      - m_Value: 0.45
+      - m_Value: 0.12
         m_Name: Duration
         m_Overridden: 1
       - m_Value: 16

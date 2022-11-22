@@ -38,11 +38,16 @@ public class Grenade : Projectile
 
     public void Explode()
     {
+        Destroy(gameObject, 0.3f);
         if (bombMesh != null)
         {
             bombMesh.SetActive(false);
             explosionSound.Play();
-            GameObject spawnVfx = Instantiate(objectToBoom, transform);
+            GameObject spawnVfx = Instantiate(objectToBoom, transform.position,transform.rotation);
+            Destroy(spawnVfx, 0.3f);
+            gameObject.GetComponent<Rigidbody>().useGravity = false;
+            Rigidbody RB = GetComponent<Rigidbody>();
+            RB.velocity = Vector3.zero;
         }
 
         hits = Physics.OverlapSphere(transform.position, explosionSize);
@@ -80,7 +85,7 @@ public class Grenade : Projectile
         //hits = null;
 
         // Delay before destroy
-        Destroy(gameObject, 1f);
+        
         //Die();
     }
 
