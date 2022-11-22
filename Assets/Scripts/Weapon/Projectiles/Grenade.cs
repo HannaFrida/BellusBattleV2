@@ -38,7 +38,7 @@ public class Grenade : Projectile
 
     public void Explode()
     {
-        Destroy(gameObject, 0.3f);
+        Destroy(gameObject, 0.15f);
         if (bombMesh != null)
         {
             bombMesh.SetActive(false);
