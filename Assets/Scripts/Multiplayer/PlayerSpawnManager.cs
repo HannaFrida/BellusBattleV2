@@ -28,8 +28,8 @@ public class PlayerSpawnManager : MonoBehaviour
 
     private void Start()
     {
-        runTimer = true;
         timer = 0f;
+        runTimer = true;
         amountOfPlayer = GameManager.Instance.GetAllPlayers().Count;
         movementTurnOnDelay = amountOfPlayer;
         //scoreManager = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>();
