@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerDetails : MonoBehaviour
 {
@@ -20,6 +21,26 @@ public class PlayerDetails : MonoBehaviour
         transform.position = startPos; // Puts the player on the spawn position
         isAlive = true;
         //headGearSlot = GameObject.FindGameObjectWithTag("HeadSlot").transform;
+    }
+
+
+    public void OnPlayerPause(InputAction.CallbackContext ctx)
+    {
+        if (ctx.started)
+        {
+            Debug.Log("joppa");
+            if (GameManager.Instance.GameIsPaused == false)
+            {
+                GameManager.Instance.PauseGame();
+                Debug.Log("jii");
+            }
+            else
+            {
+                GameManager.Instance.ResumeGame();
+                Debug.Log("hAAA");
+            }
+        }
+        
     }
 
 

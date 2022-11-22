@@ -5,7 +5,6 @@ using Unity.Burst.Intrinsics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
-using Random = UnityEngine.Random;
 
 /// <summary>
 /// Put on every weapon
@@ -51,6 +50,8 @@ public class Gun : MonoBehaviour
 
     [Header("Special cases")]
     [SerializeField] GameObject swordMesh;
+    [SerializeField] bool BulletFollow =false;
+    private GameObject firedProjectile;
 
     /// <summary>
     /// Gets the ID of the one who is currently holding the weapon
@@ -128,6 +129,13 @@ public class Gun : MonoBehaviour
         {
             Drop();
             Despawn();
+        }
+
+        if (BulletFollow && firedProjectile != null)
+        {
+            Debug.Log("RAIL");
+            firedProjectile.transform.position = muzzle.transform.position;
+            firedProjectile.transform.rotation = transform.rotation;
         }
 
     }
@@ -248,38 +256,17 @@ public class Gun : MonoBehaviour
                 Destroy(MuzzleFlashIns, 4f);
             }
 
+            firedProjectile = Instantiate(weaponData.projectile, muzzle.transform.position, transform.rotation);
+
             float forceForwrd = weaponData.projectileForce;
             float aimx = muzzle.transform.forward.x;
             float aimy = muzzle.transform.forward.y;
             Vector3 force = new Vector3(forceForwrd * aimx, forceForwrd * aimy, 0f);
+            _projectile = firedProjectile.GetComponent<Projectile>();
+            _projectile.SetDamage(weaponData.damage);
+            _projectile.GetComponent<Rigidbody>().AddForce(force);
 
-            if (weaponData.usesSpread)
-            {
-                for (int i = 0; i < weaponData.pelletCount; i++)
-                {
-                    GameObject bullet = Instantiate(weaponData.projectile, muzzle.transform.position, transform.rotation);
-
-                    Vector3 dir = transform.forward + new Vector3(Random.Range(-weaponData.spreadFactor, weaponData.spreadFactor), Random.Range(-weaponData.spreadFactor, weaponData.spreadFactor), 0f);
-
-                    _projectile = bullet.GetComponent<Projectile>();
-                    _projectile.SetDamage(weaponData.damage);
-                    _projectile.GetComponent<Rigidbody>().AddForce(dir += force);
-
-                    timeSinceLastShot = 0;
-                }
-                
-            }
-            else
-            {
-                GameObject firedProjectile = Instantiate(weaponData.projectile, muzzle.transform.position, transform.rotation);
-
-                _projectile = firedProjectile.GetComponent<Projectile>();
-                _projectile.SetDamage(weaponData.damage);
-                _projectile.GetComponent<Rigidbody>().AddForce(force);
-
-                timeSinceLastShot = 0;
-            }
-            
+            timeSinceLastShot = 0;
         }
     }
 
