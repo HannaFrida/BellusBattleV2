@@ -103,10 +103,12 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        /*
         if (gameIsPaused)
         {
             Time.timeScale = 0;
         }
+        */
         Debug.Log("TimeScale " + Time.timeScale);
         if (!gameHasStarted) return;
         CheckPlayersLeft();
