@@ -12,11 +12,6 @@ public class SettingsUIHandler : UIMenuHandler
         base.Start();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     public void SetMasterValume(float sliderValue)
     {
         audioMixer.SetFloat("MasterValume", Mathf.Log10(sliderValue) * 20);
@@ -26,4 +21,12 @@ public class SettingsUIHandler : UIMenuHandler
         audioMixer.SetFloat("MusicMixerGroup", Mathf.Log10(sliderValue) * 20);
     }
 
+    public void SetQuality(int qualityIndex)
+    {
+        QualitySettings.SetQualityLevel(qualityIndex); // double kolla med gruppden hur vårt olika quality är
+    }
+    public void SetFullscrean(bool isFullscrean)
+    {
+        Screen.fullScreen = isFullscrean;
+    }
 }
