@@ -74,6 +74,12 @@ public class GameManager : MonoBehaviour
             //Array.Clear(targetGroup.GetComponent<CinemachineTargetGroup>().m_Targets, 0, targetGroup.GetComponent<CinemachineTargetGroup>().m_Targets.Length);
             //SpawnPlayers();
         }
+        foreach(GameObject player in players)
+        {
+            RestorePLayer(gameObject);
+        }
+        
+
 
     }
     private void Awake()
@@ -138,14 +144,14 @@ public class GameManager : MonoBehaviour
     {
         if(welcomePanel != null) welcomePanel.SetActive(false);
         players.Add(player);
-        targetGroup.GetComponent<CinemachineTargetGroup>().AddMember(player.transform, 1, 5); //OBS GER ERROR!
+        targetGroup.AddMember(player.transform, 1, 5); //OBS GER ERROR!
     }
     public void RestorePLayer(GameObject player)
     {
         for (int i = 0; i < players.Count; i++)
         {
-            targetGroup.GetComponent<CinemachineTargetGroup>().RemoveMember(players[i].transform);
-            targetGroup.GetComponent<CinemachineTargetGroup>().AddMember(players[i].transform, 1, 5); //OBS GER ERROR!
+            targetGroup.RemoveMember(players[i].transform);
+            targetGroup.AddMember(players[i].transform, 1, 5); //OBS GER ERROR!
         }
     }
 
@@ -168,7 +174,7 @@ public class GameManager : MonoBehaviour
     public void PlayerDeath(GameObject deadPlayer)
     {
         playersAlive.Remove(deadPlayer);
-        targetGroup.GetComponent<CinemachineTargetGroup>().RemoveMember(deadPlayer.transform); //OBS GER ERROR!
+        targetGroup.RemoveMember(deadPlayer.transform); //OBS GER ERROR!
     }
 
 
