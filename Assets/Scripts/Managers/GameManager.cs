@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<GameObject> playersAlive = new List<GameObject>();
     [SerializeField] private SoundManager soundManager;
     private bool gameHasStarted;
+    [SerializeField] private bool gameIsPaused;
 
     [Header("Points")]
     private static Dictionary<GameObject, int> scoreDic = new Dictionary<GameObject, int>();
@@ -55,6 +56,11 @@ public class GameManager : MonoBehaviour
     public List<string> GetScencesList()
     {
         return scenesToChooseFrom;
+    }
+
+    public bool GameIsPaused
+    {
+        get => gameIsPaused;
     }
     private void OnLevelWasLoaded(int level)
     {
@@ -99,6 +105,16 @@ public class GameManager : MonoBehaviour
             GiveScoreAfterTimer();
         }           
 
+    }
+
+    public void PauseGame()
+    {
+        Time.timeScale = 0; 
+    }
+
+    public void ResumeGame()
+    {
+        Time.timeScale = 1;
     }
 
     private void AddScenesToPlay()
