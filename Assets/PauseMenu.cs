@@ -48,7 +48,7 @@ public class PauseMenu : MonoBehaviour
 
         if(toggle == true)
         {
-            es.firstSelectedGameObject = firstSelected.gameObject;
+            es.SetSelectedGameObject(firstSelected.gameObject);
         }
     }
 
