@@ -30,8 +30,12 @@ public class Bullet : Projectile
 			ContactPoint contact = other.contacts[0];
 			Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
 			Vector3 pos = contact.point;
-			GameObject MuzzleFlashIns = Instantiate(colliderPlayerVFX, pos, rot);
-			Destroy(MuzzleFlashIns, 3f);
+			if (colliderPlayerVFX != null)
+			{
+                GameObject MuzzleFlashIns = Instantiate(colliderPlayerVFX, pos, rot);
+                Destroy(MuzzleFlashIns, 3f);
+            }
+			
 			playerGo.GetComponent<PlayerHealth>().TakeDamage(damage);
 			Debug.Log("Hit player");
 
@@ -48,8 +52,13 @@ public class Bullet : Projectile
 			ContactPoint contact = other.contacts[0];
 			Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
 			Vector3 pos = contact.point;
-			GameObject MuzzleFlashIns = Instantiate(colliderWallVFX, pos, rot);
-			Destroy(MuzzleFlashIns, 3f);
+			if (colliderWallVFX != null)
+			{
+                GameObject MuzzleFlashIns = Instantiate(colliderWallVFX, pos, rot);
+                Destroy(MuzzleFlashIns, 3f);
+            }
+			
+			
 
 			//GameObject MuzzleFlashIns = Instantiate(collideVFX, gameObject.transform.position, transform.rotation);
 			//MuzzleFlashIns.transform.Rotate(Vector3.left * 90);
