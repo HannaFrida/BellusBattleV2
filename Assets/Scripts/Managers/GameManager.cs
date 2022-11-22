@@ -97,6 +97,11 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        if (gameIsPaused)
+        {
+            Time.timeScale = 0;
+        }
+        Debug.Log("TimeScale " + Time.timeScale);
         if (!gameHasStarted) return;
         CheckPlayersLeft();
 
@@ -109,11 +114,13 @@ public class GameManager : MonoBehaviour
 
     public void PauseGame()
     {
+        gameIsPaused = true;
         Time.timeScale = 0; 
     }
 
     public void ResumeGame()
     {
+        gameIsPaused = false;
         Time.timeScale = 1;
     }
 

@@ -1,15 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenuPanel;
+    [SerializeField] private Button firstSelected;
     private bool isToggled;
     private GameManager gm;
+    private EventSystem es;
     // Start is called before the first frame update
     void Start()
     {
+        es = GameObject.FindGameObjectWithTag("EventSystem").GetComponent<EventSystem>();
         gm = GameManager.Instance;
         DisplayPauseMenu(false);
     }
@@ -24,6 +29,7 @@ public class PauseMenu : MonoBehaviour
     {
         if (gm.GameIsPaused == true && isToggled == false)
         {
+            Debug.Log("dada");
             isToggled = true;
             DisplayPauseMenu(isToggled);
         }
@@ -31,6 +37,7 @@ public class PauseMenu : MonoBehaviour
         {
             isToggled = false;
             DisplayPauseMenu(isToggled);
+            Debug.Log("dada2");
         }
         
     }
@@ -38,5 +45,16 @@ public class PauseMenu : MonoBehaviour
     private void DisplayPauseMenu(bool toggle)
     {
         pauseMenuPanel.SetActive(toggle);
+
+        if(toggle == true)
+        {
+            es.firstSelectedGameObject = firstSelected.gameObject;
+        }
+    }
+
+    public void Resume()
+    {
+        gm.ResumeGame();
+        DisplayPauseMenu(false);
     }
 }
