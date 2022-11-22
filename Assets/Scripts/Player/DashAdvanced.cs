@@ -39,6 +39,7 @@ public class DashAdvanced : MonoBehaviour
     [Header("Extra")]
     [SerializeField] private float dashingActivationCooldown = 1f;
     [SerializeField] private TrailRenderer tr;
+    [SerializeField] private GameObject CharacterGlow;
     [Header("Sounds")]
     [SerializeField] private PlayerSoundManager playerSoundManager;
     private Vector3 direction;
@@ -195,6 +196,7 @@ public class DashAdvanced : MonoBehaviour
         yield return new WaitForSeconds(currentDashingDuration);
         EndDashProtocol();
         yield return new WaitForSeconds(dashingActivationCooldown);
+        CharacterGlow.SetActive(false);
         canDash = true;
     }
     private void StartDashProtocol()
@@ -207,6 +209,7 @@ public class DashAdvanced : MonoBehaviour
         dashEvent.Invoke();
         //tr.emitting = true; //See variable TrailRenderer tr
         gameObject.GetComponent<AfterImg>().StartTrail();
+        CharacterGlow.SetActive(true);
         if (stopGravityWhileDashing)
         {
             movement.DownwardForce = 0f;
@@ -273,6 +276,7 @@ public class DashAdvanced : MonoBehaviour
         yield return new WaitForSeconds(currentDashingDuration);
         EndDashProtocol();
         yield return new WaitForSeconds(dashingActivationCooldown);
+        CharacterGlow.SetActive(false);
         canDash = true;
     }
     private IEnumerator GigaChadDashAction()
@@ -282,6 +286,7 @@ public class DashAdvanced : MonoBehaviour
         yield return new WaitForSeconds(currentDashingDuration);
         EndDashProtocol();
         yield return new WaitForSeconds(dashingActivationCooldown);
+        CharacterGlow.SetActive(false);
         canDash = true;
     }
     private void CheckIfGrounded()

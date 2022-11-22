@@ -25,14 +25,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2024996653747939880}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.024, y: 0, z: 0.166}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.5, y: 0.5, z: 0.5, w: 0.5}
+  m_LocalPosition: {x: -0.017, y: -0.415, z: -0.068}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5167775749961452405}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 90}
 --- !u!2083052967 &6497904787465896445
 VisualEffect:
   m_ObjectHideFlags: 0
@@ -50,7 +50,7 @@ VisualEffect:
   m_PropertySheet:
     m_Float:
       m_Array:
-      - m_Value: 0.17
+      - m_Value: 0.2
         m_Name: ImpactDelay
         m_Overridden: 1
       - m_Value: 0.296
@@ -71,9 +71,9 @@ VisualEffect:
       - m_Value: 3
         m_Name: ImpactRingSize
         m_Overridden: 1
-      - m_Value: 0
+      - m_Value: 2.5
         m_Name: FlashSize
-        m_Overridden: 1
+        m_Overridden: 0
       - m_Value: 0.2
         m_Name: InitialParticlesLifetime
         m_Overridden: 1
@@ -83,28 +83,28 @@ VisualEffect:
       - m_Value: 3
         m_Name: Duration
         m_Overridden: 1
-      - m_Value: 0
+      - m_Value: 16
         m_Name: FlashRate
-        m_Overridden: 1
-      - m_Value: 0
+        m_Overridden: 0
+      - m_Value: 0.2
         m_Name: FlashLifetime
-        m_Overridden: 1
-      - m_Value: 0
+        m_Overridden: 0
+      - m_Value: 32
         m_Name: ElectricFlashRate
-        m_Overridden: 1
-      - m_Value: 0
+        m_Overridden: 0
+      - m_Value: 0.2
         m_Name: ElectricFlashLifetime
-        m_Overridden: 1
-      - m_Value: 0
+        m_Overridden: 0
+      - m_Value: 1
         m_Name: ElectricFlashSize
         m_Overridden: 1
-      - m_Value: 0
+      - m_Value: 8
         m_Name: DarkFlashRate
-        m_Overridden: 1
-      - m_Value: 0
+        m_Overridden: 0
+      - m_Value: 0.6
         m_Name: DarkFlashLifetime
-        m_Overridden: 1
-      - m_Value: 0
+        m_Overridden: 0
+      - m_Value: 2
         m_Name: DarkFlashSize
         m_Overridden: 1
     m_Vector2f:
@@ -146,31 +146,40 @@ VisualEffect:
             inWeight: 0
             outWeight: 0
           - serializedVersion: 3
-            time: 0.5115577
-            value: 0.24252996
-            inSlope: 1.5895971
-            outSlope: 1.5895971
+            time: 0.0025509968
+            value: 0.015712604
+            inSlope: -0.006377415
+            outSlope: -0.006377415
             tangentMode: 0
             weightedMode: 0
             inWeight: 0.33333334
             outWeight: 0.33333334
           - serializedVersion: 3
-            time: 0.6112419
-            value: 0.91413224
-            inSlope: 1.8084027
-            outSlope: 1.8084027
+            time: 0.5102822
+            value: 0.060769007
+            inSlope: 0.10348973
+            outSlope: 0.10348973
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.12326157
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 0.59083396
+            value: 0.9802271
+            inSlope: 0.26117986
+            outSlope: 0.26117986
             tangentMode: 0
             weightedMode: 0
             inWeight: 0.45762184
-            outWeight: 0.09095589
+            outWeight: 0.15780541
           - serializedVersion: 3
             time: 0.9974365
             value: 1
-            inSlope: 1.4250681
-            outSlope: 1.4250681
+            inSlope: 0.3638414
+            outSlope: 0.3638414
             tangentMode: 0
             weightedMode: 0
-            inWeight: 0.119294025
+            inWeight: 0.15371099
             outWeight: 0
           m_PreInfinity: 2
           m_PostInfinity: 2
@@ -184,9 +193,9 @@ VisualEffect:
       - m_Value: {fileID: 2800000, guid: 86ddaebc7f8ea4244b383a27ae31643a, type: 3}
         m_Name: BeamCoreTexture
         m_Overridden: 1
-      - m_Value: {fileID: 2800000, guid: df67be9d6704a374395732bff1b9ae6d, type: 3}
+      - m_Value: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
         m_Name: FlashTexture
-        m_Overridden: 1
+        m_Overridden: 0
     m_Bool:
       m_Array: []
 --- !u!73398921 &126190291025853414
@@ -254,14 +263,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2155424959905990286}
-  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
-  m_LocalPosition: {x: 0.163, y: 0, z: 0.005}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0, y: 0.70710677, z: 0.70710677, w: 0}
+  m_LocalPosition: {x: 0.365, y: 0, z: 0.005}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5167775749961452405}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
+  m_LocalEulerAnglesHint: {x: -90, y: 90, z: 90}
 --- !u!2083052967 &2985265536143178213
 VisualEffect:
   m_ObjectHideFlags: 0
@@ -279,7 +288,7 @@ VisualEffect:
   m_PropertySheet:
     m_Float:
       m_Array:
-      - m_Value: 0.17
+      - m_Value: 0.2
         m_Name: ImpactDelay
         m_Overridden: 1
       - m_Value: 0.296
@@ -300,9 +309,9 @@ VisualEffect:
       - m_Value: 3
         m_Name: ImpactRingSize
         m_Overridden: 1
-      - m_Value: 0
+      - m_Value: 2.5
         m_Name: FlashSize
-        m_Overridden: 1
+        m_Overridden: 0
       - m_Value: 0.2
         m_Name: InitialParticlesLifetime
         m_Overridden: 1
@@ -312,28 +321,28 @@ VisualEffect:
       - m_Value: 3
         m_Name: Duration
         m_Overridden: 1
-      - m_Value: 0
+      - m_Value: 16
         m_Name: FlashRate
-        m_Overridden: 1
-      - m_Value: 0
+        m_Overridden: 0
+      - m_Value: 0.2
         m_Name: FlashLifetime
-        m_Overridden: 1
-      - m_Value: 0
+        m_Overridden: 0
+      - m_Value: 32
         m_Name: ElectricFlashRate
-        m_Overridden: 1
-      - m_Value: 0
+        m_Overridden: 0
+      - m_Value: 0.2
         m_Name: ElectricFlashLifetime
-        m_Overridden: 1
-      - m_Value: 0
+        m_Overridden: 0
+      - m_Value: 1
         m_Name: ElectricFlashSize
         m_Overridden: 1
-      - m_Value: 0
+      - m_Value: 8
         m_Name: DarkFlashRate
-        m_Overridden: 1
-      - m_Value: 0
+        m_Overridden: 0
+      - m_Value: 0.6
         m_Name: DarkFlashLifetime
-        m_Overridden: 1
-      - m_Value: 0
+        m_Overridden: 0
+      - m_Value: 2
         m_Name: DarkFlashSize
         m_Overridden: 1
     m_Vector2f:
@@ -375,31 +384,40 @@ VisualEffect:
             inWeight: 0
             outWeight: 0
           - serializedVersion: 3
-            time: 0.5115577
-            value: 0.24252996
-            inSlope: 1.5895971
-            outSlope: 1.5895971
+            time: 0.0025509968
+            value: 0.015712604
+            inSlope: -0.006377415
+            outSlope: -0.006377415
             tangentMode: 0
             weightedMode: 0
             inWeight: 0.33333334
             outWeight: 0.33333334
           - serializedVersion: 3
-            time: 0.6112419
-            value: 0.91413224
-            inSlope: 1.8084027
-            outSlope: 1.8084027
+            time: 0.5102822
+            value: 0.060769007
+            inSlope: 0.10348973
+            outSlope: 0.10348973
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.12326157
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 0.59083396
+            value: 0.9802271
+            inSlope: 0.26117986
+            outSlope: 0.26117986
             tangentMode: 0
             weightedMode: 0
             inWeight: 0.45762184
-            outWeight: 0.09095589
+            outWeight: 0.15780541
           - serializedVersion: 3
             time: 0.9974365
             value: 1
-            inSlope: 1.4250681
-            outSlope: 1.4250681
+            inSlope: 0.3638414
+            outSlope: 0.3638414
             tangentMode: 0
             weightedMode: 0
-            inWeight: 0.119294025
+            inWeight: 0.15371099
             outWeight: 0
           m_PreInfinity: 2
           m_PostInfinity: 2
@@ -413,9 +431,9 @@ VisualEffect:
       - m_Value: {fileID: 2800000, guid: 86ddaebc7f8ea4244b383a27ae31643a, type: 3}
         m_Name: BeamCoreTexture
         m_Overridden: 1
-      - m_Value: {fileID: 2800000, guid: df67be9d6704a374395732bff1b9ae6d, type: 3}
+      - m_Value: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
         m_Name: FlashTexture
-        m_Overridden: 1
+        m_Overridden: 0
     m_Bool:
       m_Array: []
 --- !u!73398921 &3256206056947956906
@@ -486,7 +504,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5167775749961452402}
-  m_LocalRotation: {x: 0.5, y: 0.5, z: 0.5, w: 0.5}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -498,7 +516,7 @@ Transform:
   - {fileID: 4944561294601838990}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &6184370278961461672
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -510,7 +528,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 0
   serializedVersion: 2
-  m_Size: {x: 115.44191, y: 0.38347238, z: 0.535975}
+  m_Size: {x: 170, y: 1, z: 1}
   m_Center: {x: 0.7869644, y: -0.06783709, z: 0.025663145}
 --- !u!114 &5134385707468802731
 MonoBehaviour:
@@ -555,7 +573,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 115.4419}
+  m_Size: {x: 1, y: 170, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &2498149669663868746
 Rigidbody:
@@ -598,14 +616,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5167775750080484567}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.176, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.70710677, y: 0, z: 0, w: 0.70710677}
+  m_LocalPosition: {x: -0.376, y: -0.026, z: 0}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5167775749961452405}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 90, z: 90}
 --- !u!2083052967 &5167775750080484584
 VisualEffect:
   m_ObjectHideFlags: 0
@@ -623,7 +641,7 @@ VisualEffect:
   m_PropertySheet:
     m_Float:
       m_Array:
-      - m_Value: 0.17
+      - m_Value: 0.2
         m_Name: ImpactDelay
         m_Overridden: 1
       - m_Value: 0.296
@@ -644,9 +662,9 @@ VisualEffect:
       - m_Value: 3
         m_Name: ImpactRingSize
         m_Overridden: 1
-      - m_Value: 0
+      - m_Value: 2.5
         m_Name: FlashSize
-        m_Overridden: 1
+        m_Overridden: 0
       - m_Value: 0.2
         m_Name: InitialParticlesLifetime
         m_Overridden: 1
@@ -656,28 +674,28 @@ VisualEffect:
       - m_Value: 3
         m_Name: Duration
         m_Overridden: 1
-      - m_Value: 0
+      - m_Value: 16
         m_Name: FlashRate
-        m_Overridden: 1
-      - m_Value: 0
+        m_Overridden: 0
+      - m_Value: 0.2
         m_Name: FlashLifetime
-        m_Overridden: 1
-      - m_Value: 0
+        m_Overridden: 0
+      - m_Value: 32
         m_Name: ElectricFlashRate
-        m_Overridden: 1
-      - m_Value: 0
+        m_Overridden: 0
+      - m_Value: 0.2
         m_Name: ElectricFlashLifetime
-        m_Overridden: 1
-      - m_Value: 0
+        m_Overridden: 0
+      - m_Value: 1
         m_Name: ElectricFlashSize
         m_Overridden: 1
-      - m_Value: 0
+      - m_Value: 8
         m_Name: DarkFlashRate
-        m_Overridden: 1
-      - m_Value: 0
+        m_Overridden: 0
+      - m_Value: 0.6
         m_Name: DarkFlashLifetime
-        m_Overridden: 1
-      - m_Value: 0
+        m_Overridden: 0
+      - m_Value: 2
         m_Name: DarkFlashSize
         m_Overridden: 1
     m_Vector2f:
@@ -719,31 +737,40 @@ VisualEffect:
             inWeight: 0
             outWeight: 0
           - serializedVersion: 3
-            time: 0.5115577
-            value: 0.24252996
-            inSlope: 1.5895971
-            outSlope: 1.5895971
+            time: 0.0025509968
+            value: 0.015712604
+            inSlope: -0.006377415
+            outSlope: -0.006377415
             tangentMode: 0
             weightedMode: 0
             inWeight: 0.33333334
             outWeight: 0.33333334
           - serializedVersion: 3
-            time: 0.6112419
-            value: 0.91413224
-            inSlope: 1.8084027
-            outSlope: 1.8084027
+            time: 0.5102822
+            value: 0.060769007
+            inSlope: 0.10348973
+            outSlope: 0.10348973
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.12326157
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 0.59083396
+            value: 0.9802271
+            inSlope: 0.26117986
+            outSlope: 0.26117986
             tangentMode: 0
             weightedMode: 0
             inWeight: 0.45762184
-            outWeight: 0.09095589
+            outWeight: 0.15780541
           - serializedVersion: 3
             time: 0.9974365
             value: 1
-            inSlope: 1.4250681
-            outSlope: 1.4250681
+            inSlope: 0.3638414
+            outSlope: 0.3638414
             tangentMode: 0
             weightedMode: 0
-            inWeight: 0.119294025
+            inWeight: 0.15371099
             outWeight: 0
           m_PreInfinity: 2
           m_PostInfinity: 2
@@ -757,9 +784,9 @@ VisualEffect:
       - m_Value: {fileID: 2800000, guid: 86ddaebc7f8ea4244b383a27ae31643a, type: 3}
         m_Name: BeamCoreTexture
         m_Overridden: 1
-      - m_Value: {fileID: 2800000, guid: df67be9d6704a374395732bff1b9ae6d, type: 3}
+      - m_Value: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
         m_Name: FlashTexture
-        m_Overridden: 1
+        m_Overridden: 0
     m_Bool:
       m_Array: []
 --- !u!73398921 &5167775750080484585
@@ -827,14 +854,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8236733538578459010}
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.024, y: 0, z: -0.178}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0.5, y: 0.5, z: -0.5, w: 0.5}
+  m_LocalPosition: {x: -0.02, y: 0.277, z: -0.079}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5167775749961452405}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: -90}
 --- !u!2083052967 &5342926157275847735
 VisualEffect:
   m_ObjectHideFlags: 0
@@ -852,7 +879,7 @@ VisualEffect:
   m_PropertySheet:
     m_Float:
       m_Array:
-      - m_Value: 0.17
+      - m_Value: 0.2
         m_Name: ImpactDelay
         m_Overridden: 1
       - m_Value: 0.296
@@ -873,9 +900,9 @@ VisualEffect:
       - m_Value: 3
         m_Name: ImpactRingSize
         m_Overridden: 1
-      - m_Value: 0
+      - m_Value: 2.5
         m_Name: FlashSize
-        m_Overridden: 1
+        m_Overridden: 0
       - m_Value: 0.2
         m_Name: InitialParticlesLifetime
         m_Overridden: 1
@@ -885,28 +912,28 @@ VisualEffect:
       - m_Value: 3
         m_Name: Duration
         m_Overridden: 1
-      - m_Value: 0
+      - m_Value: 16
         m_Name: FlashRate
-        m_Overridden: 1
-      - m_Value: 0
+        m_Overridden: 0
+      - m_Value: 0.2
         m_Name: FlashLifetime
-        m_Overridden: 1
-      - m_Value: 0
+        m_Overridden: 0
+      - m_Value: 32
         m_Name: ElectricFlashRate
-        m_Overridden: 1
-      - m_Value: 0
+        m_Overridden: 0
+      - m_Value: 0.2
         m_Name: ElectricFlashLifetime
-        m_Overridden: 1
-      - m_Value: 0
+        m_Overridden: 0
+      - m_Value: 1
         m_Name: ElectricFlashSize
         m_Overridden: 1
-      - m_Value: 0
+      - m_Value: 8
         m_Name: DarkFlashRate
-        m_Overridden: 1
-      - m_Value: 0
+        m_Overridden: 0
+      - m_Value: 0.6
         m_Name: DarkFlashLifetime
-        m_Overridden: 1
-      - m_Value: 0
+        m_Overridden: 0
+      - m_Value: 2
         m_Name: DarkFlashSize
         m_Overridden: 1
     m_Vector2f:
@@ -948,31 +975,40 @@ VisualEffect:
             inWeight: 0
             outWeight: 0
           - serializedVersion: 3
-            time: 0.5115577
-            value: 0.24252996
-            inSlope: 1.5895971
-            outSlope: 1.5895971
+            time: 0.0025509968
+            value: 0.015712604
+            inSlope: -0.006377415
+            outSlope: -0.006377415
             tangentMode: 0
             weightedMode: 0
             inWeight: 0.33333334
             outWeight: 0.33333334
           - serializedVersion: 3
-            time: 0.6112419
-            value: 0.91413224
-            inSlope: 1.8084027
-            outSlope: 1.8084027
+            time: 0.5102822
+            value: 0.060769007
+            inSlope: 0.10348973
+            outSlope: 0.10348973
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.12326157
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 0.59083396
+            value: 0.9802271
+            inSlope: 0.26117986
+            outSlope: 0.26117986
             tangentMode: 0
             weightedMode: 0
             inWeight: 0.45762184
-            outWeight: 0.09095589
+            outWeight: 0.15780541
           - serializedVersion: 3
             time: 0.9974365
             value: 1
-            inSlope: 1.4250681
-            outSlope: 1.4250681
+            inSlope: 0.3638414
+            outSlope: 0.3638414
             tangentMode: 0
             weightedMode: 0
-            inWeight: 0.119294025
+            inWeight: 0.15371099
             outWeight: 0
           m_PreInfinity: 2
           m_PostInfinity: 2
@@ -986,9 +1022,9 @@ VisualEffect:
       - m_Value: {fileID: 2800000, guid: 86ddaebc7f8ea4244b383a27ae31643a, type: 3}
         m_Name: BeamCoreTexture
         m_Overridden: 1
-      - m_Value: {fileID: 2800000, guid: df67be9d6704a374395732bff1b9ae6d, type: 3}
+      - m_Value: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
         m_Name: FlashTexture
-        m_Overridden: 1
+        m_Overridden: 0
     m_Bool:
       m_Array: []
 --- !u!73398921 &134363300898513937
@@ -1046,17 +1082,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: bb1d44cfda574da46b7d9f176d92a35e,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bb1d44cfda574da46b7d9f176d92a35e,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bb1d44cfda574da46b7d9f176d92a35e,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bb1d44cfda574da46b7d9f176d92a35e,
         type: 3}
@@ -1076,22 +1112,22 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: bb1d44cfda574da46b7d9f176d92a35e,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bb1d44cfda574da46b7d9f176d92a35e,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bb1d44cfda574da46b7d9f176d92a35e,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bb1d44cfda574da46b7d9f176d92a35e,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bb1d44cfda574da46b7d9f176d92a35e,
         type: 3}
@@ -1101,12 +1137,12 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: bb1d44cfda574da46b7d9f176d92a35e,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bb1d44cfda574da46b7d9f176d92a35e,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: bb1d44cfda574da46b7d9f176d92a35e,
         type: 3}
