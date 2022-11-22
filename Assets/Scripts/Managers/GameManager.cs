@@ -74,10 +74,8 @@ public class GameManager : MonoBehaviour
             //Array.Clear(targetGroup.GetComponent<CinemachineTargetGroup>().m_Targets, 0, targetGroup.GetComponent<CinemachineTargetGroup>().m_Targets.Length);
             //SpawnPlayers();
         }
-        foreach(GameObject player in players)
-        {
-            RestorePLayer(gameObject);
-        }
+        RestorePLayer();
+        
         
 
 
@@ -102,14 +100,7 @@ public class GameManager : MonoBehaviour
     }
 
     private void Update()
-    {
-        /*
-        if (gameIsPaused)
-        {
-            Time.timeScale = 0;
-        }
-        */
-        Debug.Log("TimeScale " + Time.timeScale);
+    {   
         if (!gameHasStarted) return;
         CheckPlayersLeft();
 
@@ -148,7 +139,7 @@ public class GameManager : MonoBehaviour
         players.Add(player);
         targetGroup.AddMember(player.transform, 1, 5); //OBS GER ERROR!
     }
-    public void RestorePLayer(GameObject player)
+    public void RestorePLayer()
     {
         for (int i = 0; i < players.Count; i++)
         {
