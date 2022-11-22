@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class UIMenuHandler : MonoBehaviour
 {
     [SerializeField] private List<GameObject> panels = new List<GameObject>();
+    [SerializeField] private EventSystem eventSys;
+    [SerializeField] private GameObject button;
     private GameObject activePanel;
     private void Start()
     {
@@ -24,6 +27,10 @@ public class UIMenuHandler : MonoBehaviour
     public void ExitUI()
     {
         this.gameObject.SetActive(false);
+    }
+    private void OnEnable()
+    {
+        eventSys.SetSelectedGameObject(button);
     }
 
 }

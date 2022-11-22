@@ -1,10 +1,11 @@
+
 using System.Collections;
 using UnityEngine;
 using Random = System.Random;
-
 public class Bullet : Projectile
 {
-	[SerializeField] [Tooltip("For how long the bullet will exist for in seconds.")]
+	[SerializeField]
+	[Tooltip("For how long the bullet will exist for in seconds.")]
 	private float lifeSpan = 5.0f;
 	CameraFocus cf;
 	[SerializeField, Tooltip("Sound made when bullet hits something")]
@@ -14,13 +15,14 @@ public class Bullet : Projectile
 
 	//public float bulletDamage;
 
-	private void Start(){
+	private void Start()
+	{
 		cf = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFocus>();
 		StartCoroutine(Shoot(lifeSpan));
 	}
 	void OnCollisionEnter(Collision other)
 	{
-		
+
 		GameObject playerGo = other.gameObject;
 		if (playerGo.CompareTag("Player")) // && Shooter != playerGo)
 		{
@@ -73,36 +75,38 @@ public class Bullet : Projectile
 		}
 
 	}
-	/*private void OnTriggerEnter(Collider other)
+	private void OnTriggerEnter(Collider other)
 	{
 		GameObject playerGo = other.gameObject;
 		if (playerGo.CompareTag("Player") && Shooter != playerGo)
 		{
 			playerGo.GetComponent<PlayerHealth>().TakeDamage(damage);
 
-            if (playerGo.GetComponent<PlayerHealth>().Health <= 0)
-            {
+			if (playerGo.GetComponent<PlayerHealth>().Health <= 0)
+			{
 				//playerGo.SetActive(false);
 				//playerGo.GetComponent<PlayerHealth>().KillPlayer();
 				cf.RemoveTarget(playerGo.transform);
 			}
-			
-			PlayerDeathEvent pde = new PlayerDeathEvent{
+
+			PlayerDeathEvent pde = new PlayerDeathEvent
+			{
 				PlayerGo = other.gameObject,
 				Kille = other.name,
 				KilledBy = "No Idea-chan",
 				KilledWith = "Bullets",
 			};
 			pde.FireEvent();
-			
-	Die();
-		}else if (playerGo.CompareTag("AI"))
-        {
-			playerGo.GetComponent<AI>().KillAI();
-        }
 
-		if(other.gameObject.CompareTag("Target"))
-        {
+			Die();
+		}
+		else if (playerGo.CompareTag("AI"))
+		{
+			playerGo.GetComponent<AI>().KillAI();
+		}
+
+		if (other.gameObject.CompareTag("Target"))
+		{
 			GetComponent<Destroy>().gone();
 
 		}
@@ -110,24 +114,24 @@ public class Bullet : Projectile
 		if (other.gameObject.tag == "Obstacle")
 		{
 			Debug.Log("Obstacle");
-			GameObject MuzzleFlashIns = Instantiate(collideVFX, other.gameObject.GetComponent<Collider>().ClosestPoint(transform.position), other.transform.rotation);
+			//GameObject MuzzleFlashIns = Instantiate(collideVFX, other.gameObject.GetComponent<Collider>().ClosestPoint(transform.position), other.transform.rotation);
 			//MuzzleFlashIns.transform.Rotate(Vector3.left * 90);
-			Destroy(gameObject);
-			return;
+			//Destroy(gameObject);
+			//return;
 		}
 
-        if (other.gameObject.CompareTag("Breakable"))
-        {
+		if (other.gameObject.CompareTag("Breakable"))
+		{
 			Destroy(other.gameObject);
 			Destroy(gameObject);
-        }
+		}
 
 		if (hitSounds.Length > 0)
 		{
 			hitSounds[UnityEngine.Random.Range(0, hitSounds.Length)].Play();
 		}
 
-	}*/
+	}
 
 	/*
 	public void SetDamage(float setTo)
@@ -136,12 +140,14 @@ public class Bullet : Projectile
     }
 	*/
 
-	private IEnumerator Shoot(float seconds){
+	private IEnumerator Shoot(float seconds)
+	{
 		yield return new WaitForSeconds(seconds);
 		Die();
 	}
 
-	private void Die(){
+	private void Die()
+	{
 		Destroy(gameObject);
 	}
 }

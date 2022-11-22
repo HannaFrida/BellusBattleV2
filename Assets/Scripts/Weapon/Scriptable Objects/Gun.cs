@@ -50,6 +50,8 @@ public class Gun : MonoBehaviour
 
     [Header("Special cases")]
     [SerializeField] GameObject swordMesh;
+    [SerializeField] bool BulletFollow =false;
+    private GameObject firedProjectile;
 
     /// <summary>
     /// Gets the ID of the one who is currently holding the weapon
@@ -127,6 +129,13 @@ public class Gun : MonoBehaviour
         {
             Drop();
             Despawn();
+        }
+
+        if (BulletFollow && firedProjectile != null)
+        {
+            Debug.Log("RAIL");
+            firedProjectile.transform.position = muzzle.transform.position;
+            firedProjectile.transform.rotation = transform.rotation;
         }
 
     }
@@ -247,7 +256,7 @@ public class Gun : MonoBehaviour
                 Destroy(MuzzleFlashIns, 4f);
             }
 
-            GameObject firedProjectile = Instantiate(weaponData.projectile, muzzle.transform.position, transform.rotation);
+            firedProjectile = Instantiate(weaponData.projectile, muzzle.transform.position, transform.rotation);
 
             float forceForwrd = weaponData.projectileForce;
             float aimx = muzzle.transform.forward.x;

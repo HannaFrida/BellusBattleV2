@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<GameObject> playersAlive = new List<GameObject>();
     [SerializeField] private SoundManager soundManager;
     private bool gameHasStarted;
+    [SerializeField] private bool gameIsPaused;
 
     [Header("Points")]
     private static Dictionary<GameObject, int> scoreDic = new Dictionary<GameObject, int>();
@@ -55,6 +56,11 @@ public class GameManager : MonoBehaviour
     public List<string> GetScencesList()
     {
         return scenesToChooseFrom;
+    }
+
+    public bool GameIsPaused
+    {
+        get => gameIsPaused;
     }
     private void OnLevelWasLoaded(int level)
     {
@@ -101,6 +107,16 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void PauseGame()
+    {
+        Time.timeScale = 0; 
+    }
+
+    public void ResumeGame()
+    {
+        Time.timeScale = 1;
+    }
+
     private void AddScenesToPlay()
     {
         sceneCount = SceneManager.sceneCountInBuildSettings;
@@ -141,25 +157,6 @@ public class GameManager : MonoBehaviour
             player.GetComponent<PlayerMovement>().enabled = true;
         }
     }
-
-
-
-   
-
-    /*
-    private void SpawnPlayers()
-    {
-        Transform[] spawnPoints= GameObject.FindGameObjectWithTag("PlayerSpawnManager").GetComponent<PlayerSpawnManager>().SpawnLocations;
-        for(int i = 0; i < players.Count; i++)
-        {
-            targetGroup.AddMember(players[i].transform, 1, 5);
-            players[i].SetActive(true);
-            players[i].gameObject.SetActive(true);
-            players[i].GetComponent<Dash>().ResetValues();
-            players[i].transform.position = spawnPoints[i].position;
-        }
-    }
-    */
 
     public void PlayerDeath(GameObject deadPlayer)
     {
