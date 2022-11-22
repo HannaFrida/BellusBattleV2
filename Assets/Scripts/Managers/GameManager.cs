@@ -371,6 +371,12 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("The_End");
         StartCoroutine(RestartGame(destroyMe));
     }
+
+    public void ReturnToMainMenu()
+    {
+        if (SceneManager.GetActiveScene().name == "MainMenu") return;
+        SceneManager.LoadScene("MainMenu");
+    }
     private IEnumerator RestartGame(GameObject destroyMe)
     {
         yield return new WaitForSeconds(timeTillRestartGame);

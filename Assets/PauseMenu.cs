@@ -57,4 +57,11 @@ public class PauseMenu : MonoBehaviour
         gm.ResumeGame();
         DisplayPauseMenu(false);
     }
+
+    public void ReturnToLobby()
+    {
+        DisplayPauseMenu(false);
+        gm.ResumeGame();
+        gm.ReturnToMainMenu();
+    }
 }
