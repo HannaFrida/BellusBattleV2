@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 using Cinemachine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviour, IDataPersistenceManager
 {
 
     [SerializeField] private CinemachineTargetGroup targetGroup;
@@ -53,6 +53,7 @@ public class GameManager : MonoBehaviour
 
     public List<string> scenesToChooseFrom = new List<string>();
     public List<string> scenesToRemove = new List<string>();
+
     public List<string> GetScencesList()
     {
         return scenesToChooseFrom;
@@ -82,6 +83,7 @@ public class GameManager : MonoBehaviour
     }
     private void Awake()
     {
+        if (Instance != null) Debug.LogError("Found more than one Game Manager in scene.");
         Instance = this;
         DontDestroyOnLoad(this);
         AddScenesToPlay();
@@ -97,6 +99,7 @@ public class GameManager : MonoBehaviour
         pos2 = new Vector2(892f, 160f);
         pos3 = new Vector2(1139f, 160f);
         pos4 = new Vector2(1386f, 160f); // x = 977 - -409
+        DataPersistenceManager.Instance.LoadGame();
     }
 
     private void Update()
@@ -376,6 +379,7 @@ public class GameManager : MonoBehaviour
     private IEnumerator RestartGame()
     {
         SceneManager.LoadScene("The_End");
+        DataPersistenceManager.Instance.SaveGame();
         yield return new WaitForSeconds(timeTillRestartGame);
         Destroy(transform.parent.gameObject);
         SceneManager.LoadScene(System.IO.Path.GetFileNameWithoutExtension(SceneUtility.GetScenePathByBuildIndex(0)));
@@ -455,5 +459,15 @@ public class GameManager : MonoBehaviour
             pos4 = new Vector2(picture4.position.x, picture4.position.y + 20);
             trans.getWinScore4.SetText(scoreDic[playersAlive[0]] + "");
         }
+    }
+
+    public void LoadData(GameData data)
+    {
+        players = data.players;
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.players = players;
     }
 }
