@@ -230,6 +230,16 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+    private void AccessabilityoveDown()
+    {
+        if (downwardInput <= downwardInputBound && isStandingOnOneWayPlatform)
+        {
+            transform.position += Vector3.down * playerHeight;
+            isStandingOnOneWayPlatform = false;
+            return;
+        }
+    }
+
     public static void SetDownwardForce(float value, float downfroce)
     {
         float temp = downfroce;
