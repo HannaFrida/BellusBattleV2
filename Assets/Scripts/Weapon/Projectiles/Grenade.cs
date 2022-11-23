@@ -45,11 +45,12 @@ public class Grenade : Projectile
         {
             bombMesh.SetActive(false);
             explosionSound.Play();
-            GameObject spawnVfx = Instantiate(objectToBoom, transform.position,transform.rotation);
+            GameObject spawnVfx = Instantiate(objectToBoom, transform);
             Destroy(spawnVfx, 0.3f);
             gameObject.GetComponent<Rigidbody>().useGravity = false;
             Rigidbody RB = GetComponent<Rigidbody>();
             RB.velocity = Vector3.zero;
+            
         }
 
         hits = Physics.OverlapSphere(transform.position, explosionSize);
