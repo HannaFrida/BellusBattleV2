@@ -6,14 +6,17 @@ using UnityEngine.EventSystems;
 
 public class PauseMenu : MonoBehaviour
 {
+    
     [SerializeField] private GameObject pauseMenuPanel;
     [SerializeField] private Button firstSelected;
     private bool isToggled;
     private GameManager gm;
     private EventSystem es;
+    private SoundManager sm;
     // Start is called before the first frame update
     void Start()
     {
+        sm = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
         es = GameObject.FindGameObjectWithTag("EventSystem").GetComponent<EventSystem>();
         gm = GameManager.Instance;
         DisplayPauseMenu(false);
@@ -29,12 +32,14 @@ public class PauseMenu : MonoBehaviour
     {
         if (gm.GameIsPaused == true && isToggled == false)
         {
+            sm.HalfMusicVolume();
             Debug.Log("dada");
             isToggled = true;
             DisplayPauseMenu(isToggled);
         }
         else if(gm.GameIsPaused == false && isToggled == true)
         {
+            sm.FullMusicVolume();
             isToggled = false;
             DisplayPauseMenu(isToggled);
             Debug.Log("dada2");

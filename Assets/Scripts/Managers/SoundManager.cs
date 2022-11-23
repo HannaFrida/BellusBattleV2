@@ -145,6 +145,19 @@ public class SoundManager : MonoBehaviour
 
         }
     }
+
+    public void HalfMusicVolume()
+    {
+        
+        musicSource.volume = 0.3f;
+        Debug.Log("lower " + musicSource.volume);
+    }
+
+    public void FullMusicVolume()
+    {
+        musicSource.volume = 1f;
+        Debug.Log("normal " + musicSource.volume);
+    }
    
 
     private void ToggleDoorSound()
