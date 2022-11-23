@@ -113,12 +113,14 @@ public class GameManager : MonoBehaviour
 
     public void PauseGame()
     {
+        soundManager.HalfMusicVolume();
         gameIsPaused = true;
         Time.timeScale = 0; 
     }
 
     public void ResumeGame()
     {
+        soundManager.FullMusicVolume();
         gameIsPaused = false;
         Time.timeScale = 1;
     }
