@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<GameObject> playersAlive = new List<GameObject>();
     [SerializeField] private SoundManager soundManager;
     private bool gameHasStarted;
+    [SerializeField] private bool gameIsPaused;
 
     [Header("Points")]
     private static Dictionary<GameObject, int> scoreDic = new Dictionary<GameObject, int>();
@@ -56,6 +57,11 @@ public class GameManager : MonoBehaviour
     {
         return scenesToChooseFrom;
     }
+
+    public bool GameIsPaused
+    {
+        get => gameIsPaused;
+    }
     private void OnLevelWasLoaded(int level)
     {
         if (level != 0)
@@ -68,6 +74,10 @@ public class GameManager : MonoBehaviour
             //Array.Clear(targetGroup.GetComponent<CinemachineTargetGroup>().m_Targets, 0, targetGroup.GetComponent<CinemachineTargetGroup>().m_Targets.Length);
             //SpawnPlayers();
         }
+        RestorePLayer();
+        
+        
+
 
     }
     private void Awake()
@@ -90,7 +100,7 @@ public class GameManager : MonoBehaviour
     }
 
     private void Update()
-    {
+    {   
         if (!gameHasStarted) return;
         CheckPlayersLeft();
 
@@ -99,6 +109,20 @@ public class GameManager : MonoBehaviour
             GiveScoreAfterTimer();
         }           
 
+    }
+
+    public void PauseGame()
+    {
+        soundManager.HalfMusicVolume();
+        gameIsPaused = true;
+        Time.timeScale = 0; 
+    }
+
+    public void ResumeGame()
+    {
+        soundManager.FullMusicVolume();
+        gameIsPaused = false;
+        Time.timeScale = 1;
     }
 
     private void AddScenesToPlay()
@@ -115,14 +139,14 @@ public class GameManager : MonoBehaviour
     {
         if(welcomePanel != null) welcomePanel.SetActive(false);
         players.Add(player);
-        targetGroup.GetComponent<CinemachineTargetGroup>().AddMember(player.transform, 1, 5); //OBS GER ERROR!
+        targetGroup.AddMember(player.transform, 1, 5); //OBS GER ERROR!
     }
-    public void RestorePLayer(GameObject player)
+    public void RestorePLayer()
     {
         for (int i = 0; i < players.Count; i++)
         {
-            targetGroup.GetComponent<CinemachineTargetGroup>().RemoveMember(players[i].transform);
-            targetGroup.GetComponent<CinemachineTargetGroup>().AddMember(players[i].transform, 1, 5); //OBS GER ERROR!
+            targetGroup.RemoveMember(players[i].transform);
+            targetGroup.AddMember(players[i].transform, 1, 5); //OBS GER ERROR!
         }
     }
 
@@ -145,7 +169,7 @@ public class GameManager : MonoBehaviour
     public void PlayerDeath(GameObject deadPlayer)
     {
         playersAlive.Remove(deadPlayer);
-        targetGroup.GetComponent<CinemachineTargetGroup>().RemoveMember(deadPlayer.transform); //OBS GER ERROR!
+        targetGroup.RemoveMember(deadPlayer.transform); //OBS GER ERROR!
     }
 
 
@@ -347,6 +371,12 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene("The_End");
         StartCoroutine(RestartGame(destroyMe));
+    }
+
+    public void ReturnToMainMenu()
+    {
+        if (SceneManager.GetActiveScene().name == "MainMenu") return;
+        SceneManager.LoadScene("MainMenu");
     }
     private IEnumerator RestartGame(GameObject destroyMe)
     {

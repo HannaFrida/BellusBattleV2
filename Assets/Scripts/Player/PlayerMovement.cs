@@ -129,7 +129,6 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(DownwardForce);
         isGrounded = IsGrounded;
         UpdateRayCastOrgins();
         UpdateMovementForce();
@@ -229,6 +228,16 @@ public class PlayerMovement : MonoBehaviour
             SetDownwardForce(downwardForce, DownwardForce);    
         }
 
+    }
+
+    private void AccessabilityoveDown()
+    {
+        if (downwardInput <= downwardInputBound && isStandingOnOneWayPlatform)
+        {
+            transform.position += Vector3.down * playerHeight;
+            isStandingOnOneWayPlatform = false;
+            return;
+        }
     }
 
     public static void SetDownwardForce(float value, float downfroce)
