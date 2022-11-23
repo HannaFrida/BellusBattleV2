@@ -280,7 +280,7 @@ public class Gun : MonoBehaviour
             }
             else
             {
-                GameObject firedProjectile = Instantiate(weaponData.projectile, muzzle.transform.position, transform.rotation);
+                 firedProjectile = Instantiate(weaponData.projectile, muzzle.transform.position, transform.rotation);
 
                 _projectile = firedProjectile.GetComponent<Projectile>();
                 _projectile.SetDamage(weaponData.damage);
