@@ -239,7 +239,7 @@ public class GameManager : MonoBehaviour
             if (GetScore(winner) == scoreToWin)
             {
                 ClearScore();
-                Finish(gameObject);
+                StartCoroutine(RestartGame());
                 //Nån har vunnit!
                 return;
             }
@@ -367,22 +367,17 @@ public class GameManager : MonoBehaviour
         scenesToChooseFrom.RemoveAt(randomNumber);
         return nextLevel;
     }
-    public void Finish(GameObject destroyMe)
-    {
-        SceneManager.LoadScene("The_End");
-        StartCoroutine(RestartGame(destroyMe));
-    }
 
     public void ReturnToMainMenu()
     {
         if (SceneManager.GetActiveScene().name == "MainMenu") return;
         SceneManager.LoadScene("MainMenu");
     }
-    private IEnumerator RestartGame(GameObject destroyMe)
+    private IEnumerator RestartGame()
     {
+        SceneManager.LoadScene("The_End");
         yield return new WaitForSeconds(timeTillRestartGame);
-        Destroy(destroyMe);
-        Destroy(gameObject);
+        Destroy(transform.parent.gameObject);
         SceneManager.LoadScene(System.IO.Path.GetFileNameWithoutExtension(SceneUtility.GetScenePathByBuildIndex(0)));
     }
 
