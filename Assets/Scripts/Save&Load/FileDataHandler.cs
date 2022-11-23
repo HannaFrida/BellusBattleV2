@@ -6,8 +6,8 @@ using System.IO;
 
 public class FileDataHandler
 {
-    private string dataDirPath = "";
-    private string dataFileName = "";
+    private string dataDirPath = "C:\\Users\\khal6952\\Documents\\GitHub\\BellusBattleV2\\Assets\\Scripts\\Save&Load\\Data\\Here";
+    private string dataFileName = "temp.game";
 
     public FileDataHandler(string dataDirPath, string dataDileName)
     {

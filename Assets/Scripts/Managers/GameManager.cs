@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
 {
 
     [SerializeField] private CinemachineTargetGroup targetGroup;
+    private bool gameLoopFinished = false;
     public static GameManager Instance;
     [SerializeField] private List<GameObject> players = new List<GameObject>();
     [SerializeField] private List<GameObject> playersAlive = new List<GameObject>();
@@ -85,6 +86,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
     {
         if (Instance != null) Debug.LogError("Found more than one Game Manager in scene.");
         Instance = this;
+        gameLoopFinished = false;
         DontDestroyOnLoad(this);
         AddScenesToPlay();
 
@@ -112,6 +114,10 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
             GiveScoreAfterTimer();
         }           
 
+    }
+    private void OnApplicationQuit()
+    {
+        DataPersistenceManager.Instance.SaveGame();
     }
 
     public void PauseGame()
@@ -379,6 +385,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
     private IEnumerator RestartGame()
     {
         SceneManager.LoadScene("The_End");
+        gameLoopFinished = true;
         DataPersistenceManager.Instance.SaveGame();
         yield return new WaitForSeconds(timeTillRestartGame);
         Destroy(transform.parent.gameObject);
@@ -464,10 +471,17 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
     public void LoadData(GameData data)
     {
         players = data.players;
+        playersAlive = new List<GameObject>(players);
+        for(int i = 0; i< players.Count(); i++)
+        {
+            targetGroup.AddMember(players[i].transform, 1, 5);
+        }
+
     }
 
     public void SaveData(ref GameData data)
     {
+        if(!gameLoopFinished) players.Clear();
         data.players = players;
     }
 }
