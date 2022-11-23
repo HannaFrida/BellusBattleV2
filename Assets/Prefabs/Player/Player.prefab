@@ -6540,6 +6540,8 @@ MonoBehaviour:
   playerDeathSound: {fileID: 5042949326614459676}
   bloodSplatter: {fileID: 3332971346311075587}
   poisoned: {fileID: 6773224950172109038}
+  lighting: {fileID: 4225523728698229367}
+  fire: {fileID: 4135869402454452532}
   deathPosition: {fileID: 5916060800904582881}
   boxCollider: {fileID: 6431588530169345906}
   rightArm: {fileID: 2915926472710746649}
@@ -7766,6 +7768,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 357661171843101380}
   m_PrefabAsset: {fileID: 0}
+--- !u!2083052967 &4135869402454452532 stripped
+VisualEffect:
+  m_CorrespondingSourceObject: {fileID: 4436931563700886512, guid: f810eede62982044f86a48832bab0bc1,
+    type: 3}
+  m_PrefabInstance: {fileID: 357661171843101380}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &763485360564606633
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8552,7 +8560,7 @@ PrefabInstance:
     - target: {fileID: 8729788702895959509, guid: 17608855f52649242a0298cc451ea99c,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8729788702895959510, guid: 17608855f52649242a0298cc451ea99c,
         type: 3}
@@ -8617,7 +8625,7 @@ PrefabInstance:
     - target: {fileID: 8729788702895959513, guid: 17608855f52649242a0298cc451ea99c,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8729788702895959514, guid: 17608855f52649242a0298cc451ea99c,
         type: 3}
@@ -8686,11 +8694,32 @@ PrefabInstance:
       objectReference: {fileID: 6010799286257098507}
     - target: {fileID: 8729788702895959514, guid: 17608855f52649242a0298cc451ea99c,
         type: 3}
+      propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[0].m_Overridden
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8729788702895959514, guid: 17608855f52649242a0298cc451ea99c,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[1].m_Overridden
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8729788702895959514, guid: 17608855f52649242a0298cc451ea99c,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[2].m_Overridden
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8729788702895959514, guid: 17608855f52649242a0298cc451ea99c,
+        type: 3}
       propertyPath: m_PropertySheet.m_Vector4f.m_Array.Array.data[0].m_Overridden
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 17608855f52649242a0298cc451ea99c, type: 3}
+--- !u!2083052967 &4225523728698229367 stripped
+VisualEffect:
+  m_CorrespondingSourceObject: {fileID: 8729788702895959514, guid: 17608855f52649242a0298cc451ea99c,
+    type: 3}
+  m_PrefabInstance: {fileID: 4864560374916984749}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4225523728698229371 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8729788702895959510, guid: 17608855f52649242a0298cc451ea99c,
@@ -9561,7 +9590,7 @@ PrefabInstance:
     - target: {fileID: 1952737545159249948, guid: c4626a2bd3e247f41ad1ce76bb68ac1a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.007938603
+      value: -0.007938604
       objectReference: {fileID: 0}
     - target: {fileID: 1952737545159249948, guid: c4626a2bd3e247f41ad1ce76bb68ac1a,
         type: 3}

@@ -15,6 +15,8 @@ public class Grenade : Projectile
     [SerializeField] private AudioSource explosionSound;
     [SerializeField] private GameObject bombMesh;
     [SerializeField] Collider[] hits;
+    [SerializeField] bool lighting =false;
+    [SerializeField] bool fire = false;
 
     private void Start()
     {
@@ -56,6 +58,15 @@ public class Grenade : Projectile
             Debug.Log(hits[i].name);
             if (hits[i].CompareTag("Player"))
             {
+                if(lighting)
+                {
+                    hits[i].GetComponent<PlayerHealth>().PlayLighting();
+                }
+                if (fire)
+                {
+                    hits[i].GetComponent<PlayerHealth>().PlayFire();
+                }
+
                 PlayerHealth ph = hits[i].GetComponent<PlayerHealth>();
                 ph.TakeDamage(damage);
                 Debug.Log("playerfound");

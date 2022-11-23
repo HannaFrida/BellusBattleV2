@@ -28,6 +28,7 @@ public class RailGunBullet : Projectile
 		if (playerGo.CompareTag("Player"))
 		{
 			playerGo.GetComponent<PlayerHealth>().TakeDamage(damage);
+			playerGo.GetComponent<PlayerHealth>().PlayFire();
 
 			if (playerGo.GetComponent<PlayerHealth>().Health <= 0)
 			{
