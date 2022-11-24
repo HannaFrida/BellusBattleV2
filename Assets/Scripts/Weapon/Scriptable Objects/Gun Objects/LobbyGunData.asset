@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f37510bd6e63e4040bae77d76112c48c, type: 3}
   m_Name: LobbyGunData
   m_EditorClassIdentifier: 
-  amountToSpawn: 0
   name: Lobby Gun
   weaponPrefab: {fileID: 5397083654919640403, guid: cd0b295efc6b434459314494a9a99ccc,
     type: 3}
@@ -21,6 +20,9 @@ MonoBehaviour:
   projectile: {fileID: 7929666838174018582, guid: 37f31cb2206e9bc45aa08645596c0523,
     type: 3}
   projectileForce: 100
+  usesSpread: 0
+  spreadFactor: 0
+  pelletCount: 0
   currentAmmo: 100
   initialAmmo: 100
   magSize: 100
@@ -29,3 +31,6 @@ MonoBehaviour:
   shootAttackSound: {fileID: 0}
   muzzleFlashGameObject: {fileID: 1298385045497319875, guid: c4f13cda770c9714ba5f9ea0f462adbd,
     type: 3}
+  despawnVFX: {fileID: 3491355477508070189, guid: b823ad32a79881f498947f7cc61300ba,
+    type: 3}
+  crosshair: {fileID: 0}
