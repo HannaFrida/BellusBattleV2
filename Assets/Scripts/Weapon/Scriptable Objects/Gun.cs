@@ -95,7 +95,7 @@ public class Gun : MonoBehaviour
             // = timeSinceLastShot + (1f / weaponData.fireRate);
         }
 
-        /*
+        
         // USED FOR DROP
         if (isStartTimerForDrop)
         {
@@ -110,7 +110,7 @@ public class Gun : MonoBehaviour
         }
         
 
-
+        
         // USED FOR DE-SPAWNING
         if (isStartTimerForDeSpawn)
         {
@@ -124,8 +124,8 @@ public class Gun : MonoBehaviour
                 Despawn();
             }
         }
-        */
-        if (gunsAmmo == 0)
+        
+        if (gunsAmmo == 0 && weaponData.name != "RailGun")
         {
             Drop();
             Despawn();
@@ -139,12 +139,20 @@ public class Gun : MonoBehaviour
             Despawn();
         }
 
+        if (gunsAmmo == 0 && weaponData.name == "Xnade")
+        {
+            Drop();
+            Despawn();
+        }
+
+        /*
         if (BulletFollow && firedProjectile != null)
         {
             Debug.Log("RAIL");
             firedProjectile.transform.position = muzzle.transform.position;
             firedProjectile.transform.rotation = transform.rotation;
         }
+        */
 
     }
 
@@ -284,6 +292,16 @@ public class Gun : MonoBehaviour
                     timeSinceLastShot = 0;
                 }
 
+            }
+            else if (weaponData.name == "RailGun"){
+                GameObject firedProjectile = Instantiate(weaponData.projectile, muzzle.transform.position, transform.rotation);
+
+                _projectile = firedProjectile.GetComponent<Projectile>();
+                _projectile.SetDamage(weaponData.damage);
+                //_projectile.GetComponent<Rigidbody>().AddForce(force);
+                _projectile.gameObject.transform.parent = muzzle.transform;
+
+                timeSinceLastShot = 0;
             }
             else
             {
