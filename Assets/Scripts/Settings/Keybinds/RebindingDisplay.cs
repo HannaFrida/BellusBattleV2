@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
 public class RebindingDisplay : MonoBehaviour
@@ -36,19 +37,23 @@ public class RebindingDisplay : MonoBehaviour
 
     [Header("General")]
     [SerializeField] private PlayerMovement playerMovement = null;
+    [SerializeField] private PlayerDetails playerDetails = null;
     [SerializeField] private GameObject waitingForInputObject = null;
     private InputActionRebindingExtensions.RebindingOperation rebindingOperation;
 
     [Header("UI")]
     [SerializeField] public bool isChangingSettings;
     [SerializeField] public GameObject panel;
-
-
     
 
     private void Start()
     {
         playerMovement = GetComponentInParent<PlayerMovement>();
+        playerDetails = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerDetails>();
+        if (playerDetails.playerID == 1)
+        {
+            panel.gameObject.GetComponent<RectTransform>().pivot = new Vector2(mousePosition.x, mousePosition.y);
+        }
     }
 
 
