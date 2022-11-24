@@ -141,11 +141,6 @@ public class Gun : MonoBehaviour
             }
         }
         
-        if (gunsAmmo == 0 && weaponData.name != "RailGun")
-        {
-            Drop();
-            Despawn();
-        }
 
 
         // SPECIAL CASES
@@ -180,14 +175,14 @@ public class Gun : MonoBehaviour
             Despawn();
         }
 
-        /*
+        
         if (BulletFollow && firedProjectile != null)
         {
             Debug.Log("RAIL");
             firedProjectile.transform.position = muzzle.transform.position;
             firedProjectile.transform.rotation = transform.rotation;
         }
-        */
+        
 
     }
 
