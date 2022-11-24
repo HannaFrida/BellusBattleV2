@@ -169,13 +169,14 @@ public class Gun : MonoBehaviour
         }
 
 
-        
+        /*
         if (BulletFollow && firedProjectile != null)
         {
             Debug.Log("RAIL");
             firedProjectile.transform.position = muzzle.transform.position;
             firedProjectile.transform.rotation = transform.rotation;
         }
+        */
         
 
     }
