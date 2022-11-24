@@ -85,10 +85,12 @@ public class PauseMenu : MonoBehaviour
     private void CheckSelectedButton()
     {
         if (runButtonCheck == false) return;
+
         if(settingsPanel.activeSelf == false && es.firstSelectedGameObject != firstSelected)
         {
             es.SetSelectedGameObject(firstSelected.gameObject);
             runButtonCheck = false;
         }
     }
+
 }
