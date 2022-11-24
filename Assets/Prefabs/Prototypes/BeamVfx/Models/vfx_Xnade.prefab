@@ -490,6 +490,7 @@ GameObject:
   - component: {fileID: 145624440088507490}
   - component: {fileID: 4953645508378710751}
   - component: {fileID: 2498149669663868746}
+  - component: {fileID: 329475074490033220}
   m_Layer: 0
   m_Name: vfx_Xnade
   m_TagString: Untagged
@@ -573,7 +574,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5167775749961452402}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 6da183b983d43b84d8067674f3e3de13, type: 2}
   m_IsTrigger: 1
   m_Enabled: 0
   serializedVersion: 2
@@ -593,8 +594,20 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 56
-  m_CollisionDetection: 0
+  m_Constraints: 120
+  m_CollisionDetection: 1
+--- !u!114 &329475074490033220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5167775749961452402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a636f947e8a83f249a125b2e0102114f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5167775750080484567
 GameObject:
   m_ObjectHideFlags: 0
@@ -1526,17 +1539,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: bb1d44cfda574da46b7d9f176d92a35e,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bb1d44cfda574da46b7d9f176d92a35e,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bb1d44cfda574da46b7d9f176d92a35e,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bb1d44cfda574da46b7d9f176d92a35e,
         type: 3}

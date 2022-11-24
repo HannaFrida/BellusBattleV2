@@ -24,6 +24,10 @@ public class RailGunBullet : Projectile
 	
 	private void OnTriggerEnter(Collider other)
 	{
+
+
+
+
 		GameObject playerGo = other.gameObject;
 		if (playerGo.CompareTag("Player"))
 		{

@@ -152,6 +152,11 @@ public class Gun : MonoBehaviour
             Drop();
             Despawn();
         }
+        if (gunsAmmo == 0 && weaponData.name == "Xnade")
+        {
+            Drop();
+            Despawn();
+        }
         if (gunsAmmo == 0 && weaponData.name != "Grenade" && weaponData.name != "GwynBolt" && weaponData.name != "RailGun")
         {
             Drop();

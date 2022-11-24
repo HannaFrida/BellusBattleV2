@@ -5091,7 +5091,7 @@ Transform:
   m_GameObject: {fileID: 9109231185878699503}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2839734295875269815}
@@ -5172,8 +5172,8 @@ MonoBehaviour:
   shootSound: {fileID: 6720003567517030401}
   isPickedUp: 0
   gunsAmmo: 0
-  timeToWaitForPickup: 2
-  timeToWaitForDeSpawn: 2
+  timeToWaitForPickup: 0.5
+  timeToWaitForDeSpawn: 0.1
   swordMesh: {fileID: 0}
   BulletFollow: 0
 --- !u!65 &4144085261384979530
