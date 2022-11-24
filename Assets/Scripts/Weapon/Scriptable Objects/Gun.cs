@@ -140,8 +140,8 @@ public class Gun : MonoBehaviour
                 Despawn();
             }
         }
-        
-        if (gunsAmmo == 0 && weaponData.name != "RailGun")
+
+        if (gunsAmmo == 0)
         {
             Drop();
             Despawn();
@@ -149,6 +149,7 @@ public class Gun : MonoBehaviour
 
 
         // SPECIAL CASES
+        /*
         if (gunsAmmo == 0 && weaponData.name == "Grenade")
         {
             Drop();
@@ -164,21 +165,12 @@ public class Gun : MonoBehaviour
             Drop();
             Despawn();
         }
-        if (gunsAmmo == 0 && weaponData.name != "Grenade" && weaponData.name != "GwynBolt" && weaponData.name != "RailGun")
-        {
-            Drop();
-        }
+        */
         if (gunsAmmo == 0 && weaponData.name == "RailGun")
         {
             railGoneTime = true;
         }
 
-
-        if (gunsAmmo == 0 && weaponData.name == "Xnade")
-        {
-            Drop();
-            Despawn();
-        }
 
         /*
         if (BulletFollow && firedProjectile != null)
@@ -188,6 +180,7 @@ public class Gun : MonoBehaviour
             firedProjectile.transform.rotation = transform.rotation;
         }
         */
+        
 
     }
 
