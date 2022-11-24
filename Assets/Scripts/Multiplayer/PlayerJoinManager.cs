@@ -11,15 +11,16 @@ public class PlayerJoinManager : PlayerSpawnManager
     [SerializeField] GameObject characterLow;
     //[SerializeField] GameObject[] accessorites;
     //[SerializeField] GameObject accessoritesSlot;
+    RebindingDisplay rbd;
 
     public List<PlayerInput> listOfPlayers = new List<PlayerInput>();
     //public Material[] colors;
 
     void OnPlayerJoined(PlayerInput playerInput)
     {
-        
+        PlayerDetails playerDetails = playerInput.gameObject.GetComponent<PlayerDetails>();
         // Set the player ID, add one to the index to start at Player 1
-        playerInput.gameObject.GetComponent<PlayerDetails>().playerID = playerInput.playerIndex + 1;
+        playerDetails.playerID = playerInput.playerIndex + 1;
         //
         GameManager.Instance.AddPLayer(playerInput.gameObject);
         listOfPlayers.Add(playerInput);
@@ -28,18 +29,27 @@ public class PlayerJoinManager : PlayerSpawnManager
 
         // Set the start spawn position of the player using the location at the associated element into the array.
         // So Player 1 spawns at the first Trasnform in the list, Player 2 on the second, and so forth.
-        playerInput.gameObject.GetComponent<PlayerDetails>().startPos = SpawnLocations[playerInput.playerIndex].position;
+        playerDetails.startPos = SpawnLocations[playerInput.playerIndex].position;
         //playerInput.gameObject.GetComponent<PlayerDetails>().startPos = LevelSpawnsDic[1][playerInput.playerIndex - 1].position;
 
         //AddPlayerInFocus(playerInput.transform);
 
-        
+        RectTransform rtf;
+        rtf = rbd.panel.gameObject.GetComponent<RectTransform>();
+        if (playerDetails.playerID == 1)
+        {
+            rtf.SetTop(0);
+        }
+        if (playerDetails.playerID == 2)
+        {
+            rtf.SetLeft(100);
+        }
 
         // Changes the texture/material of the player
         //playerInput.gameObject.GetComponentInChildren<SkinnedMeshRenderer>().material = colors[playerInput.playerIndex];
         // Finds where the accessory should be placed (HeadSlot)
         //accessoritesSlot = GameObject.FindGameObjectWithTag("HeadSlot");
-        PlayerDetails playerDetails = playerInput.gameObject.GetComponent<PlayerDetails>();
+        
         // Put the accessory on the HeadSlot
         //GameObject accessory = Instantiate(accessorites[playerInput.playerIndex], playerDetails.HeadGearSlot());//accessoritesSlot.transform);
         //accessory.transform.SetParent(playerInput.gameObject.transform);

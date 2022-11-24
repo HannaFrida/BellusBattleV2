@@ -49,14 +49,10 @@ public class RebindingDisplay : MonoBehaviour
     private void Start()
     {
         playerMovement = GetComponentInParent<PlayerMovement>();
-        playerDetails = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerDetails>();
-        if (playerDetails.playerID == 1)
-        {
-            panel.gameObject.GetComponent<RectTransform>().pivot = new Vector2(mousePosition.x, mousePosition.y);
-        }
+        
+
+        
     }
-
-
 
     /// <summary>
     /// Jump rebinding
