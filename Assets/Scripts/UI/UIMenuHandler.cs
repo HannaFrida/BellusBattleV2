@@ -11,6 +11,7 @@ public class UIMenuHandler : MonoBehaviour
     private GameObject activePanel;
     protected void Start()
     {
+        eventSys = GameObject.FindGameObjectWithTag("EventSystem").GetComponent<EventSystem>();
         panels[0].SetActive(true);
         activePanel = panels[0];
     }
