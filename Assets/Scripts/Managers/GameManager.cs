@@ -68,11 +68,12 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
     {
         if (level != 0)
         {
-            DeactivateMovement();
+            
             giveScoreTimer = 0f;
             gameHasStarted = true;
             playersAlive = new List<GameObject>(players);
-            
+            DeactivateMovement();
+
             //Array.Clear(targetGroup.GetComponent<CinemachineTargetGroup>().m_Targets, 0, targetGroup.GetComponent<CinemachineTargetGroup>().m_Targets.Length);
             //SpawnPlayers();
         }
