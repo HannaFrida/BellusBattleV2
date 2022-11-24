@@ -171,10 +171,10 @@ public class SoundManager : MonoBehaviour
     private void RandomClipPlayer(AudioClip[] sounds, AudioSource source)
     {
         int randomIndex = Random.Range(0, sounds.Length);
-        if (source.clip == sounds[randomIndex])
-        {
-            RandomClipPlayer(sounds, source);
-        }
+      //  if (source.clip == sounds[randomIndex])
+      //  {
+         //   RandomClipPlayer(sounds, source);
+      //  }
         source.clip = sounds[randomIndex];
         source.Play();
     }
