@@ -40,12 +40,12 @@ public class Grenade : Projectile
 
     public void Explode()
     {
-        Destroy(gameObject, 0.15f);
+        Destroy(gameObject, 0.24f);
         if (bombMesh != null)
         {
             bombMesh.SetActive(false);
             explosionSound.Play();
-            GameObject spawnVfx = Instantiate(objectToBoom, transform);
+            GameObject spawnVfx = Instantiate(objectToBoom, transform.position,transform.rotation);
             Destroy(spawnVfx, 0.3f);
             gameObject.GetComponent<Rigidbody>().useGravity = false;
             Rigidbody RB = GetComponent<Rigidbody>();
