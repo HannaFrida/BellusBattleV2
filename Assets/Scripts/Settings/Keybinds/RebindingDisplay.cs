@@ -37,21 +37,21 @@ public class RebindingDisplay : MonoBehaviour
 
     [Header("General")]
     [SerializeField] private PlayerMovement playerMovement = null;
-    [SerializeField] private PlayerDetails playerDetails = null;
     [SerializeField] private GameObject waitingForInputObject = null;
     private InputActionRebindingExtensions.RebindingOperation rebindingOperation;
 
     [Header("UI")]
     [SerializeField] public bool isChangingSettings;
     [SerializeField] public GameObject panel;
+    [SerializeField] public GameObject PosP1;
+    [SerializeField] public GameObject PosP2;
+    [SerializeField] public GameObject PosP3;
+    [SerializeField] public GameObject PosP4;
     
 
     private void Start()
     {
         playerMovement = GetComponentInParent<PlayerMovement>();
-        
-
-        
     }
 
     /// <summary>

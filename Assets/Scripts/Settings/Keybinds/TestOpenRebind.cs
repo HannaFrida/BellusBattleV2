@@ -12,7 +12,6 @@ public class TestOpenRebind : MonoBehaviour
     }
 
     public void OnClick()
-
     {
         rd = GameObject.FindGameObjectWithTag("Rebind").GetComponent<RebindingDisplay>();
         rd.isChangingSettings = !rd.isChangingSettings;
