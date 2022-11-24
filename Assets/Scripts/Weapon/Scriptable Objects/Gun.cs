@@ -169,12 +169,6 @@ public class Gun : MonoBehaviour
         }
 
 
-        if (gunsAmmo == 0 && weaponData.name == "Xnade")
-        {
-            Drop();
-            Despawn();
-        }
-
         
         if (BulletFollow && firedProjectile != null)
         {
