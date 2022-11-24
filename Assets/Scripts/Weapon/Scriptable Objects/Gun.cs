@@ -95,6 +95,7 @@ public class Gun : MonoBehaviour
             // = timeSinceLastShot + (1f / weaponData.fireRate);
         }
 
+        /*
         // USED FOR DROP
         if (isStartTimerForDrop)
         {
@@ -122,6 +123,12 @@ public class Gun : MonoBehaviour
                 isStartTimerForDeSpawn = false;
                 Despawn();
             }
+        }
+        */
+        if (gunsAmmo == 0)
+        {
+            Drop();
+            Despawn();
         }
 
 

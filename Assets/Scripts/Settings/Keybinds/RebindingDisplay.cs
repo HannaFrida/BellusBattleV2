@@ -43,6 +43,7 @@ public class RebindingDisplay : MonoBehaviour
     [Header("UI")]
     [SerializeField] public bool isChangingSettings;
     [SerializeField] public GameObject panel;
+    [SerializeField] public TMP_Text playerIDText;
     [SerializeField] public GameObject PosP1;
     [SerializeField] public GameObject PosP2;
     [SerializeField] public GameObject PosP3;

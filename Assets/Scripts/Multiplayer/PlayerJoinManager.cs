@@ -33,6 +33,7 @@ public class PlayerJoinManager : PlayerSpawnManager
         if (playerDetails.playerID == 1)
         {
             rtf.SetTop(0);
+            rbd.playerIDText.text = playerDetails.playerID.ToString();
             //rbd.panel.transform.position = rbd.PosP1.transform.position;
         }
         else if (playerDetails.playerID == 2)
@@ -40,12 +41,14 @@ public class PlayerJoinManager : PlayerSpawnManager
             //rbd.panel.transform.position = rbd.PosP2.transform.position;
             rtf.SetLeft(960);
             rtf.sizeDelta = new Vector2(1920, 1080);
+            rbd.playerIDText.text = playerDetails.playerID.ToString();
         }
         else if (playerDetails.playerID == 3)
         {
             //rbd.panel.transform.position = rbd.PosP3.transform.position;
             rtf.SetBottom(540);
             rtf.sizeDelta = new Vector2(1920, 1080);
+            rbd.playerIDText.text = playerDetails.playerID.ToString();
         }
         else if (playerDetails.playerID == 4)
         {
@@ -53,6 +56,7 @@ public class PlayerJoinManager : PlayerSpawnManager
             rtf.SetLeft(960);
             rtf.SetBottom(540);
             rtf.sizeDelta = new Vector2(1920, 1080);
+            rbd.playerIDText.text = playerDetails.playerID.ToString();
         }
 
         rtf = null;
