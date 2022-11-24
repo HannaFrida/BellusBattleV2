@@ -34,9 +34,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private PlayerSoundManager playerSoundManager;
     [SerializeField] private Animator playerAnimator;
     [SerializeField] private GameObject doubleJumpVFX;
-    
-   
-    
+
+    [SerializeField] private PlayerInput playerInput;
+
+
+    public PlayerInput PlayerInput  => playerInput;
 
 
     public UnityEvent jumpEvent;
