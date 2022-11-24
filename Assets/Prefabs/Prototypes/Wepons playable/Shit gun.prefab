@@ -5343,7 +5343,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9109231185878699503}
-  m_Mesh: {fileID: 1988467532152511500, guid: a0ed0bae6843d0c4281c5f7a5f417020, type: 3}
+  m_Mesh: {fileID: -5338573088680005975, guid: 3e951a70605c6ab4a991b7124cef79f5, type: 3}
 --- !u!23 &6606296776006688866
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5410,6 +5410,7 @@ MonoBehaviour:
   timeToWaitForPickup: 2
   timeToWaitForDeSpawn: 2
   swordMesh: {fileID: 0}
+  BulletFollow: 0
 --- !u!65 &1102843745852693778
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5421,8 +5422,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.46086857, y: 0.18972449, z: 1}
+  m_Center: {x: -0.19690667, y: 0.04392132, z: 0}
 --- !u!54 &370272509325264095
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5437,7 +5438,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 8
   m_CollisionDetection: 0
 --- !u!1001 &5630662019978260232
 PrefabInstance:
