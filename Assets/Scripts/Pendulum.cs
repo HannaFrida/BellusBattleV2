@@ -5,10 +5,11 @@ using UnityEngine;
 public class Pendulum : MonoBehaviour
 {
     [SerializeField] private float speed;
+    [SerializeField] private float angle = 60f;
     private Quaternion start, end;
     private float targetAngle;
     private float timePassed = 6;
-    private float angle = 60f;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -23,10 +24,6 @@ public class Pendulum : MonoBehaviour
         transform.rotation = Quaternion.Lerp(start, end, (Mathf.Sin(timePassed * speed + Mathf.PI / 2) + 1f) / 2f);
     }
 
-    private void ResetTimer()
-    {
-        timePassed = 0f;
-    }
     Quaternion PendulumRotation(float angle)
     {
         Quaternion currentRotation = transform.rotation;
