@@ -141,7 +141,7 @@ public class Gun : MonoBehaviour
             }
         }
 
-        if (gunsAmmo == 0)
+        if (gunsAmmo == 0 && weaponData.name != "RailGun")
         {
             Drop();
             Despawn();
