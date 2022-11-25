@@ -6,12 +6,22 @@ using UnityEngine;
 public class GrenadeShell : Grenade
 {
     private bool hasExploded;
+    private bool hasHitGround;
+
     private void OnCollisionEnter(Collision collision)
     {
-        if(!hasExploded)
+        if (collision.gameObject.CompareTag("Obstacle"))
         {
-            Explode();
-            hasExploded = true;
+            hasHitGround = true;
         }
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            if (!hasExploded && !hasHitGround)
+            {
+                Explode();
+                hasExploded = true;
+            }
+        }
+        
     }
 }
