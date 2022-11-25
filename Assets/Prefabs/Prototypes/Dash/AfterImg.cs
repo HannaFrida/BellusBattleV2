@@ -65,9 +65,10 @@ public class AfterImg : MonoBehaviour
 
                     mf.mesh = mesh;
                     mr.material = mat;
-                     StartCoroutine(AnimateMaterialFloat(mr.material, 0,shaderVarRate,shaderVarRefreshRate));
-                    Destroy(mesh, destroyDelay);
-                }
+                StartCoroutine(AnimateMaterialFloat(mr.material, 0,shaderVarRate,shaderVarRefreshRate));
+                Destroy(meshes, destroyDelay);
+
+            }
             
 
 

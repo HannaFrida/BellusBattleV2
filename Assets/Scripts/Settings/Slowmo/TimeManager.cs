@@ -22,6 +22,8 @@ public class TimeManager : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.Instance.GameIsPaused == true) return;
+
         Time.timeScale += 1f * Time.unscaledDeltaTime;
         Time.timeScale = Mathf.Clamp(Time.timeScale, 0f, 1f);
     }

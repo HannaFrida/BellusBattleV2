@@ -34,9 +34,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private PlayerSoundManager playerSoundManager;
     [SerializeField] private Animator playerAnimator;
     [SerializeField] private GameObject doubleJumpVFX;
-    
-   
-    
+
+    [SerializeField] private PlayerInput playerInput;
+
+
+    public PlayerInput PlayerInput  => playerInput;
 
 
     public UnityEvent jumpEvent;
@@ -228,6 +230,16 @@ public class PlayerMovement : MonoBehaviour
             SetDownwardForce(downwardForce, DownwardForce);    
         }
 
+    }
+
+    private void AccessabilityoveDown()
+    {
+        if (downwardInput <= downwardInputBound && isStandingOnOneWayPlatform)
+        {
+            transform.position += Vector3.down * playerHeight;
+            isStandingOnOneWayPlatform = false;
+            return;
+        }
     }
 
     public static void SetDownwardForce(float value, float downfroce)

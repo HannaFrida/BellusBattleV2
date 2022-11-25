@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f37510bd6e63e4040bae77d76112c48c, type: 3}
   m_Name: RailGunData
   m_EditorClassIdentifier: 
-  name: Revolver
+  name: RailGun
   weaponPrefab: {fileID: 3590003872924398701, guid: 5cb8c654c8bdbd047805147174351053,
     type: 3}
   damage: 1
@@ -20,6 +20,9 @@ MonoBehaviour:
   projectile: {fileID: 5902833934068840047, guid: d399b55c19978e548abe6cb10588b6b7,
     type: 3}
   projectileForce: 0
+  usesSpread: 0
+  spreadFactor: 0
+  pelletCount: 0
   currentAmmo: 2
   initialAmmo: 2
   magSize: 2
@@ -27,4 +30,6 @@ MonoBehaviour:
   pickupSound: {fileID: 0}
   shootAttackSound: {fileID: 0}
   muzzleFlashGameObject: {fileID: 0}
+  despawnVFX: {fileID: 3491355477508070189, guid: b823ad32a79881f498947f7cc61300ba,
+    type: 3}
   crosshair: {fileID: 0}
