@@ -11,7 +11,8 @@ public class PlayerSpawnManager : MonoBehaviour
     [SerializeField] private Transform[] spawnLocations; // Keeps track of all the possible spawn locations
     [SerializeField] private GameObject[] players;
     [SerializeField] private TextMeshProUGUI countDownText;
-    
+
+    private int playerCount;
     private bool runTimer;
     private float timer = 3;
     private float movementTurnOnDelay = 3f;
@@ -26,7 +27,15 @@ public class PlayerSpawnManager : MonoBehaviour
         
         timer = 3f;
         runTimer = true;
-        players = GameManager.Instance.GetAllPlayers().ToArray();
+        playerCount = GameManager.Instance.GetAllPlayers().Count;
+        if(playerCount == 0)
+        {
+            LookForPlayers();
+        }
+        else
+        {
+            players = GameManager.Instance.GetAllPlayers().ToArray();
+        }
         for(int i = 0; i < players.Length; i++)
         {
             if (players[i] == null) continue;
@@ -68,5 +77,10 @@ public class PlayerSpawnManager : MonoBehaviour
             countDownText.text = Mathf.RoundToInt(timer).ToString();
         }
         
+    }
+
+    private void LookForPlayers()
+    {
+        players = GameObject.FindGameObjectsWithTag("Player");
     }
 }
