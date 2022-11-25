@@ -40,11 +40,13 @@ public class PlayerSpawnManager : MonoBehaviour
         UpdateText();
         if (runTimer == false) return;
         Debug.Log("runnnig");
-        if(timer <= 0f)
+        if(timer <= 0.5)
         {
-            GameManager.Instance.ActivateMovement();
+            GameManager.Instance.ActivateMovement();  
+        }
+        if(timer <= 0)
+        {
             runTimer = false;
-            timer = 0f;
         }
         timer -= Time.deltaTime;  
     } 
@@ -52,6 +54,19 @@ public class PlayerSpawnManager : MonoBehaviour
     private void UpdateText()
     {
         if (countDownText == null) return;
-        countDownText.text = ""+(int)timer + 1;
+
+        if (timer <= 0f)
+        {
+            countDownText.enabled = false;
+        }
+        else if (timer <= 0.5f)
+        {
+            countDownText.text = "Battle!";
+        }
+        else if(timer >= 0.5f)
+        {
+            countDownText.text = Mathf.RoundToInt(timer).ToString();
+        }
+        
     }
 }
