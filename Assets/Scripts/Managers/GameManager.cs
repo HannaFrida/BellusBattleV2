@@ -64,6 +64,11 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
     {
         get => gameIsPaused;
     }
+
+    public bool GameHasStarted
+    {
+        get => GameHasStarted;
+    }
     private void OnLevelWasLoaded(int level)
     {
         if (level != 0)

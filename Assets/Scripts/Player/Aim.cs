@@ -33,6 +33,8 @@ public class Aim : MonoBehaviour
     }
     public void DefualtJoystickInputToAngleCalculation(InputAction.CallbackContext context)
     {
+        if (GameManager.Instance.GameIsPaused == true) return;
+
         Vector2 t = context.ReadValue<Vector2>();
         if (t.x == 0 && t.y == 0 || usingOverride) return;
         direction.Normalize();
@@ -41,6 +43,8 @@ public class Aim : MonoBehaviour
     }
     public void OverrideJoystickInputToAngleCalculation(InputAction.CallbackContext context)
     {
+        if (GameManager.Instance.GameIsPaused == true) return;
+
         Vector2 t = context.ReadValue<Vector2>();
         if (t.x == 0 && t.y == 0)
         {
