@@ -17,6 +17,7 @@ public class PlayerJoinManager : PlayerSpawnManager
         PlayerDetails playerDetails = playerInput.gameObject.GetComponent<PlayerDetails>();
         // Set the player ID, add one to the index to start at Player 1
         playerDetails.playerID = playerInput.playerIndex + 1;
+        playerDetails.SetDevice(playerInput.devices[0]);
 
         GameManager.Instance.AddPLayer(playerInput.gameObject);
         listOfPlayers.Add(playerInput);
