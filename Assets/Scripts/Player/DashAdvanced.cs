@@ -139,6 +139,7 @@ public class DashAdvanced : MonoBehaviour
     }
     public void CheckDashWithJoystickDirection(InputAction.CallbackContext context)
     {
+        if (GameManager.Instance.GameIsPaused == true) return;
         Flip();
         direction = context.ReadValue<Vector2>();
     }

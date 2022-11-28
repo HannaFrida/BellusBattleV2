@@ -193,33 +193,38 @@ public class Gun : MonoBehaviour
     {
         if (other.gameObject.tag == "Player" && !isPickedUp)
         {
-            playerShoot = other.gameObject.GetComponent<PlayerShoot>();
+            PickUp(other);
+        }
+    }
 
-            // Check who the owner of the weapon is 
-            ownerID = other.gameObject.GetComponent<PlayerDetails>().playerID;
+    public void PickUp(Collider other)
+    {
+        playerShoot = other.gameObject.GetComponent<PlayerShoot>();
 
-            weaponManager = other.gameObject.GetComponent<WeaponManager>();
-            if (weaponManager != null)
+        // Check who the owner of the weapon is 
+        ownerID = other.gameObject.GetComponent<PlayerDetails>().playerID;
+
+        weaponManager = other.gameObject.GetComponent<WeaponManager>();
+        if (weaponManager != null)
+        {
+            if (weaponManager.EquippedWeapon == null)
             {
-                if (weaponManager.EquippedWeapon == null)
-                {
-                    playerShoot.shootInput += Shoot;
-                    playerShoot.dropInput += Drop;
+                playerShoot.shootInput += Shoot;
+                playerShoot.dropInput += Drop;
 
-                    weaponManager.EquipWeapon(weaponData, gameObject);
+                weaponManager.EquipWeapon(weaponData, gameObject);
 
-                    isStartTimerForDrop = false;
-                    isStartTimerForDeSpawn = false;
-                    deSpawnTimer = 0f;
-                    dropTimer = 0f;
+                isStartTimerForDrop = false;
+                isStartTimerForDeSpawn = false;
+                deSpawnTimer = 0f;
+                dropTimer = 0f;
 
-                    isPickedUp = true;
+                isPickedUp = true;
 
 
-                    //gunsAmmo = weaponData.Ammo;
-                }
-
+                //gunsAmmo = weaponData.Ammo;
             }
+
         }
     }
 
