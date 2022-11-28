@@ -6,12 +6,13 @@ using UnityEngine.VFX;
 
 public class PlayerHealth : MonoBehaviour
 {
-    [SerializeField] private CameraFocus CF;
     public delegate void OnGameOver();
     public static event OnGameOver onGameOver;
     [SerializeField] private AudioSource playerDeathSound;
     [SerializeField] private VisualEffect bloodSplatter;
     [SerializeField] private VisualEffect poisoned;
+    [SerializeField] private VisualEffect lighting;
+    [SerializeField] private VisualEffect fire;
     private PlayerMovement pm;
    
 
@@ -38,7 +39,6 @@ public class PlayerHealth : MonoBehaviour
 
     private void OnLevelWasLoaded(int level)
     {
-        CF = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFocus>();
         poisoned.gameObject.SetActive(false);
         UnkillPlayer();
     }
@@ -65,6 +65,19 @@ public class PlayerHealth : MonoBehaviour
     {
         poisoned.gameObject.SetActive(true);
         //poisoned.Play();
+
+    }
+    public void PlayLighting()
+    {
+        lighting.gameObject.SetActive(true);
+
+        lighting.Play();
+
+    }
+    public void PlayFire()
+    {
+        fire.gameObject.SetActive(true);
+        fire.Play();
 
     }
 
@@ -108,7 +121,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void UnkillPlayer()
     {
-        GameManager.Instance.RestorePLayer(gameObject);
+        
         health = 1f;
         skr.enabled = true;
         anime.enabled = true;
@@ -117,10 +130,12 @@ public class PlayerHealth : MonoBehaviour
         hips.transform.position = Vector3.zero;
         hips.SetActive(false);
         boxCollider.enabled = true;
+        /*
         if (pm != null)
         {
             pm.enabled = true;
         }
+        */
         dash.enabled = true;
         /*
         boxCollider.enabled = true;

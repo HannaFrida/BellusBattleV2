@@ -17,9 +17,12 @@ MonoBehaviour:
     type: 3}
   damage: 1
   maxDistance: 5
-  projectile: {fileID: 7929666838174018582, guid: 99b20f100c8787f4e96438a5ddee74fe,
+  projectile: {fileID: 3173162870060338459, guid: 67ca025a4bb502b44a5e7379799e8a8d,
     type: 3}
   projectileForce: 120
+  usesSpread: 1
+  spreadFactor: 10
+  pelletCount: 40
   currentAmmo: 4
   initialAmmo: 4
   magSize: 4
@@ -27,5 +30,7 @@ MonoBehaviour:
   pickupSound: {fileID: 0}
   shootAttackSound: {fileID: 0}
   muzzleFlashGameObject: {fileID: 4152921793190633321, guid: 48213759ef4e3da4bb200155920ca711,
+    type: 3}
+  despawnVFX: {fileID: 3491355477508070189, guid: b823ad32a79881f498947f7cc61300ba,
     type: 3}
   crosshair: {fileID: 0}

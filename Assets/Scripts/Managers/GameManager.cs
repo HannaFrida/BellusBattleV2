@@ -8,10 +8,11 @@ using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 using Cinemachine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviour, IDataPersistenceManager
 {
 
     [SerializeField] private CinemachineTargetGroup targetGroup;
+    private bool gameLoopFinished = false;
     public static GameManager Instance;
     [SerializeField] private List<GameObject> players = new List<GameObject>();
     [SerializeField] private List<GameObject> playersAlive = new List<GameObject>();
@@ -53,6 +54,7 @@ public class GameManager : MonoBehaviour
 
     public List<string> scenesToChooseFrom = new List<string>();
     public List<string> scenesToRemove = new List<string>();
+
     public List<string> GetScencesList()
     {
         return scenesToChooseFrom;
@@ -62,23 +64,35 @@ public class GameManager : MonoBehaviour
     {
         get => gameIsPaused;
     }
+
+    public bool GameHasStarted
+    {
+        get => GameHasStarted;
+    }
     private void OnLevelWasLoaded(int level)
     {
         if (level != 0)
         {
-            DeactivateMovement();
+            
             giveScoreTimer = 0f;
             gameHasStarted = true;
             playersAlive = new List<GameObject>(players);
-            
+            DeactivateMovement();
+
             //Array.Clear(targetGroup.GetComponent<CinemachineTargetGroup>().m_Targets, 0, targetGroup.GetComponent<CinemachineTargetGroup>().m_Targets.Length);
             //SpawnPlayers();
         }
+        RestorePLayer();
+        
+        
+
 
     }
     private void Awake()
     {
+        if (Instance != null) Debug.LogError("Found more than one Game Manager in scene.");
         Instance = this;
+        gameLoopFinished = false;
         DontDestroyOnLoad(this);
         AddScenesToPlay();
 
@@ -93,15 +107,11 @@ public class GameManager : MonoBehaviour
         pos2 = new Vector2(892f, 160f);
         pos3 = new Vector2(1139f, 160f);
         pos4 = new Vector2(1386f, 160f); // x = 977 - -409
+        DataPersistenceManager.Instance.LoadGame();
     }
 
     private void Update()
-    {
-        if (gameIsPaused)
-        {
-            Time.timeScale = 0;
-        }
-        Debug.Log("TimeScale " + Time.timeScale);
+    {   
         if (!gameHasStarted) return;
         CheckPlayersLeft();
 
@@ -111,15 +121,21 @@ public class GameManager : MonoBehaviour
         }           
 
     }
+    private void OnApplicationQuit()
+    {
+        DataPersistenceManager.Instance.SaveGame();
+    }
 
     public void PauseGame()
     {
+        soundManager.HalfMusicVolume();
         gameIsPaused = true;
         Time.timeScale = 0; 
     }
 
     public void ResumeGame()
     {
+        soundManager.FullMusicVolume();
         gameIsPaused = false;
         Time.timeScale = 1;
     }
@@ -138,14 +154,14 @@ public class GameManager : MonoBehaviour
     {
         if(welcomePanel != null) welcomePanel.SetActive(false);
         players.Add(player);
-        targetGroup.GetComponent<CinemachineTargetGroup>().AddMember(player.transform, 1, 5); //OBS GER ERROR!
+        targetGroup.AddMember(player.transform, 1, 5); //OBS GER ERROR!
     }
-    public void RestorePLayer(GameObject player)
+    public void RestorePLayer()
     {
         for (int i = 0; i < players.Count; i++)
         {
-            targetGroup.GetComponent<CinemachineTargetGroup>().RemoveMember(players[i].transform);
-            targetGroup.GetComponent<CinemachineTargetGroup>().AddMember(players[i].transform, 1, 5); //OBS GER ERROR!
+            targetGroup.RemoveMember(players[i].transform);
+            targetGroup.AddMember(players[i].transform, 1, 5); //OBS GER ERROR!
         }
     }
 
@@ -153,6 +169,7 @@ public class GameManager : MonoBehaviour
     {
         foreach (GameObject player in players)
         {
+            player.GetComponent<DashAdvanced>().enabled = false;
             player.GetComponent<PlayerMovement>().enabled = false;
         }
     }
@@ -161,6 +178,7 @@ public class GameManager : MonoBehaviour
     {
         foreach (GameObject player in players)
         {
+            player.GetComponent<DashAdvanced>().enabled = true;
             player.GetComponent<PlayerMovement>().enabled = true;
         }
     }
@@ -168,7 +186,7 @@ public class GameManager : MonoBehaviour
     public void PlayerDeath(GameObject deadPlayer)
     {
         playersAlive.Remove(deadPlayer);
-        targetGroup.GetComponent<CinemachineTargetGroup>().RemoveMember(deadPlayer.transform); //OBS GER ERROR!
+        targetGroup.RemoveMember(deadPlayer.transform); //OBS GER ERROR!
     }
 
 
@@ -238,7 +256,7 @@ public class GameManager : MonoBehaviour
             if (GetScore(winner) == scoreToWin)
             {
                 ClearScore();
-                Finish(gameObject);
+                StartCoroutine(RestartGame());
                 //Nån har vunnit!
                 return;
             }
@@ -366,18 +384,31 @@ public class GameManager : MonoBehaviour
         scenesToChooseFrom.RemoveAt(randomNumber);
         return nextLevel;
     }
-    public void Finish(GameObject destroyMe)
+
+    public void ReturnToMainMenu()
+    {
+        if (SceneManager.GetActiveScene().name == "MainMenu") return;
+        ReturnToLobby();
+    }
+    private IEnumerator RestartGame()
     {
         SceneManager.LoadScene("The_End");
-        StartCoroutine(RestartGame(destroyMe));
-    }
-    private IEnumerator RestartGame(GameObject destroyMe)
-    {
+        gameLoopFinished = true;
+        DataPersistenceManager.Instance.SaveGame();
         yield return new WaitForSeconds(timeTillRestartGame);
-        Destroy(destroyMe);
-        Destroy(gameObject);
+        Destroy(transform.parent.gameObject);
         SceneManager.LoadScene(System.IO.Path.GetFileNameWithoutExtension(SceneUtility.GetScenePathByBuildIndex(0)));
     }
+    private void ReturnToLobby()
+    {
+        SceneManager.LoadScene("MainMenu");
+        gameLoopFinished = true;
+        DataPersistenceManager.Instance.SaveGame();
+        //yield return new WaitForSeconds(timeTillRestartGame);
+        Destroy(transform.parent.gameObject);
+        SceneManager.LoadScene(System.IO.Path.GetFileNameWithoutExtension(SceneUtility.GetScenePathByBuildIndex(0)));
+    }
+
 
     public int GetWinnerID()
     {
@@ -453,5 +484,22 @@ public class GameManager : MonoBehaviour
             pos4 = new Vector2(picture4.position.x, picture4.position.y + 20);
             trans.getWinScore4.SetText(scoreDic[playersAlive[0]] + "");
         }
+    }
+
+    public void LoadData(GameData data)
+    {
+        players = data.players;
+        playersAlive = new List<GameObject>(players);
+        for(int i = 0; i< players.Count(); i++)
+        {
+            targetGroup.AddMember(players[i].transform, 1, 5);
+        }
+
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        if(!gameLoopFinished) players.Clear();
+        data.players = players;
     }
 }

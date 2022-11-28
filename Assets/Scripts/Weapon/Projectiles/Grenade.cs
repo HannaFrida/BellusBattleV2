@@ -15,6 +15,8 @@ public class Grenade : Projectile
     [SerializeField] private AudioSource explosionSound;
     [SerializeField] private GameObject bombMesh;
     [SerializeField] Collider[] hits;
+    [SerializeField] bool lighting =false;
+    [SerializeField] bool fire = false;
 
     private void Start()
     {
@@ -38,11 +40,17 @@ public class Grenade : Projectile
 
     public void Explode()
     {
+        Destroy(gameObject, 0.15f);
         if (bombMesh != null)
         {
             bombMesh.SetActive(false);
             explosionSound.Play();
-            GameObject spawnVfx = Instantiate(objectToBoom, transform);
+            GameObject spawnVfx = Instantiate(objectToBoom, transform.position,transform.rotation);
+            Destroy(spawnVfx, 0.3f);
+            gameObject.GetComponent<Rigidbody>().useGravity = false;
+            Rigidbody RB = GetComponent<Rigidbody>();
+            RB.velocity = Vector3.zero;
+            
         }
 
         hits = Physics.OverlapSphere(transform.position, explosionSize);
@@ -51,6 +59,15 @@ public class Grenade : Projectile
             Debug.Log(hits[i].name);
             if (hits[i].CompareTag("Player"))
             {
+                if(lighting)
+                {
+                    hits[i].GetComponent<PlayerHealth>().PlayLighting();
+                }
+                if (fire)
+                {
+                    hits[i].GetComponent<PlayerHealth>().PlayFire();
+                }
+
                 PlayerHealth ph = hits[i].GetComponent<PlayerHealth>();
                 ph.TakeDamage(damage);
                 Debug.Log("playerfound");
@@ -80,7 +97,7 @@ public class Grenade : Projectile
         //hits = null;
 
         // Delay before destroy
-        Destroy(gameObject, 1f);
+        
         //Die();
     }
 

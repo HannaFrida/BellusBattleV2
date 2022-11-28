@@ -12,19 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f37510bd6e63e4040bae77d76112c48c, type: 3}
   m_Name: BoltData
   m_EditorClassIdentifier: 
-  name: ShitGun
-  weaponPrefab: {fileID: 9109231185878699503, guid: 2576044230ab7814e8473dffcd42a1f7,
+  name: GwynBolt
+  weaponPrefab: {fileID: 9109231185878699503, guid: 677abb7f0b4cd764fb070e184898c21a,
     type: 3}
   damage: 1
   maxDistance: 5
-  projectile: {fileID: 7929666838174018582, guid: e90f3ca5efba9af4d8355c2f7b4fb820,
+  projectile: {fileID: 2217352063105504401, guid: 8df8f0990198e1f4d8d6ba6c3bc4b92a,
     type: 3}
-  projectileForce: 100
-  currentAmmo: 5
-  initialAmmo: 5
-  magSize: 5
+  projectileForce: 1000
+  usesSpread: 0
+  spreadFactor: 0
+  pelletCount: 0
+  currentAmmo: 1
+  initialAmmo: 1
+  magSize: 1
   fireRate: 100
   pickupSound: {fileID: 0}
   shootAttackSound: {fileID: 0}
   muzzleFlashGameObject: {fileID: 0}
+  despawnVFX: {fileID: 0}
   crosshair: {fileID: 0}

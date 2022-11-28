@@ -320,7 +320,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8510856196853466762}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.6799998, y: 0.120000005, z: 0}
+  m_LocalPosition: {x: -1.159, y: 0.314, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5195,7 +5195,7 @@ Transform:
   m_GameObject: {fileID: 9109231185878699503}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.566, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2839734295875269815}
@@ -5238,7 +5238,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e56085b7f1b213948ab9bf3f65916c99, type: 2}
+  - {fileID: 2100000, guid: 88944f53faecf4844abc1a6664d94bd9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5381,14 +5381,14 @@ MonoBehaviour:
   ownerID: 0
   weaponManager: {fileID: 0}
   muzzle: {fileID: 5716300864232877825}
+  emptyGunSound: {fileID: 0}
   shootSound: {fileID: 7698343306252742840}
-  player: {fileID: 0}
-  aim: {fileID: 0}
   isPickedUp: 0
   gunsAmmo: 0
+  timeToWaitForPickup: 0.5
+  timeToWaitForDeSpawn: 0.1
   swordMesh: {fileID: 0}
-  timeToWaitForPickup: 2
-  timeToWaitForDeSpawn: 5
+  BulletFollow: 0
 --- !u!54 &1248005850
 Rigidbody:
   m_ObjectHideFlags: 0

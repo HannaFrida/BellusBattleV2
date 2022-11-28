@@ -77,6 +77,8 @@ MonoBehaviour:
   explosionSound: {fileID: -8099395198417228163}
   bombMesh: {fileID: 1465621190059617142}
   hits: []
+  lighting: 0
+  fire: 1
 --- !u!114 &-387110191634700887
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96,6 +98,8 @@ MonoBehaviour:
   explosionSound: {fileID: -8099395198417228163}
   bombMesh: {fileID: 1465621190059617142}
   hits: []
+  lighting: 0
+  fire: 1
 --- !u!54 &2859355100740442453
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -104,14 +108,14 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2217352063105504401}
   serializedVersion: 2
-  m_Mass: 10
-  m_Drag: 10
-  m_AngularDrag: 1
+  m_Mass: 11.5
+  m_Drag: 0.09
+  m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 56
-  m_CollisionDetection: 0
+  m_Constraints: 120
+  m_CollisionDetection: 1
 --- !u!65 &-8253128035794468108
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -119,7 +123,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2217352063105504401}
-  m_Material: {fileID: 13400000, guid: 6da183b983d43b84d8067674f3e3de13, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -134,7 +138,7 @@ AudioSource:
   m_GameObject: {fileID: 2217352063105504401}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 1169875803261503520, guid: 66b12940d28b0d94ea93cc1bea189c8b,
+  OutputAudioMixerGroup: {fileID: 2321641943578606611, guid: 66b12940d28b0d94ea93cc1bea189c8b,
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 5a7222471ddc6664dad1f9fef20f7c6a, type: 3}
   m_PlayOnAwake: 0
@@ -288,6 +292,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: GrenadeShell
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a4f022f867fa7674a90cf884fe5de570,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a4f022f867fa7674a90cf884fe5de570, type: 3}

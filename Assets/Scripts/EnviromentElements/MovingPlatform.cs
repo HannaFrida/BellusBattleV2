@@ -6,7 +6,6 @@ public class MovingPlatform : MonoBehaviour
 {
     [SerializeField] private List<Collider> attachedColliders = new List<Collider>();
     [SerializeField] private BoxCollider attachZone;
-    [SerializeField] private Animator animator;
     [SerializeField] private float moveSpeed;
     [SerializeField]  Transform targetOne;
     [SerializeField] Transform targetTwo;
@@ -49,7 +48,6 @@ public class MovingPlatform : MonoBehaviour
             if (col.gameObject.CompareTag("Player") && attachedColliders.Contains(col) == false)
             {
                 attachedColliders.Add(col);
-                //col.gameObject.transform.parent = transform;
             }
         }
     }
@@ -64,11 +62,8 @@ public class MovingPlatform : MonoBehaviour
             if(currentColliders.Contains(attachedColliders[i]) == false)
             {
                 attachedColliders[i].GetComponent<PlayerMovement>().IsMovedByPLatform = false;
-                //attachedColliders[i].gameObject.transform.parent = null;
                 attachedColliders.RemoveAt(i);
-                
-            }
-            
+            }   
         }
     }
 
@@ -86,7 +81,7 @@ public class MovingPlatform : MonoBehaviour
                 addedForce = movementDirection;
             }
             PlayerMovement playerMovement = col.GetComponent<PlayerMovement>();
-            playerMovement.AddConstantExternalForce(addedForce * moveSpeed);
+            playerMovement.AddForceFromMovingObject(addedForce * moveSpeed);
             playerMovement.IsMovedByPLatform = true;
         }
     }
@@ -101,8 +96,6 @@ public class MovingPlatform : MonoBehaviour
         {
             currentTarget = currentTarget == targetOne ? currentTarget = targetTwo : targetOne;
         }
-        
-
         if (attachedColliders.Count == 0) return;
         MovePlayers();
     }
@@ -114,6 +107,7 @@ public class MovingPlatform : MonoBehaviour
 
     private void CheckTargetsVerticalPosition()
     {
+        if (targetOne == null || targetTwo == null) return;
         targetOne.position = new Vector2(targetOne.position.x, transform.position.y);
         targetTwo.position = new Vector2(targetTwo.position.x, transform.position.y);
     }

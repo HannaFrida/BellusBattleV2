@@ -9,8 +9,9 @@ public class UIMenuHandler : MonoBehaviour
     [SerializeField] private EventSystem eventSys;
     [SerializeField] private GameObject button;
     private GameObject activePanel;
-    private void Start()
+    protected void Start()
     {
+        eventSys = GameObject.FindGameObjectWithTag("EventSystem").GetComponent<EventSystem>();
         panels[0].SetActive(true);
         activePanel = panels[0];
     }

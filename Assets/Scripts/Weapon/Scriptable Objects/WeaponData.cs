@@ -47,6 +47,7 @@ public class WeaponData : ScriptableObject
 
     [Header("VFX")]
     [SerializeField] private GameObject muzzleFlashGameObject;
+    [SerializeField] private GameObject despawnVFX;
     //[SerializeField] private ParticleSystem muzzleFlashVFX;
 
     [Header("Crosshair")]
@@ -58,6 +59,8 @@ public class WeaponData : ScriptableObject
     //public ParticleSystem MuzzleFlash { get => muzzleFlashVFX; }
     
     public GameObject MuzzleFlashGameObject { get => muzzleFlashGameObject; }
+
+    public GameObject DespawnVFX { get => despawnVFX; }
 
     public GameObject Crosshair { get => crosshair; }
 

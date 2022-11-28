@@ -34,9 +34,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private PlayerSoundManager playerSoundManager;
     [SerializeField] private Animator playerAnimator;
     [SerializeField] private GameObject doubleJumpVFX;
-    
-   
-    
+
+    [SerializeField] private PlayerInput playerInput;
+
+
+    public PlayerInput PlayerInput  => playerInput;
 
 
     public UnityEvent jumpEvent;
@@ -75,6 +77,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private Vector2 velocity;
+    private Vector2 externalForce;
     private Vector2 rayCastBottomLeft, rayCastBottomRight, rayCastTopRight, rayCastTopLeft;
 
     private Vector2 verticalRayOffset, horizontalRayOffset;
@@ -159,13 +162,14 @@ public class PlayerMovement : MonoBehaviour
             
 
         }
-        velocity = new Vector2(movementX, movementY);
+        velocity = new Vector2(movementX, movementY) + externalForce;
         JumpBuffer();
 
         if (velocity.y != 0)
         {
-            HandleVerticalCollisions(ref velocity);
+            
         }
+        HandleVerticalCollisions(ref velocity);
 
         if (velocity.x != 0)
         {
@@ -192,6 +196,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext ctx)
     {
+        if (GameManager.Instance.GameIsPaused == true) return;
+
         downwardInput = ctx.ReadValue<Vector2>().y;
         movementAmount = ctx.ReadValue<Vector2>().x;
       
@@ -230,6 +236,16 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+    private void AccessabilityoveDown() // Ska användas om man kör med onehand-mode!
+    {
+        if (downwardInput <= downwardInputBound && isStandingOnOneWayPlatform)
+        {
+            transform.position += Vector3.down * playerHeight;
+            isStandingOnOneWayPlatform = false;
+            return;
+        }
+    }
+
     public static void SetDownwardForce(float value, float downfroce)
     {
         float temp = downfroce;
@@ -239,6 +255,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext ctx)
     {
+        if (GameManager.Instance.GameIsPaused == true) return;
+
         if (ctx.started)
         {
             Jump();
@@ -285,7 +303,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void ResetValuesOnGrounded()
     {
-        //movementY = 0;
         coyoteTimer = 0;
         hasCoyoteTime = true;
         hasDoubleJump = true;
@@ -369,6 +386,14 @@ public class PlayerMovement : MonoBehaviour
             if (isMovedByPLatform) return;
             movementX = Mathf.MoveTowards(movementX, 0, deceleration * Time.deltaTime);
         }
+        if(externalForce.x != 0f)
+        {
+            externalForce.x = Mathf.MoveTowards(externalForce.x, 0, deceleration * Time.deltaTime);
+        }
+        if(externalForce.y != 0f)
+        {
+            externalForce.y = Mathf.MoveTowards(externalForce.y, 0, deceleration * Time.deltaTime);
+        }
     }
     private bool CheckIsGrounded()
     {
@@ -430,7 +455,7 @@ public class PlayerMovement : MonoBehaviour
                     transform.position = new Vector2(transform.position.x, hit.collider.bounds.max.y);
                     ResetValuesOnGrounded();
                 }
-                velocity.y = 0;
+                velocity.y = 0f;
                 movementY = 0f;
                 return;
             }
@@ -443,12 +468,9 @@ public class PlayerMovement : MonoBehaviour
                     transform.position = new Vector2(transform.position.x, hit.collider.bounds.max.y);
                     ResetValuesOnGrounded();
                 }
-                velocity.y = 0;
-                movementY = 0;
-
-
-
-
+                velocity.y = 0f;
+                movementY = 0f;
+                return;
             } 
         }
     }
@@ -456,7 +478,7 @@ public class PlayerMovement : MonoBehaviour
     private void HandleHorizontalCollisions(ref Vector2 velocity)
     {
         float directionX = Mathf.Sign(velocity.x);
-        for (int i = 0; i < horizontalRayCount; i++)
+        for (int i = horizontalRayCount-1; i >= 0; i--)
         {
             Vector2 rayOrigin;
             if (directionX == -1)
@@ -479,6 +501,7 @@ public class PlayerMovement : MonoBehaviour
                 }
                 velocity.x = 0;
                 movementX = 0;
+                return;
             }
         }
     }
@@ -515,14 +538,6 @@ public class PlayerMovement : MonoBehaviour
         horizontalRayLength = ((boxCollider.bounds.max.x - boxCollider.bounds.min.x) / 2) + horizontalSkinWidth;
     }
 
-    public void StopPlayer()
-    {
-        velocity.x = 0;
-        velocity.y = 0;
-        movementX = 0;
-        movementY = 0;
-    }
-
     public void AddExternalForce(Vector2 force)
     {
         Debug.Log("jdjada");
@@ -532,11 +547,15 @@ public class PlayerMovement : MonoBehaviour
         movementX = force.x;
         
     }
-
     public void AddConstantExternalForce(Vector2 force)
     {
+        externalForce = force;
+    }
+
+    public void AddForceFromMovingObject(Vector2 force)
+    {
+        movementY += force.y;
         movementX = force.x;
-        movementY += force.y;  
     }
 
 }

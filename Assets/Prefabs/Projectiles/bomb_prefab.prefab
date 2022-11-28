@@ -239,11 +239,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fuse: 1.5
-  explosionSize: 5.5
+  explosionSize: 10
   objectToBoom: {fileID: 8576383740616002590, guid: 90797a69d3bc9a943a92774b5f629b77,
     type: 3}
   explosionSound: {fileID: 7930975315576435556}
   bombMesh: {fileID: 1235107522121719599}
+  hits: []
+  lighting: 0
+  fire: 1
 --- !u!54 &2859355100740442453
 Rigidbody:
   m_ObjectHideFlags: 0

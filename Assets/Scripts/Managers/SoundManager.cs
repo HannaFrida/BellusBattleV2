@@ -90,7 +90,7 @@ public class SoundManager : MonoBehaviour
     }
     public void HowerUiSound()
     {
-        howerMenuSource.pitch = Random.Range(0.95f, highPitchRan);
+        howerMenuSource.pitch = Random.Range(0.93f, highPitchRan);
         howerMenuSource.Play();
     }
     
@@ -145,6 +145,19 @@ public class SoundManager : MonoBehaviour
 
         }
     }
+
+    public void HalfMusicVolume()
+    {
+        
+        musicSource.volume = 0.3f;
+        Debug.Log("lower " + musicSource.volume);
+    }
+
+    public void FullMusicVolume()
+    {
+        musicSource.volume = 1f;
+        Debug.Log("normal " + musicSource.volume);
+    }
    
 
     private void ToggleDoorSound()
@@ -158,10 +171,10 @@ public class SoundManager : MonoBehaviour
     private void RandomClipPlayer(AudioClip[] sounds, AudioSource source)
     {
         int randomIndex = Random.Range(0, sounds.Length);
-        if (source.clip == sounds[randomIndex])
-        {
-            RandomClipPlayer(sounds, source);
-        }
+      //  if (source.clip == sounds[randomIndex])
+      //  {
+         //   RandomClipPlayer(sounds, source);
+      //  }
         source.clip = sounds[randomIndex];
         source.Play();
     }
