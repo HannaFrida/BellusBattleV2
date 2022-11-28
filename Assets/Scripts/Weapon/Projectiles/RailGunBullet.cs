@@ -14,6 +14,9 @@ public class RailGunBullet : Projectile
 	[SerializeField] private GameObject colliderPlayerVFX;
 	[SerializeField] private Collider col;
 	[SerializeField] private float colOn = 0.015f;
+	[SerializeField] private bool xnade = false;
+	[SerializeField] private float stopMove = 0.1f;
+	private bool stopMovement = false;
 	//public float bulletDamage;
 
 	private void Start()
@@ -21,11 +24,21 @@ public class RailGunBullet : Projectile
 		cf = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFocus>();
 		StartCoroutine(Shoot(lifeSpan));
 	}
-	
-	private void OnTriggerEnter(Collider other)
+    private void Update()
+    {
+		if (xnade && stopMovement)
+		{
+			gameObject.GetComponent<Rigidbody>().freezeRotation = true;
+			gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+			gameObject.GetComponent<Rigidbody>().useGravity = false;
+			gameObject.GetComponentInChildren<RotationXnade>().TimeToFreez();
+		}
+	}
+
+    private void OnTriggerEnter(Collider other)
 	{
 
-
+		
 
 
 		GameObject playerGo = other.gameObject;
@@ -93,6 +106,8 @@ public class RailGunBullet : Projectile
 
 	private IEnumerator Shoot(float seconds)
 	{
+		yield return new WaitForSeconds(stopMove);
+		Stop();
 		yield return new WaitForSeconds(colOn);
 		killcol();
 		yield return new WaitForSeconds(seconds);
@@ -103,10 +118,15 @@ public class RailGunBullet : Projectile
 	{
 		Destroy(gameObject);
 	}
+	private void Stop()
+	{
+		stopMovement = true;
+	}
 	private void killcol()
 	{
 		col.enabled = true;
-
+       
+		
 	}
 }
 

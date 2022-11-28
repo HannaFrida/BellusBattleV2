@@ -80,7 +80,7 @@ VisualEffect:
       - m_Value: 20
         m_Name: InitialParticlesRate
         m_Overridden: 1
-      - m_Value: 3
+      - m_Value: 2
         m_Name: Duration
         m_Overridden: 1
       - m_Value: 16
@@ -155,8 +155,8 @@ VisualEffect:
             inWeight: 0.33333334
             outWeight: 0.33333334
           - serializedVersion: 3
-            time: 0.5102822
-            value: 0.060769007
+            time: 0.5204751
+            value: 0.047463343
             inSlope: 0.10348973
             outSlope: 0.10348973
             tangentMode: 0
@@ -164,8 +164,8 @@ VisualEffect:
             inWeight: 0.12326157
             outWeight: 0.33333334
           - serializedVersion: 3
-            time: 0.59083396
-            value: 0.9802271
+            time: 0.5576919
+            value: 3
             inSlope: 0.26117986
             outSlope: 0.26117986
             tangentMode: 0
@@ -173,8 +173,8 @@ VisualEffect:
             inWeight: 0.45762184
             outWeight: 0.15780541
           - serializedVersion: 3
-            time: 0.9974365
-            value: 1
+            time: 0.99487305
+            value: 3
             inSlope: 0.3638414
             outSlope: 0.3638414
             tangentMode: 0
@@ -318,7 +318,7 @@ VisualEffect:
       - m_Value: 20
         m_Name: InitialParticlesRate
         m_Overridden: 1
-      - m_Value: 3
+      - m_Value: 2
         m_Name: Duration
         m_Overridden: 1
       - m_Value: 16
@@ -393,8 +393,8 @@ VisualEffect:
             inWeight: 0.33333334
             outWeight: 0.33333334
           - serializedVersion: 3
-            time: 0.5102822
-            value: 0.060769007
+            time: 0.5204751
+            value: 0.047463343
             inSlope: 0.10348973
             outSlope: 0.10348973
             tangentMode: 0
@@ -402,8 +402,8 @@ VisualEffect:
             inWeight: 0.12326157
             outWeight: 0.33333334
           - serializedVersion: 3
-            time: 0.59083396
-            value: 0.9802271
+            time: 0.5576919
+            value: 3
             inSlope: 0.26117986
             outSlope: 0.26117986
             tangentMode: 0
@@ -411,8 +411,8 @@ VisualEffect:
             inWeight: 0.45762184
             outWeight: 0.15780541
           - serializedVersion: 3
-            time: 0.9974365
-            value: 1
+            time: 0.99487305
+            value: 3
             inSlope: 0.3638414
             outSlope: 0.3638414
             tangentMode: 0
@@ -490,7 +490,7 @@ GameObject:
   - component: {fileID: 145624440088507490}
   - component: {fileID: 4953645508378710751}
   - component: {fileID: 2498149669663868746}
-  - component: {fileID: 329475074490033220}
+  - component: {fileID: 5236838186425020459}
   m_Layer: 0
   m_Name: vfx_Xnade
   m_TagString: Untagged
@@ -533,8 +533,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 0
   serializedVersion: 2
-  m_Size: {x: 170, y: 1, z: 1}
-  m_Center: {x: 0.7869644, y: -0.06783709, z: 0.025663145}
+  m_Size: {x: 170, y: 3.0363562, z: 1}
+  m_Center: {x: 0.7869644, y: -0.08352411, z: 0.025663137}
 --- !u!114 &5134385707468802731
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -547,12 +547,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2963c68e68754754cb04f648418eaa06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifeSpan: 1.2
+  lifeSpan: 0.72
   hitSounds: []
   colliderWallVFX: {fileID: 0}
   colliderPlayerVFX: {fileID: 0}
   col: {fileID: 6184370278961461672}
-  colOn: 1.8
+  colOn: 0.92
+  xnade: 1
+  stopMove: 0.3
 --- !u!136 &145624440088507490
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -560,7 +562,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5167775749961452402}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 6da183b983d43b84d8067674f3e3de13, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
@@ -574,11 +576,11 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5167775749961452402}
-  m_Material: {fileID: 13400000, guid: 6da183b983d43b84d8067674f3e3de13, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 170, z: 1}
+  m_Size: {x: 3, y: 170, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &2498149669663868746
 Rigidbody:
@@ -596,7 +598,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 1
---- !u!114 &329475074490033220
+--- !u!114 &5236838186425020459
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -608,6 +610,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a636f947e8a83f249a125b2e0102114f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  freez: 0
 --- !u!1 &5167775750080484567
 GameObject:
   m_ObjectHideFlags: 0
@@ -688,7 +691,7 @@ VisualEffect:
       - m_Value: 20
         m_Name: InitialParticlesRate
         m_Overridden: 1
-      - m_Value: 3
+      - m_Value: 2
         m_Name: Duration
         m_Overridden: 1
       - m_Value: 16
@@ -763,8 +766,8 @@ VisualEffect:
             inWeight: 0.33333334
             outWeight: 0.33333334
           - serializedVersion: 3
-            time: 0.5102822
-            value: 0.060769007
+            time: 0.5204751
+            value: 0.047463343
             inSlope: 0.10348973
             outSlope: 0.10348973
             tangentMode: 0
@@ -772,8 +775,8 @@ VisualEffect:
             inWeight: 0.12326157
             outWeight: 0.33333334
           - serializedVersion: 3
-            time: 0.59083396
-            value: 0.9802271
+            time: 0.5576919
+            value: 3
             inSlope: 0.26117986
             outSlope: 0.26117986
             tangentMode: 0
@@ -781,8 +784,8 @@ VisualEffect:
             inWeight: 0.45762184
             outWeight: 0.15780541
           - serializedVersion: 3
-            time: 0.9974365
-            value: 1
+            time: 0.99487305
+            value: 3
             inSlope: 0.3638414
             outSlope: 0.3638414
             tangentMode: 0
@@ -873,7 +876,7 @@ Transform:
   m_GameObject: {fileID: 5175197663430477817}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.548, y: -0.002, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5167775749961452405}
@@ -895,7 +898,10 @@ VisualEffect:
   m_ResourceVersion: 1
   m_PropertySheet:
     m_Float:
-      m_Array: []
+      m_Array:
+      - m_Value: 0.8
+        m_Name: Duration
+        m_Overridden: 1
     m_Vector2f:
       m_Array: []
     m_Vector3f:
@@ -983,7 +989,7 @@ Transform:
   m_GameObject: {fileID: 6055018478843353080}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.5, z: -0.033}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5167775749961452405}
@@ -1005,7 +1011,10 @@ VisualEffect:
   m_ResourceVersion: 1
   m_PropertySheet:
     m_Float:
-      m_Array: []
+      m_Array:
+      - m_Value: 0.8
+        m_Name: Duration
+        m_Overridden: 1
     m_Vector2f:
       m_Array: []
     m_Vector3f:
@@ -1093,7 +1102,7 @@ Transform:
   m_GameObject: {fileID: 7997353255696472986}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -0.59, z: -0.075}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5167775749961452405}
@@ -1115,7 +1124,10 @@ VisualEffect:
   m_ResourceVersion: 1
   m_PropertySheet:
     m_Float:
-      m_Array: []
+      m_Array:
+      - m_Value: 0.8
+        m_Name: Duration
+        m_Overridden: 1
     m_Vector2f:
       m_Array: []
     m_Vector3f:
@@ -1256,7 +1268,7 @@ VisualEffect:
       - m_Value: 20
         m_Name: InitialParticlesRate
         m_Overridden: 1
-      - m_Value: 3
+      - m_Value: 2
         m_Name: Duration
         m_Overridden: 1
       - m_Value: 16
@@ -1331,8 +1343,8 @@ VisualEffect:
             inWeight: 0.33333334
             outWeight: 0.33333334
           - serializedVersion: 3
-            time: 0.5102822
-            value: 0.060769007
+            time: 0.5204751
+            value: 0.047463343
             inSlope: 0.10348973
             outSlope: 0.10348973
             tangentMode: 0
@@ -1340,8 +1352,8 @@ VisualEffect:
             inWeight: 0.12326157
             outWeight: 0.33333334
           - serializedVersion: 3
-            time: 0.59083396
-            value: 0.9802271
+            time: 0.5576919
+            value: 3
             inSlope: 0.26117986
             outSlope: 0.26117986
             tangentMode: 0
@@ -1349,8 +1361,8 @@ VisualEffect:
             inWeight: 0.45762184
             outWeight: 0.15780541
           - serializedVersion: 3
-            time: 0.9974365
-            value: 1
+            time: 0.99487305
+            value: 3
             inSlope: 0.3638414
             outSlope: 0.3638414
             tangentMode: 0
@@ -1441,7 +1453,7 @@ Transform:
   m_GameObject: {fileID: 8285898902959455175}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.512, y: -0.056, z: -0.03}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5167775749961452405}
@@ -1463,7 +1475,10 @@ VisualEffect:
   m_ResourceVersion: 1
   m_PropertySheet:
     m_Float:
-      m_Array: []
+      m_Array:
+      - m_Value: 0.8
+        m_Name: Duration
+        m_Overridden: 1
     m_Vector2f:
       m_Array: []
     m_Vector3f:
