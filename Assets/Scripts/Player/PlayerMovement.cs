@@ -77,6 +77,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private Vector2 velocity;
+    private Vector2 externalForce;
     private Vector2 rayCastBottomLeft, rayCastBottomRight, rayCastTopRight, rayCastTopLeft;
 
     private Vector2 verticalRayOffset, horizontalRayOffset;
@@ -161,13 +162,14 @@ public class PlayerMovement : MonoBehaviour
             
 
         }
-        velocity = new Vector2(movementX, movementY);
+        velocity = new Vector2(movementX, movementY) + externalForce;
         JumpBuffer();
 
         if (velocity.y != 0)
         {
-            HandleVerticalCollisions(ref velocity);
+            
         }
+        HandleVerticalCollisions(ref velocity);
 
         if (velocity.x != 0)
         {
@@ -301,8 +303,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void ResetValuesOnGrounded()
     {
-        velocity.y = 0;
-        movementY = 0f;
         coyoteTimer = 0;
         hasCoyoteTime = true;
         hasDoubleJump = true;
@@ -386,6 +386,14 @@ public class PlayerMovement : MonoBehaviour
             if (isMovedByPLatform) return;
             movementX = Mathf.MoveTowards(movementX, 0, deceleration * Time.deltaTime);
         }
+        if(externalForce.x != 0f)
+        {
+            externalForce.x = Mathf.MoveTowards(externalForce.x, 0, deceleration * Time.deltaTime);
+        }
+        if(externalForce.y != 0f)
+        {
+            externalForce.y = Mathf.MoveTowards(externalForce.y, 0, deceleration * Time.deltaTime);
+        }
     }
     private bool CheckIsGrounded()
     {
@@ -447,6 +455,8 @@ public class PlayerMovement : MonoBehaviour
                     transform.position = new Vector2(transform.position.x, hit.collider.bounds.max.y);
                     ResetValuesOnGrounded();
                 }
+                velocity.y = 0f;
+                movementY = 0f;
                 return;
             }
             if (Physics.Raycast(rayOrigin, Vector2.up * directionY, out hit, verticalRayLength, oneWayLayer))
@@ -458,6 +468,8 @@ public class PlayerMovement : MonoBehaviour
                     transform.position = new Vector2(transform.position.x, hit.collider.bounds.max.y);
                     ResetValuesOnGrounded();
                 }
+                velocity.y = 0f;
+                movementY = 0f;
                 return;
             } 
         }
@@ -537,8 +549,13 @@ public class PlayerMovement : MonoBehaviour
     }
     public void AddConstantExternalForce(Vector2 force)
     {
+        externalForce = force;
+    }
+
+    public void AddForceFromMovingObject(Vector2 force)
+    {
+        movementY += force.y;
         movementX = force.x;
-        movementY += force.y;  
     }
 
 }

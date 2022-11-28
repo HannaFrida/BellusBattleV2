@@ -81,7 +81,7 @@ public class MovingPlatform : MonoBehaviour
                 addedForce = movementDirection;
             }
             PlayerMovement playerMovement = col.GetComponent<PlayerMovement>();
-            playerMovement.AddConstantExternalForce(addedForce * moveSpeed);
+            playerMovement.AddForceFromMovingObject(addedForce * moveSpeed);
             playerMovement.IsMovedByPLatform = true;
         }
     }
