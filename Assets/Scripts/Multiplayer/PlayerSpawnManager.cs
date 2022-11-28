@@ -20,27 +20,18 @@ public class PlayerSpawnManager : MonoBehaviour
         get { return spawnLocations; }
     }
 
-
-    private void OnLevelWasLoaded(int level)
-    {
-        
-    }
-
     private void Start()
     {
         timer = 0f;
         runTimer = true;
         amountOfPlayer = GameManager.Instance.GetAllPlayers().Count;
         movementTurnOnDelay = amountOfPlayer;
-        //scoreManager = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>();
         players = GameManager.Instance.GetAllPlayers().ToArray();
         for(int i = 0; i < players.Length; i++)
         {
-            Debug.Log("spawnmePls");
-            //players[i].gameObject.SetActive(true);
+            if (players[i] == null) continue;
             players[i].GetComponent<Dash>().ResetValues();
             players[i].transform.position = spawnLocations[i].position;
-            //spawnedPlayers++;
         }
         
 

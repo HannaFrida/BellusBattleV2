@@ -147,9 +147,14 @@ public class Gun : MonoBehaviour
             Despawn();
         }
 
+        if (gunsAmmo == 0 && weaponData.name != "Grenade" && weaponData.name != "GwynBolt" && weaponData.name != "RailGun")
+        {
+            Drop();
+            Despawn();
+        }
 
         // SPECIAL CASES
-        /*
+
         if (gunsAmmo == 0 && weaponData.name == "Grenade")
         {
             Drop();
@@ -165,7 +170,7 @@ public class Gun : MonoBehaviour
             Drop();
             Despawn();
         }
-        */
+        
         if (gunsAmmo == 0 && weaponData.name == "RailGun")
         {
             railGoneTime = true;
