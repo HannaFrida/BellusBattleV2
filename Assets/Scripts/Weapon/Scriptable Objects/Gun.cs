@@ -55,7 +55,7 @@ public class Gun : MonoBehaviour
     private GameObject firedProjectile;
     private bool railGoneTime;
     private float railGoneTimer = 0;
-    private float railGunWaitForGone = 1.6f;
+    private float railGunWaitForGone = 1.48f;
 
     /// <summary>
     /// Gets the ID of the one who is currently holding the weapon
