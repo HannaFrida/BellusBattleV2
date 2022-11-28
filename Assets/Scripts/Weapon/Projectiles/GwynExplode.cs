@@ -6,9 +6,9 @@ using UnityEngine;
 public class GwynExplode : Grenade
 {
     private bool hasExploded;
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if(collision.Equals("Player"))
+        if (other.gameObject.CompareTag("Player"))
         {
             if (!hasExploded)
             {
@@ -16,10 +16,8 @@ public class GwynExplode : Grenade
                 hasExploded = true;
             }
         }
-        else
-        {
-
-        }
+            
+     }
         
-    }
 }
+

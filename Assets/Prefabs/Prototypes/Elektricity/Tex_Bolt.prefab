@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1553263964355448363}
   - component: {fileID: 1298431034502118128}
-  - component: {fileID: 615147525693207714}
+  - component: {fileID: 193580869578090200}
   - component: {fileID: -387110191634700887}
   - component: {fileID: 2859355100740442453}
   - component: {fileID: -8253128035794468108}
@@ -59,7 +59,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &615147525693207714
+--- !u!114 &193580869578090200
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -68,11 +68,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2217352063105504401}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90660ea4de421514983888705b1ebf07, type: 3}
+  m_Script: {fileID: 11500000, guid: 34604bd3826e94c41a06efd9e85502d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   fuse: 5
-  explosionSize: 9.5
+  explosionSize: 3
   objectToBoom: {fileID: 7555042882257320724, guid: 6d8d623286bc54c4f9e4b4da35d2dc3e,
     type: 3}
   explosionSound: {fileID: -8099395198417228163}
@@ -125,11 +125,11 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2217352063105504401}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.8428663, y: 0.18172686, z: 0.14554901}
-  m_Center: {x: -0.8766387, y: -0.18193476, z: 0.011972653}
+  m_Size: {x: 0.96280277, y: 0.29810795, z: 2.1100004}
+  m_Center: {x: -0.9723442, y: -0.19893038, z: -0.02599458}
 --- !u!82 &-8099395198417228163
 AudioSource:
   m_ObjectHideFlags: 0
@@ -260,14 +260,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2746280792741251289}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1553263964355448363}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!2083052967 &6853596510726689356
 VisualEffect:
   m_ObjectHideFlags: 0
