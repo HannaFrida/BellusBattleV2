@@ -64,6 +64,11 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
     {
         get => gameIsPaused;
     }
+
+    public bool GameHasStarted
+    {
+        get => GameHasStarted;
+    }
     private void OnLevelWasLoaded(int level)
     {
         if (level != 0)
@@ -383,7 +388,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
     public void ReturnToMainMenu()
     {
         if (SceneManager.GetActiveScene().name == "MainMenu") return;
-        SceneManager.LoadScene("MainMenu");
+        ReturnToLobby();
     }
     private IEnumerator RestartGame()
     {
@@ -394,6 +399,16 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
         Destroy(transform.parent.gameObject);
         SceneManager.LoadScene(System.IO.Path.GetFileNameWithoutExtension(SceneUtility.GetScenePathByBuildIndex(0)));
     }
+    private void ReturnToLobby()
+    {
+        SceneManager.LoadScene("MainMenu");
+        gameLoopFinished = true;
+        DataPersistenceManager.Instance.SaveGame();
+        //yield return new WaitForSeconds(timeTillRestartGame);
+        Destroy(transform.parent.gameObject);
+        SceneManager.LoadScene(System.IO.Path.GetFileNameWithoutExtension(SceneUtility.GetScenePathByBuildIndex(0)));
+    }
+
 
     public int GetWinnerID()
     {

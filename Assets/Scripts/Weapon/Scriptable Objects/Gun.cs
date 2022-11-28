@@ -38,21 +38,24 @@ public class Gun : MonoBehaviour
 
     [Header("Dropping")]
     [Tooltip("time before the weapon can be picked up again")]
-    [SerializeField] float timeToWaitForPickup = 2f;
+    [SerializeField] float timeToWaitForPickup = 0.5f;
     bool isStartTimerForDrop;
     float dropTimer;
     bool isDropped;
 
     [Header("DeSpawning")]
     [Tooltip("time before the weapon can be picked up again")]
-    [SerializeField] float timeToWaitForDeSpawn = 2f;
+    [SerializeField] float timeToWaitForDeSpawn = 0.1f;
     bool isStartTimerForDeSpawn;
     float deSpawnTimer;
 
     [Header("Special cases")]
     [SerializeField] GameObject swordMesh;
-    [SerializeField] bool BulletFollow =false;
+    [SerializeField] bool BulletFollow = false;
     private GameObject firedProjectile;
+    private bool railGoneTime;
+    private float railGoneTimer = 0;
+    private float railGunWaitForGone = 1.6f;
 
     /// <summary>
     /// Gets the ID of the one who is currently holding the weapon
@@ -95,7 +98,7 @@ public class Gun : MonoBehaviour
             // = timeSinceLastShot + (1f / weaponData.fireRate);
         }
 
-        /*
+        
         // USED FOR DROP
         if (isStartTimerForDrop)
         {
@@ -106,11 +109,23 @@ public class Gun : MonoBehaviour
                 dropTimer = 0;
                 isStartTimerForDrop = false;
                 gameObject.GetComponent<BoxCollider>().enabled = true;
+
             }
         }
+        if (railGoneTime)
+        {
+            railGoneTimer += Time.deltaTime;
+            //Debug.Log("droppper: " + dropTimer + " poda " + timeToWaitForPickup);
+            if (railGoneTimer >= railGunWaitForGone)
+            {
+                dropTimer = 0;
+                railGoneTime = false;
+                Drop();
+
+            }
+        }
+
         
-
-
         // USED FOR DE-SPAWNING
         if (isStartTimerForDeSpawn)
         {
@@ -119,32 +134,58 @@ public class Gun : MonoBehaviour
             // No ammo && Time runs out
             if (deSpawnTimer >= timeToWaitForDeSpawn && gunsAmmo == 0)
             {
+
                 deSpawnTimer = 0f;
                 isStartTimerForDeSpawn = false;
                 Despawn();
             }
         }
-        */
-        if (gunsAmmo == 0)
+
+        if (gunsAmmo == 0 && weaponData.name != "RailGun")
         {
             Drop();
             Despawn();
         }
 
+        if (gunsAmmo == 0 && weaponData.name != "Grenade" && weaponData.name != "GwynBolt" && weaponData.name != "RailGun")
+        {
+            Drop();
+            Despawn();
+        }
 
         // SPECIAL CASES
+
         if (gunsAmmo == 0 && weaponData.name == "Grenade")
         {
             Drop();
             Despawn();
         }
+        if (gunsAmmo == 0 && weaponData.name == "GwynBolt")
+        {
+            Drop();
+            Despawn();
+        }
+        if (gunsAmmo == 0 && weaponData.name == "Xnade")
+        {
+            Drop();
+            Despawn();
+        }
+        
+        if (gunsAmmo == 0 && weaponData.name == "RailGun")
+        {
+            railGoneTime = true;
+        }
 
+
+        /*
         if (BulletFollow && firedProjectile != null)
         {
             Debug.Log("RAIL");
             firedProjectile.transform.position = muzzle.transform.position;
             firedProjectile.transform.rotation = transform.rotation;
         }
+        */
+        
 
     }
 
@@ -152,42 +193,58 @@ public class Gun : MonoBehaviour
     {
         if (other.gameObject.tag == "Player" && !isPickedUp)
         {
-            playerShoot = other.gameObject.GetComponent<PlayerShoot>();
+            PickUp(other);
+        }
+    }
 
-            // Check who the owner of the weapon is 
-            ownerID = other.gameObject.GetComponent<PlayerDetails>().playerID;
+    public void PickUp(Collider other)
+    {
+        playerShoot = other.gameObject.GetComponent<PlayerShoot>();
 
-            weaponManager = other.gameObject.GetComponent<WeaponManager>();
-            if (weaponManager != null)
+        // Check who the owner of the weapon is 
+        ownerID = other.gameObject.GetComponent<PlayerDetails>().playerID;
+
+        weaponManager = other.gameObject.GetComponent<WeaponManager>();
+        if (weaponManager != null)
+        {
+            if (weaponManager.EquippedWeapon == null)
             {
-                if (weaponManager.EquippedWeapon == null)
-                {
-                    playerShoot.shootInput += Shoot;
-                    playerShoot.dropInput += Drop;
-                    
-                    weaponManager.EquipWeapon(weaponData, gameObject);
+                playerShoot.shootInput += Shoot;
+                playerShoot.dropInput += Drop;
 
-                    isStartTimerForDrop = false;
-                    isStartTimerForDeSpawn = false;
-                    deSpawnTimer = 0f;
-                    dropTimer = 0f;
+                weaponManager.EquipWeapon(weaponData, gameObject);
 
-                    isPickedUp = true;
+                isStartTimerForDrop = false;
+                isStartTimerForDeSpawn = false;
+                deSpawnTimer = 0f;
+                dropTimer = 0f;
+
+                isPickedUp = true;
 
 
-                    //gunsAmmo = weaponData.Ammo;
-                }
-
+                //gunsAmmo = weaponData.Ammo;
             }
+
         }
     }
 
     private void Despawn()
     {
         //Drop();
+
+        
+        Debug.Log("borde vara här");
         gameObject.SetActive(false);
         gameObject.GetComponent<BoxCollider>().enabled = false;
         gameObject.GetComponent<Gun>().enabled = false;
+
+        if (gameObject.GetComponent<MeshFilter>().mesh != null)
+        {
+            Debug.Log("borde inte vara här");
+            Mesh mesh = GetComponent<MeshFilter>().mesh;
+            GameObject despawnVFX = Instantiate(weaponData.DespawnVFX, transform.position, transform.rotation);
+            despawnVFX.GetComponent<Despawn>().SetMesh(mesh);
+        }
     }
 
     private bool CanShoot() => timeSinceLastShot > 1f / (weaponData.fireRate / 60f) && gunsAmmo > 0 && isPickedUp;//!gunData.reloading && timeSinceLastShot > 1f / (gunData.fireRate / 60f); //weaponData.Ammo > 0
@@ -285,9 +342,19 @@ public class Gun : MonoBehaviour
                 }
 
             }
+            else if (weaponData.name == "RailGun"){
+                GameObject firedProjectile = Instantiate(weaponData.projectile, muzzle.transform.position, transform.rotation);
+
+                _projectile = firedProjectile.GetComponent<Projectile>();
+                _projectile.SetDamage(weaponData.damage);
+                //_projectile.GetComponent<Rigidbody>().AddForce(force);
+                _projectile.gameObject.transform.parent = muzzle.transform;
+
+                timeSinceLastShot = 0;
+            }
             else
             {
-                GameObject firedProjectile = Instantiate(weaponData.projectile, muzzle.transform.position, transform.rotation);
+                firedProjectile = Instantiate(weaponData.projectile, muzzle.transform.position, transform.rotation);
 
                 _projectile = firedProjectile.GetComponent<Projectile>();
                 _projectile.SetDamage(weaponData.damage);
@@ -310,8 +377,11 @@ public class Gun : MonoBehaviour
         if (gunsAmmo == 0)
         {
             isStartTimerForDeSpawn = true;
+
+
+            //isStartTimerForDeSpawn = true;
         }
-        
+
         gameObject.transform.SetParent(null);
         isDropped = true;
         // Otherwise it stays in DontDestroyOnLoad

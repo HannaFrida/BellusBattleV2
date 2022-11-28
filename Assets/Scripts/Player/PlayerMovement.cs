@@ -194,6 +194,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext ctx)
     {
+        if (GameManager.Instance.GameIsPaused == true) return;
+
         downwardInput = ctx.ReadValue<Vector2>().y;
         movementAmount = ctx.ReadValue<Vector2>().x;
       
@@ -232,7 +234,7 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    private void AccessabilityoveDown()
+    private void AccessabilityoveDown() // Ska användas om man kör med onehand-mode!
     {
         if (downwardInput <= downwardInputBound && isStandingOnOneWayPlatform)
         {
@@ -251,6 +253,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext ctx)
     {
+        if (GameManager.Instance.GameIsPaused == true) return;
+
         if (ctx.started)
         {
             Jump();
@@ -297,7 +301,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void ResetValuesOnGrounded()
     {
-        //movementY = 0;
+        velocity.y = 0;
+        movementY = 0f;
         coyoteTimer = 0;
         hasCoyoteTime = true;
         hasDoubleJump = true;
@@ -442,8 +447,6 @@ public class PlayerMovement : MonoBehaviour
                     transform.position = new Vector2(transform.position.x, hit.collider.bounds.max.y);
                     ResetValuesOnGrounded();
                 }
-                velocity.y = 0;
-                movementY = 0f;
                 return;
             }
             if (Physics.Raycast(rayOrigin, Vector2.up * directionY, out hit, verticalRayLength, oneWayLayer))
@@ -455,12 +458,7 @@ public class PlayerMovement : MonoBehaviour
                     transform.position = new Vector2(transform.position.x, hit.collider.bounds.max.y);
                     ResetValuesOnGrounded();
                 }
-                velocity.y = 0;
-                movementY = 0;
-
-
-
-
+                return;
             } 
         }
     }
@@ -468,7 +466,7 @@ public class PlayerMovement : MonoBehaviour
     private void HandleHorizontalCollisions(ref Vector2 velocity)
     {
         float directionX = Mathf.Sign(velocity.x);
-        for (int i = 0; i < horizontalRayCount; i++)
+        for (int i = horizontalRayCount-1; i >= 0; i--)
         {
             Vector2 rayOrigin;
             if (directionX == -1)
@@ -491,6 +489,7 @@ public class PlayerMovement : MonoBehaviour
                 }
                 velocity.x = 0;
                 movementX = 0;
+                return;
             }
         }
     }
@@ -527,14 +526,6 @@ public class PlayerMovement : MonoBehaviour
         horizontalRayLength = ((boxCollider.bounds.max.x - boxCollider.bounds.min.x) / 2) + horizontalSkinWidth;
     }
 
-    public void StopPlayer()
-    {
-        velocity.x = 0;
-        velocity.y = 0;
-        movementX = 0;
-        movementY = 0;
-    }
-
     public void AddExternalForce(Vector2 force)
     {
         Debug.Log("jdjada");
@@ -544,7 +535,6 @@ public class PlayerMovement : MonoBehaviour
         movementX = force.x;
         
     }
-
     public void AddConstantExternalForce(Vector2 force)
     {
         movementX = force.x;

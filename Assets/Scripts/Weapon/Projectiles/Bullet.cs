@@ -12,6 +12,7 @@ public class Bullet : Projectile
 	public AudioSource[] hitSounds;
 	[SerializeField] private GameObject colliderWallVFX;
 	[SerializeField] private GameObject colliderPlayerVFX;
+	[SerializeField] private bool lighting;
 
 	//public float bulletDamage;
 
@@ -26,6 +27,10 @@ public class Bullet : Projectile
 		GameObject playerGo = other.gameObject;
 		if (playerGo.CompareTag("Player")) // && Shooter != playerGo)
 		{
+			if (lighting)
+			{
+				playerGo.GetComponent<PlayerHealth>().PlayLighting();
+			}
 			Debug.Log("Obstacle");
 			ContactPoint contact = other.contacts[0];
 			Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);

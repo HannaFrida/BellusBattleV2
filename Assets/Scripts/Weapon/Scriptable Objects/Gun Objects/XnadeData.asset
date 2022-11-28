@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f37510bd6e63e4040bae77d76112c48c, type: 3}
   m_Name: XnadeData
   m_EditorClassIdentifier: 
-  name: Revolver
+  name: Xnade
   weaponPrefab: {fileID: 1456660403862733717, guid: f7d83e96429b3944ebc78405285670b8,
     type: 3}
   damage: 1
@@ -20,6 +20,9 @@ MonoBehaviour:
   projectile: {fileID: 5167775749961452402, guid: 39e4a1204ed427f4dac774057ff107bf,
     type: 3}
   projectileForce: 1000
+  usesSpread: 0
+  spreadFactor: 0
+  pelletCount: 0
   currentAmmo: 1
   initialAmmo: 1
   magSize: 1
@@ -27,4 +30,5 @@ MonoBehaviour:
   pickupSound: {fileID: 0}
   shootAttackSound: {fileID: 0}
   muzzleFlashGameObject: {fileID: 0}
+  despawnVFX: {fileID: 0}
   crosshair: {fileID: 0}

@@ -24,10 +24,15 @@ public class RailGunBullet : Projectile
 	
 	private void OnTriggerEnter(Collider other)
 	{
+
+
+
+
 		GameObject playerGo = other.gameObject;
 		if (playerGo.CompareTag("Player"))
 		{
 			playerGo.GetComponent<PlayerHealth>().TakeDamage(damage);
+			playerGo.GetComponent<PlayerHealth>().PlayFire();
 
 			if (playerGo.GetComponent<PlayerHealth>().Health <= 0)
 			{

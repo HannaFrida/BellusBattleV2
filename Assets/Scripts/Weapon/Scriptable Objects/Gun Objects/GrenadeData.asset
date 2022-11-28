@@ -19,7 +19,10 @@ MonoBehaviour:
   maxDistance: 80
   projectile: {fileID: 7929666838174018582, guid: e6495995ebe266c4aa513e23ff180d7d,
     type: 3}
-  projectileForce: 9000
+  projectileForce: 1000
+  usesSpread: 0
+  spreadFactor: 0
+  pelletCount: 0
   currentAmmo: 1
   initialAmmo: 1
   magSize: 1
@@ -27,4 +30,5 @@ MonoBehaviour:
   pickupSound: {fileID: 0}
   shootAttackSound: {fileID: 0}
   muzzleFlashGameObject: {fileID: 0}
+  despawnVFX: {fileID: 0}
   crosshair: {fileID: 0}

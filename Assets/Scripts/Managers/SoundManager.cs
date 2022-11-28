@@ -90,7 +90,7 @@ public class SoundManager : MonoBehaviour
     }
     public void HowerUiSound()
     {
-        howerMenuSource.pitch = Random.Range(0.95f, highPitchRan);
+        howerMenuSource.pitch = Random.Range(0.93f, highPitchRan);
         howerMenuSource.Play();
     }
     
