@@ -90,10 +90,8 @@ public class PlayerHealth : MonoBehaviour
 
     public void KillPlayer()
     {
-        //Debug.Log("jjajajajaj" + " " + gameObject.GetComponent<PlayerDetails>().playerID + " i am dEAD " + Health);
-        //CF.RemoveTarget(gameObject.transform);
-        //gameObject.transform.position = deathPosition.position;
         GameManager.Instance.PlayerDeath(gameObject);
+        GetComponent<PlayerDetails>().Rumble(0.5f,0.5f);
         boxCollider.enabled = false;
         bloodSplatter.Play();
         hips.SetActive(true);
@@ -108,15 +106,7 @@ public class PlayerHealth : MonoBehaviour
         {
             gameObject.GetComponentInChildren<Gun>().Drop();
         }
-        Debug.Log("dufucjhedfjsujsuj" + " " + gameObject.GetComponent<PlayerDetails>().playerID + " i am dEAD aaginsss " + Health);
-
-        /*
-        boxCollider.enabled = false;
-        rightArm.SetActive(false);
-        skr.enabled = false;
-        */
-        //gunMesh.enabled = false;
-        //grenadeMesh.enabled = false;
+    
     }
 
     public void UnkillPlayer()
@@ -130,22 +120,8 @@ public class PlayerHealth : MonoBehaviour
         hips.transform.position = Vector3.zero;
         hips.SetActive(false);
         boxCollider.enabled = true;
-        /*
-        if (pm != null)
-        {
-            pm.enabled = true;
-        }
-        */
         dash.enabled = true;
-        /*
-        boxCollider.enabled = true;
-        rightArm.SetActive(true);
-        skr.enabled = true;
-        */
-        //gunMesh.enabled = false;
-        //grenadeMesh.enabled = false;
-        //swordMesh.enabled = true;
-        //ppV1.isHoldingWeapon = false;
+      
     }
     
 }

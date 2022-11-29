@@ -9,6 +9,10 @@ public class PlayerDetails : MonoBehaviour
     public Vector3 startPos; // Stores the start spawn position
     public bool isAlive;
     [SerializeField] private Transform headGearSlot;
+    [SerializeField] private InputDevice device;
+    private bool isRumbling;
+    private float rumbleTime = 0.3f;
+    private float timer;
 
     public Transform HeadGearSlot()
     {
@@ -23,6 +27,11 @@ public class PlayerDetails : MonoBehaviour
         //headGearSlot = GameObject.FindGameObjectWithTag("HeadSlot").transform;
     }
 
+
+    private void Update()
+    {
+        RunRumbleTimer();
+    }
 
     public void OnPlayerPause(InputAction.CallbackContext ctx)
     {
@@ -41,6 +50,32 @@ public class PlayerDetails : MonoBehaviour
             }
         }
         
+    }
+
+    public void SetDevice(InputDevice device)
+    {
+        this.device = device;
+    }
+
+    public void Rumble(float lowF, float highF)
+    {
+        isRumbling = true;
+        Gamepad gamepad = (Gamepad)device;
+        gamepad.SetMotorSpeeds(lowF, highF);
+    }
+
+    private void RunRumbleTimer()
+    {
+        if (isRumbling == false) return;
+
+        timer += Time.deltaTime;
+        if(timer >= rumbleTime)
+        {
+            Rumble(0, 0);
+            isRumbling = false;
+            timer = 0f;
+        }
+
     }
 
 

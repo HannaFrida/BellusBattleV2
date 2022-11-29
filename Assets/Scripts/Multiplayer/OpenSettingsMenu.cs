@@ -14,4 +14,6 @@ public class OpenSettingsMenu : MonoBehaviour
             settingsMenuPanel.SetActive(true);
         }
     }
+
+    
 }
