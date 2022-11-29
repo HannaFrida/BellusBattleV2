@@ -16,6 +16,7 @@ public class Gun : MonoBehaviour
     [SerializeField] private WeaponData weaponData; // The data of the weapon
     [SerializeField] private PlayerShoot playerShoot; // Actions
     [SerializeField] private int ownerID; // Player ID
+    [SerializeField] private Aim[] ownerAim; 
     [SerializeField] private WeaponManager weaponManager;
     [SerializeField] private Transform muzzle;
 
@@ -204,6 +205,12 @@ public class Gun : MonoBehaviour
         // Check who the owner of the weapon is 
         ownerID = other.gameObject.GetComponent<PlayerDetails>().playerID;
 
+        // Get the reference for the players aim
+        ownerAim = other.gameObject.GetComponentsInChildren<Aim>();
+
+        
+        //ownerAim = other.gameObject.GetComponentInChildren<Aim>();
+
         weaponManager = other.gameObject.GetComponent<WeaponManager>();
         if (weaponManager != null)
         {
@@ -350,6 +357,10 @@ public class Gun : MonoBehaviour
                 //_projectile.GetComponent<Rigidbody>().AddForce(force);
                 _projectile.gameObject.transform.parent = muzzle.transform;
 
+
+                // Lock aim
+                StartCoroutine("DisableAimScript");
+
                 timeSinceLastShot = 0;
             }
             else
@@ -405,5 +416,21 @@ public class Gun : MonoBehaviour
         gameObject.SetActive(false);
     }
     */
+
+    IEnumerator DisableAimScript()
+    {
+
+        foreach (Aim aim in ownerAim)
+        {
+            aim.enabled = false;
+        }
+
+        yield return new WaitForSeconds(1.6f);
+
+        foreach (Aim aim in ownerAim)
+        {
+            aim.enabled = true;
+        }
+    }
 
 }
