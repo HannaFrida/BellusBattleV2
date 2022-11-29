@@ -48,7 +48,6 @@ public class PlayerSpawnManager : MonoBehaviour
     {
         UpdateText();
         if (runTimer == false) return;
-        Debug.Log("runnnig");
         if(timer <= 0.5)
         {
             GameManager.Instance.ActivateMovement();  

@@ -9,6 +9,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] private EventSystem es;
     private GameObject activePanel;
 
+    [Header("PlayMenu")]
+    [SerializeField] private int numberOfLevels;
+
     protected void Start()
     {
         if(es == null) es = GameObject.FindGameObjectWithTag("EventSystem").GetComponent<EventSystem>();
@@ -25,5 +28,10 @@ public class UIManager : MonoBehaviour
     public void ExitPanel()
     {
         GoTo(panels[0]);
+    }
+    public void OnPlay()
+    {
+        GameManager.Instance.SetPointsToWin(numberOfLevels);
+        GameManager.Instance.LoadNextScene();
     }
 }
