@@ -235,16 +235,31 @@ public class Gun : MonoBehaviour
         }
     }
 
+    private IEnumerator DeactivateAfterTime(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        gameObject.SetActive(false);
+    }
+
     private void Despawn()
     {
         //Drop();
 
         
         Debug.Log("borde vara här");
-        gameObject.SetActive(false);
+        if (weaponData.name == "Xnade")
+        {
+            StartCoroutine(DeactivateAfterTime(2f));
+        }
+        else
+        {
+            gameObject.SetActive(false);
+        }
+        
         gameObject.GetComponent<BoxCollider>().enabled = false;
         gameObject.GetComponent<Gun>().enabled = false;
 
+        
         if (gameObject.GetComponent<MeshFilter>().mesh != null)
         {
             Debug.Log("borde inte vara här");
@@ -252,6 +267,7 @@ public class Gun : MonoBehaviour
             GameObject despawnVFX = Instantiate(weaponData.DespawnVFX, transform.position, transform.rotation);
             despawnVFX.GetComponent<Despawn>().SetMesh(mesh);
         }
+        
     }
 
     private bool CanShoot() => timeSinceLastShot > 1f / (weaponData.fireRate / 60f) && gunsAmmo > 0 && isPickedUp;//!gunData.reloading && timeSinceLastShot > 1f / (gunData.fireRate / 60f); //weaponData.Ammo > 0
