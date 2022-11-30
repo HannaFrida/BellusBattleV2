@@ -24,6 +24,10 @@ public class NavigateUI : MonoBehaviour
     {
         g.NavigateLeft();
     }
+    public void ExitUI(InputAction.CallbackContext context)
+    {
+        g.ExitUI();
+    }
     public void SetConnection(GameObject gg)
     {
         g = gg.GetComponent<UIMenuHandler>();

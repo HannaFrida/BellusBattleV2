@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class OpenSettingsMenu : MonoBehaviour
 {
@@ -12,6 +13,12 @@ public class OpenSettingsMenu : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             settingsMenuPanel.SetActive(true);
+            GameObject[] obj = GameObject.FindGameObjectsWithTag("Player");
+            for (int i = 0; i < obj.Length; i++)
+            {
+                obj[i].GetComponent<PlayerInput>().SwitchCurrentActionMap("Menu");
+            }
+            other.gameObject.GetComponent<NavigateUI>().SetConnection(settingsMenuPanel);
         }
     }
 

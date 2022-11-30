@@ -1387,7 +1387,7 @@
                     "name": "NavigateRight",
                     "type": "Value",
                     "id": "14d37e9a-ba5b-4124-8bb7-cdbed672bc00",
-                    "expectedControlType": "",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -1396,7 +1396,16 @@
                     "name": "NavigateLeft",
                     "type": "Value",
                     "id": "dd8b66b1-46f5-4bba-b20a-9e5ce40110a8",
-                    "expectedControlType": "",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "ExitUI",
+                    "type": "Value",
+                    "id": "33ae5a36-86ba-42d9-a6cb-f68d6770499a",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -1422,6 +1431,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "NavigateLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2f771715-1146-4ef7-95c2-d28305bdde2c",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ExitUI",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
