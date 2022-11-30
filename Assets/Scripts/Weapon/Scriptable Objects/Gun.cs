@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
+using UnityEngine.VFX;
 
 /// <summary>
 /// Put on every weapon
@@ -251,6 +252,12 @@ public class Gun : MonoBehaviour
         {
             StartCoroutine(DeactivateAfterTime(2f));
         }
+        if (weaponData.name == "GwynBolt")
+        {
+            VisualEffect bolt = GetComponentInChildren<VisualEffect>();
+            bolt.enabled = false;
+            StartCoroutine(DeactivateAfterTime(2f));
+        }
         else
         {
             gameObject.SetActive(false);
@@ -259,7 +266,7 @@ public class Gun : MonoBehaviour
         gameObject.GetComponent<BoxCollider>().enabled = false;
         gameObject.GetComponent<Gun>().enabled = false;
 
-        
+       /* 
         if (gameObject.GetComponent<MeshFilter>().mesh != null)
         {
             Debug.Log("borde inte vara här");
@@ -267,7 +274,7 @@ public class Gun : MonoBehaviour
             GameObject despawnVFX = Instantiate(weaponData.DespawnVFX, transform.position, transform.rotation);
             despawnVFX.GetComponent<Despawn>().SetMesh(mesh);
         }
-        
+        */
     }
 
     private bool CanShoot() => timeSinceLastShot > 1f / (weaponData.fireRate / 60f) && gunsAmmo > 0 && isPickedUp;//!gunData.reloading && timeSinceLastShot > 1f / (gunData.fireRate / 60f); //weaponData.Ammo > 0
