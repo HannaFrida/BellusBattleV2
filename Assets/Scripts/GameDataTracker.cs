@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 public class GameDataTracker : MonoBehaviour
 {
@@ -10,11 +11,11 @@ public class GameDataTracker : MonoBehaviour
     private int totalRoundsPlayed;
     private float totalGameTime;
     private List<KillEvent> killList = new List<KillEvent>();
+    private static string filePath = "Assets/Resources/GameLogs.txt";
     // Start is called before the first frame update
 
     private void Awake()
     {
-        Debug.Log("yo world");
         if(Instance != null && Instance != this)
         {
             Destroy(this);
@@ -45,6 +46,18 @@ public class GameDataTracker : MonoBehaviour
     public void IncreasePlayersKilledByHazards()
     {
         playersKilledByHazard++;
+    }
+
+    public void WriteToFile()
+    {
+        StreamWriter writer = new StreamWriter(filePath, true);
+        writer.WriteLine($"Session completed at {System.DateTime.Now} ---------------------------------------------");
+        foreach(KillEvent eve in killList)
+        {
+            writer.WriteLine(eve.ToString());
+        }
+        writer.WriteLine("\n");
+        writer.Close();
     }
 
 
