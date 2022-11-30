@@ -71,6 +71,7 @@ public class Grenade : Projectile
                 PlayerHealth ph = hits[i].GetComponent<PlayerHealth>();
                 ph.TakeDamage(damage);
                 Debug.Log("playerfound");
+                GameDataTracker.Instance.NewKillEvent(shooterID, hits[i].GetComponent<PlayerDetails>().playerID, weaponName);
                 //cf.RemoveTarget(hits[i].transform); //shitfix
                 //pickUp_Proto.isHoldingWeapon = false;
 
