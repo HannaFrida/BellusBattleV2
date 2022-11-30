@@ -7,7 +7,6 @@ public class Bullet : Projectile
 	[SerializeField]
 	[Tooltip("For how long the bullet will exist for in seconds.")]
 	private float lifeSpan = 5.0f;
-	CameraFocus cf;
 	[SerializeField, Tooltip("Sound made when bullet hits something")]
 	public AudioSource[] hitSounds;
 	[SerializeField] private GameObject colliderWallVFX;
@@ -18,7 +17,6 @@ public class Bullet : Projectile
 
 	private void Start()
 	{
-		cf = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFocus>();
 		StartCoroutine(Shoot(lifeSpan));
 	}
 	void OnCollisionEnter(Collision other)
@@ -43,7 +41,8 @@ public class Bullet : Projectile
 			
 			playerGo.GetComponent<PlayerHealth>().TakeDamage(damage);
 			Debug.Log("Hit player");
-
+			
+			GameDataTracker.Instance.NewKillEvent(shooterID, playerGo.GetComponent<PlayerDetails>().playerID, weaponName);
 			Die();
 		}
 		else if (playerGo.CompareTag("AI"))
@@ -92,7 +91,7 @@ public class Bullet : Projectile
 	private void OnTriggerEnter(Collider other)
 	{
 		GameObject playerGo = other.gameObject;
-		if (playerGo.CompareTag("Player") && Shooter != playerGo)
+		if (playerGo.CompareTag("Player") && shooter != playerGo)
 		{
 			playerGo.GetComponent<PlayerHealth>().TakeDamage(damage);
 
@@ -100,7 +99,6 @@ public class Bullet : Projectile
 			{
 				//playerGo.SetActive(false);
 				//playerGo.GetComponent<PlayerHealth>().KillPlayer();
-				cf.RemoveTarget(playerGo.transform);
 			}
 
 			PlayerDeathEvent pde = new PlayerDeathEvent
