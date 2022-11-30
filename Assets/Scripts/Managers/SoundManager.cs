@@ -26,12 +26,13 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioSource doorCloseSource;
     [SerializeField] private AudioSource bellRingSource;
     [SerializeField] private AudioSource startGameBellSource;
+    
 
     [Header("UI sounds")]
     [SerializeField] private AudioSource howerMenuSource;
     [SerializeField] private AudioSource pressMenuSource;
+    [SerializeField] private AudioSource pressingBattleButtonSource;
 
-    
 
     private float volLowRan = 0.3f;
     private float volHighRan = 1.0f;
@@ -99,6 +100,10 @@ public class SoundManager : MonoBehaviour
     public void PressUiSound()
     {
         pressMenuSource.Play();
+    }
+    public void PressBattleButtonSound()
+    {
+        pressingBattleButtonSource.Play();
     }
     public void OpenDoorSound()
     {
