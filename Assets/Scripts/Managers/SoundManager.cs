@@ -17,6 +17,7 @@ public class SoundManager : MonoBehaviour
 
     [Header("hazards")]
     [SerializeField] private AudioSource hazardSource;
+    [SerializeField] private AudioSource hazardWarningSource;
     [SerializeField] private AudioClip lavaHazardSound;
     [SerializeField] private AudioClip poisonHazardSound;
    
@@ -76,8 +77,9 @@ public class SoundManager : MonoBehaviour
     }
     public void HazardWarningSound()
     {
-        // PlaySound("Hazards", hazard);
-        StartCoroutine(FadeMixerGroup.StartFade(overallMixer, "HazardMixerGroup", 2, 0.5f));
+        hazardWarningSource.pitch = Random.Range(0.95f, highPitchRan);
+        hazardWarningSource.Play();
+       
     }
     public void PlayerOnPlay_Sound()
     {
