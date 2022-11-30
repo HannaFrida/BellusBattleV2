@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class Teleporter : MonoBehaviour
@@ -27,11 +28,13 @@ public class Teleporter : MonoBehaviour
 
         // There needs to be at least two players in the scene
         // All players in game needs to be in the Teleporter for the game to start
-        if (playerJoinManager.listOfPlayers.Count >= 1 && playerAmountOnTeleporter == playerJoinManager.listOfPlayers.Count)//playerSpawnManager.listOfPlayers.Count >= 2 && playerAmountOnTeleporter == playerSpawnManager.listOfPlayers.Count)
+        if (playerJoinManager.listOfPlayers.Count >= 1 && playerAmountOnTeleporter == playerJoinManager.listOfPlayers.Count && other.gameObject.GetComponent<PlayerMovement>() != null)//playerSpawnManager.listOfPlayers.Count >= 2 && playerAmountOnTeleporter == playerSpawnManager.listOfPlayers.Count)
         {
             playPanel.SetActive(true);
+            other.gameObject.GetComponent<PlayerInput>().SwitchCurrentActionMap("Menu");
+            other.gameObject.GetComponent<NavigateUI>().SetConnection(playPanel);
         }
-        if(playerAmountOnTeleporter == playerJoinManager.listOfPlayers.Count)
+        if (playerAmountOnTeleporter == playerJoinManager.listOfPlayers.Count)
         {
             soundManager.AllPlayersOnPlay_Sound();
         }

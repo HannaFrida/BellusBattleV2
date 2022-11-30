@@ -392,6 +392,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
     }
     private IEnumerator RestartGame()
     {
+        GameDataTracker.Instance.WriteToFile();
         SceneManager.LoadScene("The_End");
         gameLoopFinished = true;
         DataPersistenceManager.Instance.SaveGame();

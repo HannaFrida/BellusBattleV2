@@ -373,6 +373,9 @@ public class Gun : MonoBehaviour
 
                 timeSinceLastShot = 0;
             }
+            Debug.Log("ownerID : " + ownerID);
+            _projectile.SetShooterID(ownerID);
+            _projectile.SetWeaponName(weaponData.name);
         }
     }
 

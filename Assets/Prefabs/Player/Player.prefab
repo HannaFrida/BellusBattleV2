@@ -763,37 +763,6 @@ MonoBehaviour:
   m_Property:
     m_Name: Transform
   Target: {fileID: 7182564231045683896}
---- !u!1 &4036185387566594912
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5916060800904582881}
-  m_Layer: 0
-  m_Name: "giofs\xF6dg b"
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5916060800904582881
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4036185387566594912}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.10889827, y: 0.8774986, z: 1845}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6431588530169345905}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4232545144309797344
 GameObject:
   m_ObjectHideFlags: 0
@@ -5868,7 +5837,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6431588530169345905}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!2083052967 &26230028221232840
 VisualEffect:
@@ -6265,7 +6234,6 @@ GameObject:
   - component: {fileID: 6431588530169345917}
   - component: {fileID: 2786539736660453916}
   - component: {fileID: -163156915827499938}
-  - component: {fileID: 6592616742247666660}
   - component: {fileID: 4997217773707887276}
   - component: {fileID: 8544227076739203574}
   - component: {fileID: 7604770547986073551}
@@ -6278,6 +6246,7 @@ GameObject:
   - component: {fileID: 761715777191676976}
   - component: {fileID: 5042949326614459676}
   - component: {fileID: 5729916427380021730}
+  - component: {fileID: 3926757260285706939}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -6298,7 +6267,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 550519761581017672}
-  - {fileID: 5916060800904582881}
   - {fileID: 7130087715711594001}
   - {fileID: 8357581948125345351}
   - {fileID: 5160088003888078306}
@@ -6740,9 +6708,57 @@ MonoBehaviour:
     m_ActionId: 05705316-0c28-4abd-bcb6-6658d3594a7c
     m_ActionName: PlayerAccessibilityRight/GoThroughtOneWayPlattformsLeft[/XInputControllerWindows/rightStick/down,/XInputControllerWindows1/rightStick/down]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3926757260285706939}
+        m_TargetAssemblyTypeName: NavigateUI, Assembly-CSharp
+        m_MethodName: NavigateRight
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 14d37e9a-ba5b-4124-8bb7-cdbed672bc00
     m_ActionName: Menu/New action
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 009e2a8d-b73d-419b-a2da-6b3edcca3e38
+    m_ActionName: Player/Rebind[/XInputControllerWindows/select]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3926757260285706939}
+        m_TargetAssemblyTypeName: NavigateUI, Assembly-CSharp
+        m_MethodName: NavigateLeft
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: dd8b66b1-46f5-4bba-b20a-9e5ce40110a8
+    m_ActionName: Menu/NavigateLeft[/XInputControllerWindows/leftShoulder]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3926757260285706939}
+        m_TargetAssemblyTypeName: NavigateUI, Assembly-CSharp
+        m_MethodName: ExitUI
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 33ae5a36-86ba-42d9-a6cb-f68d6770499a
+    m_ActionName: Menu/ExitUI[/XInputControllerWindows1/buttonEast]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -6764,41 +6780,6 @@ MonoBehaviour:
   startPos: {x: 0, y: 0, z: 0}
   isAlive: 0
   headGearSlot: {fileID: 0}
---- !u!114 &6592616742247666660
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6431588530169345916}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9e7e3762a3fa3f44b3ad82306d8c8aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dashType: 0
-  canDash: 1
-  stopGravityWhileDashing: 1
-  dashingDistace: 24
-  dashingDuration: 0.124
-  dashingActivationCooldown: 1
-  dashingInvincibilityDuration: 1
-  dashSound: {fileID: 1079757518853252576}
-  dashEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8727384561011662934}
-        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: SetTrigger
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Roll
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &4997217773707887276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6829,7 +6810,7 @@ MonoBehaviour:
   poisoned: {fileID: 6773224950172109038}
   lighting: {fileID: 4225523728698229367}
   fire: {fileID: 4135869402454452532}
-  deathPosition: {fileID: 5916060800904582881}
+  deathPosition: {fileID: 0}
   boxCollider: {fileID: 6431588530169345906}
   rightArm: {fileID: 2915926472710746649}
   skr: {fileID: 6010799286257098507}
@@ -7459,6 +7440,18 @@ MonoBehaviour:
   destroyDelay: 0.2
   mat: {fileID: 2100000, guid: 091903414baf7df4f938dc4db96976e3, type: 2}
   shaderVarRef: _Alpha
+--- !u!114 &3926757260285706939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6431588530169345916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f24fb13cc061604ab06f0d224f903be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6655365121378666022
 GameObject:
   m_ObjectHideFlags: 0
@@ -7738,7 +7731,7 @@ Transform:
   m_Children:
   - {fileID: 1658759243020090889}
   m_Father: {fileID: 6431588530169345905}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7210684032876526358
 GameObject:
@@ -7812,7 +7805,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6431588530169345905}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!2083052967 &3332971346311075587
 VisualEffect:
@@ -8208,7 +8201,7 @@ PrefabInstance:
     - target: {fileID: 7209866185493163395, guid: f0790b542fe5c634fba74dc67ba52a26,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7209866185493163395, guid: f0790b542fe5c634fba74dc67ba52a26,
         type: 3}
@@ -9180,7 +9173,7 @@ PrefabInstance:
     - target: {fileID: 1038247843323486100, guid: 2d839ba2e9a69134981f56816a9cae7e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1038247843323486100, guid: 2d839ba2e9a69134981f56816a9cae7e,
         type: 3}
