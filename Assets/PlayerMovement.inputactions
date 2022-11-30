@@ -1384,24 +1384,44 @@
             "id": "8347a22a-5607-4ebd-a446-a9a72d0b3bc7",
             "actions": [
                 {
-                    "name": "New action",
-                    "type": "Button",
+                    "name": "NavigateRight",
+                    "type": "Value",
                     "id": "14d37e9a-ba5b-4124-8bb7-cdbed672bc00",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "NavigateLeft",
+                    "type": "Value",
+                    "id": "dd8b66b1-46f5-4bba-b20a-9e5ce40110a8",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
                 {
                     "name": "",
                     "id": "3186c02b-467a-462b-b638-27bf9fe1b6d8",
-                    "path": "",
+                    "path": "<Gamepad>/rightShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "New action",
+                    "action": "NavigateRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "940099c7-59ec-4296-ac92-90fce567019f",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NavigateLeft",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

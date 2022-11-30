@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 public class UIMenuHandler : MonoBehaviour
 {
@@ -28,10 +29,23 @@ public class UIMenuHandler : MonoBehaviour
     public void ExitUI()
     {
         this.gameObject.SetActive(false);
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
     }
     private void OnEnable()
     {
         eventSys.SetSelectedGameObject(button);
+    }
+    public void NavigateRight()
+    {
+        if (panels.IndexOf(activePanel)+1 < panels.Count)
+        {
+            SetPanelActive(panels[panels.IndexOf(activePanel) + 1]);
+        }
+    }
+    public void NavigateLeft()
+    {
+        if (panels.IndexOf(activePanel)-1 >= 0) SetPanelActive(panels[panels.IndexOf(activePanel) - 1]);
+
     }
 
 }
