@@ -7,6 +7,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 using Cinemachine;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour, IDataPersistenceManager
 {
@@ -73,6 +74,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
     private void OnLevelWasLoaded(int level)
     {
         cameraTarget = GameObject.FindGameObjectWithTag("CameraTarget").transform;
+        if (cameraTarget == null) cameraTarget = new GameObject("temp").transform;
         if (level != 0)
         {
             
@@ -168,6 +170,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
         {
             targetGroup.RemoveMember(players[i].transform);
             targetGroup.AddMember(players[i].transform, 1, 5); //OBS GER ERROR!
+            players[i].GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
         }
     }
 
