@@ -252,7 +252,7 @@ public class Gun : MonoBehaviour
         {
             MeshFilter meshfil = GetComponentInChildren<MeshFilter>();
             meshfil.gameObject.SetActive(false);
-            StartCoroutine(DeactivateAfterTime(2f));
+            StartCoroutine(DeactivateAfterTime(5f));
         }
         else if (weaponData.name == "GwynBolt")
         {
