@@ -37,16 +37,16 @@ public class PlayerDetails : MonoBehaviour
     {
         if (ctx.started)
         {
-            Debug.Log("joppa");
+            //Debug.Log("joppa");
             if (GameManager.Instance.GameIsPaused == false)
             {
                 GameManager.Instance.PauseGame();
-                Debug.Log("jii");
+                //Debug.Log("jii");
             }
             else
             {
                 GameManager.Instance.ResumeGame();
-                Debug.Log("hAAA");
+                //Debug.Log("hAAA");
             }
         }
         

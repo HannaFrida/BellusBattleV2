@@ -21,7 +21,7 @@ public class PlayerJoinManager : PlayerSpawnManager
 
         GameManager.Instance.AddPLayer(playerInput.gameObject);
         listOfPlayers.Add(playerInput);
-        Debug.Log("PlayerInput ID: " + playerInput.playerIndex);
+        //Debug.Log("PlayerInput ID: " + playerInput.playerIndex);
 
         // Set the start spawn position of the player using the location at the associated element into the array.
         // So Player 1 spawns at the first Trasnform in the list, Player 2 on the second, and so forth.
