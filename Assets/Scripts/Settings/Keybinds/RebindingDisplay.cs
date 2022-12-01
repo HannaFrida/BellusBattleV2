@@ -89,6 +89,7 @@ public class RebindingDisplay : MonoBehaviour
         waitingForInputObject.SetActive(true);
 
         playerMovement.PlayerInput.SwitchCurrentActionMap("Menu");
+        Debug.Log(playerMovement.PlayerInput.currentActionMap);
 
         rebindingOperation = jumpAction.action.PerformInteractiveRebinding()
             .WithControlsExcluding("Mouse")
