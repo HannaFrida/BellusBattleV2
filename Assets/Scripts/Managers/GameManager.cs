@@ -20,6 +20,11 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
     private bool gameHasStarted;
     [SerializeField] private bool gameIsPaused;
 
+    private bool runRoundTimer;
+    private float roundDuration;
+    private float roundTimer;
+    private int roundCounter;
+
     [Header("Points")]
     private static Dictionary<GameObject, int> scoreDic = new Dictionary<GameObject, int>();
     [SerializeField] private int scoreToWin;
@@ -69,8 +74,20 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
     {
         get => GameHasStarted;
     }
+
+    public bool IsRunningRoundTimer
+    {
+        get => runRoundTimer;
+        set => runRoundTimer = value;
+    }
     private void OnLevelWasLoaded(int level)
     {
+        /*
+        if(SceneManager.GetSceneAt(level).name.Equals("TranisitionScene") == false)
+        {
+            
+        }
+        */
         if (level != 0)
         {
             
@@ -82,6 +99,10 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
             //Array.Clear(targetGroup.GetComponent<CinemachineTargetGroup>().m_Targets, 0, targetGroup.GetComponent<CinemachineTargetGroup>().m_Targets.Length);
             //SpawnPlayers();
         }
+        roundCounter++;
+        runRoundTimer = false;
+        roundTimer = 0f;
+        roundDuration = 0f;
         RestorePLayer();
         
         
@@ -118,7 +139,10 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
         if (hasOnePlayerLeft && !hasGivenScore && gameHasStarted)
         {
             GiveScoreAfterTimer();
-        }           
+        }
+
+        roundTimer += Time.deltaTime;
+        roundDuration = roundTimer;
 
     }
     private void OnApplicationQuit()
@@ -207,12 +231,17 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
     {
         if (playersAlive.Count <= 1)
         {
+            if (hasOnePlayerLeft == false)
+            {
+                GameDataTracker.Instance.SaveRoundTime(roundCounter, roundDuration);
+            }
             hasOnePlayerLeft = true;
             soundManager.FadeOutMusic();
             soundManager.FadeOutHazard();
         }
         else if (playersAlive.Count > 1)
         {
+          
             hasOnePlayerLeft = false;
         }
     }

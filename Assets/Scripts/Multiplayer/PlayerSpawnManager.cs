@@ -55,6 +55,7 @@ public class PlayerSpawnManager : MonoBehaviour
         if(timer <= 0)
         {
             runTimer = false;
+            GameManager.Instance.IsRunningRoundTimer = true;
         }
         timer -= Time.deltaTime;  
     } 

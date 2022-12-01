@@ -31,6 +31,7 @@ public class GameDataTracker : MonoBehaviour
     {
       
     }
+   
 
     public void NewKillEvent(int killer, int killed, string weaponName)
     {
@@ -56,8 +57,22 @@ public class GameDataTracker : MonoBehaviour
         {
             writer.WriteLine(eve.ToString());
         }
-        writer.WriteLine("\n");
+        writer.WriteLine();
+        for(int i = 1; i <= totalRoundsPlayed; i++)
+        {
+            writer.WriteLine($"Round {i} lasted {roundTimeDic[i]} seconds");
+            totalGameTime += roundTimeDic[i];
+        }
+        writer.WriteLine($"Rounds played: {totalRoundsPlayed} \nTotal time of session: {totalGameTime} seconds \nAverage time per round: {totalGameTime / totalRoundsPlayed}");
+        writer.WriteLine($"\n total amount of players killed by hazards : {playersKilledByHazard} \n" +
+            $"");
         writer.Close();
+    }
+
+    public void SaveRoundTime(int roundNr, float duration)
+    {
+        roundTimeDic[roundNr] = duration;
+        totalRoundsPlayed++;
     }
 
 

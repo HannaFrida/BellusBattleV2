@@ -12,6 +12,7 @@ public class DeathZone : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             GameDataTracker.Instance.NewKillEvent(0, other.gameObject.GetComponent<PlayerDetails>().playerID, DeathZoneType);
+            GameDataTracker.Instance.IncreasePlayersKilledByHazards();
             other.gameObject.GetComponent<PlayerHealth>().TakeDamage(1);
         }
     }

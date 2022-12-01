@@ -78,6 +78,7 @@ public class PoisonZone : MonoBehaviour
             {
                 GameManager.Instance.PlayerDeath(player);
                 GameDataTracker.Instance.NewKillEvent(0, player.GetComponent<PlayerDetails>().playerID, hazardName);
+                GameDataTracker.Instance.IncreasePlayersKilledByHazards();
                 player.GetComponent<PlayerHealth>().KillPlayer();
             }
         }
