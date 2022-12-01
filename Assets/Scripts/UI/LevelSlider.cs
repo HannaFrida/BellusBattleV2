@@ -43,6 +43,11 @@ public class LevelSlider : MonoBehaviour
     public void OnPlay()
     {
         GameManager.Instance.SetPointsToWin(nmrOfLevels);
+        //#################################KHALED GÖR EN ENUMERATOR SOM VÄNTAR ME DETTA KOMMANDO I 1 SEKUND ######################################################
+        //#################################KHALED GÖR EN ENUMERATOR SOM VÄNTAR ME DETTA KOMMANDO I 1 SEKUND ######################################################
+        //#################################KHALED GÖR EN ENUMERATOR SOM VÄNTAR ME DETTA KOMMANDO I 1 SEKUND ######################################################
+        //#################################KHALED GÖR EN ENUMERATOR SOM VÄNTAR ME DETTA KOMMANDO I 1 SEKUND ######################################################
+        //#################################KHALED GÖR EN ENUMERATOR SOM VÄNTAR ME DETTA KOMMANDO I 1 SEKUND ######################################################
         GameManager.Instance.LoadNextScene();
     }
 }
