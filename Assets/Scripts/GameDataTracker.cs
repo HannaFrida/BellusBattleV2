@@ -6,7 +6,7 @@ using System.IO;
 public class GameDataTracker : MonoBehaviour
 {
     public static GameDataTracker Instance;
-    private Dictionary<int, float> roundTimeDic = new();
+    private Dictionary<int, float> roundTimeDic = new Dictionary<int, float>();
     private int playersKilledByHazard;
     private int totalRoundsPlayed;
     private float totalGameTime;
@@ -76,10 +76,21 @@ public struct KillEvent
         this.weaponName = weaponName;
     }
 
+
     public override string ToString()
     {
-        return $"Player {killerID} killed Player {killedPlayerID} with the {weaponName}";
+        if(killerID == 0)
+        {
+            return $"Player {killedPlayerID} got killed by {weaponName}";
+        }
+        else
+        {
+            return $"Player {killerID} killed Player {killedPlayerID} with the {weaponName}";
+        }
+        
     }
+
+    
 
 
 }
