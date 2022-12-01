@@ -350,7 +350,7 @@ public class PlayerMovement : MonoBehaviour
         Bounds col = platformCollider.bounds;
 
         float colliderDif = col.max.y - hitpointY;
-        Debug.Log(colliderDif);
+        //Debug.Log(colliderDif);
 
         if (colliderDif >= -.01f && colliderDif <= edgeControlAmount)
         {
@@ -540,7 +540,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void AddExternalForce(Vector2 force)
     {
-        Debug.Log("jdjada");
+        //Debug.Log("jdjada");
         hasBeenKnockedBack = true;
         knockBackTimer = 0f;
         movementY = force.y;
