@@ -24,6 +24,6 @@ public class Projectile : MonoBehaviour{
 	public void SetShooterID(int id)
     {
 		shooterID = id;
-		Debug.Log("id is: " + shooterID);
+		//Debug.Log("id is: " + shooterID);
     }
 }

@@ -157,7 +157,7 @@ public class SoundManager : MonoBehaviour
     {
         
         musicSource.volume = 0.3f;
-        Debug.Log("lower " + musicSource.volume);
+        //Debug.Log("lower " + musicSource.volume);
     }
 
     public void FullMusicVolume()

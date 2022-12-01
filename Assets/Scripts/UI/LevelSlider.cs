@@ -9,6 +9,7 @@ public class LevelSlider : MonoBehaviour
     [SerializeField] private LevelManager levelManager;
     [SerializeField] private TextMeshProUGUI textS;
     [SerializeField] private ScoreManager scoreManager;
+    [SerializeField] private Animator animator;
     private Slider slider;
     private int nmrOfLevels;
     // Start is called before the first frame update
@@ -43,11 +44,17 @@ public class LevelSlider : MonoBehaviour
     public void OnPlay()
     {
         GameManager.Instance.SetPointsToWin(nmrOfLevels);
-        //#################################KHALED GÖR EN ENUMERATOR SOM VÄNTAR ME DETTA KOMMANDO I 1 SEKUND ######################################################
-        //#################################KHALED GÖR EN ENUMERATOR SOM VÄNTAR ME DETTA KOMMANDO I 1 SEKUND ######################################################
-        //#################################KHALED GÖR EN ENUMERATOR SOM VÄNTAR ME DETTA KOMMANDO I 1 SEKUND ######################################################
-        //#################################KHALED GÖR EN ENUMERATOR SOM VÄNTAR ME DETTA KOMMANDO I 1 SEKUND ######################################################
-        //#################################KHALED GÖR EN ENUMERATOR SOM VÄNTAR ME DETTA KOMMANDO I 1 SEKUND ######################################################
+        //PlaySceneChangeAnimation();
+        StartCoroutine(Timer(1));
+        //GameManager.Instance.LoadNextScene();
+    }
+    public void PlaySceneChangeAnimation()
+    {
+        animator.Play("pressed");
+    }
+    private IEnumerator Timer(float time)
+    {
+        yield return new WaitForSeconds(time);
         GameManager.Instance.LoadNextScene();
     }
 }
