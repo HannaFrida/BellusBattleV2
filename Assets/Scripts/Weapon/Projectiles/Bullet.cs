@@ -52,7 +52,7 @@ public class Bullet : Projectile
 
 		if (other.gameObject.tag == "Obstacle")
 		{
-			Debug.Log("Obstacle");
+			//Debug.Log("Obstacle");
 			ContactPoint contact = other.contacts[0];
 			Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
 			Vector3 pos = contact.point;

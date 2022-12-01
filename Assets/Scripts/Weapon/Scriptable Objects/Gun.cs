@@ -247,7 +247,7 @@ public class Gun : MonoBehaviour
         //Drop();
 
         
-        Debug.Log("borde vara här");
+        //Debug.Log("borde vara här");
         if (weaponData.name == "Xnade")
         {
             StartCoroutine(DeactivateAfterTime(2f));
@@ -396,7 +396,7 @@ public class Gun : MonoBehaviour
 
                 timeSinceLastShot = 0;
             }
-            Debug.Log("ownerID : " + ownerID);
+            //Debug.Log("ownerID : " + ownerID);
             _projectile.SetShooterID(ownerID);
             _projectile.SetWeaponName(weaponData.name);
         }

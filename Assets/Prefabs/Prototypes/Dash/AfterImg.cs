@@ -35,7 +35,7 @@ public class AfterImg : MonoBehaviour
     {
         if (!isTrailActive)
         {
-            Debug.Log("hej");
+            //Debug.Log("hej");
             isTrailActive = true;
             StartCoroutine(ActivateTrail(activeTime));
         }

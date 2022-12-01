@@ -56,7 +56,7 @@ public class Grenade : Projectile
         hits = Physics.OverlapSphere(transform.position, explosionSize);
         for (int i = 0; i < hits.Length; i++)
         {
-            Debug.Log(hits[i].name);
+            //Debug.Log(hits[i].name);
             if (hits[i].CompareTag("Player"))
             {
                 if(lighting)
