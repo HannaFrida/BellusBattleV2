@@ -250,9 +250,11 @@ public class Gun : MonoBehaviour
         //Debug.Log("borde vara här");
         if (weaponData.name == "Xnade")
         {
-            StartCoroutine(DeactivateAfterTime(2f));
+            MeshFilter meshfil = GetComponentInChildren<MeshFilter>();
+            meshfil.gameObject.SetActive(false);
+            StartCoroutine(DeactivateAfterTime(5f));
         }
-        if (weaponData.name == "GwynBolt")
+        else if (weaponData.name == "GwynBolt")
         {
             VisualEffect bolt = GetComponentInChildren<VisualEffect>();
             bolt.enabled = false;
@@ -266,7 +268,7 @@ public class Gun : MonoBehaviour
         gameObject.GetComponent<BoxCollider>().enabled = false;
         gameObject.GetComponent<Gun>().enabled = false;
 
-       /* 
+       
         if (gameObject.GetComponent<MeshFilter>().mesh != null)
         {
             Debug.Log("borde inte vara här");
@@ -274,7 +276,7 @@ public class Gun : MonoBehaviour
             GameObject despawnVFX = Instantiate(weaponData.DespawnVFX, transform.position, transform.rotation);
             despawnVFX.GetComponent<Despawn>().SetMesh(mesh);
         }
-        */
+        
     }
 
     private bool CanShoot() => timeSinceLastShot > 1f / (weaponData.fireRate / 60f) && gunsAmmo > 0 && isPickedUp;//!gunData.reloading && timeSinceLastShot > 1f / (gunData.fireRate / 60f); //weaponData.Ammo > 0
