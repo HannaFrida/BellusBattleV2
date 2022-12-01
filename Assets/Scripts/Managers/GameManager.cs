@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
 {
 
     [SerializeField] private CinemachineTargetGroup targetGroup;
+    [SerializeField] private Transform cameraTarget;
     private bool gameLoopFinished = false;
     public static GameManager Instance;
     [SerializeField] private List<GameObject> players = new List<GameObject>();
@@ -71,6 +72,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
     }
     private void OnLevelWasLoaded(int level)
     {
+        cameraTarget = GameObject.FindGameObjectWithTag("CameraTarget").transform;
         if (level != 0)
         {
             
@@ -111,14 +113,18 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
     }
 
     private void Update()
-    {   
+    {
+        if (targetGroup.GetComponent<CinemachineTargetGroup>().m_Targets.Length < 1)  {
+            targetGroup.AddMember(cameraTarget , 1, 5); 
+        }else if((targetGroup.m_Targets[0].target == cameraTarget) && targetGroup.GetComponent<CinemachineTargetGroup>().m_Targets.Length < 2) ;
+        else targetGroup.RemoveMember(cameraTarget);
         if (!gameHasStarted) return;
         CheckPlayersLeft();
 
         if (hasOnePlayerLeft && !hasGivenScore && gameHasStarted)
         {
             GiveScoreAfterTimer();
-        }           
+        }
 
     }
     private void OnApplicationQuit()
