@@ -21,9 +21,9 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
     [SerializeField] private bool gameIsPaused;
 
     private bool runRoundTimer;
-    private float roundDuration;
-    private float roundTimer;
-    private int roundCounter;
+    [SerializeField] private float roundDuration;
+    [SerializeField] private float roundTimer;
+    [SerializeField] private int roundCounter;
 
     [Header("Points")]
     private static Dictionary<GameObject, int> scoreDic = new Dictionary<GameObject, int>();
@@ -99,15 +99,15 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
             //Array.Clear(targetGroup.GetComponent<CinemachineTargetGroup>().m_Targets, 0, targetGroup.GetComponent<CinemachineTargetGroup>().m_Targets.Length);
             //SpawnPlayers();
         }
-        roundCounter++;
-        runRoundTimer = false;
-        roundTimer = 0f;
-        roundDuration = 0f;
+
+        if(SceneManager.GetActiveScene().name.Equals("TransitionScene") == false)
+        {
+            roundCounter++;
+            runRoundTimer = false;
+            roundTimer = 0f;
+            roundDuration = 0f;
+        }
         RestorePLayer();
-        
-        
-
-
     }
     private void Awake()
     {
@@ -141,6 +141,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
             GiveScoreAfterTimer();
         }
 
+        if (!runRoundTimer) return;
         roundTimer += Time.deltaTime;
         roundDuration = roundTimer;
 
@@ -231,10 +232,6 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
     {
         if (playersAlive.Count <= 1)
         {
-            if (hasOnePlayerLeft == false)
-            {
-                GameDataTracker.Instance.SaveRoundTime(roundCounter, roundDuration);
-            }
             hasOnePlayerLeft = true;
             soundManager.FadeOutMusic();
             soundManager.FadeOutHazard();
@@ -296,6 +293,8 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
             Debug.Log("Its a draaaaw!");
         }
         hasGivenScore = false;
+        Debug.Log($"send it! {roundCounter} and {roundDuration}");
+        GameDataTracker.Instance.SaveRoundTime(roundCounter, roundDuration);
         LoadNextScene();
 
     }

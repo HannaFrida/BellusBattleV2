@@ -11,7 +11,8 @@ public class GameDataTracker : MonoBehaviour
     private int totalRoundsPlayed;
     private float totalGameTime;
     private List<KillEvent> killList = new List<KillEvent>();
-    private static string filePath = "Assets/Resources/GameLogs.txt";
+    private string filePath; 
+    private bool isInEditor;
     // Start is called before the first frame update
 
     private void Awake()
@@ -26,10 +27,32 @@ public class GameDataTracker : MonoBehaviour
         }
         
     }
+    private void Start()
+    {
+        if (Application.isEditor)
+        {
+            isInEditor = true;
+        }
+        filePath = GetFilePath();
+    }
     // Update is called once per frame
     void Update()
     {
       
+    }
+
+    private string GetFilePath()
+    {
+        if (isInEditor)
+        {
+            return "Assets/Resources/GameLogs.txt";
+        }
+        else
+        {
+            return Application.persistentDataPath + "/GameLogs.txt";
+        }
+
+        
     }
    
 
@@ -104,8 +127,5 @@ public struct KillEvent
         }
         
     }
-
-    
-
 
 }
