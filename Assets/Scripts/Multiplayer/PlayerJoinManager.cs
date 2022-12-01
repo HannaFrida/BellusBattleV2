@@ -10,6 +10,8 @@ public class PlayerJoinManager : PlayerSpawnManager
     [SerializeField] GameObject characterLow;
     RebindingDisplay rbd;
 
+    [SerializeField] GameObject rebindPanel;
+
     public List<PlayerInput> listOfPlayers = new List<PlayerInput>();
 
     void OnPlayerJoined(PlayerInput playerInput)
@@ -27,6 +29,26 @@ public class PlayerJoinManager : PlayerSpawnManager
         // So Player 1 spawns at the first Trasnform in the list, Player 2 on the second, and so forth.
         playerDetails.startPos = SpawnLocations[playerInput.playerIndex].position;
 
+        // Rebind 2.0
+        rbd = playerInput.gameObject.GetComponentInChildren<RebindingDisplay>();//GameObject.FindGameObjectWithTag("Rebind").GetComponent<RebindingDisplay>();
+        if (playerDetails.playerID == 1)
+        {
+            GameObject thisPlayersRebindPanel;
+            thisPlayersRebindPanel = Instantiate(rebindPanel, rbd.PosP1.transform);
+            rbd.panels.Add(thisPlayersRebindPanel);
+            //rbd.playerIDText.text = playerDetails.playerID.ToString();
+        }
+        else if (playerDetails.playerID == 2)
+        {
+            GameObject thisPlayersRebindPanel;
+            thisPlayersRebindPanel = Instantiate(rebindPanel, rbd.PosP2.transform);
+            rbd.panels.Add(thisPlayersRebindPanel);
+            //rbd.playerIDText.text = playerDetails.playerID.ToString();
+        }
+
+
+
+        /*
         // Rebind settings canvas in player posiotioning depending on PlayerID
         RectTransform rtf;
         rbd = GameObject.FindGameObjectWithTag("Rebind").GetComponent<RebindingDisplay>();
@@ -62,6 +84,7 @@ public class PlayerJoinManager : PlayerSpawnManager
 
         rtf = null;
         rbd = null; 
+        */
 
         Renderer renderer = playerInput.gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
         TextMeshPro indicatorText = playerInput.gameObject.GetComponentInChildren<TextMeshPro>();

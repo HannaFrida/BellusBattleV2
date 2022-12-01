@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using System.Collections.Generic;
 
 public class RebindingDisplay : MonoBehaviour
 {
@@ -42,17 +43,38 @@ public class RebindingDisplay : MonoBehaviour
 
     [Header("UI")]
     [SerializeField] public bool isChangingSettings;
-    [SerializeField] public GameObject panel;
+    [SerializeField] public List<GameObject> panels = new List<GameObject>();
     [SerializeField] public TMP_Text playerIDText;
     [SerializeField] public GameObject PosP1;
     [SerializeField] public GameObject PosP2;
     [SerializeField] public GameObject PosP3;
     [SerializeField] public GameObject PosP4;
-    
+
 
     private void Start()
     {
         playerMovement = GetComponentInParent<PlayerMovement>();
+
+        waitingForInputObject = GameObject.Find("WaitingForInputText");
+    }
+
+    public GameObject FindChildGameObjectByName(GameObject parent, string gameObjectName)
+    {
+        GameObject retrunGO = null;
+
+        for (int i = 0; i < parent.transform.childCount; i++)
+        {
+            if (parent.transform.GetChild(i).name == gameObjectName)
+            {
+                retrunGO = parent.transform.GetChild(i).gameObject;
+            }
+
+            GameObject tmp = FindChildGameObjectByName(parent.transform.GetChild(i).gameObject, gameObjectName);
+
+            retrunGO = (tmp != null ? tmp : retrunGO);
+        }
+
+        return retrunGO;
     }
 
     /// <summary>
@@ -60,6 +82,9 @@ public class RebindingDisplay : MonoBehaviour
     /// </summary>
     public void StartJumpRebinding()
     {
+        bindingJumpDisplayNameText = FindChildGameObjectByName(gameObject, "JumpButtonText").GetComponent<TMP_Text>();
+        startJumpRebindObject = FindChildGameObjectByName(gameObject, "JumpButton");
+
         startJumpRebindObject.SetActive(false);
         waitingForInputObject.SetActive(true);
 

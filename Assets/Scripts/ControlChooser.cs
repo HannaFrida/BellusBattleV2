@@ -8,8 +8,6 @@ public class ControlChooser : MonoBehaviour
     private List<PlayerInput> playerInputs = new List<PlayerInput>();
     private static bool toggledLeft;
     private static bool toggledRight;
-
-
     public void LeftControllerMode()
     {
         toggledLeft = !toggledLeft;

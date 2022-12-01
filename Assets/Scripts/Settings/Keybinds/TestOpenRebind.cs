@@ -8,7 +8,7 @@ public class TestOpenRebind : MonoBehaviour
 
     void Start()
     {
-        
+
     }
 
     public void OnClick()
@@ -16,17 +16,28 @@ public class TestOpenRebind : MonoBehaviour
         RebindingDisplay[] rebindingDisplays = (RebindingDisplay[])FindObjectsOfType(typeof(RebindingDisplay));
         rd = GameObject.FindGameObjectWithTag("Rebind").GetComponent<RebindingDisplay>();
         rd.isChangingSettings = !rd.isChangingSettings;
+
+
         foreach (RebindingDisplay rebindDisp in rebindingDisplays)
         {
+
             if (rd.isChangingSettings)
             {
-                rebindDisp.panel.gameObject.SetActive(true);
+                for (int i = 0; i < rebindDisp.panels.Count; i++)
+                {
+                    rebindDisp.panels[i].SetActive(true);
+                }
+                //rebindDisp.panels.gameObject.SetActive(true);
             }
             else
             {
-                rebindDisp.panel.gameObject.SetActive(false);
+                for (int i = 0; i < rebindDisp.panels.Count; i++)
+                {
+                    rebindDisp.panels[i].SetActive(false);
+                }
+                //rebindDisp.panels.gameObject.SetActive(false);
             }
         }
-        
+
     }
 }
