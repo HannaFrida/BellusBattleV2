@@ -37,7 +37,7 @@ public class PauseMenu : MonoBehaviour
         if (gm.GameIsPaused == true && isToggled == false)
         {
             sm.HalfMusicVolume();
-            Debug.Log("dada");
+            //Debug.Log("dada");
             isToggled = true;
             DisplayPauseMenu(isToggled);
         }
