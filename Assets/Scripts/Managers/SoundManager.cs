@@ -18,9 +18,11 @@ public class SoundManager : MonoBehaviour
     [Header("hazards")]
     [SerializeField] private AudioSource hazardSource;
     [SerializeField] private AudioSource hazardWarningSource;
+    [SerializeField] private AudioSource trampolineSource; //ligger för närvarande på trampolinprefab. används ej av soundManager
     [SerializeField] private AudioClip lavaHazardSound;
     [SerializeField] private AudioClip poisonHazardSound;
-   
+    
+
     [Header("foliage")]
     [SerializeField] private AudioSource doorOpenSource;
     [SerializeField] private AudioSource doorCloseSource;
@@ -31,7 +33,9 @@ public class SoundManager : MonoBehaviour
     [Header("UI sounds")]
     [SerializeField] private AudioSource howerMenuSource;
     [SerializeField] private AudioSource pressMenuSource;
+    [SerializeField] private AudioSource pressBackButtonSource;
     [SerializeField] private AudioSource pressingBattleButtonSource;
+   
 
 
     private float volLowRan = 0.3f;
@@ -59,6 +63,15 @@ public class SoundManager : MonoBehaviour
     public void FadeOutMusic()
     {
         StartCoroutine(FadeMixerGroup.StartFade(overallMixer, "MusicMixerGroup", 1f, 0f));
+    }
+    public void FadeOutBellSounds()
+    {
+        StartCoroutine(FadeMixerGroup.StartFade(overallMixer, "BellSounds", 3f, 0f));
+    }
+    public void FadeInBellSounds()
+    {
+       
+        StartCoroutine(FadeMixerGroup.StartFade(overallMixer, "BellSounds", 1f, 0.4f));
     }
 
     public void FadeInLavaHazard(string hazardName)
@@ -99,7 +112,13 @@ public class SoundManager : MonoBehaviour
     
     public void PressUiSound()
     {
+        howerMenuSource.pitch = Random.Range(0.96f, highPitchRan);
         pressMenuSource.Play();
+    }
+    public void PressBackButtonSound()
+    {
+        howerMenuSource.pitch = Random.Range(0.96f, highPitchRan);
+        pressBackButtonSource.Play();
     }
     public void PressBattleButtonSound()
     {
@@ -109,6 +128,11 @@ public class SoundManager : MonoBehaviour
     {
         doorOpenSource.pitch = Random.Range(0.95f, highPitchRan);
         doorOpenSource.Play();
+    }
+    public void TrampolineSound()
+    {
+        trampolineSource.pitch = Random.Range(0.8f, highPitchRan);
+        trampolineSource.Play();
     }
     public void CloseDoorSound()
     {
