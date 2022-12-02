@@ -453,7 +453,7 @@ public class Gun : MonoBehaviour
             aim.enabled = false;
         }
 
-        yield return new WaitForSeconds(1.6f);
+        yield return new WaitForSeconds(1.5f);
 
         foreach (Aim aim in ownerAim)
         {
