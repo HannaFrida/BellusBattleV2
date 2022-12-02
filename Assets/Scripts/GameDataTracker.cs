@@ -7,10 +7,10 @@ public class GameDataTracker : MonoBehaviour
 {
     public static GameDataTracker Instance;
     private Dictionary<int, float> roundTimeDic = new Dictionary<int, float>();
+    private List<KillEvent> killList = new List<KillEvent>();
     private int playersKilledByHazard;
     private int totalRoundsPlayed;
     private float totalGameTime;
-    private List<KillEvent> killList = new List<KillEvent>();
     private string filePath; 
     private bool isInEditor;
     // Start is called before the first frame update
@@ -90,12 +90,22 @@ public class GameDataTracker : MonoBehaviour
         writer.WriteLine($"\n total amount of players killed by hazards : {playersKilledByHazard} \n" +
             $"");
         writer.Close();
+        ClearSavedData();
     }
 
     public void SaveRoundTime(int roundNr, float duration)
     {
         roundTimeDic[roundNr] = duration;
         totalRoundsPlayed++;
+    }
+
+    private void ClearSavedData()
+    {
+        killList.Clear();
+        roundTimeDic.Clear();
+        playersKilledByHazard = 0;
+        totalRoundsPlayed = 0;
+        totalGameTime = 0;
     }
 
 

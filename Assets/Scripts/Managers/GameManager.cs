@@ -57,6 +57,18 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
     private static Dictionary<int, GameObject> transPosDic = new Dictionary<int, GameObject>();
     private static Dictionary<int, Image> imageDic = new Dictionary<int, Image>();
 
+    [SerializeField] private Image player1Dead;
+    [SerializeField] private Image player1Alive;
+    
+    [SerializeField] private Image player2Dead;
+    [SerializeField] private Image player2Alive;
+    
+    [SerializeField] private Image player3Dead;
+    [SerializeField] private Image player3Alive;
+    
+    [SerializeField] private Image player4Dead;
+    [SerializeField] private Image player4Alive;
+
     public List<string> scenesToChooseFrom = new List<string>();
     public List<string> scenesToRemove = new List<string>();
 
@@ -107,6 +119,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
             roundTimer = 0f;
             roundDuration = 0f;
         }
+        ResetPlayerImage();
         RestorePLayer();
     }
     private void Awake()
@@ -212,9 +225,52 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
     {
         playersAlive.Remove(deadPlayer);
         targetGroup.RemoveMember(deadPlayer.transform); //OBS GER ERROR!
+        SetDeathImage(deadPlayer.GetComponent<PlayerDetails>().playerID);
     }
 
+    private void SetDeathImage(int playerID)
+    {
+        if(playerID == 1)
+        {
+            player1Dead.enabled = true;
+            player1Alive.enabled = false;
+        }
+        if(playerID == 2)
+        {
+            player2Dead.enabled = true;
+            player2Alive.enabled = false;
+        }
+        if (playerID == 3)
+        {
+            player3Dead.enabled = true;
+            player3Alive.enabled = false;
+        }
+        if (playerID == 4)
+        {
+            player4Dead.enabled = true;
+            player4Alive.enabled = false;
+        }
+    }
 
+    private void ResetPlayerImage()
+    {
+        player1Dead.enabled = false;
+        player1Alive.enabled = true;
+
+        player2Dead.enabled = false;
+        player2Alive.enabled = true;
+
+        player3Dead.enabled = false;
+        player3Alive.enabled = true;
+
+        player4Dead.enabled = false;
+        player4Alive.enabled = true;
+    }
+       
+           
+        
+
+   
 
     private void ClearScore()
     {
