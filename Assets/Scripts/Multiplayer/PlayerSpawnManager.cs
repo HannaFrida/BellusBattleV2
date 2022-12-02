@@ -39,7 +39,7 @@ public class PlayerSpawnManager : MonoBehaviour
         for(int i = 0; i < players.Length; i++)
         {
             if (players[i] == null) continue;
-            players[i].GetComponent<Dash>().ResetValues();
+            //players[i].GetComponent<Dash>().ResetValues();
             players[i].transform.position = spawnLocations[i].position;
         }
 
@@ -55,6 +55,7 @@ public class PlayerSpawnManager : MonoBehaviour
         if(timer <= 0)
         {
             runTimer = false;
+            GameManager.Instance.IsRunningRoundTimer = true;
         }
         timer -= Time.deltaTime;  
     } 

@@ -6,6 +6,7 @@ using UnityEngine;
 public class PoisonZone : MonoBehaviour
 {
     [SerializeField] private float timeToKill;
+    [SerializeField] private string hazardName; // Anvönds för att logga
     private static Dictionary<GameObject, float> poisonDic = new Dictionary<GameObject, float>();
     private static Dictionary<GameObject, bool> isInZoneDic = new Dictionary<GameObject, bool>();
     
@@ -76,6 +77,8 @@ public class PoisonZone : MonoBehaviour
             if(poisonDic[player] >= timeToKill)
             {
                 GameManager.Instance.PlayerDeath(player);
+                GameDataTracker.Instance.NewKillEvent(0, player.GetComponent<PlayerDetails>().playerID, hazardName);
+                GameDataTracker.Instance.IncreasePlayersKilledByHazards();
                 player.GetComponent<PlayerHealth>().KillPlayer();
             }
         }

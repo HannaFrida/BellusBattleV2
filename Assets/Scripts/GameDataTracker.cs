@@ -6,12 +6,13 @@ using System.IO;
 public class GameDataTracker : MonoBehaviour
 {
     public static GameDataTracker Instance;
-    private Dictionary<int, float> roundTimeDic = new();
+    private Dictionary<int, float> roundTimeDic = new Dictionary<int, float>();
     private int playersKilledByHazard;
     private int totalRoundsPlayed;
     private float totalGameTime;
     private List<KillEvent> killList = new List<KillEvent>();
-    private static string filePath = "Assets/Resources/GameLogs.txt";
+    private string filePath; 
+    private bool isInEditor;
     // Start is called before the first frame update
 
     private void Awake()
@@ -26,11 +27,34 @@ public class GameDataTracker : MonoBehaviour
         }
         
     }
+    private void Start()
+    {
+        if (Application.isEditor)
+        {
+            isInEditor = true;
+        }
+        filePath = GetFilePath();
+    }
     // Update is called once per frame
     void Update()
     {
       
     }
+
+    private string GetFilePath()
+    {
+        if (isInEditor)
+        {
+            return "Assets/Resources/GameLogs.txt";
+        }
+        else
+        {
+            return Application.persistentDataPath + "/GameLogs.txt";
+        }
+
+        
+    }
+   
 
     public void NewKillEvent(int killer, int killed, string weaponName)
     {
@@ -56,8 +80,22 @@ public class GameDataTracker : MonoBehaviour
         {
             writer.WriteLine(eve.ToString());
         }
-        writer.WriteLine("\n");
+        writer.WriteLine();
+        for(int i = 1; i <= totalRoundsPlayed; i++)
+        {
+            writer.WriteLine($"Round {i} lasted {roundTimeDic[i]} seconds");
+            totalGameTime += roundTimeDic[i];
+        }
+        writer.WriteLine($"Rounds played: {totalRoundsPlayed} \nTotal time of session: {totalGameTime} seconds \nAverage time per round: {totalGameTime / totalRoundsPlayed}");
+        writer.WriteLine($"\n total amount of players killed by hazards : {playersKilledByHazard} \n" +
+            $"");
         writer.Close();
+    }
+
+    public void SaveRoundTime(int roundNr, float duration)
+    {
+        roundTimeDic[roundNr] = duration;
+        totalRoundsPlayed++;
     }
 
 
@@ -76,10 +114,18 @@ public struct KillEvent
         this.weaponName = weaponName;
     }
 
+
     public override string ToString()
     {
-        return $"Player {killerID} killed Player {killedPlayerID} with the {weaponName}";
+        if(killerID == 0)
+        {
+            return $"Player {killedPlayerID} got killed by {weaponName}";
+        }
+        else
+        {
+            return $"Player {killerID} killed Player {killedPlayerID} with the {weaponName}";
+        }
+        
     }
-
 
 }
