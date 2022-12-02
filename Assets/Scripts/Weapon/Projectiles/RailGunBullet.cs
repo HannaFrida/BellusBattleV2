@@ -7,7 +7,6 @@ public class RailGunBullet : Projectile
 	[SerializeField]
 	[Tooltip("For how long the bullet will exist for in seconds.")]
 	private float lifeSpan = 0.015f;
-	CameraFocus cf;
 	[SerializeField, Tooltip("Sound made when bullet hits something")]
 	public AudioSource[] hitSounds;
 	[SerializeField] private GameObject colliderWallVFX;
@@ -21,7 +20,6 @@ public class RailGunBullet : Projectile
 
 	private void Start()
 	{
-		cf = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFocus>();
 		StartCoroutine(Shoot(lifeSpan));
 	}
     private void Update()
@@ -47,13 +45,10 @@ public class RailGunBullet : Projectile
 			playerGo.GetComponent<PlayerHealth>().TakeDamage(damage);
 			playerGo.GetComponent<PlayerHealth>().PlayFire();
 
-			if (playerGo.GetComponent<PlayerHealth>().Health <= 0)
-			{
-				//playerGo.SetActive(false);
-				//playerGo.GetComponent<PlayerHealth>().KillPlayer();
-				cf.RemoveTarget(playerGo.transform);
-			}
+			GameDataTracker.Instance.NewKillEvent(shooterID, playerGo.GetComponent<PlayerDetails>().playerID, weaponName);
 
+		
+			/*
 			PlayerDeathEvent pde = new PlayerDeathEvent
 			{
 				PlayerGo = other.gameObject,
@@ -62,6 +57,7 @@ public class RailGunBullet : Projectile
 				KilledWith = "Bullets",
 			};
 			pde.FireEvent();
+			*/
 
 			//Die();
 		}

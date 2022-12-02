@@ -7,13 +7,11 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 using Cinemachine;
-using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour, IDataPersistenceManager
 {
 
     [SerializeField] private CinemachineTargetGroup targetGroup;
-    [SerializeField] private Transform cameraTarget;
     private bool gameLoopFinished = false;
     public static GameManager Instance;
     [SerializeField] private List<GameObject> players = new List<GameObject>();
@@ -21,6 +19,11 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
     [SerializeField] private SoundManager soundManager;
     private bool gameHasStarted;
     [SerializeField] private bool gameIsPaused;
+
+    private bool runRoundTimer;
+    [SerializeField] private float roundDuration;
+    [SerializeField] private float roundTimer;
+    [SerializeField] private int roundCounter;
 
     [Header("Points")]
     private static Dictionary<GameObject, int> scoreDic = new Dictionary<GameObject, int>();
@@ -71,10 +74,20 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
     {
         get => GameHasStarted;
     }
+
+    public bool IsRunningRoundTimer
+    {
+        get => runRoundTimer;
+        set => runRoundTimer = value;
+    }
     private void OnLevelWasLoaded(int level)
     {
-        cameraTarget = GameObject.FindGameObjectWithTag("CameraTarget").transform;
-        if (cameraTarget == null) cameraTarget = new GameObject("temp").transform;
+        /*
+        if(SceneManager.GetSceneAt(level).name.Equals("TranisitionScene") == false)
+        {
+            
+        }
+        */
         if (level != 0)
         {
             
@@ -86,11 +99,15 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
             //Array.Clear(targetGroup.GetComponent<CinemachineTargetGroup>().m_Targets, 0, targetGroup.GetComponent<CinemachineTargetGroup>().m_Targets.Length);
             //SpawnPlayers();
         }
+
+        if(SceneManager.GetActiveScene().name.Equals("TransitionScene") == false)
+        {
+            roundCounter++;
+            runRoundTimer = false;
+            roundTimer = 0f;
+            roundDuration = 0f;
+        }
         RestorePLayer();
-        
-        
-
-
     }
     private void Awake()
     {
@@ -115,11 +132,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
     }
 
     private void Update()
-    {
-        if (targetGroup.GetComponent<CinemachineTargetGroup>().m_Targets.Length < 1)  {
-            targetGroup.AddMember(cameraTarget , 1, 5); 
-        }else if((targetGroup.m_Targets[0].target == cameraTarget) && targetGroup.GetComponent<CinemachineTargetGroup>().m_Targets.Length < 2) ;
-        else targetGroup.RemoveMember(cameraTarget);
+    {   
         if (!gameHasStarted) return;
         CheckPlayersLeft();
 
@@ -127,6 +140,10 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
         {
             GiveScoreAfterTimer();
         }
+
+        if (!runRoundTimer) return;
+        roundTimer += Time.deltaTime;
+        roundDuration = roundTimer;
 
     }
     private void OnApplicationQuit()
@@ -170,7 +187,6 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
         {
             targetGroup.RemoveMember(players[i].transform);
             targetGroup.AddMember(players[i].transform, 1, 5); //OBS GER ERROR!
-            players[i].GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
         }
     }
 
@@ -222,6 +238,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
         }
         else if (playersAlive.Count > 1)
         {
+          
             hasOnePlayerLeft = false;
         }
     }
@@ -276,6 +293,8 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
             Debug.Log("Its a draaaaw!");
         }
         hasGivenScore = false;
+        Debug.Log($"send it! {roundCounter} and {roundDuration}");
+        GameDataTracker.Instance.SaveRoundTime(roundCounter, roundDuration);
         LoadNextScene();
 
     }

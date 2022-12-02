@@ -24,6 +24,9 @@ public class Teleporter : MonoBehaviour
         {
             playerAmountOnTeleporter++;
             soundManager.PlayerOnPlay_Sound();
+            soundManager.FadeInBellSounds();
+
+
         }
 
         // There needs to be at least two players in the scene
@@ -37,7 +40,11 @@ public class Teleporter : MonoBehaviour
         if (playerAmountOnTeleporter == playerJoinManager.listOfPlayers.Count)
         {
             soundManager.AllPlayersOnPlay_Sound();
+            soundManager.FadeOutBellSounds();
         }
+        
+            
+        
     }
 
     private void OnTriggerExit(Collider other)

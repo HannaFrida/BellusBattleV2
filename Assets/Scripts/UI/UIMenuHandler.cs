@@ -10,6 +10,7 @@ public class UIMenuHandler : MonoBehaviour
     [SerializeField] private List<GameObject> panels = new List<GameObject>();
     [SerializeField] private EventSystem es;
     [SerializeField] private GameObject button;
+    [SerializeField] private SoundManager soundManager;
     [SerializeField] private List<Button> buttons = new List<Button>();
     private GameObject activePanel;
     protected void Start()
@@ -42,6 +43,10 @@ public class UIMenuHandler : MonoBehaviour
         //    Debug.Log(b.spriteState);
         //}
         gameObject.SetActive(false);
+        soundManager.FadeInBellSounds();
+        
+
+
     }
     private void OnEnable()
     {
