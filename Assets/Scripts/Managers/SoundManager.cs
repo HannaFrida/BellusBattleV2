@@ -91,7 +91,7 @@ public class SoundManager : MonoBehaviour
     }
     public void HazardWarningSound()
     {
-        hazardWarningSource.pitch = Random.Range(0.95f, highPitchRan);
+        //hazardWarningSource.pitch = Random.Range(0.95f, highPitchRan);
         hazardWarningSource.Play();
        
     }

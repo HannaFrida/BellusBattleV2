@@ -7,10 +7,10 @@ public class GameDataTracker : MonoBehaviour
 {
     public static GameDataTracker Instance;
     private Dictionary<int, float> roundTimeDic = new Dictionary<int, float>();
+    private List<KillEvent> killList = new List<KillEvent>();
     private int playersKilledByHazard;
     private int totalRoundsPlayed;
     private float totalGameTime;
-    private List<KillEvent> killList = new List<KillEvent>();
     private string filePath; 
     private bool isInEditor;
     // Start is called before the first frame update
@@ -51,11 +51,9 @@ public class GameDataTracker : MonoBehaviour
         {
             return Application.persistentDataPath + "/GameLogs.txt";
         }
-
         
     }
    
-
     public void NewKillEvent(int killer, int killed, string weaponName)
     {
         KillEvent killEvent = new KillEvent(killerID: killer, killedPlayerID: killed, weaponName);
@@ -90,6 +88,7 @@ public class GameDataTracker : MonoBehaviour
         writer.WriteLine($"\n total amount of players killed by hazards : {playersKilledByHazard} \n" +
             $"");
         writer.Close();
+        ClearSavedData();
     }
 
     public void SaveRoundTime(int roundNr, float duration)
@@ -98,7 +97,14 @@ public class GameDataTracker : MonoBehaviour
         totalRoundsPlayed++;
     }
 
-
+    private void ClearSavedData()
+    {
+        killList.Clear();
+        roundTimeDic.Clear();
+        playersKilledByHazard = 0;
+        totalRoundsPlayed = 0;
+        totalGameTime = 0;
+    }
 }
 
 public struct KillEvent
@@ -111,6 +117,10 @@ public struct KillEvent
     {
         this.killerID = killerID;
         this.killedPlayerID = killedPlayerID;
+        if(weaponName == null)
+        {
+            weaponName = "Unnamed hazard";
+        }
         this.weaponName = weaponName;
     }
 

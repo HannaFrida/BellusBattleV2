@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
 {
 
     [SerializeField] private CinemachineTargetGroup targetGroup;
+    [SerializeField] private Transform cameraTarget;
     private bool gameLoopFinished = false;
     public static GameManager Instance;
     [SerializeField] private List<GameObject> players = new List<GameObject>();
@@ -56,6 +57,18 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
     static Vector2 pos1, pos2, pos3, pos4;
     private static Dictionary<int, GameObject> transPosDic = new Dictionary<int, GameObject>();
     private static Dictionary<int, Image> imageDic = new Dictionary<int, Image>();
+
+    [SerializeField] private Image player1Dead;
+    [SerializeField] private Image player1Alive;
+    
+    [SerializeField] private Image player2Dead;
+    [SerializeField] private Image player2Alive;
+    
+    [SerializeField] private Image player3Dead;
+    [SerializeField] private Image player3Alive;
+    
+    [SerializeField] private Image player4Dead;
+    [SerializeField] private Image player4Alive;
 
     public List<string> scenesToChooseFrom = new List<string>();
     public List<string> scenesToRemove = new List<string>();
@@ -107,6 +120,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
             roundTimer = 0f;
             roundDuration = 0f;
         }
+        ResetPlayerImage();
         RestorePLayer();
     }
     private void Awake()
@@ -121,6 +135,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
 
     private void Start()
     {
+        cameraTarget = GameObject.FindGameObjectWithTag("CameraTarget").transform;  
         //targetGroup = GameObject.FindGameObjectWithTag("targets");
         //trans = Transition.Instance;
         //trans.gameObject.SetActive(false);
@@ -132,7 +147,13 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
     }
 
     private void Update()
-    {   
+    {
+        if (targetGroup.GetComponent<CinemachineTargetGroup>().m_Targets.Length < 1)
+        {
+            targetGroup.AddMember(cameraTarget, 1, 5);
+        }
+        else if ((targetGroup.m_Targets[0].target == cameraTarget) && targetGroup.GetComponent<CinemachineTargetGroup>().m_Targets.Length < 2) ;
+        else targetGroup.RemoveMember(cameraTarget);
         if (!gameHasStarted) return;
         CheckPlayersLeft();
 
@@ -172,7 +193,6 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
         scenesToRemove.Add("The_End");
         scenesToRemove.Add("TransitionScene");
         LoadScenesList();
-        if (SceneManager.GetActiveScene().buildIndex == 0) CreateLevelsUI();
     }
 
     public void AddPLayer(GameObject player)
@@ -212,9 +232,52 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
     {
         playersAlive.Remove(deadPlayer);
         targetGroup.RemoveMember(deadPlayer.transform); //OBS GER ERROR!
+        SetDeathImage(deadPlayer.GetComponent<PlayerDetails>().playerID);
     }
 
+    private void SetDeathImage(int playerID)
+    {
+        if(playerID == 1)
+        {
+            player1Dead.enabled = true;
+            player1Alive.enabled = false;
+        }
+        if(playerID == 2)
+        {
+            player2Dead.enabled = true;
+            player2Alive.enabled = false;
+        }
+        if (playerID == 3)
+        {
+            player3Dead.enabled = true;
+            player3Alive.enabled = false;
+        }
+        if (playerID == 4)
+        {
+            player4Dead.enabled = true;
+            player4Alive.enabled = false;
+        }
+    }
 
+    private void ResetPlayerImage()
+    {
+        player1Dead.enabled = false;
+        player1Alive.enabled = true;
+
+        player2Dead.enabled = false;
+        player2Alive.enabled = true;
+
+        player3Dead.enabled = false;
+        player3Alive.enabled = true;
+
+        player4Dead.enabled = false;
+        player4Alive.enabled = true;
+    }
+       
+           
+        
+
+   
 
     private void ClearScore()
     {
@@ -320,21 +383,6 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
         }
         if (scenesToChooseFrom.Count <= 0) Debug.LogError("There is no scenes in build. please put scenes in build or choose ScencesFromList from " + gameObject);
     }
-    private void CreateLevelsUI()
-    {
-        for (int i = 0; i < sceneCount - 2; i++)
-        {
-            string tempStr = System.IO.Path.GetFileNameWithoutExtension(SceneUtility.GetScenePathByBuildIndex(i));
-            if (i != 0)
-            {
-                GameObject g = Instantiate(levelXPrefab);
-                g.transform.parent = content.transform;
-                levels.Add(g.GetComponent<LevelDetails>());
-                levels.ElementAt(i - 1).SetName(tempStr);
-            }
-
-        }
-    }
     private void CreateListOfScenesFromList()
     {
         foreach (string scene in scenes)
@@ -382,7 +430,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
             LoadScenesList();
 
         }
-        StartCoroutine(AsynchronousLoad());
+        if(nextLevel != null)StartCoroutine(AsynchronousLoad());
         soundManager.FadeInMusic();
     }
     /*
