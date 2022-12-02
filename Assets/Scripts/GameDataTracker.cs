@@ -51,11 +51,9 @@ public class GameDataTracker : MonoBehaviour
         {
             return Application.persistentDataPath + "/GameLogs.txt";
         }
-
         
     }
    
-
     public void NewKillEvent(int killer, int killed, string weaponName)
     {
         KillEvent killEvent = new KillEvent(killerID: killer, killedPlayerID: killed, weaponName);
@@ -107,8 +105,6 @@ public class GameDataTracker : MonoBehaviour
         totalRoundsPlayed = 0;
         totalGameTime = 0;
     }
-
-
 }
 
 public struct KillEvent
