@@ -193,7 +193,6 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
         scenesToRemove.Add("The_End");
         scenesToRemove.Add("TransitionScene");
         LoadScenesList();
-        if (SceneManager.GetActiveScene().buildIndex == 0) CreateLevelsUI();
     }
 
     public void AddPLayer(GameObject player)
@@ -383,21 +382,6 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
             scenesToChooseFrom.Add(tempStr);
         }
         if (scenesToChooseFrom.Count <= 0) Debug.LogError("There is no scenes in build. please put scenes in build or choose ScencesFromList from " + gameObject);
-    }
-    private void CreateLevelsUI()
-    {
-        for (int i = 0; i < sceneCount - 2; i++)
-        {
-            string tempStr = System.IO.Path.GetFileNameWithoutExtension(SceneUtility.GetScenePathByBuildIndex(i));
-            if (i != 0)
-            {
-                GameObject g = Instantiate(levelXPrefab);
-                g.transform.parent = content.transform;
-                levels.Add(g.GetComponent<LevelDetails>());
-                levels.ElementAt(i - 1).SetName(tempStr);
-            }
-
-        }
     }
     private void CreateListOfScenesFromList()
     {

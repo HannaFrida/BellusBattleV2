@@ -9,7 +9,8 @@ public class UIMenuHandler : MonoBehaviour
 {
     [SerializeField] private List<GameObject> panels = new List<GameObject>();
     [SerializeField] private EventSystem es;
-    [SerializeField] private GameObject button;
+    [SerializeField] private GameObject buttonDeafaultPanel;
+    [SerializeField] private GameObject buttonMapsSelectionPanel;
     [SerializeField] private SoundManager soundManager;
     [SerializeField] private List<Button> buttons = new List<Button>();
     private GameObject activePanel;
@@ -25,6 +26,11 @@ public class UIMenuHandler : MonoBehaviour
         panel.SetActive(true);
         activePanel.SetActive(false);
         activePanel = panel;
+        switch(panel.name)
+        {
+            case "Defualt_Panel": es.SetSelectedGameObject(buttonDeafaultPanel); break;
+            case "MapsSelection_Panel": es.SetSelectedGameObject(buttonMapsSelectionPanel); break;
+        }
     }
     public void OpenTheSuprise()
     {
@@ -50,7 +56,7 @@ public class UIMenuHandler : MonoBehaviour
     }
     private void OnEnable()
     {
-        es.SetSelectedGameObject(button);
+        es.SetSelectedGameObject(buttonDeafaultPanel);
     }
     public void NavigateRight()
     {
