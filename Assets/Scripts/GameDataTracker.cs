@@ -117,6 +117,10 @@ public struct KillEvent
     {
         this.killerID = killerID;
         this.killedPlayerID = killedPlayerID;
+        if(weaponName == null)
+        {
+            weaponName = "Unnamed hazard";
+        }
         this.weaponName = weaponName;
     }
 

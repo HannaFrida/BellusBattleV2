@@ -116,8 +116,12 @@ public class PlayerMovement : MonoBehaviour
     private bool hasBeenKnockedBack;
     private bool isGrounded;
     private bool isMovedByPLatform;
-    
-  
+
+    private void OnLevelWasLoaded(int level)
+    {
+        externalForce = Vector2.zero;
+    }
+
     void Start()
     {
         initialSpeed = moveSpeed - 5; //Används för acceleration
