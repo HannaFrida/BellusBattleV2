@@ -430,7 +430,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
             LoadScenesList();
 
         }
-        StartCoroutine(AsynchronousLoad());
+        if(nextLevel != null)StartCoroutine(AsynchronousLoad());
         soundManager.FadeInMusic();
     }
     /*
