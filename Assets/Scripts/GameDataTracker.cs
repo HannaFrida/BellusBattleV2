@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
+
 public class GameDataTracker : MonoBehaviour
 {
+
     public static GameDataTracker Instance;
     private Dictionary<int, float> roundTimeDic = new Dictionary<int, float>();
     private List<KillEvent> killList = new List<KillEvent>();
@@ -47,10 +49,7 @@ public class GameDataTracker : MonoBehaviour
         {
             return "Assets/Resources/GameLogs.txt";
         }
-        else
-        {
-            return Application.persistentDataPath + "/GameLogs.txt";
-        }
+        return null;
         
     }
    
@@ -72,22 +71,58 @@ public class GameDataTracker : MonoBehaviour
 
     public void WriteToFile()
     {
+        if(isInEditor == true)
+        {
+            WriteToFileEditor();
+        }
+        else
+        {
+            WriteDebugDevBuild();
+        }
+      
+    }
+
+    private void WriteToFileEditor()
+    {
         StreamWriter writer = new StreamWriter(filePath, true);
         writer.WriteLine($"Session completed at {System.DateTime.Now} ---------------------------------------------");
-        foreach(KillEvent eve in killList)
+        foreach (KillEvent eve in killList)
         {
             writer.WriteLine(eve.ToString());
         }
         writer.WriteLine();
-        for(int i = 1; i <= totalRoundsPlayed; i++)
+        for (int i = 1; i <= totalRoundsPlayed; i++)
         {
-            writer.WriteLine($"Round {i} lasted {roundTimeDic[i]} seconds");
-            totalGameTime += roundTimeDic[i];
+            if (roundTimeDic.ContainsKey(i))
+            {
+                writer.WriteLine($"Round {i} lasted {roundTimeDic[i]} seconds");
+                totalGameTime += roundTimeDic[i];
+            }
+            
         }
-        writer.WriteLine($"Rounds played: {totalRoundsPlayed} \nTotal time of session: {totalGameTime} seconds \nAverage time per round: {totalGameTime / totalRoundsPlayed}");
-        writer.WriteLine($"\n total amount of players killed by hazards : {playersKilledByHazard} \n" +
+        writer.WriteLine($"Rounds played: {totalRoundsPlayed} \nTotal time of session: {totalGameTime} seconds \nAverage time per round: {totalGameTime / totalRoundsPlayed} seconds");
+        writer.WriteLine($"\ntotal amount of players killed by hazards : {playersKilledByHazard} \n" +
             $"");
         writer.Close();
+        ClearSavedData();
+    }
+
+    private void WriteDebugDevBuild()
+    {
+        Debug.Log($"Session completed at {System.DateTime.Now} ---------------------------------------------");
+        foreach (KillEvent eve in killList)
+        {
+            Debug.Log(eve.ToString());
+        }
+        Debug.Log("");
+        for (int i = 1; i <= totalRoundsPlayed; i++)
+        {
+            Debug.Log($"Round {i} lasted {roundTimeDic[i]} seconds");
+            totalGameTime += roundTimeDic[i];
+        }
+        Debug.Log($"Rounds played: {totalRoundsPlayed} \nTotal time of session: {totalGameTime} seconds \nAverage time per round: {totalGameTime / totalRoundsPlayed} seconds");
+        Debug.Log($"\ntotal amount of players killed by hazards : {playersKilledByHazard} \n" +
+            $"");
         ClearSavedData();
     }
 
@@ -117,7 +152,7 @@ public struct KillEvent
     {
         this.killerID = killerID;
         this.killedPlayerID = killedPlayerID;
-        if(weaponName == null)
+        if (weaponName == null)
         {
             weaponName = "Unnamed hazard";
         }

@@ -59,12 +59,10 @@ public class HazardMover : MonoBehaviour
         if (hasReachedHighestPoint == false)
         {
             transform.position = Vector3.SmoothDamp(transform.position, highestPosition, ref moveVector, smoothTime);
-            Debug.Log(boxCollider.bounds.max.y + " < " + highestPoint.position.y);
             if (boxCollider.bounds.max.y >= highestPoint.position.y)
             {
                 moveVector = Vector3.zero;
                 hasReachedHighestPoint = true;
-                Debug.Log("boomboomboom");
             }
         }
         else
@@ -72,7 +70,6 @@ public class HazardMover : MonoBehaviour
             transform.position = Vector3.SmoothDamp(transform.position, lowestPosition, ref moveVector, smoothTime);
             if (transform.position.y <= lowestPosition.y + 0.2f)
             {
-                Debug.Log("what?");
                 moveVector = Vector3.zero;
                 hasReachedHighestPoint = false;
                 runTimer = true;

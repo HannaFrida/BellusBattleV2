@@ -38,11 +38,15 @@ public class Bullet : Projectile
                 GameObject MuzzleFlashIns = Instantiate(colliderPlayerVFX, pos, rot);
                 Destroy(MuzzleFlashIns, 3f);
             }
-			
-			playerGo.GetComponent<PlayerHealth>().TakeDamage(damage);
+			PlayerHealth ph = playerGo.GetComponent<PlayerHealth>();
+			if(ph.IsAlive == true)
+            {
+				GameDataTracker.Instance.NewKillEvent(shooterID, playerGo.GetComponent<PlayerDetails>().playerID, weaponName);
+			}
+			ph.TakeDamage(damage);
 			Debug.Log("Hit player");
 			
-			GameDataTracker.Instance.NewKillEvent(shooterID, playerGo.GetComponent<PlayerDetails>().playerID, weaponName);
+			
 			Die();
 		}
 		else if (playerGo.CompareTag("AI"))

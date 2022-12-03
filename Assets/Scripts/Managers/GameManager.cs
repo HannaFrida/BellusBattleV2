@@ -334,7 +334,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
 
         giveScoreTimer += Time.deltaTime;
         if (giveScoreTimer <= giveScoreTime) return;
-
+        GameDataTracker.Instance.SaveRoundTime(roundCounter, roundDuration);
         if (playersAlive.Count != 0)
         {
             
@@ -357,7 +357,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
         }
         hasGivenScore = false;
         Debug.Log($"send it! {roundCounter} and {roundDuration}");
-        GameDataTracker.Instance.SaveRoundTime(roundCounter, roundDuration);
+        
         LoadNextScene();
 
     }
