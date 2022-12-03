@@ -49,7 +49,12 @@ public class GameDataTracker : MonoBehaviour
         {
             return "Assets/Resources/GameLogs.txt";
         }
-        return null;
+        else
+        {
+            Directory.CreateDirectory(Application.streamingAssetsPath + "/GameLogs/");
+            return Application.streamingAssetsPath + "/GameLogs/Logs.txt";
+
+        }
         
     }
    
@@ -71,15 +76,28 @@ public class GameDataTracker : MonoBehaviour
 
     public void WriteToFile()
     {
-        if(isInEditor == true)
+        StreamWriter writer = new StreamWriter(filePath, true);
+        writer.WriteLine($"Session completed at {System.DateTime.Now} ---------------------------------------------");
+        foreach (KillEvent eve in killList)
         {
-            WriteToFileEditor();
+            writer.WriteLine(eve.ToString());
         }
-        else
+        writer.WriteLine();
+        for (int i = 1; i <= totalRoundsPlayed; i++)
         {
-            WriteDebugDevBuild();
+            if (roundTimeDic.ContainsKey(i))
+            {
+                writer.WriteLine($"Round {i} lasted {roundTimeDic[i]} seconds");
+                totalGameTime += roundTimeDic[i];
+            }
+
         }
-      
+        writer.WriteLine($"Rounds played: {totalRoundsPlayed} \nTotal time of session: {totalGameTime} seconds \nAverage time per round: {totalGameTime / totalRoundsPlayed} seconds");
+        writer.WriteLine($"\ntotal amount of players killed by hazards : {playersKilledByHazard} \n" +
+            $"");
+        writer.Close();
+        ClearSavedData();
+
     }
 
     private void WriteToFileEditor()
@@ -117,8 +135,11 @@ public class GameDataTracker : MonoBehaviour
         Debug.Log("");
         for (int i = 1; i <= totalRoundsPlayed; i++)
         {
-            Debug.Log($"Round {i} lasted {roundTimeDic[i]} seconds");
-            totalGameTime += roundTimeDic[i];
+            if (roundTimeDic.ContainsKey(i))
+            {
+                Debug.Log($"Round {i} lasted {roundTimeDic[i]} seconds");
+                totalGameTime += roundTimeDic[i];
+            }  
         }
         Debug.Log($"Rounds played: {totalRoundsPlayed} \nTotal time of session: {totalGameTime} seconds \nAverage time per round: {totalGameTime / totalRoundsPlayed} seconds");
         Debug.Log($"\ntotal amount of players killed by hazards : {playersKilledByHazard} \n" +
