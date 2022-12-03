@@ -33,6 +33,10 @@ public class SoundManager : MonoBehaviour
     [Header("UI sounds")]
     [SerializeField] private AudioSource howerMenuSource;
     [SerializeField] private AudioSource pressMenuSource;
+    [SerializeField] private AudioSource pressMenu2Source;
+    [SerializeField] private AudioSource pressMenu3Source;
+    [SerializeField] private AudioSource pressMenu4Source;
+
     [SerializeField] private AudioSource pressBackButtonSource;
     [SerializeField] private AudioSource pressingBattleButtonSource;
    
@@ -114,6 +118,21 @@ public class SoundManager : MonoBehaviour
     {
         howerMenuSource.pitch = Random.Range(0.96f, highPitchRan);
         pressMenuSource.Play();
+    }
+    public void PressUiTwoSound()
+    {
+        howerMenuSource.pitch = Random.Range(0.96f, highPitchRan);
+        pressMenu2Source.Play();
+    }
+    public void PressUiThreeSound()
+    {
+        howerMenuSource.pitch = Random.Range(0.96f, highPitchRan);
+        pressMenu3Source.Play();
+    }
+    public void PressUiFourSound()
+    {
+        howerMenuSource.pitch = Random.Range(0.96f, highPitchRan);
+        pressMenu4Source.Play();
     }
     public void PressBackButtonSound()
     {
