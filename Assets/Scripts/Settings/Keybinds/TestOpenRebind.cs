@@ -5,6 +5,9 @@ using UnityEngine;
 public class TestOpenRebind : MonoBehaviour
 {
     public RebindingDisplay rd;
+    [SerializeField]
+    private GameObject[] players;
+    private PlayerMovement[] playersMovement;
 
     void Start()
     {
@@ -18,6 +21,9 @@ public class TestOpenRebind : MonoBehaviour
         rd.isChangingSettings = !rd.isChangingSettings;
 
 
+        playersMovement = (PlayerMovement[])FindObjectsOfType(typeof(PlayerMovement));
+        //playersMovement = GameObject.FindGameObjectsWithTag("Player");
+
         foreach (RebindingDisplay rebindDisp in rebindingDisplays)
         {
 
@@ -27,6 +33,12 @@ public class TestOpenRebind : MonoBehaviour
                 {
                     rebindDisp.panels[i].SetActive(true);
                 }
+                /*
+                foreach (PlayerMovement pm in playersMovement)
+                {
+                    rd.TurnOffMovement(pm);
+                }
+                */
                 //rebindDisp.panels.gameObject.SetActive(true);
             }
             else
@@ -35,6 +47,12 @@ public class TestOpenRebind : MonoBehaviour
                 {
                     rebindDisp.panels[i].SetActive(false);
                 }
+                /*
+                foreach (PlayerMovement pm in playersMovement)
+                {
+                    rd.TurnOnMovement(pm);
+                }
+                */
                 //rebindDisp.panels.gameObject.SetActive(false);
             }
         }

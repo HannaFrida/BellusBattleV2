@@ -8,6 +8,7 @@ public class RebindingDisplay : MonoBehaviour
 {
     [Header("Jumping")]
     [SerializeField] private InputActionReference jumpAction = null;
+    [SerializeField] private InputActionReference jumpAction2 = null;
     [SerializeField] private TMP_Text bindingJumpDisplayNameText = null;
     [SerializeField] private GameObject startJumpRebindObject = null;
 
@@ -58,6 +59,27 @@ public class RebindingDisplay : MonoBehaviour
         waitingForInputObject = GameObject.Find("WaitingForInputText");
     }
 
+    public void TurnOffMovement(PlayerMovement pms)
+    {
+        pms.PlayerInput.SwitchCurrentActionMap("Menu");
+        //Debug.Log(pms.PlayerInput.currentActionMap);
+    }
+    
+    public void TurnOnMovement(PlayerMovement pms)
+    {
+        if (pms.gameObject.GetComponent<PlayerDetails>().playerID == 1)
+        {
+            pms.PlayerInput.SwitchCurrentActionMap("Player");
+        }
+        if (pms.gameObject.GetComponent<PlayerDetails>().playerID == 2)
+        {
+            pms.PlayerInput.SwitchCurrentActionMap("Player2");
+            Debug.Log(pms.PlayerInput.currentActionMap);
+        }
+        //pms.PlayerInput.SwitchCurrentActionMap("Player");
+        //Debug.Log(pms.PlayerInput.currentActionMap);
+    }
+
     public GameObject FindChildGameObjectByName(GameObject parent, string gameObjectName)
     {
         GameObject retrunGO = null;
@@ -89,29 +111,65 @@ public class RebindingDisplay : MonoBehaviour
         waitingForInputObject.SetActive(true);
 
         playerMovement.PlayerInput.SwitchCurrentActionMap("Menu");
-        Debug.Log(playerMovement.PlayerInput.currentActionMap);
+        //Debug.Log(playerMovement.PlayerInput.currentActionMap);
 
-        rebindingOperation = jumpAction.action.PerformInteractiveRebinding()
+        if (playerMovement.gameObject.GetComponent<PlayerDetails>().playerID == 1)
+        {
+            rebindingOperation = jumpAction.action.PerformInteractiveRebinding()
             .WithControlsExcluding("Mouse")
             .OnMatchWaitForAnother(0.1f)
             .OnComplete(operation => RebindJumpComplete())
             .Start();
+        }
+        if (playerMovement.gameObject.GetComponent<PlayerDetails>().playerID == 2)
+        {
+            Debug.Log("fuck");
+            rebindingOperation = jumpAction2.action.PerformInteractiveRebinding()
+            .WithControlsExcluding("Mouse")
+            .OnMatchWaitForAnother(0.1f)
+            .OnComplete(operation => RebindJumpComplete())
+            .Start();
+        }
+
     }
 
     private void RebindJumpComplete()
     {
-        int bindingIndex = jumpAction.action.GetBindingIndexForControl(jumpAction.action.controls[0]);
+        if (playerMovement.gameObject.GetComponent<PlayerDetails>().playerID == 1)
+        {
+            int bindingIndex = jumpAction.action.GetBindingIndexForControl(jumpAction.action.controls[0]);
 
-        bindingJumpDisplayNameText.text = InputControlPath.ToHumanReadableString(
-            jumpAction.action.bindings[bindingIndex].effectivePath,
-            InputControlPath.HumanReadableStringOptions.OmitDevice);
+            bindingJumpDisplayNameText.text = InputControlPath.ToHumanReadableString(
+                jumpAction.action.bindings[bindingIndex].effectivePath,
+                InputControlPath.HumanReadableStringOptions.OmitDevice);
+            rebindingOperation.Dispose();
 
-        rebindingOperation.Dispose();
+            startJumpRebindObject.SetActive(true);
+            waitingForInputObject.SetActive(false);
 
-        startJumpRebindObject.SetActive(true);
-        waitingForInputObject.SetActive(false);
+            playerMovement.PlayerInput.SwitchCurrentActionMap("Player");
+        }
 
-        playerMovement.PlayerInput.SwitchCurrentActionMap("Player");
+        if (playerMovement.gameObject.GetComponent<PlayerDetails>().playerID == 2)
+        {
+            Debug.Log("ahah");
+            int bindingIndex = jumpAction2.action.GetBindingIndexForControl(jumpAction2.action.controls[0]);
+
+            bindingJumpDisplayNameText.text = InputControlPath.ToHumanReadableString(
+                jumpAction2.action.bindings[bindingIndex].effectivePath,
+                InputControlPath.HumanReadableStringOptions.OmitDevice);
+            rebindingOperation.Dispose();
+
+            startJumpRebindObject.SetActive(true);
+            waitingForInputObject.SetActive(false);
+
+
+            playerMovement.PlayerInput.SwitchCurrentActionMap("Player2");
+        }
+
+        
+
+
     }
 
     /// <summary>

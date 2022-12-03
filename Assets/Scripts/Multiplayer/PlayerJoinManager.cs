@@ -33,6 +33,7 @@ public class PlayerJoinManager : PlayerSpawnManager
         rbd = playerInput.gameObject.GetComponentInChildren<RebindingDisplay>();//GameObject.FindGameObjectWithTag("Rebind").GetComponent<RebindingDisplay>();
         if (playerDetails.playerID == 1)
         {
+            playerInput.gameObject.GetComponent<PlayerMovement>().PlayerInput.SwitchCurrentActionMap("Player");
             GameObject thisPlayersRebindPanel;
             thisPlayersRebindPanel = Instantiate(rebindPanel, rbd.PosP1.transform);
             rbd.panels.Add(thisPlayersRebindPanel);
@@ -40,9 +41,10 @@ public class PlayerJoinManager : PlayerSpawnManager
         }
         else if (playerDetails.playerID == 2)
         {
-            GameObject thisPlayersRebindPanel;
-            thisPlayersRebindPanel = Instantiate(rebindPanel, rbd.PosP2.transform);
-            rbd.panels.Add(thisPlayersRebindPanel);
+            playerInput.gameObject.GetComponent<PlayerMovement>().PlayerInput.SwitchCurrentActionMap("Player2");
+            GameObject thisPlayersRebindPanel2;
+            thisPlayersRebindPanel2 = Instantiate(rebindPanel, rbd.PosP2.transform);
+            rbd.panels.Add(thisPlayersRebindPanel2);
             //rbd.playerIDText.text = playerDetails.playerID.ToString();
         }
 
