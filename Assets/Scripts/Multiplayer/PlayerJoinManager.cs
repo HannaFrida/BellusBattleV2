@@ -10,6 +10,11 @@ public class PlayerJoinManager : PlayerSpawnManager
     [SerializeField] GameObject characterLow;
     RebindingDisplay rbd;
 
+    [SerializeField] private GameObject player1UI;
+    [SerializeField] private GameObject player2UI;
+    [SerializeField] private GameObject player3UI;
+    [SerializeField] private GameObject player4UI;
+
     public List<PlayerInput> listOfPlayers = new List<PlayerInput>();
 
     void OnPlayerJoined(PlayerInput playerInput)
@@ -59,6 +64,7 @@ public class PlayerJoinManager : PlayerSpawnManager
             rtf.sizeDelta = new Vector2(1920, 1080);
             rbd.playerIDText.text = playerDetails.playerID.ToString();
         }
+        ActivateUI(playerDetails.playerID);
 
         rtf = null;
         rbd = null; 
@@ -68,5 +74,25 @@ public class PlayerJoinManager : PlayerSpawnManager
         //Activates Player characteraccessories and assigns material based on characterIndex
         playerInput.gameObject.GetComponentInChildren<CharacterCustimization>().ActivateAccessories(playerInput.playerIndex, renderer, indicatorText);
 
+    }
+
+    private void ActivateUI(int playerID)
+    {
+        if (playerID == 1)
+        {
+            player1UI.SetActive(true);
+        }
+        if (playerID == 2)
+        {
+            player2UI.SetActive(true);
+        }
+        if (playerID == 3)
+        {
+            player3UI.SetActive(true);
+        }
+        if (playerID == 4)
+        {
+            player4UI.SetActive(true);
+        }
     }
 }

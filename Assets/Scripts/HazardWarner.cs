@@ -6,12 +6,14 @@ using UnityEngine.UI;
 public class HazardWarner : MonoBehaviour
 {
     [SerializeField] private Image warningIcon;
+    private SoundManager soundManager;
     private float blinkTimer;
     private float blinkTime = 0.3f;
     private bool isShowingWarning;
 
     private void Start()
     {
+        soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
         DisplayWarning(false);
     }
     void Update()
@@ -39,6 +41,10 @@ public class HazardWarner : MonoBehaviour
                 break;
             case "0":
                 warningIcon.color = new Color(warningIcon.color.r, warningIcon.color.g, warningIcon.color.b, 1);
+                if (soundManager != null)
+                {
+                    soundManager.HazardWarningSound();
+                }
                 break;
         }
         blinkTimer = 0f;
@@ -52,6 +58,8 @@ public class HazardWarner : MonoBehaviour
         if (blinkTimer >= blinkTime)
         {
             WarningBlink();
+            
+
         }
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class DeathZone : MonoBehaviour
 {
-    [SerializeField] private string DeathZoneType; // Används för att logga data
+    [SerializeField] private string DeathZoneType = "Unnamed Hazard"; // Används för att logga data
     
     private void OnTriggerEnter(Collider other)
     {

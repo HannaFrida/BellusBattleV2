@@ -168,6 +168,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotations: 0
+  rotationsOverride: 0
+  amountOfFixedAgnles: 0
 --- !u!1 &1404615784500993771
 GameObject:
   m_ObjectHideFlags: 0
@@ -1487,7 +1489,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6491676215397512714}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.511, y: 1.302, z: 0}
+  m_LocalPosition: {x: 1.696, y: 1.302, z: -2.821}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1627,8 +1629,8 @@ MonoBehaviour:
         transform: {fileID: 0}
         weight: 0
     m_Offset: {x: 0, y: 0, z: 0}
-    m_MinLimit: -30
-    m_MaxLimit: 30
+    m_MinLimit: -180
+    m_MaxLimit: 180
     m_AimAxis: 4
     m_UpAxis: 2
     m_WorldUpType: 0
@@ -2474,6 +2476,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotations: 0
+  rotationsOverride: 0
+  amountOfFixedAgnles: 0
 --- !u!1 &9047723134818983288
 GameObject:
   m_ObjectHideFlags: 0
