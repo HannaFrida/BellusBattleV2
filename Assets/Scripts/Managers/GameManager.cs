@@ -273,11 +273,6 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
         player4Dead.enabled = false;
         player4Alive.enabled = true;
     }
-       
-           
-        
-
-   
 
     private void ClearScore()
     {
@@ -569,7 +564,11 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
         playersAlive = new List<GameObject>(players);
         for(int i = 0; i< players.Count(); i++)
         {
-            targetGroup.AddMember(players[i].transform, 1, 5);
+            if(players[i] != null)
+            {
+                targetGroup.AddMember(players[i].transform, 1, 5);
+            }
+            
         }
 
     }
