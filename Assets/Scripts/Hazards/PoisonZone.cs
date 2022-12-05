@@ -12,9 +12,16 @@ public class PoisonZone : MonoBehaviour
     
     private List<GameObject> playersInZone = new List<GameObject>();
     private List<Collider> objectsInZone = new List<Collider>();
+
+    private float delay = 2f;
+    private float delayTimer;
+
     
     void Update()
     {
+        delayTimer += Time.deltaTime;
+        if (delayTimer <= delay) return;
+
         LookForPLayers();
         PoisionPlayers();
         if (playersInZone.Count == 0) return;
@@ -93,6 +100,7 @@ public class PoisonZone : MonoBehaviour
         poisonDic.Clear();
         isInZoneDic.Clear();
         playersInZone.Clear();
+        delayTimer = 0f;
     }
 
     private void OnDestroy()
