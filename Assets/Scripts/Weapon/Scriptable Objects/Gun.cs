@@ -149,29 +149,11 @@ public class Gun : MonoBehaviour
             Despawn();
         }
 
-        if (gunsAmmo == 0 && weaponData.name != "Grenade" && weaponData.name != "GwynBolt" && weaponData.name != "RailGun")
-        {
-            Drop();
-            Despawn();
-        }
 
-        // SPECIAL CASES
 
-        if (gunsAmmo == 0 && weaponData.name == "Grenade")
-        {
-            Drop();
-            Despawn();
-        }
-        if (gunsAmmo == 0 && weaponData.name == "GwynBolt")
-        {
-            Drop();
-            Despawn();
-        }
-        if (gunsAmmo == 0 && weaponData.name == "Xnade")
-        {
-            Drop();
-            Despawn();
-        }
+        // SPECIAL CASES 
+
+
         
         if (gunsAmmo == 0 && weaponData.name == "RailGun")
         {
@@ -269,7 +251,7 @@ public class Gun : MonoBehaviour
         gameObject.GetComponent<Gun>().enabled = false;
 
        
-        if (gameObject.GetComponent<MeshFilter>().mesh != null)
+        if (gameObject.GetComponent<MeshFilter>() != null)
         {
             Debug.Log("borde inte vara här");
             Mesh mesh = GetComponent<MeshFilter>().mesh;

@@ -2337,6 +2337,10 @@ MonoBehaviour:
   players: []
   countDownText: {fileID: 0}
   characterLow: {fileID: 0}
+  player1UI: {fileID: 0}
+  player2UI: {fileID: 0}
+  player3UI: {fileID: 0}
+  player4UI: {fileID: 0}
   listOfPlayers: []
 --- !u!114 &809493153
 MonoBehaviour:
@@ -3029,6 +3033,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f04af376c30d4ea4aad6fdadf805aa8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DeathZoneType: Unnamed Hazard
 --- !u!54 &1192681187
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3990,7 +3995,7 @@ PrefabInstance:
     - target: {fileID: 5145488137297898642, guid: 0a552101cc61c2a4ca063caffa3ee033,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5145488137297898642, guid: 0a552101cc61c2a4ca063caffa3ee033,
         type: 3}

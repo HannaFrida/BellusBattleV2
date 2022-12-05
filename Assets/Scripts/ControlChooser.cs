@@ -5,10 +5,27 @@ using UnityEngine.InputSystem;
 
 public class ControlChooser : MonoBehaviour
 {
-    private List<PlayerInput> playerInputs = new List<PlayerInput>();
+    [SerializeField] private List<PlayerInput> playerInputs = new List<PlayerInput>();
     private static bool toggledLeft;
     private static bool toggledRight;
 
+    private void Start()
+    {
+        //gameObject.SetActive(false);
+    }
+
+    private void Update()
+    {
+        foreach(PlayerInput input in GameManager.Instance.GetInputs())
+        {
+            Debug.Log("wjaja");
+            if (!playerInputs.Contains(input))
+            {
+                playerInputs.Add(input);
+            }
+            
+        }
+    }
 
     public void LeftControllerMode()
     {
@@ -34,11 +51,12 @@ public class ControlChooser : MonoBehaviour
     void ControlScheme()
     {
         if (toggledLeft)
-        {
+        {           
             foreach (PlayerInput input in playerInputs)
             {
                 input.SwitchCurrentActionMap("PlayerAccessibilityLeft");
             }
+            
             Debug.Log("sätt in left controller control scheme här");
         }
         if (toggledRight)
