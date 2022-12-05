@@ -57,7 +57,7 @@ public class Gun : MonoBehaviour
     private GameObject firedProjectile;
     private bool railGoneTime;
     private float railGoneTimer = 0;
-    private float railGunWaitForGone = 1.51f;
+    private float railGunWaitForGone = 1.5f;
 
     /// <summary>
     /// Gets the ID of the one who is currently holding the weapon
@@ -367,6 +367,16 @@ public class Gun : MonoBehaviour
 
                 // Lock aim
                 StartCoroutine("DisableAimScript");
+
+                timeSinceLastShot = 0;
+            }
+            else if (weaponData.name == "Xnade")
+            {
+                GameObject firedProjectile = Instantiate(weaponData.projectile, muzzle.transform.position, weaponData.projectile.transform.rotation);
+
+                _projectile = firedProjectile.GetComponent<Projectile>();
+                _projectile.SetDamage(weaponData.damage);
+                _projectile.GetComponent<Rigidbody>().AddForce(force);
 
                 timeSinceLastShot = 0;
             }
