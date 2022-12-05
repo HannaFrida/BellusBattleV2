@@ -205,6 +205,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
     {
         for (int i = 0; i < players.Count; i++)
         {
+            if (players[i] == null) continue;
             targetGroup.RemoveMember(players[i].transform);
             targetGroup.AddMember(players[i].transform, 1, 5); //OBS GER ERROR!
         }
@@ -214,6 +215,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
     {
         foreach (GameObject player in players)
         {
+            if (player == null) continue;
             player.GetComponent<DashAdvanced>().enabled = false;
             player.GetComponent<PlayerMovement>().enabled = false;
         }
@@ -223,8 +225,13 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
     {
         foreach (GameObject player in players)
         {
+            if (player == null) continue;
             player.GetComponent<DashAdvanced>().enabled = true;
             player.GetComponent<PlayerMovement>().enabled = true;
+
+
+
+
         }
     }
 
