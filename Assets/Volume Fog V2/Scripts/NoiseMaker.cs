@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class NoiseMaker : MonoBehaviour
 {
+    /*
     public ComputeShader computeShader;
     ComputeBuffer buffer;
     public Material fogMat;
@@ -57,6 +58,8 @@ public class NoiseMaker : MonoBehaviour
     void CreateTexture3D()
     {
         // Save the texture to your Unity Project
-        AssetDatabase.CreateAsset(tex3D, "Assets/Volume Fog/3DTexture.asset");
+        AssetDatabase.CreateAsset(tex3D, "Assets/VolumeFogV2/3DTexture.asset"); 
     }
+    */
+    
 }

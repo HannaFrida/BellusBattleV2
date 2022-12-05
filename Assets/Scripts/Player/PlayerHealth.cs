@@ -18,10 +18,16 @@ public class PlayerHealth : MonoBehaviour
 
     private float health = 1;
     private bool isInvinsable=false;
+    private bool isAlive = true;
 
     [SerializeField] Transform deathPosition;
 
     public float Health { get => health; }
+
+    public bool IsAlive
+    {
+        get => isAlive;
+    }
 
     //USCH
     [SerializeField] private BoxCollider boxCollider;
@@ -90,6 +96,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void KillPlayer()
     {
+        isAlive = false;
         GameManager.Instance.PlayerDeath(gameObject);
         GetComponent<PlayerDetails>().Rumble(0.5f,0.5f);
         boxCollider.enabled = false;
@@ -111,7 +118,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void UnkillPlayer()
     {
-        
+        isAlive = true;
         health = 1f;
         skr.enabled = true;
         anime.enabled = true;

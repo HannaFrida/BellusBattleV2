@@ -19,13 +19,26 @@ public class JumpPad : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player")) 
+        AddForceToObject(other.gameObject, other.tag);  
+    }
+
+    private void AddForceToObject(GameObject go, string tag)
+    {
+        if (tag.Equals("Player") == false && tag.Equals("Grenade") == false) return;
+        effect.Play();
+        SoundManager.TrampolineSound();
+
+        if (tag.Equals("Player"))
         {
-            effect.Play();
-            SoundManager.TrampolineSound();
-            other.gameObject.GetComponent<PlayerMovement>().AddExternalForce(force);
+            go.GetComponent<PlayerMovement>().AddExternalForce(force);
         }
-        
+        else
+        {
+            Rigidbody rb = go.GetComponent<Rigidbody>();
+            rb.AddForce(force * rb.mass, ForceMode.Impulse);
+        }
+
+
     }
     
 }

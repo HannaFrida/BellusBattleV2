@@ -155,7 +155,7 @@ public class Gun : MonoBehaviour
             Despawn();
         }
 
-        // SPECIAL CASES
+        // SPECIAL CASES stop pls
 
         if (gunsAmmo == 0 && weaponData.name == "Grenade")
         {
@@ -269,7 +269,7 @@ public class Gun : MonoBehaviour
         gameObject.GetComponent<Gun>().enabled = false;
 
        
-        if (gameObject.GetComponent<MeshFilter>().mesh != null)
+        if (gameObject.GetComponent<MeshFilter>() != null)
         {
             Debug.Log("borde inte vara här");
             Mesh mesh = GetComponent<MeshFilter>().mesh;
@@ -453,7 +453,7 @@ public class Gun : MonoBehaviour
             aim.enabled = false;
         }
 
-        yield return new WaitForSeconds(1.6f);
+        yield return new WaitForSeconds(1.5f);
 
         foreach (Aim aim in ownerAim)
         {

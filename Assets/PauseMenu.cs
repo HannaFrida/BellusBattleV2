@@ -80,6 +80,9 @@ public class PauseMenu : MonoBehaviour
         runButtonCheck = true;
         settingsPanel.SetActive(true);
         es.SetSelectedGameObject(firstSelectedOnSettings.gameObject);
+    
+
+
     }
 
     private void CheckSelectedButton()
