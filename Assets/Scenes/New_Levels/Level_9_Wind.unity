@@ -2165,6 +2165,11 @@ MonoBehaviour:
   players: []
   countDownText: {fileID: 0}
   characterLow: {fileID: 0}
+  ctrlcc: {fileID: 0}
+  player1UI: {fileID: 0}
+  player2UI: {fileID: 0}
+  player3UI: {fileID: 0}
+  player4UI: {fileID: 0}
   listOfPlayers: []
 --- !u!114 &1043277769
 MonoBehaviour:
@@ -2463,6 +2468,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f04af376c30d4ea4aad6fdadf805aa8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DeathZoneType: Unnamed Hazard
 --- !u!54 &1170530365
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3138,12 +3144,12 @@ PrefabInstance:
     - target: {fileID: 6905323298159064486, guid: 761e8ef253114344fa0a49ec3dc85b54,
         type: 3}
       propertyPath: windForce
-      value: 10
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6905323298159064486, guid: 761e8ef253114344fa0a49ec3dc85b54,
         type: 3}
       propertyPath: windDuration
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6905323298159064486, guid: 761e8ef253114344fa0a49ec3dc85b54,
         type: 3}
