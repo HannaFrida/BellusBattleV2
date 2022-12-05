@@ -7,6 +7,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 using Cinemachine;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour, IDataPersistenceManager
 {
@@ -17,6 +18,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
     public static GameManager Instance;
     [SerializeField] private List<GameObject> players = new List<GameObject>();
     [SerializeField] private List<GameObject> playersAlive = new List<GameObject>();
+    private List<PlayerInput> inputs = new List<PlayerInput>();
     [SerializeField] private SoundManager soundManager;
     private bool gameHasStarted;
     [SerializeField] private bool gameIsPaused;
@@ -200,6 +202,16 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
         if(welcomePanel != null) welcomePanel.SetActive(false);
         players.Add(player);
         targetGroup.AddMember(player.transform, 1, 5); //OBS GER ERROR!
+    }
+
+    public void AddInput(PlayerInput input)
+    {
+        inputs.Add(input);
+    }
+
+    public List<PlayerInput> GetInputs()
+    {
+        return inputs;
     }
     public void RestorePLayer()
     {
