@@ -78,11 +78,12 @@ public class Gun : MonoBehaviour
 
         //dropTimer = 0f;
         //deSpawnTimer = 0f;
-        //Drop();
+        Drop();
     }
 
     private void OnLevelWasLoaded(int level)
     {
+        Drop();
         if (isDropped)
         {
             Despawn();
