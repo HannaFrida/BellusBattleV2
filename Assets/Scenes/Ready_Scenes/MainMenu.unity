@@ -403,10 +403,10 @@ Light:
   m_Intensity: 150
   m_Range: 50
   m_SpotAngle: 179
-  m_InnerSpotAngle: 47.16816
+  m_InnerSpotAngle: 131.72177
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -2290,10 +2290,10 @@ Light:
   m_Intensity: 150
   m_Range: 50
   m_SpotAngle: 179
-  m_InnerSpotAngle: 47.16816
+  m_InnerSpotAngle: 131.72177
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -4667,7 +4667,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 187840593}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 17.75, y: 16.73, z: -9.35}
+  m_LocalPosition: {x: 17.75, y: 16.73, z: -13.32}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -11554,10 +11554,10 @@ Light:
   m_Intensity: 150
   m_Range: 50
   m_SpotAngle: 179
-  m_InnerSpotAngle: 47.16816
+  m_InnerSpotAngle: 131.72177
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -11999,7 +11999,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &461047673
 Transform:
   m_ObjectHideFlags: 0
@@ -12727,10 +12727,10 @@ Light:
   m_Intensity: 150
   m_Range: 50
   m_SpotAngle: 179
-  m_InnerSpotAngle: 47.16816
+  m_InnerSpotAngle: 131.72177
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -20816,10 +20816,10 @@ Light:
   m_Intensity: 150
   m_Range: 50
   m_SpotAngle: 179
-  m_InnerSpotAngle: 47.16816
+  m_InnerSpotAngle: 131.72177
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -25345,10 +25345,10 @@ Light:
   m_Intensity: 150
   m_Range: 50
   m_SpotAngle: 179
-  m_InnerSpotAngle: 47.16816
+  m_InnerSpotAngle: 131.72177
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -27337,7 +27337,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.2
+  m_Intensity: 0.1
   m_Range: 300
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -32233,10 +32233,10 @@ Light:
   m_Intensity: 150
   m_Range: 50
   m_SpotAngle: 179
-  m_InnerSpotAngle: 47.16816
+  m_InnerSpotAngle: 131.72177
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -34096,10 +34096,10 @@ Light:
   m_Intensity: 150
   m_Range: 50
   m_SpotAngle: 179
-  m_InnerSpotAngle: 47.16816
+  m_InnerSpotAngle: 131.72177
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -41401,8 +41401,6 @@ MonoBehaviour:
   buttonDeafaultPanel: {fileID: 1309140580}
   buttonMapsSelectionPanel: {fileID: 352109270}
   soundManager: {fileID: 1656595240}
-  buttons:
-  - {fileID: 454411317}
 --- !u!114 &1877500886
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43235,7 +43233,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1975336015
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46021,12 +46019,12 @@ PrefabInstance:
     - target: {fileID: 7722675255810172075, guid: d76928a44253c4943b34a25b284f0c95,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8941086809558798519, guid: d76928a44253c4943b34a25b284f0c95,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d76928a44253c4943b34a25b284f0c95, type: 3}
@@ -50617,10 +50615,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2765520031678666021, guid: 9b9a8b0effbc9554abfe189199487551,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2765520031777468956, guid: 9b9a8b0effbc9554abfe189199487551,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2765520032066866543, guid: 9b9a8b0effbc9554abfe189199487551,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2765520032206853400, guid: 9b9a8b0effbc9554abfe189199487551,
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2765520032206853401, guid: 9b9a8b0effbc9554abfe189199487551,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6874365232524544735, guid: 9b9a8b0effbc9554abfe189199487551,
         type: 3}
@@ -56958,8 +56976,7 @@ MonoBehaviour:
   buttonDeafaultPanel: {fileID: 0}
   buttonMapsSelectionPanel: {fileID: 0}
   soundManager: {fileID: 0}
-  buttons: []
-  resolutionDropDown: {fileID: 8441022414489460654}
+  am: {fileID: 0}
 --- !u!114 &8919107019119994730
 MonoBehaviour:
   m_ObjectHideFlags: 0
