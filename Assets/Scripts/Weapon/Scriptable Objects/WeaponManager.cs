@@ -32,6 +32,20 @@ public class WeaponManager : MonoBehaviour
         
     }
 
+    private void Update()
+    {
+        /*
+        if (equippedWeapon.name == "RailGun")
+        {
+            weaponSlot.transform.rotation.y = -80f;
+        }
+        else{
+            weaponSlot.transform.rotation.y = -99.742f;
+        }
+        */
+        
+    }
+
     public void EquipWeapon(WeaponData weaponData, GameObject nowWeapon)
     {
         if (equippedWeapon != null)

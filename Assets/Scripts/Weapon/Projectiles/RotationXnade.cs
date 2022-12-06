@@ -15,7 +15,8 @@ public class RotationXnade : MonoBehaviour
     void Update()
     {
         if (!freez) {
-            gameObject.transform.Rotate(Vector3.forward * 1f);
+            Vector3 rotate = new Vector3(0f,0f,1f);
+            gameObject.transform.Rotate(rotate);
         }
         
 
