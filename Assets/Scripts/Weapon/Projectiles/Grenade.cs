@@ -18,7 +18,7 @@ public class Grenade : Projectile
     [SerializeField] bool lighting =false;
     [SerializeField] bool fire = false;
 
-    private void Start()
+    protected virtual void Start()
     {
         //cf = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFocus>(); //shitfix
         StartCoroutine(StartFuse());
