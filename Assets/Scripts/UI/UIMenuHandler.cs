@@ -12,7 +12,7 @@ public class UIMenuHandler : MonoBehaviour
     [SerializeField] private GameObject buttonDeafaultPanel;
     [SerializeField] private GameObject buttonMapsSelectionPanel;
     [SerializeField] private SoundManager soundManager;
-    [SerializeField] private List<Button> buttons = new List<Button>();
+    //[SerializeField] private List<Button> buttons = new List<Button>();
     private GameObject activePanel;
     protected void Start()
     {
