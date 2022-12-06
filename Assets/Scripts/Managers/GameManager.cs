@@ -95,6 +95,11 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
         get => runRoundTimer;
         set => runRoundTimer = value;
     }
+
+    public float RoundDuration
+    {
+        get => roundDuration;
+    }
     private void OnLevelWasLoaded(int level)
     {
         /*

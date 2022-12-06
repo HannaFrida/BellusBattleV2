@@ -67,9 +67,9 @@ public class GameDataTracker : MonoBehaviour
         currentRound = roundNr;
     }
    
-    public void NewKillEvent(int killer, int killed, string weaponName)
+    public void NewKillEvent(int killer, int killed, string weaponName, float timeOfKill)
     {
-        KillEvent killEvent = new KillEvent(killerID: killer, killedPlayerID: killed, weaponName);
+        KillEvent killEvent = new KillEvent(killerID: killer, killedPlayerID: killed, weaponName, timeOfKill);
         killsEachRoundDic[currentRound].Add(killEvent);
         killList.Add(killEvent);
         
@@ -116,9 +116,46 @@ public class GameDataTracker : MonoBehaviour
 
     public string MultiKillFinder()
     {
-        //På g
+        Dictionary<int, List<float>> killerAndTime = new Dictionary<int, List<float>>();
+        List<KillStreak> killStreaks = new List<KillStreak>();
+        for(int i = 0; i < killsEachRoundDic[currentRound].Count; i++)
+        {
+            if (killsEachRoundDic[currentRound][i].GetKiller() == 0) continue; 
+            killerAndTime[killsEachRoundDic[currentRound][i].GetKiller()].Add(killsEachRoundDic[currentRound][i].GetKillTime());
+        }
+        for(int i = 1; i <=4; i++)
+        {
+            if (killerAndTime.ContainsKey(i) == false) continue;
+
+            if (killerAndTime[i].Count >= 2)
+            {
+                int amountOfKills = killerAndTime[i].Count + 1;
+                float timeDiff = killerAndTime[i][amountOfKills - 2] - killerAndTime[i][0];
+                KillStreak killStreak = new KillStreak(amountOfKills, timeDiff);
+                killStreaks.Add(killStreak);
+            }
+        }
+
         return "";
     }
+    private struct KillStreak
+    {
+        private readonly int kills;
+        private readonly float streakTimeSpan;
+
+        public KillStreak(int kills, float streakTimeSpan)
+        {
+            this.kills = kills;
+            this.streakTimeSpan = streakTimeSpan;
+        }
+
+        public override string ToString()
+        {
+            return "";
+        }
+    }
+
+   
     public void IncreaseRoundsPlayed()
     {
         totalRoundsPlayed++;
@@ -155,53 +192,6 @@ public class GameDataTracker : MonoBehaviour
 
     }
 
-    private void WriteToFileEditor()
-    {
-        StreamWriter writer = new StreamWriter(filePath, true);
-        writer.WriteLine($"Session completed at {System.DateTime.Now} ---------------------------------------------");
-        foreach (KillEvent eve in killList)
-        {
-            writer.WriteLine(eve.ToString());
-        }
-        writer.WriteLine();
-        for (int i = 1; i <= totalRoundsPlayed; i++)
-        {
-            if (roundTimeDic.ContainsKey(i))
-            {
-                writer.WriteLine($"Round {i} lasted {roundTimeDic[i]} seconds");
-                totalGameTime += roundTimeDic[i];
-            }
-            
-        }
-        writer.WriteLine($"Rounds played: {totalRoundsPlayed} \nTotal time of session: {totalGameTime} seconds \nAverage time per round: {totalGameTime / totalRoundsPlayed} seconds");
-        writer.WriteLine($"\ntotal amount of players killed by hazards : {playersKilledByHazard} \n" +
-            $"");
-        writer.Close();
-        ClearSavedData();
-    }
-
-    private void WriteDebugDevBuild()
-    {
-        Debug.Log($"Session completed at {System.DateTime.Now} ---------------------------------------------");
-        foreach (KillEvent eve in killList)
-        {
-            Debug.Log(eve.ToString());
-        }
-        Debug.Log("");
-        for (int i = 1; i <= totalRoundsPlayed; i++)
-        {
-            if (roundTimeDic.ContainsKey(i))
-            {
-                Debug.Log($"Round {i} lasted {roundTimeDic[i]} seconds");
-                totalGameTime += roundTimeDic[i];
-            }  
-        }
-        Debug.Log($"Rounds played: {totalRoundsPlayed} \nTotal time of session: {totalGameTime} seconds \nAverage time per round: {totalGameTime / totalRoundsPlayed} seconds");
-        Debug.Log($"\ntotal amount of players killed by hazards : {playersKilledByHazard} \n" +
-            $"");
-        ClearSavedData();
-    }
-
     public void SaveRoundTime(int roundNr, float duration)
     {
         roundTimeDic[roundNr] = duration;
@@ -223,16 +213,28 @@ public struct KillEvent
     private readonly int killerID;
     private readonly int killedPlayerID;
     private readonly string weaponName;
+    private readonly float timeOfKill;
 
-    public KillEvent(int killerID, int killedPlayerID, string weaponName)
+    public KillEvent(int killerID, int killedPlayerID, string weaponName, float timeOfKill)
     {
         this.killerID = killerID;
         this.killedPlayerID = killedPlayerID;
+        this.timeOfKill = timeOfKill;
         if (weaponName == null)
         {
             weaponName = "Unnamed hazard";
         }
         this.weaponName = weaponName;
+    }
+
+    public int GetKiller()
+    {
+        return killerID;
+    }
+
+    public float GetKillTime()
+    {
+        return timeOfKill;
     }
 
 

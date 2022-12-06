@@ -84,7 +84,7 @@ public class PoisonZone : MonoBehaviour
             if(poisonDic[player] >= timeToKill)
             {
                 GameManager.Instance.PlayerDeath(player);
-                GameDataTracker.Instance.NewKillEvent(0, player.GetComponent<PlayerDetails>().playerID, hazardName);
+                GameDataTracker.Instance.NewKillEvent(0, player.GetComponent<PlayerDetails>().playerID, hazardName, GameManager.Instance.RoundDuration);
                 GameDataTracker.Instance.IncreasePlayersKilledByHazards();
                 player.GetComponent<PlayerHealth>().KillPlayer();
             }
