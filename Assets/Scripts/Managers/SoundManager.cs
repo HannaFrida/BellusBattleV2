@@ -16,32 +16,26 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip[] allAmbienceSounds;
 
     [Header("hazards")]
-    [SerializeField] private AudioSource hazardSource;
+    [SerializeField] private AudioSource poisonHazardSource;
+    [SerializeField] private AudioSource lavaHazardSource;
     [SerializeField] private AudioSource hazardWarningSource;
     [SerializeField] private AudioSource trampolineSource; //ligger för närvarande på trampolinprefab. används ej av soundManager
-    [SerializeField] private AudioClip lavaHazardSound;
-    [SerializeField] private AudioClip poisonHazardSound;
-    
-
+   
     [Header("foliage")]
     [SerializeField] private AudioSource doorOpenSource;
     [SerializeField] private AudioSource doorCloseSource;
     [SerializeField] private AudioSource bellRingSource;
     [SerializeField] private AudioSource startGameBellSource;
     
-
     [Header("UI sounds")]
     [SerializeField] private AudioSource howerMenuSource;
     [SerializeField] private AudioSource pressMenuSource;
     [SerializeField] private AudioSource pressMenu2Source;
     [SerializeField] private AudioSource pressMenu3Source;
     [SerializeField] private AudioSource pressMenu4Source;
-
     [SerializeField] private AudioSource pressBackButtonSource;
     [SerializeField] private AudioSource pressingBattleButtonSource;
    
-
-
     private float volLowRan = 0.3f;
     private float volHighRan = 1.0f;
     private float lowPitchRan = 0.3f;
@@ -51,13 +45,6 @@ public class SoundManager : MonoBehaviour
     void Start()
     {
         DontDestroyOnLoad(gameObject);
-        //ambienceDay.time = Random.Range(0, 60);
-        //pianoMusic.time = Random.Range(0, 60);
-       // FadeInMusic();
-    }
-    void Update()
-    {
-      //  RandomiseSoundPlayback();
     }
     public void FadeInMusic()
     {
@@ -68,25 +55,31 @@ public class SoundManager : MonoBehaviour
     {
         StartCoroutine(FadeMixerGroup.StartFade(overallMixer, "MusicMixerGroup", 1f, 0f));
     }
+    public void FadeInBellSounds()
+    {
+
+        StartCoroutine(FadeMixerGroup.StartFade(overallMixer, "BellSounds", 1f, 0.4f));
+    }
+    
     public void FadeOutBellSounds()
     {
         StartCoroutine(FadeMixerGroup.StartFade(overallMixer, "BellSounds", 3f, 0f));
     }
-    public void FadeInBellSounds()
-    {
-       
-        StartCoroutine(FadeMixerGroup.StartFade(overallMixer, "BellSounds", 1f, 0.4f));
-    }
+   
 
-    public void FadeInLavaHazard(string hazardName)
+    public void FadeInLavaHazard()
     {
-        PlaySound(hazardName, lavaHazardSound);
-        StartCoroutine(FadeMixerGroup.StartFade(overallMixer, "HazardMixerGroup", 2, 0.5f));
+        lavaHazardSource.Play();
+        StartCoroutine(FadeMixerGroup.StartFade(overallMixer, "HazardMixerGroup", 5f, 0.5f));
     }
-    public void FadeInPoisionHazard(string hazardName)
+    public void FadeOutLavaHazard()
     {
-        PlaySound(hazardName, poisonHazardSound);
-        StartCoroutine(FadeMixerGroup.StartFade(overallMixer, "HazardMixerGroup", 2, 0.5f));
+        StartCoroutine(FadeMixerGroup.StartFade(overallMixer, "HazardMixerGroup", 5f, 0f));
+    }
+    public void FadeInPoisionHazard()
+    {
+        poisonHazardSource.Play();
+        StartCoroutine(FadeMixerGroup.StartFade(overallMixer, "HazardMixerGroup", 1, 0.5f));
     }
     public void FadeOutHazard()
     {
@@ -95,9 +88,7 @@ public class SoundManager : MonoBehaviour
     }
     public void HazardWarningSound()
     {
-        //hazardWarningSource.pitch = Random.Range(0.95f, highPitchRan);
-        hazardWarningSource.Play();
-       
+        hazardWarningSource.Play();     
     }
     public void PlayerOnPlay_Sound()
     {
@@ -148,43 +139,18 @@ public class SoundManager : MonoBehaviour
         doorOpenSource.pitch = Random.Range(0.95f, highPitchRan);
         doorOpenSource.Play();
     }
-    public void TrampolineSound()
-    {
-        trampolineSource.pitch = Random.Range(0.8f, highPitchRan);
-        trampolineSource.Play();
-    }
     public void CloseDoorSound()
     {
         doorCloseSource.pitch = Random.Range(0.95f, highPitchRan);
         doorCloseSource.Play();
     }
-    public void PlaySound(string soundName,AudioClip soundToPlay)
+    public void TrampolineSound()
     {
-        if (soundName == "lavaHazard")
-        {
-            hazardSource.PlayOneShot(soundToPlay);
-        }
-        if (soundName == "poisonRainHazard")
-        {
-            hazardSource.PlayOneShot(soundToPlay);
-        }
+        trampolineSource.pitch = Random.Range(0.8f, highPitchRan);
+        trampolineSource.Play();
     }
-    private void MeleeAttackSound()
-    {
-   //     meleeAttackSoundSource.pitch = Random.Range(0.6f, highPitchRan);//kanske ska ha samma pitch hela tiden?
-    //    meleeAttackSoundSource.PlayOneShot(meleeSound);
-    }
-    private void PickUp()
-    {
-       // pickUpSoundSource.pitch = Random.Range(0.8f, highPitchRan);//kanske ska ha samma pitch hela tiden?
-    //    pickUpSoundSource.PlayOneShot(pickUpSound);
-    }
-    private void ZombieDeathSound()
-    {
-        float vol = Random.Range(volLowRan, volHighRan);
-    //    zombieDeathSource.pitch = Random.Range(lowPitchRan, highPitchRan);
-    //    zombieDeathSource.PlayOneShot(zombieDeathSound, vol);
-    }
+   
+   
     private void RandomiseSoundPlayback()
     { //Gör att ett ljud körs random.
      //   if (!zombieRoarSoundSource.isPlaying)

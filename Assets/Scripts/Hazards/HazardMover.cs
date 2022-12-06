@@ -16,6 +16,7 @@ public class HazardMover : MonoBehaviour
     private Vector3 lowestPosition, highestPosition;
     [SerializeField] private bool hasReachedHighestPoint;
     private bool runTimer = true;
+    private bool doOnce = true;
     private float warningTime = 3f;
     // Start is called before the first frame update
     void Start()
@@ -24,7 +25,7 @@ public class HazardMover : MonoBehaviour
         moveVector = new Vector3(0f, movingSpeed, 0f);
         lowestPosition = new Vector3(transform.position.x, transform.position.y - boxCollider.size.y / 2, 0f);
         highestPosition = new Vector3(transform.position.x, highestPoint.transform.position.y + boxCollider.size.y / 2, 0f);
-        //soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
+        soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
     }
 
     // Update is called once per frame
@@ -51,33 +52,40 @@ public class HazardMover : MonoBehaviour
     private void MoveHazard()
     {
         ToggleHazardWarner(false);
-        if(soundManager != null)
-        {
-            soundManager.FadeInLavaHazard("lavaHazard");
-        }
-        
+
+
+       
+
+
         if (hasReachedHighestPoint == false)
         {
+            soundManager.FadeInLavaHazard();
             transform.position = Vector3.SmoothDamp(transform.position, highestPosition, ref moveVector, smoothTime);
             if (boxCollider.bounds.max.y >= highestPoint.position.y)
             {
                 moveVector = Vector3.zero;
                 hasReachedHighestPoint = true;
+                
             }
         }
         else
         {
+            if (doOnce)
+            {
+                doOnce = false;
+                soundManager.FadeOutLavaHazard();
+            }
+           
             transform.position = Vector3.SmoothDamp(transform.position, lowestPosition, ref moveVector, smoothTime);
             if (transform.position.y <= lowestPosition.y + 0.2f)
             {
                 moveVector = Vector3.zero;
                 hasReachedHighestPoint = false;
                 runTimer = true;
-                if(soundManager != null)
-                {
-                    soundManager.FadeOutHazard();
-                }
-                
+                doOnce = true;
+
+
+
             }
         }
     }
