@@ -9,12 +9,16 @@ public class GameDataTracker : MonoBehaviour
 
     public static GameDataTracker Instance;
     private Dictionary<int, float> roundTimeDic = new Dictionary<int, float>();
+    private Dictionary<int, int> roundWinnerDic = new Dictionary<int, int>();
+    private Dictionary<int, List<KillEvent>> killsEachRoundDic = new Dictionary<int, List<KillEvent>>();
     private List<KillEvent> killList = new List<KillEvent>();
     private int playersKilledByHazard;
     private int totalRoundsPlayed;
     private float totalGameTime;
     private string filePath; 
     private bool isInEditor;
+
+    private int currentRound;
     // Start is called before the first frame update
 
     private void Awake()
@@ -57,12 +61,63 @@ public class GameDataTracker : MonoBehaviour
         }
         
     }
+
+    public void SetCurrentRound(int roundNr)
+    {
+        currentRound = roundNr;
+    }
    
     public void NewKillEvent(int killer, int killed, string weaponName)
     {
         KillEvent killEvent = new KillEvent(killerID: killer, killedPlayerID: killed, weaponName);
+        killsEachRoundDic[currentRound].Add(killEvent);
         killList.Add(killEvent);
-        print(killEvent.ToString());
+        
+    }
+
+    public void AddWinner(int roundNr, int playerID)
+    {
+        roundWinnerDic[roundNr] = playerID;
+    }
+
+    public string StreakFinder()
+    {
+        int roundWinner = 0;
+        int streak = 0;
+        for(int i = currentRound; i > 0; i--)
+        {
+            if (roundWinner == 0)
+            {
+                roundWinner = roundWinnerDic[i];
+                Debug.Log("roundwinner is " + roundWinner);
+            }
+            if(roundWinner == roundWinnerDic[i])
+            {
+                Debug.Log("streak is " + streak);
+                streak++;
+            }
+            else
+            {
+                break;
+            }
+            
+        }
+        if(streak > 1)
+        {
+            if(roundWinner != 0)
+            {
+                return $"Player {roundWinner} has won {streak} rounds in a row!";
+            }
+            return $"The last {streak} rounds have ended in a draw!";
+            
+        }
+        return "nothing interesting";
+    }
+
+    public string MultiKillFinder()
+    {
+        //På g
+        return "";
     }
     public void IncreaseRoundsPlayed()
     {

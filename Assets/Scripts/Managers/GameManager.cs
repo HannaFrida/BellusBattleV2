@@ -118,6 +118,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
         if(SceneManager.GetActiveScene().name.Equals("TransitionScene") == false)
         {
             roundCounter++;
+            GameDataTracker.Instance.SetCurrentRound(roundCounter);
             runRoundTimer = false;
             roundTimer = 0f;
             roundDuration = 0f;
@@ -349,11 +350,13 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
         giveScoreTimer += Time.deltaTime;
         if (giveScoreTimer <= giveScoreTime) return;
         GameDataTracker.Instance.SaveRoundTime(roundCounter, roundDuration);
+        
         if (playersAlive.Count != 0)
         {
             
             GameObject winner = playersAlive[0];
             winnerID = winner.GetComponent<PlayerDetails>().playerID;
+            GameDataTracker.Instance.AddWinner(roundCounter, winnerID);
             AddScore(playersAlive[0]);
             hasGivenScore = true;
             if (GetScore(winner) == scoreToWin)
@@ -368,10 +371,11 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
         {
             winnerID = 0;
             Debug.Log("Its a draaaaw!");
+            GameDataTracker.Instance.AddWinner(roundCounter, 0);
         }
         hasGivenScore = false;
-        Debug.Log($"send it! {roundCounter} and {roundDuration}");
-        
+      
+        Debug.Log(GameDataTracker.Instance.StreakFinder());
         LoadNextScene();
 
     }

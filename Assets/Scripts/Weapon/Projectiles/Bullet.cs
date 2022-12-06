@@ -29,7 +29,7 @@ public class Bullet : Projectile
 			{
 				playerGo.GetComponent<PlayerHealth>().PlayLighting();
 			}
-			Debug.Log("Obstacle");
+			
 			ContactPoint contact = other.contacts[0];
 			Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
 			Vector3 pos = contact.point;
@@ -44,7 +44,7 @@ public class Bullet : Projectile
 				GameDataTracker.Instance.NewKillEvent(shooterID, playerGo.GetComponent<PlayerDetails>().playerID, weaponName);
 			}
 			ph.TakeDamage(damage);
-			Debug.Log("Hit player");
+			
 			
 			
 			Die();
