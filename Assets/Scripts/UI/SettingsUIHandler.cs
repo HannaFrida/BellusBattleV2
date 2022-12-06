@@ -10,6 +10,7 @@ public class SettingsUIHandler : UIMenuHandler
     private static AudioMixer audioMixer;
     //public TMP_Dropdown resolutionDropDown;
     static Resolution[] resolutions;
+    TextMeshProUGUI textPro;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,16 +22,23 @@ public class SettingsUIHandler : UIMenuHandler
     public void SetMasterValume(float sliderValue)
     {
         audioMixer.SetFloat("MasterVolume", Mathf.Log10(sliderValue) * 20);
-    }
-    public static void SetMusicValume(float sliderValue)
-    {
-        audioMixer.SetFloat("MusicMixerGroup", Mathf.Log10(sliderValue) * 20);
-    }
-    public static void SetEffectValume(float sliderValue)
-    {
-        audioMixer.SetFloat("MusicMixerGroup", Mathf.Log10(sliderValue) * 20);
+        textPro.text = (sliderValue * 10).ToString("0#");
     }
 
+    public void SetMusicValume(float sliderValue)
+    {
+        audioMixer.SetFloat("MusicMixerGroup", Mathf.Log10(sliderValue) * 20);
+        textPro.text = (sliderValue * 10).ToString("0#");
+    }
+    public void SetEffectValume(float sliderValue)
+    {
+        audioMixer.SetFloat("MusicMixerGroup", Mathf.Log10(sliderValue) * 20);
+        textPro.text = (sliderValue *10).ToString("0#");
+    }
+    public void SetValumeText(TextMeshProUGUI textPro)
+    {
+        this.textPro = textPro;
+    }
     public void SetQuality(int qualityIndex)
     {
         QualitySettings.SetQualityLevel(qualityIndex); // double kolla med gruppden hur vårt olika quality är
