@@ -26,6 +26,10 @@ public class SettingsUIHandler : UIMenuHandler
     {
         audioMixer.SetFloat("MusicMixerGroup", Mathf.Log10(sliderValue) * 20);
     }
+    public static void SetEffectValume(float sliderValue)
+    {
+        audioMixer.SetFloat("MusicMixerGroup", Mathf.Log10(sliderValue) * 20);
+    }
 
     public void SetQuality(int qualityIndex)
     {
