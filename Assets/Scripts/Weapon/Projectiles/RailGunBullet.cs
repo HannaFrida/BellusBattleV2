@@ -12,6 +12,7 @@ public class RailGunBullet : Projectile
 	[SerializeField] private GameObject colliderWallVFX;
 	[SerializeField] private GameObject colliderPlayerVFX;
 	[SerializeField] private Collider col;
+	[SerializeField] private Collider col2;
 	[SerializeField] private float colOn = 0.015f;
 	[SerializeField] private bool xnade = false;
 	[SerializeField] private float stopMove = 0.1f;
@@ -126,8 +127,8 @@ public class RailGunBullet : Projectile
 	private void killcol()
 	{
 		col.enabled = true;
-       
-		
+		col2.enabled = true;
+
 	}
 }
 

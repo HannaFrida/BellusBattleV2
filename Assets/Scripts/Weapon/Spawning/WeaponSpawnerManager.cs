@@ -12,6 +12,9 @@ public class WeaponSpawnerManager : MonoBehaviour
     private List<WeaponSpawner> spawnersToChooseFrom = new List<WeaponSpawner>();
     private List<WeaponSpawner> choosenSpawners = new List<WeaponSpawner>();
     private bool isReadyToSpawn = false;
+    [SerializeField] private Transform trashBin;
+
+    public Transform GetTrashBin { get { return trashBin; } }
 
     void Start()
     {

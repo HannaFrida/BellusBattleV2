@@ -39,7 +39,11 @@ public class PoisionManager : MonoBehaviour
         {
             hazardWarner.DisplayWarning(true);    
         }
-        if((isPoisionActive == false && poisionTimer >= waitBetweenPoision) || (isPoisionActive == true && poisionTimer >= poisionDuration))
+        if(isPoisionActive == true && poisionTimer >= poisionDuration-1.5f)
+        {
+            soundManager.FadeOutHazard();
+        }
+        if ((isPoisionActive == false && poisionTimer >= waitBetweenPoision) || (isPoisionActive == true && poisionTimer >= poisionDuration))
         {
             TogglePoisionZones();
         }
@@ -53,13 +57,13 @@ public class PoisionManager : MonoBehaviour
             {
                 hazardWarner.DisplayWarning(false);
                 poisionZone.gameObject.SetActive(true);
-                soundManager.FadeInPoisionHazard("poisonRainHazard");
+                soundManager.FadeInPoisionHazard();
             }
             else
             {
                 poisionZone.Clear();
                 poisionZone.gameObject.SetActive(false);
-                soundManager.FadeOutHazard();
+                
             }
             
         }
