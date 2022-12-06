@@ -32,7 +32,7 @@ public class SettingsUIHandler : UIMenuHandler
     }
     public void SetEffectValume(float sliderValue)
     {
-        audioMixer.SetFloat("MusicMixerGroup", Mathf.Log10(sliderValue) * 20);
+        audioMixer.SetFloat("EffectSounds", Mathf.Log10(sliderValue) * 20);
         textPro.text = (sliderValue *10).ToString("0#");
     }
     public void SetValumeText(TextMeshProUGUI textPro)
