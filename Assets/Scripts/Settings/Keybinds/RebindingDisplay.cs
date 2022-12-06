@@ -55,7 +55,7 @@ public class RebindingDisplay : MonoBehaviour
     private void Start()
     {
         playerMovement = GetComponentInParent<PlayerMovement>();
-
+        isChangingSettings = true;
         waitingForInputObject = GameObject.Find("WaitingForInputText");
     }
 
@@ -115,17 +115,22 @@ public class RebindingDisplay : MonoBehaviour
 
         if (playerMovement.gameObject.GetComponent<PlayerDetails>().playerID == 1)
         {
+            Debug.Log("Player1 rebinding jump");
             rebindingOperation = jumpAction.action.PerformInteractiveRebinding()
             .WithControlsExcluding("Mouse")
+            .WithControlsExcluding("<Gamepad>/select")
+            .WithControlsExcluding("<Gamepad>/start")
             .OnMatchWaitForAnother(0.1f)
             .OnComplete(operation => RebindJumpComplete())
             .Start();
         }
         if (playerMovement.gameObject.GetComponent<PlayerDetails>().playerID == 2)
         {
-            Debug.Log("fuck");
+            Debug.Log("Player2 rebinding jump");
             rebindingOperation = jumpAction2.action.PerformInteractiveRebinding()
             .WithControlsExcluding("Mouse")
+            .WithControlsExcluding("<Gamepad>/select")
+            .WithControlsExcluding("<Gamepad>/start")
             .OnMatchWaitForAnother(0.1f)
             .OnComplete(operation => RebindJumpComplete())
             .Start();
@@ -137,6 +142,7 @@ public class RebindingDisplay : MonoBehaviour
     {
         if (playerMovement.gameObject.GetComponent<PlayerDetails>().playerID == 1)
         {
+            Debug.Log("Player1 done rebinding jump");
             int bindingIndex = jumpAction.action.GetBindingIndexForControl(jumpAction.action.controls[0]);
 
             bindingJumpDisplayNameText.text = InputControlPath.ToHumanReadableString(
@@ -148,11 +154,12 @@ public class RebindingDisplay : MonoBehaviour
             waitingForInputObject.SetActive(false);
 
             playerMovement.PlayerInput.SwitchCurrentActionMap("Player");
+            Debug.Log(playerMovement.PlayerInput.currentActionMap);
         }
 
         if (playerMovement.gameObject.GetComponent<PlayerDetails>().playerID == 2)
         {
-            Debug.Log("ahah");
+            Debug.Log("Player2 done rebinding jump");
             int bindingIndex = jumpAction2.action.GetBindingIndexForControl(jumpAction2.action.controls[0]);
 
             bindingJumpDisplayNameText.text = InputControlPath.ToHumanReadableString(
@@ -165,10 +172,8 @@ public class RebindingDisplay : MonoBehaviour
 
 
             playerMovement.PlayerInput.SwitchCurrentActionMap("Player2");
+            Debug.Log(playerMovement.PlayerInput.currentActionMap);
         }
-
-        
-
 
     }
 
