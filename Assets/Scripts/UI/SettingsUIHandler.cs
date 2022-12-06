@@ -6,7 +6,8 @@ using TMPro;
 
 public class SettingsUIHandler : UIMenuHandler
 {
-    [SerializeField] private static AudioMixer audioMixer;
+    [SerializeField] private AudioMixer am;
+    private static AudioMixer audioMixer;
     //public TMP_Dropdown resolutionDropDown;
     static Resolution[] resolutions;
     // Start is called before the first frame update
@@ -14,18 +15,19 @@ public class SettingsUIHandler : UIMenuHandler
     {
         base.Start();
         SetUpResolution();
+        audioMixer = am;
     }
 
     public void SetMasterValume(float sliderValue)
     {
-        audioMixer.SetFloat("MasterValume", Mathf.Log10(sliderValue) * 20);
+        audioMixer.SetFloat("MasterVolume", Mathf.Log10(sliderValue) * 20);
     }
     public static void SetMusicValume(float sliderValue)
     {
         audioMixer.SetFloat("MusicMixerGroup", Mathf.Log10(sliderValue) * 20);
     }
 
-    public static void SetQuality(int qualityIndex)
+    public void SetQuality(int qualityIndex)
     {
         QualitySettings.SetQualityLevel(qualityIndex); // double kolla med gruppden hur vårt olika quality är
     }
@@ -52,7 +54,7 @@ public class SettingsUIHandler : UIMenuHandler
         //resolutionDropDown.value = currentResolutionIndex;
         //resolutionDropDown.RefreshShownValue();
     }
-    public static void SetResolution(int resolutionIndex)
+    public void SetResolution(int resolutionIndex)
     {
         Resolution resolution = resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);

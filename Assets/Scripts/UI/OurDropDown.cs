@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class OurDropDown : MonoBehaviour
 {
-    [SerializeField] private List<Button> elements = new List<Button>();
-    [SerializeField] private Button navRight;
-    [SerializeField] private Button navLeft;
-    private Button activeButton;
+    [SerializeField] private List<GameObject> elements = new List<GameObject>();
+    [SerializeField] private Button navRight, navLeft;
+    private GameObject activeButton;
+    [SerializeField] private SettingsUIHandler settings;
 
     // Start is called before the first frame update
     void Start()
@@ -18,7 +19,7 @@ public class OurDropDown : MonoBehaviour
             element.gameObject.SetActive(false);
         }
         elements[0].gameObject.SetActive(true);
-        activeButton = elements[0];
+        activeButton = elements[0].gameObject;
     }
 
     // Update is called once per frame
@@ -26,23 +27,43 @@ public class OurDropDown : MonoBehaviour
     {
         
     }
-    public void OnNavRight()
+    public void OnNavRight(string toDo)
     {
-        if(elements.IndexOf(activeButton) < elements.Count-1)SetActiveButton(elements[elements.IndexOf(activeButton) + 1]);
+        if (elements.IndexOf(activeButton) < elements.Count - 1)
+        {
+            SetActiveButton(elements[elements.IndexOf(activeButton) + 1]);
+            ChooseSettingTodo(toDo);
+        }
     }
-    public void OnNavLeft()
+    public void OnNavLeft(string toDo)
     {
-        if (elements.IndexOf(activeButton) > 0) SetActiveButton(elements[elements.IndexOf(activeButton) - 1]);
+        if (elements.IndexOf(activeButton) > 0)
+        {
+            SetActiveButton(elements[elements.IndexOf(activeButton) - 1]);
+            ChooseSettingTodo(toDo);
+        }
 
     }
-    private void SetActiveButton(Button element)
+    private void SetActiveButton(GameObject element)
     {
         activeButton.gameObject.SetActive(false);
         element.gameObject.SetActive(true);
         activeButton = element;
     }
-    public string GetActiveElement()
+    private void ChooseSettingTodo(string toDo)
     {
-        return activeButton.gameObject.name;
+        switch(toDo)
+        {
+            case "Quality":
+                settings.SetQuality(GetActiveElementIndex());
+                break;
+            case "Resolution": 
+                settings.SetResolution(GetActiveElementIndex());
+                break;
+        }
+    }
+    public int GetActiveElementIndex()
+    {
+        return elements.IndexOf(activeButton);
     }
 }
