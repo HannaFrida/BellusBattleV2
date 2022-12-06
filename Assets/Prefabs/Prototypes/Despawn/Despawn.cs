@@ -11,7 +11,6 @@ public class Despawn : MonoBehaviour
     // Start is called before the first frame update
     public void SetMesh(Mesh mesh)
     {
-        Debug.Log(mesh);
         visualEffect.SetMesh("MeshToMaterialze", mesh);
         visualEffect.Play();
     }
