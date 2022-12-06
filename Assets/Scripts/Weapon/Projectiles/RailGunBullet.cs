@@ -6,12 +6,13 @@ public class RailGunBullet : Projectile
 {
 	[SerializeField]
 	[Tooltip("For how long the bullet will exist for in seconds.")]
-	private float lifeSpan = 0.015f;
+	private float lifeSpan = 0f;
 	[SerializeField, Tooltip("Sound made when bullet hits something")]
 	public AudioSource[] hitSounds;
 	[SerializeField] private GameObject colliderWallVFX;
 	[SerializeField] private GameObject colliderPlayerVFX;
 	[SerializeField] private Collider col;
+	[SerializeField] private Collider col2;
 	[SerializeField] private float colOn = 0.015f;
 	[SerializeField] private bool xnade = false;
 	[SerializeField] private float stopMove = 0.1f;
@@ -126,8 +127,8 @@ public class RailGunBullet : Projectile
 	private void killcol()
 	{
 		col.enabled = true;
-       
-		
+		col2.enabled = true;
+
 	}
 }
 

@@ -57,7 +57,7 @@ public class Gun : MonoBehaviour
     private GameObject firedProjectile;
     private bool railGoneTime;
     private float railGoneTimer = 0;
-    private float railGunWaitForGone = 1.5f;
+    private float railGunWaitForGone = 1.6f;
 
     /// <summary>
     /// Gets the ID of the one who is currently holding the weapon
@@ -78,7 +78,7 @@ public class Gun : MonoBehaviour
 
         //dropTimer = 0f;
         //deSpawnTimer = 0f;
-        Drop();
+        //Drop();
     }
 
     private void OnLevelWasLoaded(int level)
@@ -440,7 +440,7 @@ public class Gun : MonoBehaviour
 
     IEnumerator DisableAimScript()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.6f);
         foreach (Aim aim in ownerAim)
         {
             aim.enabled = false;
