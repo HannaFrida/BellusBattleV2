@@ -6,7 +6,7 @@ public class RailGunBullet : Projectile
 {
 	[SerializeField]
 	[Tooltip("For how long the bullet will exist for in seconds.")]
-	private float lifeSpan = 0.015f;
+	private float lifeSpan = 0f;
 	[SerializeField, Tooltip("Sound made when bullet hits something")]
 	public AudioSource[] hitSounds;
 	[SerializeField] private GameObject colliderWallVFX;

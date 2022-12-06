@@ -23,6 +23,7 @@ public class RespawnObject : MonoBehaviour
             //Debug.Log("droppper: " + dropTimer + " poda " + timeToWaitForPickup);
             if (respawnTimer >= respawWait)
             {
+                respawnTimer = 0f;
                 respawn = false;
                 SpawnObj = Instantiate(respawnObject, transform.position, transform.rotation);
             }
