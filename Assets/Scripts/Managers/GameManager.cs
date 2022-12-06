@@ -7,6 +7,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 using Cinemachine;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour, IDataPersistenceManager
 {
@@ -17,6 +18,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
     public static GameManager Instance;
     [SerializeField] private List<GameObject> players = new List<GameObject>();
     [SerializeField] private List<GameObject> playersAlive = new List<GameObject>();
+    private List<PlayerInput> inputs = new List<PlayerInput>();
     [SerializeField] private SoundManager soundManager;
     private bool gameHasStarted;
     [SerializeField] private bool gameIsPaused;
@@ -201,10 +203,21 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
         players.Add(player);
         targetGroup.AddMember(player.transform, 1, 5); //OBS GER ERROR!
     }
+
+    public void AddInput(PlayerInput input)
+    {
+        inputs.Add(input);
+    }
+
+    public List<PlayerInput> GetInputs()
+    {
+        return inputs;
+    }
     public void RestorePLayer()
     {
         for (int i = 0; i < players.Count; i++)
         {
+            if (players[i] == null) continue;
             targetGroup.RemoveMember(players[i].transform);
             targetGroup.AddMember(players[i].transform, 1, 5); //OBS GER ERROR!
         }
@@ -214,6 +227,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
     {
         foreach (GameObject player in players)
         {
+            if (player == null) continue;
             player.GetComponent<DashAdvanced>().enabled = false;
             player.GetComponent<PlayerMovement>().enabled = false;
         }
@@ -223,8 +237,13 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
     {
         foreach (GameObject player in players)
         {
+            if (player == null) continue;
             player.GetComponent<DashAdvanced>().enabled = true;
             player.GetComponent<PlayerMovement>().enabled = true;
+
+
+
+
         }
     }
 
@@ -273,11 +292,6 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
         player4Dead.enabled = false;
         player4Alive.enabled = true;
     }
-       
-           
-        
-
-   
 
     private void ClearScore()
     {
@@ -569,7 +583,11 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
         playersAlive = new List<GameObject>(players);
         for(int i = 0; i< players.Count(); i++)
         {
-            targetGroup.AddMember(players[i].transform, 1, 5);
+            if(players[i] != null)
+            {
+                targetGroup.AddMember(players[i].transform, 1, 5);
+            }
+            
         }
 
     }

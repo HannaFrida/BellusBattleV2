@@ -9,6 +9,7 @@ public class PlayerJoinManager : PlayerSpawnManager
 {
     [SerializeField] GameObject characterLow;
     RebindingDisplay rbd;
+    [SerializeField] private ControlChooser ctrlcc;
 
     [SerializeField] private GameObject player1UI;
     [SerializeField] private GameObject player2UI;
@@ -25,7 +26,9 @@ public class PlayerJoinManager : PlayerSpawnManager
         playerDetails.SetDevice(playerInput.devices[0]);
 
         GameManager.Instance.AddPLayer(playerInput.gameObject);
+        GameManager.Instance.AddInput(playerInput);
         listOfPlayers.Add(playerInput);
+        ctrlcc.AddToList(playerInput);
         //Debug.Log("PlayerInput ID: " + playerInput.playerIndex);
 
         // Set the start spawn position of the player using the location at the associated element into the array.
