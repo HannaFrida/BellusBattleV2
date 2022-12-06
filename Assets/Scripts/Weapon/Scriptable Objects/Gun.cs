@@ -57,7 +57,7 @@ public class Gun : MonoBehaviour
     private GameObject firedProjectile;
     private bool railGoneTime;
     private float railGoneTimer = 0;
-    private float railGunWaitForGone = 1.48f;
+    private float railGunWaitForGone = 1.6f;
 
     /// <summary>
     /// Gets the ID of the one who is currently holding the weapon
@@ -83,6 +83,7 @@ public class Gun : MonoBehaviour
 
     private void OnLevelWasLoaded(int level)
     {
+        Drop();
         if (isDropped)
         {
             Despawn();
@@ -370,6 +371,16 @@ public class Gun : MonoBehaviour
 
                 timeSinceLastShot = 0;
             }
+            else if (weaponData.name == "Xnade")
+            {
+                GameObject firedProjectile = Instantiate(weaponData.projectile, muzzle.transform.position, weaponData.projectile.transform.rotation);
+
+                _projectile = firedProjectile.GetComponent<Projectile>();
+                _projectile.SetDamage(weaponData.damage);
+                _projectile.GetComponent<Rigidbody>().AddForce(force);
+
+                timeSinceLastShot = 0;
+            }
             else
             {
                 firedProjectile = Instantiate(weaponData.projectile, muzzle.transform.position, transform.rotation);
@@ -429,13 +440,13 @@ public class Gun : MonoBehaviour
 
     IEnumerator DisableAimScript()
     {
-
+        yield return new WaitForSeconds(0.6f);
         foreach (Aim aim in ownerAim)
         {
             aim.enabled = false;
         }
 
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1f);
 
         foreach (Aim aim in ownerAim)
         {

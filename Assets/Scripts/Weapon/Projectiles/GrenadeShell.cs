@@ -5,14 +5,27 @@ using UnityEngine;
 
 public class GrenadeShell : Grenade
 {
+    private float energyMuliplierOnBounce = 0.5f;
     private bool hasExploded;
     private bool hasHitGround;
+    private Rigidbody rigidBody;
+    private Vector3 velocityOnImpact;
 
+    protected override void Start()
+    {
+        base.Start();
+        rigidBody = GetComponent<Rigidbody>();
+    }
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Obstacle"))
         {
+            velocityOnImpact = collision.relativeVelocity;
             hasHitGround = true;
+            Vector3 normal = collision.GetContact(0).normal;
+            print(normal);
+            BounceGrenade(normal);
+            
         }
         if (collision.gameObject.CompareTag("Player"))
         {
@@ -24,4 +37,12 @@ public class GrenadeShell : Grenade
         }
         
     }
+    
+    private void BounceGrenade(Vector3 reflection)
+    {
+        Debug.Log(velocityOnImpact);
+        rigidBody.velocity = Vector3.Reflect(-velocityOnImpact * energyMuliplierOnBounce, reflection); 
+    }
+    
+
 }
