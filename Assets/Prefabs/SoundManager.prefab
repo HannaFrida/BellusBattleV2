@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 771460134917488178}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &362340390
 AudioSource:
@@ -41,7 +41,7 @@ AudioSource:
   m_GameObject: {fileID: 362340389}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: -5372074077934051185, guid: 66b12940d28b0d94ea93cc1bea189c8b,
+  OutputAudioMixerGroup: {fileID: 8554501312141069213, guid: 66b12940d28b0d94ea93cc1bea189c8b,
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 23d7929b24a50ab4fb969652b4000133, type: 3}
   m_PlayOnAwake: 0
@@ -159,7 +159,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 771460134917488178}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &944344729
 AudioSource:
@@ -288,7 +288,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 771460134917488178}
-  m_RootOrder: 13
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &1069356958
 AudioSource:
@@ -417,7 +417,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 771460134917488178}
-  m_RootOrder: 14
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &1949255584
 AudioSource:
@@ -527,7 +527,7 @@ GameObject:
   - component: {fileID: 1493656041279445486}
   - component: {fileID: 4946347301616573592}
   m_Layer: 0
-  m_Name: HazardsAudioSource
+  m_Name: PoisonHazardsAudioSource
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -680,6 +680,7 @@ Transform:
   - {fileID: 2926824865877434782}
   - {fileID: 434401081592997254}
   - {fileID: 1493656041279445486}
+  - {fileID: 1544211417653863798}
   - {fileID: 8893693799196438424}
   - {fileID: 6223485620718826934}
   - {fileID: 362340391}
@@ -709,7 +710,6 @@ MonoBehaviour:
   allMusicSounds:
   - {fileID: 8300000, guid: 5d4009fc940db434182125257fd86bcc, type: 3}
   - {fileID: 8300000, guid: a36f4ee34428fbb4499063406a383276, type: 3}
-  - {fileID: 8300000, guid: 818d23e30c14eea48811aadbe931a02c, type: 3}
   - {fileID: 8300000, guid: b0d78d55344f0884883fb0a52c6f0352, type: 3}
   - {fileID: 8300000, guid: 74be97a14c093c042a755bcee477b389, type: 3}
   - {fileID: 8300000, guid: 7b908e1841a0d4d4d9e1594b74fd3abf, type: 3}
@@ -726,7 +726,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 6053949166228884b8c25d391a640458, type: 3}
   - {fileID: 8300000, guid: e0d2c4ec63588924396d7b1aaa88d0f4, type: 3}
   - {fileID: 8300000, guid: 797af1e1f0e632e4d823508e05b9d4d9, type: 3}
-  - {fileID: 8300000, guid: 8301231628c8b7c46a255dc788e93f2f, type: 3}
   - {fileID: 8300000, guid: 229ce36b81121ae4db68c3cb71092208, type: 3}
   - {fileID: 8300000, guid: 022e20ce60df1784895d51c2025d1341, type: 3}
   - {fileID: 8300000, guid: c556394e9a80e7a44939c8857f70a7d4, type: 3}
@@ -743,14 +742,16 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 6a63911702342f348afb3fb8f7004964, type: 3}
   - {fileID: 8300000, guid: 4ec560087651fc046a117435534c670c, type: 3}
   - {fileID: 8300000, guid: 8da25f976145e7149b8c9ce08b073aa0, type: 3}
+  - {fileID: 8300000, guid: 6c78679ca7cbffc4296ebd7069e302fe, type: 3}
+  - {fileID: 8300000, guid: fe85d5149bf9bce4a82e97231b8515ea, type: 3}
+  - {fileID: 8300000, guid: d7d5d0aee47f9874c95fe73f360cb35e, type: 3}
   victoryMusic: {fileID: 8300000, guid: 211c9a92440e2e7478e61d8425a2f785, type: 3}
   ambience: {fileID: 0}
   allAmbienceSounds: []
-  hazardSource: {fileID: 4946347301616573592}
+  poisonHazardSource: {fileID: 4946347301616573592}
+  lavaHazardSource: {fileID: 2985758541844360470}
   hazardWarningSource: {fileID: 362340390}
   trampolineSource: {fileID: 8141356961336639011}
-  lavaHazardSound: {fileID: 8300000, guid: e7e7f5ac19c547449abe123e08bce0a6, type: 3}
-  poisonHazardSound: {fileID: 0}
   doorOpenSource: {fileID: 4780153962410067488}
   doorCloseSource: {fileID: 8659831326094511765}
   bellRingSource: {fileID: 5938187503359489482}
@@ -809,7 +810,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -1179,7 +1180,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 771460134917488178}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &3484668417469327726
 AudioSource:
@@ -1407,6 +1408,135 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &4631057473195657970
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1544211417653863798}
+  - component: {fileID: 2985758541844360470}
+  m_Layer: 0
+  m_Name: LavaHazardsAudioSource
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1544211417653863798
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4631057473195657970}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 771460134917488178}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &2985758541844360470
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4631057473195657970}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: -5372074077934051185, guid: 66b12940d28b0d94ea93cc1bea189c8b,
+    type: 2}
+  m_audioClip: {fileID: 8300000, guid: e7e7f5ac19c547449abe123e08bce0a6, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 0
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &5351858370983525615
 GameObject:
   m_ObjectHideFlags: 0
@@ -1437,7 +1567,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 771460134917488178}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &5966526769060372153
 AudioSource:
@@ -1566,7 +1696,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 771460134917488178}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &8238720335278469103
 AudioSource:
@@ -1824,7 +1954,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 771460134917488178}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &8825724949800694803
 AudioSource:
@@ -1953,7 +2083,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 771460134917488178}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &8141356961336639011
 AudioSource:
