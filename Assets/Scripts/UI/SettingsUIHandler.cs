@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using TMPro;
+using UnityEngine.Rendering;
+using Unity.VisualScripting;
+using UnityEngine.Rendering.Universal;
 
 public class SettingsUIHandler : UIMenuHandler
 {
     [SerializeField] private AudioMixer am;
+    [SerializeField] private Volume globalVolume;
     private static AudioMixer audioMixer;
     //public TMP_Dropdown resolutionDropDown;
     static Resolution[] resolutions;
@@ -16,7 +20,12 @@ public class SettingsUIHandler : UIMenuHandler
     {
         base.Start();
         SetUpResolution();
+        globalVolume = GameObject.FindObjectOfType<Volume>();
         audioMixer = am;
+    }
+    private void OnLevelWasLoaded(int level)
+    {
+        globalVolume = GameObject.FindObjectOfType<Volume>();
     }
 
     public void SetMasterValume(float sliderValue)
@@ -46,6 +55,18 @@ public class SettingsUIHandler : UIMenuHandler
     public static void SetFullscrean(bool isFullscrean)
     {
         Screen.fullScreen = isFullscrean;
+    }
+    public void SetBlur(bool toggle)
+    {
+
+
+        VolumeProfile profile = globalVolume.sharedProfile;
+        if (!profile.TryGet<DepthOfField>(out var dof))
+        {
+            dof = profile.Add<DepthOfField>(toggle);
+        }
+        dof.active = toggle;
+
     }
     private void SetUpResolution()
     {
