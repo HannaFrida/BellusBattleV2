@@ -44,7 +44,7 @@ public class SettingsUIHandler : UIMenuHandler
         audioMixer.SetFloat("EffectSounds", Mathf.Log10(sliderValue) * 20);
         textPro.text = (sliderValue *10).ToString("0#");
     }
-    public void SetValumeText(TextMeshProUGUI textPro)
+    public void SetText(TextMeshProUGUI textPro)
     {
         this.textPro = textPro;
     }
@@ -52,9 +52,11 @@ public class SettingsUIHandler : UIMenuHandler
     {
         QualitySettings.SetQualityLevel(qualityIndex); // double kolla med gruppden hur vårt olika quality är
     }
-    public static void SetFullscrean(bool isFullscrean)
+    public void SetFullscrean(bool isFullscrean)
     {
         Screen.fullScreen = isFullscrean;
+        if(isFullscrean)textPro.text = "ON";
+        else textPro.text = "OFF";
     }
     public void SetBlur(bool toggle)
     {
