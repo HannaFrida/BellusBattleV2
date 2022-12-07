@@ -23,6 +23,7 @@ public class DashAdvanced : MonoBehaviour
     [Header("E1")]
     [SerializeField] private float dashingDistace = 24f;
     [SerializeField] private float dashingDuration = 0.2f;
+    [SerializeField] private BoxCollider bcollider; // here
     [Header("E2")]
     [SerializeField] private float airDashingDistace = 24f;
     [SerializeField] private float airDashingDuration = 0.2f;
@@ -323,6 +324,27 @@ public class DashAdvanced : MonoBehaviour
             else
             {
                 currentDashingDistace = hit.distance / currentDashingDuration - 2*Mathf.Abs(movement.Velocity.x) - 5;
+                //currentDashingDuration = currentDashingDuration * ((hit.distance / currentDashingDuration - 2 * Mathf.Abs(movement.Velocity.x)-7) / dashingDistace);
+            }
+        }
+    }
+    private void CheckForCollision2()
+    {
+        RaycastHit hit;
+        if (Physics.BoxCast(transform.position, bcollider.size/2, direction, out hit, transform.rotation, currentDashingDistace * currentDashingDuration + 5, movement.CollisionLayer)) //10 is a the number that make dash distance works correct 
+        {
+            if (hit.distance < 1f)
+            {
+                currentDashingDistace = 0;
+            }
+            else if (onControlOverride)
+            {
+                currentDashingDistace = hit.distance / currentDashingDuration - Mathf.Sqrt(Mathf.Pow(movement.Velocity.x, 2) + Mathf.Pow(movement.Velocity.y, 2)) - Mathf.Abs(movement.Velocity.x) - Mathf.Abs(movement.Velocity.y);
+                currentDashingDistace = Mathf.Abs(currentDashingDistace);
+            }
+            else
+            {
+                currentDashingDistace = hit.distance / currentDashingDuration - 2 * Mathf.Abs(movement.Velocity.x) - 5;
                 //currentDashingDuration = currentDashingDuration * ((hit.distance / currentDashingDuration - 2 * Mathf.Abs(movement.Velocity.x)-7) / dashingDistace);
             }
         }

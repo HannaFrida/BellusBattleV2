@@ -50,9 +50,6 @@ public class UIMenuHandler : MonoBehaviour
         //}
         gameObject.SetActive(false);
         soundManager.FadeInBellSounds();
-        
-
-
     }
     private void OnEnable()
     {

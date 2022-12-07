@@ -193,9 +193,6 @@ public class PlayerMovement : MonoBehaviour
             playerAnimator.SetFloat("Speed", movementX);
         }
 
-
-        
-        
     }
 
     public void OnMove(InputAction.CallbackContext ctx)
