@@ -36,6 +36,7 @@ public class UIMenuHandler : MonoBehaviour
     {
         Application.OpenURL("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
     }
+
     public void ExitUI()
     {
         GameObject[] obj = GameObject.FindGameObjectsWithTag("Player");

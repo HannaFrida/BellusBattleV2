@@ -94,4 +94,8 @@ public class SettingsUIHandler : UIMenuHandler
         Resolution resolution = resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
+    public void SetUIInicator(bool isFullscrean)
+    {
+
+    }
 }
