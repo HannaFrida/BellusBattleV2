@@ -133,7 +133,8 @@ public class GameDataTracker : MonoBehaviour
         Dictionary<int, List<float>> killerAndTime = new Dictionary<int, List<float>>();
         KillStreak killStreak;
         string returnValue = "Nothing interesting happened";
-        for(int i = 0; i < killsEachRoundDic[currentRound].Count; i++)
+        if (killsEachRoundDic.ContainsKey(currentRound) == false) return returnValue;
+        for (int i = 0; i < killsEachRoundDic[currentRound].Count; i++)
         {
             if (killsEachRoundDic[currentRound][i].GetKiller() == 0) continue;
             if(killerAndTime.ContainsKey(killsEachRoundDic[currentRound][i].GetKiller()) == false)
