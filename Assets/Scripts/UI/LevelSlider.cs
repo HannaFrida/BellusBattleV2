@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.InputSystem;
 
 public class LevelSlider : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class LevelSlider : MonoBehaviour
     [SerializeField] private Animator animator;
     private Slider slider;
     private int nmrOfLevels;
-    [SerializeField] private UIMenuHandler uIMenuHandler;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,10 +46,14 @@ public class LevelSlider : MonoBehaviour
     public void OnPlay()
     {
         GameManager.Instance.SetPointsToWin(nmrOfLevels);
-        
+        // So that the players can move once the game starts
+        GameObject[] obj = GameObject.FindGameObjectsWithTag("Player");
+        for (int i = 0; i < obj.Length; i++)
+        {
+            obj[i].GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
+        }
         //PlaySceneChangeAnimation();
         StartCoroutine(Timer(1));
-        
         //GameManager.Instance.LoadNextScene();
     }
     public void PlaySceneChangeAnimation()
@@ -57,9 +62,7 @@ public class LevelSlider : MonoBehaviour
     }
     private IEnumerator Timer(float time)
     {
-        
         yield return new WaitForSeconds(time);
-        //uIMenuHandler.ExitUI();
         GameManager.Instance.LoadNextScene();
     }
 }
