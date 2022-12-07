@@ -58,7 +58,7 @@ public class Gun : MonoBehaviour
     private GameObject firedProjectile;
     private bool railGoneTime;
     private float railGoneTimer = 0;
-    private float railGunWaitForGone = 1.6f;
+    private float railGunWaitForGone = 1.601f;
 
     /// <summary>
     /// Gets the ID of the one who is currently holding the weapon
@@ -117,9 +117,13 @@ public class Gun : MonoBehaviour
             if (railGoneTimer >= railGunWaitForGone)
             {
                 dropTimer = 0;
-                railGoneTime = false;
+                foreach (Aim aim in ownerAim)
+                {
+                    aim.enabled = true;
+                }
                 Drop();
-
+                Despawn();
+                railGoneTime = false;
             }
         }
 
@@ -232,7 +236,6 @@ public class Gun : MonoBehaviour
        
         if (gameObject.GetComponent<MeshFilter>() != null)
         {
-            Debug.Log("borde inte vara här");
             Mesh mesh = GetComponent<MeshFilter>().mesh;
             GameObject despawnVFX = Instantiate(weaponData.DespawnVFX, transform.position, transform.rotation);
             despawnVFX.GetComponent<Despawn>().SetMesh(mesh);

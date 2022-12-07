@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 8576383740616002590}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3.4, y: 3.4, z: 3.4}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8576383740986167060}
@@ -478,23 +478,33 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 663566263277125165, guid: 869a311aa75c72640a64374200dd4e2c,
         type: 3}
+      propertyPath: m_PropertySheet.m_NamedObject.m_Array.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 663566263277125165, guid: 869a311aa75c72640a64374200dd4e2c,
+        type: 3}
       propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[4].m_Name
       value: Duration
       objectReference: {fileID: 0}
     - target: {fileID: 663566263277125165, guid: 869a311aa75c72640a64374200dd4e2c,
         type: 3}
       propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Value
-      value: 0.07
+      value: 0.438
       objectReference: {fileID: 0}
     - target: {fileID: 663566263277125165, guid: 869a311aa75c72640a64374200dd4e2c,
         type: 3}
       propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[1].m_Value
-      value: 0.96
+      value: 0.906
       objectReference: {fileID: 0}
     - target: {fileID: 663566263277125165, guid: 869a311aa75c72640a64374200dd4e2c,
         type: 3}
       propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[2].m_Value
-      value: 0.2
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 663566263277125165, guid: 869a311aa75c72640a64374200dd4e2c,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[3].m_Value
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 663566263277125165, guid: 869a311aa75c72640a64374200dd4e2c,
         type: 3}
@@ -505,6 +515,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[4].m_Overridden
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 663566263277125165, guid: 869a311aa75c72640a64374200dd4e2c,
+        type: 3}
+      propertyPath: m_PropertySheet.m_NamedObject.m_Array.Array.data[0].m_Name
+      value: BeamCoreTexture
       objectReference: {fileID: 0}
     - target: {fileID: 663566263277125165, guid: 869a311aa75c72640a64374200dd4e2c,
         type: 3}
@@ -520,6 +535,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_PropertySheet.m_Vector2f.m_Array.Array.data[1].m_Value.x
       value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 663566263277125165, guid: 869a311aa75c72640a64374200dd4e2c,
+        type: 3}
+      propertyPath: m_PropertySheet.m_NamedObject.m_Array.Array.data[0].m_Value
+      value: 
+      objectReference: {fileID: 2800000, guid: 27aa58f2adbfe234c8e5e055e418c4ec, type: 3}
+    - target: {fileID: 663566263277125165, guid: 869a311aa75c72640a64374200dd4e2c,
+        type: 3}
+      propertyPath: m_PropertySheet.m_NamedObject.m_Array.Array.data[0].m_Overridden
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 663566263277125165, guid: 869a311aa75c72640a64374200dd4e2c,
         type: 3}
