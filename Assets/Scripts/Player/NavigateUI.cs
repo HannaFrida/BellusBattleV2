@@ -6,6 +6,8 @@ using UnityEngine.InputSystem;
 public class NavigateUI : MonoBehaviour
 {
     UIMenuHandler g;
+    int x = 0;
+    int y = 0;
     private void Awake()
     {
 
@@ -18,11 +20,27 @@ public class NavigateUI : MonoBehaviour
     }
     public void NavigateRight(InputAction.CallbackContext context)
     {
-        g.NavigateRight();
+        if(x == 0)
+        {
+            g.NavigateRight();
+            x++;
+        }
+        else
+        {
+            x = 0;
+        }
     }
     public void NavigateLeft(InputAction.CallbackContext context)
     {
-        g.NavigateLeft();
+        if (y == 0)
+        {
+            g.NavigateLeft();
+            y++;
+        }
+        else
+        {
+            y = 0;
+        }
     }
     public void ExitUI(InputAction.CallbackContext context)
     {
