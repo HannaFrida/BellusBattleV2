@@ -52,7 +52,6 @@ public class HazardWarner : MonoBehaviour
 
     private void RunBlinkTimer()
     {
-        Debug.Log("blink");
         blinkTimer += Time.deltaTime;
 
         if (blinkTimer >= blinkTime)

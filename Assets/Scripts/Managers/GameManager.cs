@@ -381,6 +381,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
         hasGivenScore = false;
       
         Debug.Log(GameDataTracker.Instance.StreakFinder());
+        Debug.Log(GameDataTracker.Instance.MultiKillFinder());
         LoadNextScene();
 
     }

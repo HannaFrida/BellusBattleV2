@@ -69,6 +69,10 @@ public class GameDataTracker : MonoBehaviour
    
     public void NewKillEvent(int killer, int killed, string weaponName, float timeOfKill)
     {
+        if(killsEachRoundDic.ContainsKey(currentRound)== false)
+        {
+            killsEachRoundDic[currentRound] = new List<KillEvent>();
+        }
         KillEvent killEvent = new KillEvent(killerID: killer, killedPlayerID: killed, weaponName, timeOfKill);
         killsEachRoundDic[currentRound].Add(killEvent);
         killList.Add(killEvent);
@@ -117,10 +121,15 @@ public class GameDataTracker : MonoBehaviour
     public string MultiKillFinder()
     {
         Dictionary<int, List<float>> killerAndTime = new Dictionary<int, List<float>>();
-        List<KillStreak> killStreaks = new List<KillStreak>();
+        KillStreak killStreak;
+        string returnValue = "Nothing interesting happened";
         for(int i = 0; i < killsEachRoundDic[currentRound].Count; i++)
         {
-            if (killsEachRoundDic[currentRound][i].GetKiller() == 0) continue; 
+            if (killsEachRoundDic[currentRound][i].GetKiller() == 0) continue;
+            if(killerAndTime.ContainsKey(killsEachRoundDic[currentRound][i].GetKiller()) == false)
+            {
+                killerAndTime[killsEachRoundDic[currentRound][i].GetKiller()] = new List<float>();
+            }
             killerAndTime[killsEachRoundDic[currentRound][i].GetKiller()].Add(killsEachRoundDic[currentRound][i].GetKillTime());
         }
         for(int i = 1; i <=4; i++)
@@ -129,29 +138,31 @@ public class GameDataTracker : MonoBehaviour
 
             if (killerAndTime[i].Count >= 2)
             {
-                int amountOfKills = killerAndTime[i].Count + 1;
+                int amountOfKills = killerAndTime[i].Count;
                 float timeDiff = killerAndTime[i][amountOfKills - 2] - killerAndTime[i][0];
-                KillStreak killStreak = new KillStreak(amountOfKills, timeDiff);
-                killStreaks.Add(killStreak);
+                killStreak = new KillStreak(i, amountOfKills, timeDiff);
+                returnValue = killStreak.ToString();
+                break;
             }
         }
-
-        return "";
+        return returnValue;
     }
     private struct KillStreak
     {
+        private readonly int killer;
         private readonly int kills;
         private readonly float streakTimeSpan;
 
-        public KillStreak(int kills, float streakTimeSpan)
+        public KillStreak(int killer, int kills, float streakTimeSpan)
         {
+            this.killer = killer;
             this.kills = kills;
             this.streakTimeSpan = streakTimeSpan;
         }
 
         public override string ToString()
         {
-            return "";
+            return $"The Player {killer} killed {kills} players in the last round!";
         }
     }
 

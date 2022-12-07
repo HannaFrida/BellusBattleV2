@@ -36,7 +36,11 @@ public class Bullet : Projectile
 			if (colliderPlayerVFX != null)
 			{
                 GameObject MuzzleFlashIns = Instantiate(colliderPlayerVFX, pos, rot);
-                Destroy(MuzzleFlashIns, 3f);
+				//MuzzleFlashIns.transform.Rotate(Vector3.forward * -90);
+				//MuzzleFlashIns.transform.Rotate(Vector3.right * 90);
+				//MuzzleFlashIns.transform.Rotate(Vector3.up * );
+
+				Destroy(MuzzleFlashIns, 3f);
             }
 			PlayerHealth ph = playerGo.GetComponent<PlayerHealth>();
 			if(ph.IsAlive == true)
