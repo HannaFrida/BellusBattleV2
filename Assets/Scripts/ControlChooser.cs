@@ -18,7 +18,7 @@ public class ControlChooser : MonoBehaviour
     {
         foreach(PlayerInput input in GameManager.Instance.GetInputs())
         {
-            Debug.Log("wjaja");
+            //Debug.Log("wjaja");
             if (!playerInputs.Contains(input))
             {
                 playerInputs.Add(input);

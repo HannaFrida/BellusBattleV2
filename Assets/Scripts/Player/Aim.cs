@@ -8,7 +8,7 @@ public class Aim : MonoBehaviour
     enum AngleRotations{ FullAngleRotation, HalvAngleRotation, FixedAnglesRotation }
     [SerializeField] private AngleRotations rotations;
     [SerializeField] private AngleRotations rotationsOverride;
-    [Range (1, 64)][SerializeField] private int amountOfFixedAgnles;
+    [Range (1, 360)][SerializeField] private int amountOfFixedAgnles;
     private const float FULLCIRCLE = 360f;
     private const float HALFCIRCLE = 180f;
     private Vector3 mousePos;
@@ -100,5 +100,10 @@ public class Aim : MonoBehaviour
                 rotation = Quaternion.AngleAxis(i + y, Vector3.forward);
             }
         }
+    }
+    public bool IsFacingRight()
+    {
+        if (angle > 90 ||angle < -90) return false;
+        else return true;
     }
 }

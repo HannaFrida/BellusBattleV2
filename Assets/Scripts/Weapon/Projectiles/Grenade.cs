@@ -18,7 +18,7 @@ public class Grenade : Projectile
     [SerializeField] bool lighting =false;
     [SerializeField] bool fire = false;
 
-    private void Start()
+    protected virtual void Start()
     {
         //cf = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFocus>(); //shitfix
         StartCoroutine(StartFuse());
@@ -71,7 +71,7 @@ public class Grenade : Projectile
                 PlayerHealth ph = hits[i].GetComponent<PlayerHealth>();
                 if(ph.IsAlive == true)
                 {
-                    GameDataTracker.Instance.NewKillEvent(shooterID, hits[i].GetComponent<PlayerDetails>().playerID, weaponName);
+                    GameDataTracker.Instance.NewKillEvent(shooterID, hits[i].GetComponent<PlayerDetails>().playerID, weaponName, GameManager.Instance.RoundDuration);
                 }
                 ph.TakeDamage(damage);
                 Debug.Log("playerfound");

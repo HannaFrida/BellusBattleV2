@@ -20,6 +20,7 @@ public class Gun : MonoBehaviour
     [SerializeField] private Aim[] ownerAim; 
     [SerializeField] private WeaponManager weaponManager;
     [SerializeField] private Transform muzzle;
+    [SerializeField] private WeaponSpawnerManager weaponSpawnerManager;
 
     [Tooltip("What projectile is being fired.")]
     private GameObject projectile;
@@ -75,10 +76,7 @@ public class Gun : MonoBehaviour
         {
             _projectile = projectile.GetComponent<Projectile>();
         }
-
-        //dropTimer = 0f;
-        //deSpawnTimer = 0f;
-        Drop();
+        weaponSpawnerManager = FindObjectOfType<WeaponSpawnerManager>().GetComponent<WeaponSpawnerManager>();
     }
 
     private void OnLevelWasLoaded(int level)
@@ -88,6 +86,7 @@ public class Gun : MonoBehaviour
         {
             Despawn();
         }
+        weaponSpawnerManager = FindObjectOfType<WeaponSpawnerManager>().GetComponent<WeaponSpawnerManager>();
     }
 
     private void Update()
@@ -96,9 +95,7 @@ public class Gun : MonoBehaviour
         timeSinceLastShot += Time.deltaTime;
         if (Time.deltaTime >= _nextTimeToFire)
         {
-            // Might need to change calculation
             _nextTimeToFire = timeSinceLastShot / (weaponData.fireRate / 60f);
-            // = timeSinceLastShot + (1f / weaponData.fireRate);
         }
 
         
@@ -106,7 +103,6 @@ public class Gun : MonoBehaviour
         if (isStartTimerForDrop)
         {
             dropTimer += Time.deltaTime;
-            //Debug.Log("droppper: " + dropTimer + " poda " + timeToWaitForPickup);
             if (dropTimer >= timeToWaitForPickup)
             {
                 dropTimer = 0;
@@ -118,7 +114,6 @@ public class Gun : MonoBehaviour
         if (railGoneTime)
         {
             railGoneTimer += Time.deltaTime;
-            //Debug.Log("droppper: " + dropTimer + " poda " + timeToWaitForPickup);
             if (railGoneTimer >= railGunWaitForGone)
             {
                 dropTimer = 0;
@@ -128,13 +123,11 @@ public class Gun : MonoBehaviour
             }
         }
 
-        
+        /*
         // USED FOR DE-SPAWNING
         if (isStartTimerForDeSpawn)
         {
             deSpawnTimer += Time.deltaTime;
-            //Debug.Log("Despawn: " + deSpawnTimer);
-            // No ammo && Time runs out
             if (deSpawnTimer >= timeToWaitForDeSpawn && gunsAmmo == 0)
             {
 
@@ -143,6 +136,7 @@ public class Gun : MonoBehaviour
                 Despawn();
             }
         }
+        */
 
         if (gunsAmmo == 0 && weaponData.name != "RailGun")
         {
@@ -150,12 +144,7 @@ public class Gun : MonoBehaviour
             Despawn();
         }
 
-
-
         // SPECIAL CASES 
-
-
-        
         if (gunsAmmo == 0 && weaponData.name == "RailGun")
         {
             railGoneTime = true;
@@ -192,9 +181,6 @@ public class Gun : MonoBehaviour
         // Get the reference for the players aim
         ownerAim = other.gameObject.GetComponentsInChildren<Aim>();
 
-        
-        //ownerAim = other.gameObject.GetComponentInChildren<Aim>();
-
         weaponManager = other.gameObject.GetComponent<WeaponManager>();
         if (weaponManager != null)
         {
@@ -211,11 +197,7 @@ public class Gun : MonoBehaviour
                 dropTimer = 0f;
 
                 isPickedUp = true;
-
-
-                //gunsAmmo = weaponData.Ammo;
             }
-
         }
     }
 
@@ -227,10 +209,6 @@ public class Gun : MonoBehaviour
 
     private void Despawn()
     {
-        //Drop();
-
-        
-        //Debug.Log("borde vara här");
         if (weaponData.name == "Xnade")
         {
             MeshFilter meshfil = GetComponentInChildren<MeshFilter>();
@@ -279,42 +257,11 @@ public class Gun : MonoBehaviour
         }
         */
 
-        /*
-
-        // Basic sword special case
-
-        if (weaponData.name == "BasicSword" && timeSinceLastShot > 1f / (weaponData.fireRate / 60f) && isPickedUp)
-        {
-            BasicSwordBehaviour bsb = swordMesh.GetComponent<BasicSwordBehaviour>();
-            bsb.isAttacking = true;
-
-            //Sound
-            if (weaponData.shootAttackSound != null)
-            {
-                weaponData.shootAttackSound.Play();
-            }
-
-            //VFX
-            if (weaponData.MuzzleFlashGameObject != null)
-            {
-                GameObject MuzzleFlashIns = Instantiate(weaponData.MuzzleFlashGameObject, muzzle.transform.position, transform.rotation);
-                MuzzleFlashIns.transform.Rotate(Vector3.up * 90);
-                Destroy(MuzzleFlashIns, 4f);
-            }
-
-            // Animation
-            swordMesh.GetComponent<Animator>().SetBool("Attack", true);
-            Debug.Log("Swosh");
-
-
-        }
-
-        */
 
         if (CanShoot())
         {
             gunsAmmo--;
-            //Debug.Log(gunsAmmo);
+
             if (shootSound != null)
             {
                 shootSound.Play();
@@ -327,10 +274,8 @@ public class Gun : MonoBehaviour
             }
 
             //VFX
-            //if (weaponData.MuzzleFlash != null) { weaponData.MuzzleFlash.Play(); }
             if (weaponData.MuzzleFlashGameObject != null)
             {
-                //Debug.Log("YOOOO");
                 GameObject MuzzleFlashIns = Instantiate(weaponData.MuzzleFlashGameObject, muzzle.transform.position, transform.rotation);
                 MuzzleFlashIns.transform.Rotate(Vector3.up * 90);
                 Destroy(MuzzleFlashIns, 4f);
@@ -362,9 +307,7 @@ public class Gun : MonoBehaviour
 
                 _projectile = firedProjectile.GetComponent<Projectile>();
                 _projectile.SetDamage(weaponData.damage);
-                //_projectile.GetComponent<Rigidbody>().AddForce(force);
                 _projectile.gameObject.transform.parent = muzzle.transform;
-
 
                 // Lock aim
                 StartCoroutine("DisableAimScript");
@@ -391,7 +334,6 @@ public class Gun : MonoBehaviour
 
                 timeSinceLastShot = 0;
             }
-            //Debug.Log("ownerID : " + ownerID);
             _projectile.SetShooterID(ownerID);
             _projectile.SetWeaponName(weaponData.name);
         }
@@ -409,34 +351,22 @@ public class Gun : MonoBehaviour
         if (gunsAmmo == 0)
         {
             isStartTimerForDeSpawn = true;
-
-
-            //isStartTimerForDeSpawn = true;
         }
 
         gameObject.transform.SetParent(null);
-        isDropped = true;
         // Otherwise it stays in DontDestroyOnLoad
-        //SceneManager.MoveGameObjectToScene(gameObject, SceneManager.GetActiveScene());
-        //gameObject.GetComponent<Gun>().enabled = false;
-        //gameObject.transform.position = new Vector2(999999, 999999);
-        //gameObject.SetActive(false);
-        //ExecuteAfterTime(1f);
-        //Debug.Log("fuck");
-        //gameObject.GetComponent<BoxCollider>().enabled = true;
+        if (weaponSpawnerManager.GetTrashBin != null)
+        {
+            gameObject.transform.SetParent(weaponSpawnerManager.GetTrashBin);
+        }
 
+        isDropped = true;
+        
 
         // So that the previous owner can't shoot this gun
         playerShoot.shootInput = null;
         playerShoot.dropInput = null;
     }
-    /*
-    IEnumerator ExecuteAfterTime(float time)
-    {
-        yield return new WaitForSeconds(time);
-        gameObject.SetActive(false);
-    }
-    */
 
     IEnumerator DisableAimScript()
     {

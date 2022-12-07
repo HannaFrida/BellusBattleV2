@@ -6,26 +6,40 @@ using TMPro;
 
 public class SettingsUIHandler : UIMenuHandler
 {
-    [SerializeField] private static AudioMixer audioMixer;
-    public TMP_Dropdown resolutionDropDown;
+    [SerializeField] private AudioMixer am;
+    private static AudioMixer audioMixer;
+    //public TMP_Dropdown resolutionDropDown;
     static Resolution[] resolutions;
+    TextMeshProUGUI textPro;
     // Start is called before the first frame update
     void Start()
     {
         base.Start();
         SetUpResolution();
+        audioMixer = am;
     }
 
     public void SetMasterValume(float sliderValue)
     {
-        audioMixer.SetFloat("MasterValume", Mathf.Log10(sliderValue) * 20);
-    }
-    public static void SetMusicValume(float sliderValue)
-    {
-        audioMixer.SetFloat("MusicMixerGroup", Mathf.Log10(sliderValue) * 20);
+        audioMixer.SetFloat("MasterVolume", Mathf.Log10(sliderValue) * 20);
+        textPro.text = (sliderValue * 10).ToString("0#");
     }
 
-    public static void SetQuality(int qualityIndex)
+    public void SetMusicValume(float sliderValue)
+    {
+        audioMixer.SetFloat("MusicMixerGroup", Mathf.Log10(sliderValue) * 20);
+        textPro.text = (sliderValue * 10).ToString("0#");
+    }
+    public void SetEffectValume(float sliderValue)
+    {
+        audioMixer.SetFloat("EffectSounds", Mathf.Log10(sliderValue) * 20);
+        textPro.text = (sliderValue *10).ToString("0#");
+    }
+    public void SetValumeText(TextMeshProUGUI textPro)
+    {
+        this.textPro = textPro;
+    }
+    public void SetQuality(int qualityIndex)
     {
         QualitySettings.SetQualityLevel(qualityIndex); // double kolla med gruppden hur vårt olika quality är
     }
@@ -36,7 +50,7 @@ public class SettingsUIHandler : UIMenuHandler
     private void SetUpResolution()
     {
         resolutions = Screen.resolutions;
-        resolutionDropDown.ClearOptions();
+        //resolutionDropDown.ClearOptions();
         List<string> options = new List<string>();
         int currentResolutionIndex = 0;
         for (int i = 0; i < resolutions.Length; i++)
@@ -48,11 +62,11 @@ public class SettingsUIHandler : UIMenuHandler
                 currentResolutionIndex = i;
             }
         }
-        resolutionDropDown.AddOptions(options);
-        resolutionDropDown.value = currentResolutionIndex;
-        resolutionDropDown.RefreshShownValue();
+        //resolutionDropDown.AddOptions(options);
+        //resolutionDropDown.value = currentResolutionIndex;
+        //resolutionDropDown.RefreshShownValue();
     }
-    public static void SetResolution(int resolutionIndex)
+    public void SetResolution(int resolutionIndex)
     {
         Resolution resolution = resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);

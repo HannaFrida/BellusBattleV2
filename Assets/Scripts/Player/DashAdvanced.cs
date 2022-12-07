@@ -327,4 +327,8 @@ public class DashAdvanced : MonoBehaviour
             }
         }
     }
+    public bool GetISFacingRight()
+    {
+        return isFacingRight;
+    }
 }
