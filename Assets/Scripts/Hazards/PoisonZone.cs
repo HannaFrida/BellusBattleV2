@@ -78,9 +78,6 @@ public class PoisonZone : MonoBehaviour
             {
                 player.GetComponent<PlayerHealth>().PlayPoisoned();
             }
-            
-
-            Debug.Log(poisonDic[player]);
             if(poisonDic[player] >= timeToKill)
             {
                 GameManager.Instance.PlayerDeath(player);

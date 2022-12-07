@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
     [SerializeField] private bool gameIsPaused;
 
     private bool runRoundTimer;
+    private bool acceptPlayerInput = true;
     [SerializeField] private float roundDuration;
     [SerializeField] private float roundTimer;
     [SerializeField] private int roundCounter;
@@ -85,6 +86,11 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
         get => gameIsPaused;
     }
 
+    public bool AcceptPlayerInput
+    {
+        get => acceptPlayerInput;
+    }
+
     public bool GameHasStarted
     {
         get => GameHasStarted;
@@ -108,9 +114,13 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
             
         }
         */
+        if(level == 0)
+        {
+            acceptPlayerInput = true;
+        }
         if (level != 0)
         {
-            
+            acceptPlayerInput = false;
             giveScoreTimer = 0f;
             gameHasStarted = true;
             playersAlive = new List<GameObject>(players);
@@ -127,9 +137,10 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
             runRoundTimer = false;
             roundTimer = 0f;
             roundDuration = 0f;
+            ResetPlayerImage();
+            RestorePLayer();
         }
-        ResetPlayerImage();
-        RestorePLayer();
+        
     }
     private void Awake()
     {
@@ -171,6 +182,10 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
         }
 
         if (!runRoundTimer) return;
+        if(acceptPlayerInput == false)
+        {
+            acceptPlayerInput = true;
+        }
         roundTimer += Time.deltaTime;
         roundDuration = roundTimer;
 
@@ -366,7 +381,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
             hasGivenScore = true;
             if (GetScore(winner) == scoreToWin)
             {
-               // Debug.Log(GameDataTracker.Instance.GetScoreInOrder()[0] + ", " + GameDataTracker.Instance.GetScoreInOrder()[1] + ", " + GameDataTracker.Instance.GetScoreInOrder()[2]);
+                //Debug.Log(GameDataTracker.Instance.GetScoreInOrder()[0] + ", " + GameDataTracker.Instance.GetScoreInOrder()[1] + ", " + GameDataTracker.Instance.GetScoreInOrder()[2]);
                 ClearScore();
                 StartCoroutine(RestartGame());
                 //Nån har vunnit!

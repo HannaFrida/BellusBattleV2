@@ -133,6 +133,7 @@ public class DashAdvanced : MonoBehaviour
 
     public void DashWithJoystick(InputAction.CallbackContext context)
     {
+        if (GameManager.Instance.GameIsPaused == true || GameManager.Instance.AcceptPlayerInput == false) return;
         if (canDash && !isDashing)
         {
             CheckDashType();
@@ -140,7 +141,7 @@ public class DashAdvanced : MonoBehaviour
     }
     public void CheckDashWithJoystickDirection(InputAction.CallbackContext context)
     {
-        if (GameManager.Instance.GameIsPaused == true) return;
+        if (GameManager.Instance.GameIsPaused == true || GameManager.Instance.AcceptPlayerInput == false) return;
         Flip();
         direction = context.ReadValue<Vector2>();
     }
@@ -161,6 +162,7 @@ public class DashAdvanced : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (GameManager.Instance.GameIsPaused == true || GameManager.Instance.AcceptPlayerInput == false) return;
         if (isDashing)
         {
             transform.position += velocity * Time.deltaTime;
