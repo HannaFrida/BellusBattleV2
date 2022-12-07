@@ -162,12 +162,14 @@ public class GameDataTracker : MonoBehaviour
     {
         int amountOfPlayers = GameManager.Instance.GetAllPlayers().Count;
         int[] playerOrder = new int[amountOfPlayers];
-        for(int i = 0; i < amountOfPlayers; i++)
+        for(int i = 1; i < amountOfPlayers; i++)
         {
+            if (playerScore.ContainsKey(i) == false) continue;
             int order = 0;
             for(int j = 0; j < amountOfPlayers; j++)
             {
-                if(playerScore[i] < playerScore[j])
+                if (playerScore.ContainsKey(j) == false) continue;
+                if (playerScore[i] < playerScore[j])
                 {
                     order++;
                 }
