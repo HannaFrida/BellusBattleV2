@@ -138,7 +138,7 @@ public class GameDataTracker : MonoBehaviour
 
             if (killerAndTime[i].Count >= 2)
             {
-                int amountOfKills = killerAndTime[i].Count + 1;
+                int amountOfKills = killerAndTime[i].Count;
                 float timeDiff = killerAndTime[i][amountOfKills - 2] - killerAndTime[i][0];
                 killStreak = new KillStreak(i, amountOfKills, timeDiff);
                 returnValue = killStreak.ToString();
