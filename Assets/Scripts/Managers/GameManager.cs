@@ -366,6 +366,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
             hasGivenScore = true;
             if (GetScore(winner) == scoreToWin)
             {
+                Debug.Log(GameDataTracker.Instance.GetScoreInOrder()[0] + ", " + GameDataTracker.Instance.GetScoreInOrder()[1] + ", " + GameDataTracker.Instance.GetScoreInOrder()[2]);
                 ClearScore();
                 StartCoroutine(RestartGame());
                 //Nån har vunnit!

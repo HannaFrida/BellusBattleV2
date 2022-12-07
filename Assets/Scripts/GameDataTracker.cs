@@ -11,6 +11,7 @@ public class GameDataTracker : MonoBehaviour
     private Dictionary<int, float> roundTimeDic = new Dictionary<int, float>();
     private Dictionary<int, int> roundWinnerDic = new Dictionary<int, int>();
     private Dictionary<int, List<KillEvent>> killsEachRoundDic = new Dictionary<int, List<KillEvent>>();
+    private Dictionary<int, int> playerScore = new Dictionary<int, int>();
     private List<KillEvent> killList = new List<KillEvent>();
     private int playersKilledByHazard;
     private int totalRoundsPlayed;
@@ -82,6 +83,15 @@ public class GameDataTracker : MonoBehaviour
     public void AddWinner(int roundNr, int playerID)
     {
         roundWinnerDic[roundNr] = playerID;
+        if(playerScore.ContainsKey(playerID) == false)
+        {
+            playerScore[playerID] = 1;
+        }
+        else
+        {
+            playerScore[playerID]++;
+        }
+        
     }
 
     public string StreakFinder()
@@ -147,6 +157,31 @@ public class GameDataTracker : MonoBehaviour
         }
         return returnValue;
     }
+    
+    public int[] GetScoreInOrder()
+    {
+        int amountOfPlayers = GameManager.Instance.GetAllPlayers().Count;
+        int[] playerOrder = new int[amountOfPlayers];
+        for(int i = 1; i < amountOfPlayers; i++)
+        {
+            if (playerScore.ContainsKey(i) == false) continue;
+            int order = 0;
+            for(int j = 0; j < amountOfPlayers; j++)
+            {
+                if (playerScore.ContainsKey(j) == false) continue;
+                if (playerScore[i] < playerScore[j])
+                {
+                    order++;
+                }
+                else
+                {
+                    playerOrder[order] = i;
+                }
+            }
+        }
+        return playerOrder;  
+    }
+    
     private struct KillStreak
     {
         private readonly int killer;
