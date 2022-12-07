@@ -59,7 +59,7 @@ public class LevelSlider : MonoBehaviour
     {
         
         yield return new WaitForSeconds(time);
-        uIMenuHandler.ExitUI();
+        //uIMenuHandler.ExitUI();
         GameManager.Instance.LoadNextScene();
     }
 }
