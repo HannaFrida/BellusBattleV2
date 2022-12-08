@@ -119,7 +119,11 @@ public class Gun : MonoBehaviour
                 dropTimer = 0;
                 railGoneTime = false;
                 Drop();
-
+                Despawn();
+                foreach (Aim aim in ownerAim)
+                {
+                    aim.enabled = true;
+                }
             }
         }
 
