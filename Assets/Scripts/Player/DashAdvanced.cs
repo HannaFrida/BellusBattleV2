@@ -39,6 +39,7 @@ public class DashAdvanced : MonoBehaviour
     [SerializeField] private float deadZoneAngleRange = 90;
     [Header("Extra")]
     [SerializeField] private float dashingActivationCooldown = 1f;
+    [SerializeField] private LayerMask collisionLayer;
     [SerializeField] private TrailRenderer tr;
     [SerializeField] private GameObject CharacterGlow;
     [Header("Sounds")]
@@ -133,7 +134,7 @@ public class DashAdvanced : MonoBehaviour
 
     public void DashWithJoystick(InputAction.CallbackContext context)
     {
-        if (GameManager.Instance.GameIsPaused == true || GameManager.Instance.AcceptPlayerInput == false) return;
+        if (GameManager.Instance.GameIsPaused == true || GameManager.Instance.AcceptPlayerInput == false || (!canDash && isDashing)) return;
         if (canDash && !isDashing)
         {
             CheckDashType();
@@ -141,7 +142,7 @@ public class DashAdvanced : MonoBehaviour
     }
     public void CheckDashWithJoystickDirection(InputAction.CallbackContext context)
     {
-        if (GameManager.Instance.GameIsPaused == true || GameManager.Instance.AcceptPlayerInput == false) return;
+        if (GameManager.Instance.GameIsPaused == true || GameManager.Instance.AcceptPlayerInput == false || (!canDash && isDashing)) return;
         Flip();
         direction = context.ReadValue<Vector2>();
     }
@@ -165,7 +166,8 @@ public class DashAdvanced : MonoBehaviour
         if (GameManager.Instance.GameIsPaused == true || GameManager.Instance.AcceptPlayerInput == false) return;
         if (isDashing)
         {
-            transform.position += velocity * Time.deltaTime;
+            Debug.DrawLine(transform.position + new Vector3(0f, 0.5f, -0.3f), transform.position + new Vector3(0f, 0.5f, -0.3f) + velocity * Time.deltaTime, Color.red, 5);
+            transform.position += velocity * Time.fixedDeltaTime;
             return;
         }
         velocity = new Vector3(0, velocity.y, velocity.z);
@@ -197,6 +199,8 @@ public class DashAdvanced : MonoBehaviour
     {
         StartDashProtocol();
         velocity = new Vector3(direction.x * currentDashingDistace, 0f, 0f);
+        Debug.DrawLine(transform.position + new Vector3(0f, 0.5f, 0.3f), transform.position + new Vector3(0f, 0.5f, 0.3f) + direction * currentDashingDistace*currentDashingDuration, Color.green, 5);
+
         yield return new WaitForSeconds(currentDashingDuration);
         EndDashProtocol();
         yield return new WaitForSeconds(dashingActivationCooldown);
@@ -205,13 +209,13 @@ public class DashAdvanced : MonoBehaviour
     }
     private void StartDashProtocol()
     {
-        currentDashingDuration *= 2;
+        //currentDashingDuration *= 2;
         playerSoundManager.PlayerDashSound();
         CheckForCollision();
         canDash = false;
         isDashing = true;
         dashEvent.Invoke();
-        //tr.emitting = true; //See variable TrailRenderer tr
+        tr.emitting = true; //See variable TrailRenderer tr
         gameObject.GetComponent<AfterImg>().StartTrail();
         CharacterGlow.SetActive(true);
         if (stopGravityWhileDashing)
@@ -225,7 +229,7 @@ public class DashAdvanced : MonoBehaviour
     }
     private void EndDashProtocol()
     {
-        //SSAtr.emitting = false; //See variable TrailRenderer tr
+        tr.emitting = false; //See variable TrailRenderer tr
         currentDashingDistace = dashingDistace;
         currentDashingDuration = dashingDuration;
         currentCanDashDown = canDashDown;
@@ -312,41 +316,36 @@ public class DashAdvanced : MonoBehaviour
     private void CheckForCollision()
     {
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, direction, out hit, currentDashingDistace*currentDashingDuration + 5 , movement.CollisionLayer)) //10 is a the number that make dash distance works correct 
+        Debug.DrawLine(transform.position + new Vector3(0f, 0.5f, 0), transform.position + new Vector3(0f, 0.5f, 0) + direction * (currentDashingDistace * currentDashingDuration + bcollider.size.x), Color.blue, 5);
+        if (Physics.Raycast(transform.position + new Vector3(0f, 0.5f, 0), direction, out hit, currentDashingDistace*currentDashingDuration + bcollider.size.x, collisionLayer)) //10 is a the number that make dash distance works correct 
         {
-            if (hit.distance < 1f)
-            {
-                currentDashingDistace = 0;
-            }
-            else if(onControlOverride)
-            {
-                currentDashingDistace = hit.distance/ currentDashingDuration - Mathf.Sqrt( Mathf.Pow(movement.Velocity.x, 2) + Mathf.Pow(movement.Velocity.y, 2)) - Mathf.Abs(movement.Velocity.x) - Mathf.Abs(movement.Velocity.y);
-                currentDashingDistace = Mathf.Abs(currentDashingDistace);
-            }
-            else
-            {
-                currentDashingDistace = hit.distance / currentDashingDuration - 2*Mathf.Abs(movement.Velocity.x) - 5;
-                //currentDashingDuration = currentDashingDuration * ((hit.distance / currentDashingDuration - 2 * Mathf.Abs(movement.Velocity.x)-7) / dashingDistace);
-            }
+            currentDashingDistace = hit.distance / currentDashingDuration - bcollider.size.x / currentDashingDuration;
+            //if(onControlOverride)
+            //{
+            //    currentDashingDistace = hit.distance/ currentDashingDuration - Mathf.Sqrt( Mathf.Pow(movement.Velocity.x, 2) + Mathf.Pow(movement.Velocity.y, 2)) - Mathf.Abs(movement.Velocity.x) - Mathf.Abs(movement.Velocity.y);
+            //    currentDashingDistace = Mathf.Abs(currentDashingDistace);
+            //}
+            //else
+            //{
+            //    //currentDashingDistace = hit.distance / currentDashingDuration - 2 * Mathf.Abs(movement.Velocity.x) - 5;
+            //    currentDashingDistace = hit.distance / currentDashingDuration - bcollider.size.x / currentDashingDuration;
+            //    //currentDashingDuration = currentDashingDuration * ((hit.distance / currentDashingDuration - 2 * Mathf.Abs(movement.Velocity.x)-7) / dashingDistace);
+            //}
         }
     }
     private void CheckForCollision2()
     {
         RaycastHit hit;
-        if (Physics.BoxCast(transform.position, bcollider.size/2, direction, out hit, transform.rotation, currentDashingDistace * currentDashingDuration + 5, movement.CollisionLayer)) //10 is a the number that make dash distance works correct 
+        if (Physics.BoxCast(transform.position, bcollider.size/2, direction, out hit, transform.rotation, currentDashingDistace * currentDashingDuration + bcollider.size.x, movement.CollisionLayer)) //10 is a the number that make dash distance works correct 
         {
-            if (hit.distance < 1f)
-            {
-                currentDashingDistace = 0;
-            }
-            else if (onControlOverride)
+            if (onControlOverride)
             {
                 currentDashingDistace = hit.distance / currentDashingDuration - Mathf.Sqrt(Mathf.Pow(movement.Velocity.x, 2) + Mathf.Pow(movement.Velocity.y, 2)) - Mathf.Abs(movement.Velocity.x) - Mathf.Abs(movement.Velocity.y);
                 currentDashingDistace = Mathf.Abs(currentDashingDistace);
             }
             else
             {
-                currentDashingDistace = hit.distance / currentDashingDuration - 2 * Mathf.Abs(movement.Velocity.x) - 5;
+                currentDashingDistace = hit.distance / currentDashingDuration - bcollider.size.x / currentDashingDuration;
                 //currentDashingDuration = currentDashingDuration * ((hit.distance / currentDashingDuration - 2 * Mathf.Abs(movement.Velocity.x)-7) / dashingDistace);
             }
         }

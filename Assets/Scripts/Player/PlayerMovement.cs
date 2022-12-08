@@ -558,5 +558,8 @@ public class PlayerMovement : MonoBehaviour
         movementY += force.y;
         movementX = force.x;
     }
-
+    public void SetVelovity(Vector3 amount)
+    {
+        velocity = amount;
+    }
 }
