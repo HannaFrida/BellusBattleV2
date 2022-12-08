@@ -73,6 +73,8 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
     [SerializeField] private Image player4Dead;
     [SerializeField] private Image player4Alive;
 
+    public bool _safeMode = false;
+
     public List<string> scenesToChooseFrom = new List<string>();
     public List<string> scenesToRemove = new List<string>();
 
