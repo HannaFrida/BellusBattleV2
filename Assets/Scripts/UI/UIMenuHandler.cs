@@ -8,12 +8,12 @@ using UnityEngine.UI;
 public class UIMenuHandler : MonoBehaviour
 {
     [SerializeField] private List<GameObject> panels = new List<GameObject>();
-    [SerializeField] private EventSystem es;
-    [SerializeField] private GameObject buttonDeafaultPanel;
-    [SerializeField] private GameObject buttonMapsSelectionPanel;
+    [SerializeField] protected EventSystem es;
+    [SerializeField] protected GameObject buttonDeafaultPanel;
+    [SerializeField] protected GameObject buttonMapsSelectionPanel;
     [SerializeField] private SoundManager soundManager;
     //[SerializeField] private List<Button> buttons = new List<Button>();
-    private GameObject activePanel;
+    protected GameObject activePanel;
     protected void Start()
     {
         if (es == null) es = GameObject.FindGameObjectWithTag("EventSystem").GetComponent<EventSystem>();
@@ -21,7 +21,7 @@ public class UIMenuHandler : MonoBehaviour
         panels[0].SetActive(true);
         activePanel = panels[0];
     }
-    public void SetPanelActive(GameObject panel)
+    virtual public void SetPanelActive(GameObject panel)
     {
         panel.SetActive(true);
         activePanel.SetActive(false);

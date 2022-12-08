@@ -9,6 +9,9 @@ using UnityEngine.Rendering.Universal;
 
 public class SettingsUIHandler : UIMenuHandler
 {
+    [SerializeField] private GameObject bvs;
+    [SerializeField] private GameObject bas;
+    [SerializeField] private GameObject bgs;
     [SerializeField] private AudioMixer am;
     [SerializeField] private Volume globalVolume;
     private static AudioMixer audioMixer;
@@ -26,6 +29,18 @@ public class SettingsUIHandler : UIMenuHandler
     private void OnLevelWasLoaded(int level)
     {
         globalVolume = GameObject.FindObjectOfType<Volume>();
+    }
+    override public void SetPanelActive(GameObject panel)
+    {
+        panel.SetActive(true);
+        activePanel.SetActive(false);
+        activePanel = panel;
+        switch (panel.name)
+        {
+            case "VisualsSelectedButtons": es.SetSelectedGameObject(bvs); break;
+            case "AudioSelectedButtons": es.SetSelectedGameObject(bas); break;
+            case "GameplaySelectedButtons": es.SetSelectedGameObject(bgs); break;
+        }
     }
 
     public void SetMasterValume(float sliderValue)

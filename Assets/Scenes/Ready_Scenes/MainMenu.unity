@@ -3870,9 +3870,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
+    m_SelectOnUp: {fileID: 1941505646}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
@@ -12993,7 +12993,7 @@ MonoBehaviour:
     m_Mode: 4
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnDown: {fileID: 1941505646}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -16974,6 +16974,7 @@ MonoBehaviour:
   - {fileID: 425511094}
   navRight: {fileID: 266629416}
   navLeft: {fileID: 369604863}
+  startElement: 2
   settings: {fileID: 1947459015}
 --- !u!224 &634945308
 RectTransform:
@@ -20721,7 +20722,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 335, y: -0.000061035156}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 1, y: 0.5}
@@ -26874,7 +26875,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 335, y: -0.000061035156}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 1, y: 0.5}
@@ -28930,7 +28931,7 @@ MonoBehaviour:
     m_Mode: 4
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnDown: {fileID: 917274593}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -31454,7 +31455,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 335, y: -0.000061035156}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 1, y: 0.5}
@@ -34055,7 +34056,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1424814000
 RectTransform:
   m_ObjectHideFlags: 0
@@ -41265,7 +41266,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1770167084
 RectTransform:
   m_ObjectHideFlags: 0
@@ -45640,10 +45641,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnUp: {fileID: 431233499}
+    m_SelectOnDown: {fileID: 137309759}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -45816,7 +45817,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1947459014
 RectTransform:
   m_ObjectHideFlags: 0
@@ -45861,8 +45862,11 @@ MonoBehaviour:
   buttonDeafaultPanel: {fileID: 369604862}
   buttonMapsSelectionPanel: {fileID: 0}
   soundManager: {fileID: 1656595240}
+  bvs: {fileID: 369604862}
+  bas: {fileID: 431233497}
+  bgs: {fileID: 1185804687}
   am: {fileID: 24100000, guid: 66b12940d28b0d94ea93cc1bea189c8b, type: 2}
-  globalVolume: {fileID: 0}
+  globalVolume: {fileID: 1490821644}
 --- !u!114 &1947459016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47440,6 +47444,7 @@ MonoBehaviour:
   - {fileID: 655585524}
   navRight: {fileID: 392571910}
   navLeft: {fileID: 785460351}
+  startElement: 0
   settings: {fileID: 1947459015}
 --- !u!1001 &2041065922
 PrefabInstance:
