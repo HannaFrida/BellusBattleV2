@@ -82,7 +82,17 @@ public class GameDataTracker : MonoBehaviour
 
     public void AddWinner(int roundNr, int playerID)
     {
-        roundWinnerDic[roundNr] = playerID;
+
+        if(roundWinnerDic.ContainsKey(roundNr) == false)
+        {
+            roundWinnerDic.Add(roundNr, playerID);
+        }
+        else
+        {
+            roundWinnerDic[roundNr] = playerID;
+        }
+        //roundWinnerDic.Add(roundNr,playerID);
+
         if(playerScore.ContainsKey(playerID) == false)
         {
             playerScore[playerID] = 1;
@@ -249,6 +259,9 @@ public class GameDataTracker : MonoBehaviour
     {
         killList.Clear();
         roundTimeDic.Clear();
+        //roundWinnerDic.Clear();
+        killsEachRoundDic.Clear();
+        playerScore.Clear();
         playersKilledByHazard = 0;
         totalRoundsPlayed = 0;
         totalGameTime = 0;

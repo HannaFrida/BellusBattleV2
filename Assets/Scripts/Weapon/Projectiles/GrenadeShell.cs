@@ -23,7 +23,6 @@ public class GrenadeShell : Grenade
             velocityOnImpact = collision.relativeVelocity;
             hasHitGround = true;
             Vector3 normal = collision.GetContact(0).normal;
-            print(normal);
             BounceGrenade(normal);
             
         }
@@ -39,8 +38,7 @@ public class GrenadeShell : Grenade
     }
     
     private void BounceGrenade(Vector3 reflection)
-    {
-        Debug.Log(velocityOnImpact);
+    { 
         rigidBody.velocity = Vector3.Reflect(-velocityOnImpact * energyMuliplierOnBounce, reflection); 
     }
     
