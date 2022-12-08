@@ -140,9 +140,11 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
 
         if (level == 0)
         {
+            
             acceptPlayerInput = true;
             roundCounter = 0;
         }
+        ValidatePlayerLists();
 
     }
     private void Awake()
@@ -192,6 +194,19 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
         roundTimer += Time.deltaTime;
         roundDuration = roundTimer;
 
+    }
+
+    private void ValidatePlayerLists()
+    {
+        if (players.Count == 0) return;
+
+        for(int i = 0; i < players.Count; i++)
+        {
+            if(players[i] == null)
+            {
+                players.RemoveAt(i);
+            }
+        }
     }
     private void OnApplicationQuit()
     {
