@@ -47,7 +47,10 @@ public class PlayerHealth : MonoBehaviour
     {
         poisoned.gameObject.SetActive(false);
         UnkillPlayer();
+
+        gameObject.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
     }
+
 
     public void TakeDamage(float damage)
     {
