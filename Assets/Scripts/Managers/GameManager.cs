@@ -114,10 +114,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
             
         }
         */
-        if(level == 0)
-        {
-            acceptPlayerInput = true;
-        }
+     
         if (level != 0)
         {
             acceptPlayerInput = false;
@@ -140,7 +137,13 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
             ResetPlayerImage();
             RestorePLayer();
         }
-        
+
+        if (level == 0)
+        {
+            acceptPlayerInput = true;
+            roundCounter = 0;
+        }
+
     }
     private void Awake()
     {
@@ -376,6 +379,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
             
             GameObject winner = playersAlive[0];
             winnerID = winner.GetComponent<PlayerDetails>().playerID;
+            Debug.Log("Added " + roundCounter + " " + winnerID);
             GameDataTracker.Instance.AddWinner(roundCounter, winnerID);
             AddScore(playersAlive[0]);
             hasGivenScore = true;
