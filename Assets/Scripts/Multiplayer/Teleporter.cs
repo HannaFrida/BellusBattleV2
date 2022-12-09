@@ -20,7 +20,7 @@ public class Teleporter : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // When a player stands on the Teleporter the playerAmountOnTeleporter goes up
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag.Equals("Player"))
         {
             playerAmountOnTeleporter++;
             soundManager.PlayerOnPlay_Sound();
@@ -50,7 +50,7 @@ public class Teleporter : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         // When a player gets off the Teleporter the playerAmountOnTeleporter goes down
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag.Equals("Player"))
         {
             playerAmountOnTeleporter--;
         }

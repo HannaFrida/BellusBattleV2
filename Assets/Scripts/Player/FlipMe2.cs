@@ -6,7 +6,6 @@ using UnityEngine;
 public class FlipMe2 : MonoBehaviour
 {
     Aim da;
-    bool tmp = true;
     // Start is called before the first frame update
 
     // Update is called once per frame

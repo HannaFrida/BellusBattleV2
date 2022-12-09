@@ -57,9 +57,9 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
     [SerializeField] private float transitionTime = 5f;
     AsyncOperation asyncLoad;
     [SerializeField] Transition trans;
-    static Vector2 pos1, pos2, pos3, pos4;
-    private static Dictionary<int, GameObject> transPosDic = new Dictionary<int, GameObject>();
-    private static Dictionary<int, Image> imageDic = new Dictionary<int, Image>();
+    //static Vector2 pos1, pos2, pos3, pos4;
+    //private static Dictionary<int, GameObject> transPosDic = new Dictionary<int, GameObject>();
+    //private static Dictionary<int, Image> imageDic = new Dictionary<int, Image>();
 
     [SerializeField] private Image player1Dead;
     [SerializeField] private Image player1Alive;
@@ -166,10 +166,10 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
         //targetGroup = GameObject.FindGameObjectWithTag("targets");
         //trans = Transition.Instance;
         //trans.gameObject.SetActive(false);
-        pos1 = new Vector2(477f, 160f); 
-        pos2 = new Vector2(892f, 160f);
-        pos3 = new Vector2(1139f, 160f);
-        pos4 = new Vector2(1386f, 160f); // x = 977 - -409
+        //pos1 = new Vector2(477f, 160f); 
+        //pos2 = new Vector2(892f, 160f);
+        //pos3 = new Vector2(1139f, 160f);
+        //pos4 = new Vector2(1386f, 160f); // x = 977 - -409
         DataPersistenceManager.Instance.LoadGame();
     }
 
@@ -179,7 +179,8 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
         {
             targetGroup.AddMember(cameraTarget, 1, 5);
         }
-        else if ((targetGroup.m_Targets[0].target == cameraTarget) && targetGroup.GetComponent<CinemachineTargetGroup>().m_Targets.Length < 2) ;
+        // ska vara tom, annars freakar kameran
+        else if ((targetGroup.m_Targets[0].target == cameraTarget) && targetGroup.GetComponent<CinemachineTargetGroup>().m_Targets.Length < 2);
         else targetGroup.RemoveMember(cameraTarget);
         if (!gameHasStarted) return;
         CheckPlayersLeft();
@@ -581,6 +582,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
 
     public void MoveUpPlayer()
     {
+        /*
         if (winnerID == 0)
         {
             Debug.Log("draw or something");
@@ -623,6 +625,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
             pos4 = new Vector2(picture4.position.x, picture4.position.y + 20);
             trans.getWinScore4.SetText(scoreDic[playersAlive[0]] + "");
         }
+        */
     }
 
     public void LoadData(GameData data)

@@ -43,11 +43,6 @@ public class GameDataTracker : MonoBehaviour
         }
         filePath = GetFilePath();
     }
-    // Update is called once per frame
-    void Update()
-    {
-      
-    }
 
     private string GetFilePath()
     {

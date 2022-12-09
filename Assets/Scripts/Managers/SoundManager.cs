@@ -150,7 +150,7 @@ public class SoundManager : MonoBehaviour
         trampolineSource.Play();
     }
    
-   
+   /*
     private void RandomiseSoundPlayback()
     { //Gör att ett ljud körs random.
      //   if (!zombieRoarSoundSource.isPlaying)
@@ -161,6 +161,7 @@ public class SoundManager : MonoBehaviour
 
         }
     }
+   */
 
     public void HalfMusicVolume()
     {

@@ -11,7 +11,6 @@ public class LevelSlider : MonoBehaviour
     [SerializeField] private TextMeshProUGUI textS;
     [SerializeField] private ScoreManager scoreManager;
     [SerializeField] private Animator animator;
-    private Slider slider;
     private int nmrOfLevels;
 
     // Start is called before the first frame update

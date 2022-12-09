@@ -95,14 +95,14 @@ public class PlayerMovement : MonoBehaviour
     private float deceleration;
 
     private float coyoteTimer, bufferTimer, knockBackTimer;
-    private float horizontalSkinWidth = 0.2f;
-    private float verticalSkinWidth = 0.1f;
+    private readonly float horizontalSkinWidth = 0.2f;
+    private readonly float verticalSkinWidth = 0.1f;
     private float downwardInput;
     private float verticalRaySpacing, horizontalRaySpacing;
     private float verticalRayLength, horizontalRayLength;
     private float movementAmount;
     private float initialSpeed;
-    private float movementAnimationSpeed;
+    //private float movementAnimationSpeed;
     private float playerHeight;
 
     private float knockBackTime = 0.2f;
@@ -194,7 +194,6 @@ public class PlayerMovement : MonoBehaviour
 
         transform.Translate(velocity * Time.deltaTime);
         //Debug.Log(movementAmount);
-        movementAnimationSpeed = movementX;
         if (isMovedByPLatform == true && movementAmount == 0f)
         {
             playerAnimator.SetFloat("Speed", 0f);
@@ -488,7 +487,7 @@ public class PlayerMovement : MonoBehaviour
             }
             rayOrigin += Vector2.right * (verticalRaySpacing * i);
 
-            Debug.DrawRay(rayOrigin, Vector2.up * directionY * verticalRayLength, Color.red);
+            //Debug.DrawRay(rayOrigin, Vector2.up * directionY * verticalRayLength, Color.red);
 
             RaycastHit hit;
             if (Physics.Raycast(rayOrigin, Vector2.up * directionY, out hit, verticalRayLength, collisionLayer))
@@ -534,7 +533,7 @@ public class PlayerMovement : MonoBehaviour
             }
             rayOrigin += Vector2.up * (horizontalRaySpacing * i);
 
-            Debug.DrawRay(rayOrigin, Vector2.right * directionX * horizontalRayLength, Color.red);
+            //Debug.DrawRay(rayOrigin, Vector2.right * directionX * horizontalRayLength, Color.red);
             RaycastHit hit;
             if (Physics.Raycast(rayOrigin, Vector2.right * directionX, out hit, horizontalRayLength, collisionLayer))
             {

@@ -9,10 +9,6 @@ public class ControlChooser : MonoBehaviour
     private static bool toggledLeft;
     private static bool toggledRight;
 
-    private void Start()
-    {
-        //gameObject.SetActive(false);
-    }
 
     private void Update()
     {

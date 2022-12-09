@@ -15,11 +15,6 @@ public class TimeManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
-    private void Start()
-    {
-        //percentageText = GetComponent<Text>();
-    }
-
     void Update()
     {
         if (GameManager.Instance.GameIsPaused == true) return;
