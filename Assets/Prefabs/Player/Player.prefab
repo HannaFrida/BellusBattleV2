@@ -9705,9 +9705,10 @@ MonoBehaviour:
   canDash: 1
   stopGravityWhileDashing: 0
   isInvincibileWhileDashing: 0
+  canMoveWhileDashing: 1
   dashingDistace: 45
   dashingDuration: 0.05
-  bcollider: {fileID: 0}
+  bcollider: {fileID: 6431588530169345906}
   airDashingDistace: 45
   airDashingDuration: 0.05
   dashUpAngle: 90
@@ -9718,6 +9719,9 @@ MonoBehaviour:
   deadZoneAngle: -90
   deadZoneAngleRange: 85
   dashingActivationCooldown: 0.67
+  collisionLayer:
+    serializedVersion: 2
+    m_Bits: 0
   tr: {fileID: 7687228209419224627}
   CharacterGlow: {fileID: 2586055511146347963}
   playerSoundManager: {fileID: 545699144991103134}
