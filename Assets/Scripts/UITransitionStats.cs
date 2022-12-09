@@ -48,11 +48,8 @@ public class UITransitionStats : MonoBehaviour
                 stat = GameDataTracker.Instance.StreakFinder();
             }
         }
-        FactText.text = stat; 
+        
+        FactText.text = stat;
     }
 
-    private void SetPlayerIcons()
-    {
-
-    }
 }
