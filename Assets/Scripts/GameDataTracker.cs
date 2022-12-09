@@ -147,9 +147,9 @@ public class GameDataTracker : MonoBehaviour
         {
             if(roundWinner != 0)
             {
-                return $"Player {roundWinner} has won {streak} rounds in a row!";
+                return $"P{roundWinner} won {streak} rounds in a row";
             }
-            return $"The last {streak} rounds have ended in a draw!";
+            return $"{streak} rounds have ended in a draw";
             
         }
         return "nothing interesting";
@@ -245,7 +245,7 @@ public class GameDataTracker : MonoBehaviour
 
         public override string ToString()
         {
-            return $"The Player {killer} killed {kills} players in the last round!";
+            return $"P{killer} just killed {kills} players!";
         }
     }
 
