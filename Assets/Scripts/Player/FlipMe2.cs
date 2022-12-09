@@ -19,12 +19,12 @@ public class FlipMe2 : MonoBehaviour
         }
         if(!da.IsFacingRight())
         {
-            transform.rotation *= Quaternion.AngleAxis(0, Vector3.right);
+            transform.rotation *= Quaternion.AngleAxis(180, Vector3.right);
 
         }
         else if(da.IsFacingRight())
         {
-            transform.rotation *= Quaternion.AngleAxis(180, Vector3.right);
+            transform.rotation *= Quaternion.AngleAxis(0, Vector3.right);
         }
     }
 }
