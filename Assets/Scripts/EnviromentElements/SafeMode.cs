@@ -17,7 +17,7 @@ public class SafeMode : MonoBehaviour
             }
             foreach (GameObject obj in _objectsToEnable)
             {
-                obj.SetActive(false);
+                obj.SetActive(true);
             }
         }
 
