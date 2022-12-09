@@ -75,14 +75,9 @@ public class PauseMenu : MonoBehaviour
         gm.ReturnToMainMenu();
     }
 
-    public void OpenSettings()
+    public void QuitGame()
     {
-        runButtonCheck = true;
-        settingsPanel.SetActive(true);
-        es.SetSelectedGameObject(firstSelectedOnSettings.gameObject);
-    
-
-
+        Application.Quit();
     }
 
     private void CheckSelectedButton()
