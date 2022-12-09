@@ -123,11 +123,11 @@ public class GameDataTracker : MonoBehaviour
 
     public string StreakFinder()
     {
-        int roundWinner = 0;
+        int roundWinner = -1; // ingenting har -1 som id
         int streak = 0;
         for(int i = currentRound; i > 0; i--)
         {
-            if (roundWinner == 0)
+            if (roundWinner == -1)
             {
                 roundWinner = roundWinnerDic[i];
                 Debug.Log("roundwinner is " + roundWinner);
