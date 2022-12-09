@@ -5,15 +5,16 @@ using TMPro;
 
 public class UITransitionStats : MonoBehaviour
 {
-    TextMeshProUGUI FactText;
+    [SerializeField] private TextMeshProUGUI FactText;
     [SerializeField] private TextMeshProUGUI[] scoreTexts;
     [SerializeField] private TextMeshProUGUI[] killsTexts;
+    [SerializeField] private GameObject[] playerIcons;
     GameDataTracker gameDataTracker;
     // Start is called before the first frame update
     void Start()
     {
-        UpdateScoreText();
-        UpdateKillText();
+        UpdateTransitionScene();
+        ChooseInterestingStat();
     }
 
     // Update is called once per frame
@@ -22,19 +23,36 @@ public class UITransitionStats : MonoBehaviour
         
     }
 
-    private void UpdateScoreText()
+    private void UpdateTransitionScene()
     {
         for(int i = 0; i < GameManager.Instance.GetAllPlayers().Count; i++)
         {
+            playerIcons[i].SetActive(true);
             scoreTexts[i].text = "Score: " + GameDataTracker.Instance.GetPlayerScore(i + 1);
+            killsTexts[i].text = "Kills: " + GameDataTracker.Instance.GetPlayerKills(i + 1);
         }
     }
 
-    private void UpdateKillText()
+    private void ChooseInterestingStat()
     {
-        for (int i = 0; i < GameManager.Instance.GetAllPlayers().Count; i++)
+        string stat = "";
+
+        if(GameDataTracker.Instance.MultiKillFinder().Equals("nothing interesting") == false)
         {
-            killsTexts[i].text = "Kills: " + GameDataTracker.Instance.GetPlayerKills(i+1);
+            stat = GameDataTracker.Instance.MultiKillFinder();
         }
+        if (GameDataTracker.Instance.StreakFinder().Equals("nothing interesting") == false)
+        {
+            if(stat.Length == 0)
+            {
+                stat = GameDataTracker.Instance.StreakFinder();
+            }
+        }
+        FactText.text = stat; 
+    }
+
+    private void SetPlayerIcons()
+    {
+
     }
 }
