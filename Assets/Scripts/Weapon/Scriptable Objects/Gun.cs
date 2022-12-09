@@ -119,7 +119,11 @@ public class Gun : MonoBehaviour
                 dropTimer = 0;
                 railGoneTime = false;
                 Drop();
-
+                Despawn();
+                foreach (Aim aim in ownerAim)
+                {
+                    aim.enabled = true;
+                }
             }
         }
 
@@ -179,7 +183,7 @@ public class Gun : MonoBehaviour
         ownerID = other.gameObject.GetComponent<PlayerDetails>().playerID;
 
         // Get the reference for the players aim
-        ownerAim = other.gameObject.GetComponentsInChildren<Aim>();
+        ownerAim = other.gameObject.GetComponentsInParent<Aim>();
 
         weaponManager = other.gameObject.GetComponent<WeaponManager>();
         if (weaponManager != null)

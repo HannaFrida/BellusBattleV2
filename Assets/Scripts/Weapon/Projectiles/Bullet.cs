@@ -43,7 +43,7 @@ public class Bullet : Projectile
 				Destroy(MuzzleFlashIns, 3f);
             }
 			PlayerHealth ph = playerGo.GetComponent<PlayerHealth>();
-			if(ph.IsAlive == true)
+			if(ph.IsAlive == true && damage >= 1)
             {
 				GameDataTracker.Instance.NewKillEvent(shooterID, playerGo.GetComponent<PlayerDetails>().playerID, weaponName, GameManager.Instance.RoundDuration);
 			}

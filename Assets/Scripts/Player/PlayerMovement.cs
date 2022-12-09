@@ -17,8 +17,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField, Range(-100f, 0f)] private float downwardForce;
     [SerializeField, Range(1f, 50000f)] private float acceleration;
     [SerializeField, Range(-1f, -50000f)] private float fallForce;
-   
+
     [Header("Jump & Edgecontrol")]
+    [SerializeField] JumpSetting jumpSetting = JumpSetting.Press;
     [SerializeField, Range(0f, 1f)] private float doubleJumpDecreaser;
     [SerializeField, Range(-1f, 0f)] private float downwardInputBound;
     [SerializeField] private float edgeControlAmount;
@@ -29,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask collisionLayer;
     [SerializeField] private LayerMask oneWayLayer;
-    
+
     [Header("Sound & VFX")]
     [SerializeField] private PlayerSoundManager playerSoundManager;
     [SerializeField] private Animator playerAnimator;
@@ -38,25 +39,25 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private PlayerInput playerInput;
 
 
-    public PlayerInput PlayerInput  => playerInput;
+    public PlayerInput PlayerInput => playerInput;
 
 
     public UnityEvent jumpEvent;
 
     public LayerMask CollisionLayer
     {
-        get => collisionLayer; 
+        get => collisionLayer;
     }
 
     public Vector2 Velocity
     {
-        get => velocity; 
+        get => velocity;
     }
 
     public float DownwardForce
     {
         get => downwardForce;
-        set => downwardForce = value; 
+        set => downwardForce = value;
     }
 
     public float FallForce
@@ -67,7 +68,7 @@ public class PlayerMovement : MonoBehaviour
 
     public bool IsGrounded
     {
-        get => CheckIsGrounded(); 
+        get => CheckIsGrounded();
     }
 
     public bool IsMovedByPLatform
@@ -81,18 +82,18 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 rayCastBottomLeft, rayCastBottomRight, rayCastTopRight, rayCastTopLeft;
 
     private Vector2 verticalRayOffset, horizontalRayOffset;
-    
+
 
     private GameObject MuzzleFlashIns;
 
     private BoxCollider boxCollider;
 
-    private int horizontalRayCount = 6; 
+    private int horizontalRayCount = 6;
     private int verticalRayCount = 4;
 
     private float movementX, movementY;
     private float deceleration;
-    
+
     private float coyoteTimer, bufferTimer, knockBackTimer;
     private float horizontalSkinWidth = 0.2f;
     private float verticalSkinWidth = 0.1f;
@@ -107,8 +108,8 @@ public class PlayerMovement : MonoBehaviour
     private float knockBackTime = 0.2f;
 
     private bool hasJumpedOnGround, hasDoubleJump, hasCoyoteTime;
-    
-    
+
+
     private bool isMovingLeft, isMovingRight;
     private bool isStandingOnOneWayPlatform;
     private bool runBufferTimer;
@@ -117,9 +118,19 @@ public class PlayerMovement : MonoBehaviour
     private bool isGrounded;
     private bool isMovedByPLatform;
 
+    private bool toggleJump = false;
+
     private void OnLevelWasLoaded(int level)
     {
         externalForce = Vector2.zero;
+    }
+
+    [System.Serializable]
+    public enum JumpSetting
+    {
+        Press,
+        Toggle,
+        Hold
     }
 
     void Start()
@@ -141,21 +152,21 @@ public class PlayerMovement : MonoBehaviour
         UpdateMovementForce();
         UpdateCoyoteTime();
         RunKnockbackTimer();
-        
+
         if (isGrounded == false)
         {
             movementY = Mathf.MoveTowards(movementY, downwardForce, airResistance * Time.deltaTime);
-            
+
         }
 
         if (isGrounded && velocity.y < 0)
         {
 
-            
+
             playerSoundManager.PlayerLandSound();
-           
-            
-            
+
+
+
             if (hasJumpBuffer)
             {
                 Jump();
@@ -163,7 +174,7 @@ public class PlayerMovement : MonoBehaviour
                 runBufferTimer = false;
 
             }
-            
+
 
         }
         velocity = new Vector2(movementX, movementY) + externalForce;
@@ -171,7 +182,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (velocity.y != 0)
         {
-            
+
         }
         HandleVerticalCollisions(ref velocity);
 
@@ -179,8 +190,8 @@ public class PlayerMovement : MonoBehaviour
         {
             HandleHorizontalCollisions(ref velocity);
         }
-        
-        
+
+
         transform.Translate(velocity * Time.deltaTime);
         //Debug.Log(movementAmount);
         movementAnimationSpeed = movementX;
@@ -201,7 +212,7 @@ public class PlayerMovement : MonoBehaviour
 
         downwardInput = ctx.ReadValue<Vector2>().y;
         movementAmount = ctx.ReadValue<Vector2>().x;
-      
+
         if (ctx.ReadValue<Vector2>().x > 0.1f)
         {
             isMovingRight = true;
@@ -218,7 +229,7 @@ public class PlayerMovement : MonoBehaviour
             isMovingLeft = false;
         }
 
-        if(movementAmount < 0.1f && movementAmount > -0.1f)
+        if (movementAmount < 0.1f && movementAmount > -0.1f)
         {
             movementAmount = 0f;
         }
@@ -232,7 +243,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            SetDownwardForce(downwardForce, DownwardForce);    
+            SetDownwardForce(downwardForce, DownwardForce);
         }
 
     }
@@ -254,13 +265,35 @@ public class PlayerMovement : MonoBehaviour
         downfroce = temp;
     }
 
+    //Autojump setting av Nyman - magic numbers beware.. >.<
     public void OnJump(InputAction.CallbackContext ctx)
     {
         if (GameManager.Instance.GameIsPaused == true) return;
 
-        if (ctx.started)
+        if (ctx.started && jumpSetting == JumpSetting.Press)
         {
             Jump();
+        }
+        else if (ctx.canceled && jumpSetting == JumpSetting.Hold)
+        {
+            CancelInvoke();
+            StopAllCoroutines();
+        }
+        else if (ctx.started && jumpSetting == JumpSetting.Hold)
+        {
+            Jump();
+            InvokeRepeating("JumpCoroutine", 0.1f, 1f);
+        }
+
+        else if (ctx.started && jumpSetting == JumpSetting.Toggle && toggleJump)
+        {
+            CancelInvoke();
+            toggleJump = false;
+        }
+        else if (ctx.started && jumpSetting == JumpSetting.Toggle && !toggleJump)
+        {
+            InvokeRepeating("JumpCoroutine", 0.1f, 1.5f);
+            toggleJump = true;
         }
     }
 
@@ -283,7 +316,7 @@ public class PlayerMovement : MonoBehaviour
 
             }
             if (!hasCoyoteTime && hasDoubleJump)
-            { 
+            {
                 playerSoundManager.PlayerDoubleJumpSound();
                 MuzzleFlashIns = Instantiate(doubleJumpVFX, transform.position, transform.rotation);
                 Destroy(MuzzleFlashIns, 1.5f);
@@ -296,7 +329,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            
+
             runBufferTimer = true;
             bufferTimer = 0;
         }
@@ -304,6 +337,15 @@ public class PlayerMovement : MonoBehaviour
 
     private void ResetValuesOnGrounded()
     {
+        /** 
+         * Här ska landanimationen ligga!!!!
+         * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+         * ->            Här!             <-
+         * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+         * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+         * Här ska landanimationen ligga!!!!
+         */
+
         coyoteTimer = 0;
         hasCoyoteTime = true;
         hasDoubleJump = true;
@@ -319,7 +361,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!runBufferTimer) return;
         bufferTimer += Time.deltaTime;
-        if(bufferTimer <= jumpBufferTime)
+        if (bufferTimer <= jumpBufferTime)
         {
             hasJumpBuffer = true;
         }
@@ -336,7 +378,7 @@ public class PlayerMovement : MonoBehaviour
 
         knockBackTimer += Time.deltaTime;
 
-        if(knockBackTimer >= knockBackTime)
+        if (knockBackTimer >= knockBackTime)
         {
             hasBeenKnockedBack = false;
             knockBackTimer = 0f;
@@ -370,7 +412,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (hasBeenKnockedBack) return;
 
-        if(movementAmount > 0.1f || movementAmount < -0.1f)
+        if (movementAmount > 0.1f || movementAmount < -0.1f)
         {
             if (isMovingRight)
             {
@@ -387,18 +429,18 @@ public class PlayerMovement : MonoBehaviour
             if (isMovedByPLatform) return;
             movementX = Mathf.MoveTowards(movementX, 0, deceleration * Time.deltaTime);
         }
-        if(externalForce.x != 0f)
+        if (externalForce.x != 0f)
         {
             externalForce.x = Mathf.MoveTowards(externalForce.x, 0, deceleration * Time.deltaTime);
         }
-        if(externalForce.y != 0f)
+        if (externalForce.y != 0f)
         {
             externalForce.y = Mathf.MoveTowards(externalForce.y, 0, deceleration * Time.deltaTime);
         }
     }
     private bool CheckIsGrounded()
     {
-        
+
         if (Physics.Raycast(boxCollider.bounds.center, Vector2.down, verticalRayLength, oneWayLayer))
         {
             isStandingOnOneWayPlatform = true;
@@ -421,7 +463,7 @@ public class PlayerMovement : MonoBehaviour
     private void UpdateCoyoteTime()
     {
         if (isGrounded || !hasCoyoteTime) return;
- 
+
         if (coyoteTimer > coyoteTime || hasJumpedOnGround)
         {
             hasCoyoteTime = false;
@@ -445,13 +487,13 @@ public class PlayerMovement : MonoBehaviour
                 rayOrigin = rayCastTopLeft - verticalRayOffset;
             }
             rayOrigin += Vector2.right * (verticalRaySpacing * i);
-            
+
             Debug.DrawRay(rayOrigin, Vector2.up * directionY * verticalRayLength, Color.red);
-           
+
             RaycastHit hit;
             if (Physics.Raycast(rayOrigin, Vector2.up * directionY, out hit, verticalRayLength, collisionLayer))
             {
-                if(velocity.y < 0f)
+                if (velocity.y < 0f)
                 {
                     transform.position = new Vector2(transform.position.x, hit.collider.bounds.max.y);
                     ResetValuesOnGrounded();
@@ -472,14 +514,14 @@ public class PlayerMovement : MonoBehaviour
                 velocity.y = 0f;
                 movementY = 0f;
                 return;
-            } 
+            }
         }
     }
 
     private void HandleHorizontalCollisions(ref Vector2 velocity)
     {
         float directionX = Mathf.Sign(velocity.x);
-        for (int i = horizontalRayCount-1; i >= 0; i--)
+        for (int i = horizontalRayCount - 1; i >= 0; i--)
         {
             Vector2 rayOrigin;
             if (directionX == -1)
@@ -491,12 +533,12 @@ public class PlayerMovement : MonoBehaviour
                 rayOrigin = rayCastBottomRight - horizontalRayOffset;
             }
             rayOrigin += Vector2.up * (horizontalRaySpacing * i);
-     
+
             Debug.DrawRay(rayOrigin, Vector2.right * directionX * horizontalRayLength, Color.red);
             RaycastHit hit;
             if (Physics.Raycast(rayOrigin, Vector2.right * directionX, out hit, horizontalRayLength, collisionLayer))
             {
-                if(i == 0)
+                if (i == 0)
                 {
                     EdgeControl(hit);
                 }
@@ -546,7 +588,7 @@ public class PlayerMovement : MonoBehaviour
         knockBackTimer = 0f;
         movementY = force.y;
         movementX = force.x;
-        
+
     }
     public void AddConstantExternalForce(Vector2 force)
     {
@@ -559,4 +601,21 @@ public class PlayerMovement : MonoBehaviour
         movementX = force.x;
     }
 
+    public void SetJumpSetting(JumpSetting setting)
+    {
+        jumpSetting = setting;
+        CancelInvoke();
+    }
+
+    private IEnumerator ToggleDoubleJump(float waitTime)
+    {
+        Jump();
+        yield return new WaitForSeconds(waitTime);
+        Jump();
+    }
+
+    void JumpCoroutine()
+    {
+        StartCoroutine(ToggleDoubleJump(0.25f));
+    }
 }
