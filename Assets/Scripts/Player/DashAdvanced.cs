@@ -16,6 +16,7 @@ public class DashAdvanced : MonoBehaviour
     [SerializeField] private bool canDash = true;
     [SerializeField] private bool stopGravityWhileDashing = true;
     [SerializeField] private bool isInvincibileWhileDashing = true;
+    [SerializeField] private bool canMoveWhileDashing = false;
     private bool isFacingRight;
     private bool isDashing;
     private bool onControlOverride;
@@ -166,9 +167,11 @@ public class DashAdvanced : MonoBehaviour
         if (GameManager.Instance.GameIsPaused == true || GameManager.Instance.AcceptPlayerInput == false) return;
         if (isDashing)
         {
-            Debug.DrawLine(transform.position + new Vector3(0f, 0.5f, -0.3f), transform.position + new Vector3(0f, 0.5f, -0.3f) + (velocity - (Vector3)movement.Velocity) * Time.deltaTime, Color.red, 5);
-            transform.position += (velocity - (Vector3)movement.Velocity)* Time.deltaTime;
-            return;
+            Debug.DrawLine(transform.position + new Vector3(0f, 0.5f, -0.3f), transform.position + new Vector3(0f, 0.5f, -0.3f) + velocity * Time.deltaTime, Color.red, 5);
+            if (canMoveWhileDashing && !stopGravityWhileDashing) transform.position += velocity * Time.deltaTime;
+            else if (canMoveWhileDashing) transform.position += (velocity - new Vector3(0f, movement.Velocity.y, 0f)) * Time.deltaTime;
+            else if (!stopGravityWhileDashing) transform.position += (velocity - new Vector3(movement.Velocity.x, 0f, 0f)) * Time.deltaTime;
+            else transform.position += (velocity - (Vector3)movement.Velocity) * Time.deltaTime;
         }
         //velocity = new Vector3(0, velocity.y, velocity.z);
     }
