@@ -8,7 +8,7 @@ public class RebindingDisplay : MonoBehaviour
 {
     [Header("Jumping")]
     [SerializeField] private InputActionReference jumpAction = null;
-    [SerializeField] private InputActionReference jumpAction2 = null;
+    [SerializeField] public InputActionReference jumpAction2 = null;
     [SerializeField] private TMP_Text bindingJumpDisplayNameText = null;
     [SerializeField] private GameObject startJumpRebindObject = null;
 
@@ -111,7 +111,6 @@ public class RebindingDisplay : MonoBehaviour
         waitingForInputObject.SetActive(true);
 
         playerMovement.PlayerInput.SwitchCurrentActionMap("Menu");
-        //Debug.Log(playerMovement.PlayerInput.currentActionMap);
 
         if (playerMovement.gameObject.GetComponent<PlayerDetails>().playerID == 1)
         {
@@ -135,7 +134,6 @@ public class RebindingDisplay : MonoBehaviour
             .OnComplete(operation => RebindJumpComplete())
             .Start();
         }
-
     }
 
     private void RebindJumpComplete()
@@ -154,7 +152,6 @@ public class RebindingDisplay : MonoBehaviour
             waitingForInputObject.SetActive(false);
 
             playerMovement.PlayerInput.SwitchCurrentActionMap("Player");
-            Debug.Log(playerMovement.PlayerInput.currentActionMap);
         }
 
         if (playerMovement.gameObject.GetComponent<PlayerDetails>().playerID == 2)
@@ -170,11 +167,8 @@ public class RebindingDisplay : MonoBehaviour
             startJumpRebindObject.SetActive(true);
             waitingForInputObject.SetActive(false);
 
-
             playerMovement.PlayerInput.SwitchCurrentActionMap("Player2");
-            Debug.Log(playerMovement.PlayerInput.currentActionMap);
         }
-
     }
 
     /// <summary>

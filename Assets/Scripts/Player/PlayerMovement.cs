@@ -116,8 +116,8 @@ public class PlayerMovement : MonoBehaviour
     private bool hasBeenKnockedBack;
     private bool isGrounded;
     private bool isMovedByPLatform;
-    
-  
+
+    [SerializeField] private RebindingDisplay rbd;
     void Start()
     {
         initialSpeed = moveSpeed - 5; //Används för acceleration
@@ -127,6 +127,7 @@ public class PlayerMovement : MonoBehaviour
         CalculateRaySpacing();
         DontDestroyOnLoad(gameObject);
         CalculateRaycastOffset();
+        rbd = GetComponentInChildren<RebindingDisplay>();
     }
 
     // Update is called once per frame
@@ -253,12 +254,22 @@ public class PlayerMovement : MonoBehaviour
         downfroce = temp;
     }
 
+    
     public void OnJump(InputAction.CallbackContext ctx)
     {
         if (GameManager.Instance.GameIsPaused == true) return;
-
+        string sdsd = ctx.ToString();
+        //string rdrb = rbd.jumpAction2.action.ToString();
+        //sdsd = rdrb;
+        //sdsd = rbd.jumpAction2.action.ToString();
+        //Debug.Log(rbd.jumpAction2.action.triggered);
+        Debug.Log(sdsd);
         if (ctx.started)
         {
+            Debug.Log(ctx);
+            
+            Debug.Log(rbd.jumpAction2.action);
+            Debug.Log(PlayerInput.currentActionMap);
             Jump();
         }
     }
