@@ -73,7 +73,7 @@ public class GameDataTracker : MonoBehaviour
     {
         if(killsEachRoundDic.ContainsKey(currentRound)== false)
         {
-            killsEachRoundDic[currentRound] = new List<KillEvent>();
+            killsEachRoundDic.Add(currentRound, new List<KillEvent>());
         }
         KillEvent killEvent = new KillEvent(killerID: killer, killedPlayerID: killed, weaponName, timeOfKill);
         killsEachRoundDic[currentRound].Add(killEvent);
@@ -159,8 +159,10 @@ public class GameDataTracker : MonoBehaviour
     {
         Dictionary<int, List<float>> killerAndTime = new Dictionary<int, List<float>>();
         KillStreak killStreak;
-        string returnValue = "Nothing interesting";
+        string returnValue = "nothing interesting";
         if (killsEachRoundDic.ContainsKey(currentRound) == false) return returnValue;
+
+        Debug.Log("interesting stuff");
         for (int i = 0; i < killsEachRoundDic[currentRound].Count; i++)
         {
             if (killsEachRoundDic[currentRound][i].GetKiller() == 0) continue;
