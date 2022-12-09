@@ -277,7 +277,7 @@ public class PlayerMovement : MonoBehaviour
         else if (ctx.canceled && jumpSetting == JumpSetting.Hold)
         {
             CancelInvoke();
-            StopAllCoroutines();
+            StopCoroutine("ToggleDoubleJump");
         }
         else if (ctx.started && jumpSetting == JumpSetting.Hold)
         {
