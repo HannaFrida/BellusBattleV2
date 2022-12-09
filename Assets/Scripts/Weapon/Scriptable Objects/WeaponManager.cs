@@ -37,23 +37,6 @@ public class WeaponManager : MonoBehaviour
 
     private void Update()
     {
-        /*
-        Debug.Log(rightArmAimPivotpoint.transform.eulerAngles.z);
-
-        if(rightArmAimPivotpoint.transform.eulerAngles.z > 90f && rightArmAimPivotpoint.transform.eulerAngles.z < 275f && hasflippedLeft == false)
-        {
-            //Debug.Log(rightArmAimPivotpoint.transform.rotation.z);
-            hasflippedLeft = true;
-            hasflippedRight = false;
-            weaponSlot.eulerAngles = new Vector3(0f, weaponSlot.rotation.y, weaponSlot.rotation.z);
-        }
-        else if(rightArmAimPivotpoint.transform.eulerAngles.z < 90f && rightArmAimPivotpoint.transform.eulerAngles.z > 275f &&  hasflippedRight == false)
-        {
-            hasflippedRight = true;
-            hasflippedLeft = false;
-            weaponSlot.eulerAngles = new Vector3(180f, weaponSlot.rotation.y, 180f);
-        }
-        */
 
         /*
         if (equippedWeapon.name == "RailGun")

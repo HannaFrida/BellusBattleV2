@@ -116,7 +116,8 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
             
         }
         */
-     
+        ValidatePlayerLists();
+
         if (level != 0)
         {
             acceptPlayerInput = false;
@@ -146,7 +147,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
             acceptPlayerInput = true;
             roundCounter = 0;
         }
-        ValidatePlayerLists();
+        
 
     }
     private void Awake()
