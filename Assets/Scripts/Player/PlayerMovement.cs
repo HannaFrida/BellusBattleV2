@@ -337,6 +337,15 @@ public class PlayerMovement : MonoBehaviour
 
     private void ResetValuesOnGrounded()
     {
+        /** 
+         * Här ska landanimationen ligga!!!!
+         * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+         * ->            Här!             <-
+         * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+         * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+         * Här ska landanimationen ligga!!!!
+         */
+
         coyoteTimer = 0;
         hasCoyoteTime = true;
         hasDoubleJump = true;

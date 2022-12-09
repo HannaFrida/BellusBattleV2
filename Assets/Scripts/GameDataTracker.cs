@@ -97,11 +97,10 @@ public class GameDataTracker : MonoBehaviour
         {
             roundWinnerDic[roundNr] = playerID;
         }
-        //roundWinnerDic.Add(roundNr,playerID);
 
         if(playerScore.ContainsKey(playerID) == false)
         {
-            playerScore[playerID] = 1;
+            playerScore.Add(playerID, 1);
         }
         else
         {
@@ -160,7 +159,7 @@ public class GameDataTracker : MonoBehaviour
     {
         Dictionary<int, List<float>> killerAndTime = new Dictionary<int, List<float>>();
         KillStreak killStreak;
-        string returnValue = "Nothing interesting happened";
+        string returnValue = "Nothing interesting";
         if (killsEachRoundDic.ContainsKey(currentRound) == false) return returnValue;
         for (int i = 0; i < killsEachRoundDic[currentRound].Count; i++)
         {
