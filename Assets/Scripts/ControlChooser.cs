@@ -51,6 +51,7 @@ public class ControlChooser : MonoBehaviour
             foreach (PlayerInput input in playerInputs)
             {
                 input.SwitchCurrentActionMap("PlayerAccessibilityLeft");
+                input.gameObject.GetComponent<PlayerMovement>().HasAccessibility = true;
             }
             
             Debug.Log("sätt in left controller control scheme här");
@@ -70,6 +71,7 @@ public class ControlChooser : MonoBehaviour
             foreach (PlayerInput input in playerInputs)
             {
                 input.SwitchCurrentActionMap("Player");
+                input.gameObject.GetComponent<PlayerMovement>().HasAccessibility = false;
             }
 
         }
