@@ -13,6 +13,13 @@ public class PlayerDetails : MonoBehaviour
     private bool isRumbling;
     private float rumbleTime = 0.3f;
     private float timer;
+    private string chosenActionMap = "Player";
+
+    public string ChosenActionMap
+    {
+        get => chosenActionMap;
+        set => chosenActionMap = value;
+    }
 
     public Transform HeadGearSlot()
     {

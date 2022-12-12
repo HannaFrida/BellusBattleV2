@@ -12,6 +12,7 @@ public class UIMenuHandler : MonoBehaviour
     [SerializeField] protected GameObject buttonDeafaultPanel;
     [SerializeField] protected GameObject buttonMapsSelectionPanel;
     [SerializeField] private SoundManager soundManager;
+    private List<string> actionMapNames = new();
     //[SerializeField] private List<Button> buttons = new List<Button>();
     protected GameObject activePanel;
     protected void Start()
@@ -37,13 +38,21 @@ public class UIMenuHandler : MonoBehaviour
         Application.OpenURL("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
     }
 
+    public void AddToList(string name)
+    {
+        actionMapNames.Add(name);
+    }
+
     public void ExitUI()
     {
         GameObject[] obj = GameObject.FindGameObjectsWithTag("Player");
         for(int i = 0; i < obj.Length; i++)
         {
+            if (obj[i] == null) continue;
+            if (obj[i].GetComponent<PlayerInput>().currentActionMap.name.Equals("PlayerAccessibilityLeft")) break;
             obj[i].GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
         }
+        actionMapNames.Clear();
 
         //foreach(Button b in buttons)
         //{
