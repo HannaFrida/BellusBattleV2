@@ -37,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private GameObject doubleJumpVFX;
 
     [SerializeField] private PlayerInput playerInput;
+    [SerializeField] private DashAdvanced da;
 
     private GameObject MuzzleFlashIns;
     private BoxCollider boxCollider;
@@ -495,8 +496,10 @@ public class PlayerMovement : MonoBehaviour
                     transform.position = new Vector2(transform.position.x, hit.collider.bounds.max.y);
                     ResetValuesOnGrounded();
                 }
+                Debug.Log("jheja");
                 velocity.y = 0f;
                 movementY = 0f;
+                da.SetVelocity(Vector2.zero);
                 return;
             }
             if (Physics.Raycast(rayOrigin, Vector2.up * directionY, out hit, verticalRayLength, oneWayLayer))
@@ -508,6 +511,7 @@ public class PlayerMovement : MonoBehaviour
                     transform.position = new Vector2(transform.position.x, hit.collider.bounds.max.y);
                     ResetValuesOnGrounded();
                 }
+                
                 velocity.y = 0f;
                 movementY = 0f;
                 return;
@@ -539,6 +543,7 @@ public class PlayerMovement : MonoBehaviour
                 {
                     EdgeControl(hit);
                 }
+                da.SetVelocity(Vector2.zero);
                 velocity.x = 0;
                 movementX = 0;
                 return;
