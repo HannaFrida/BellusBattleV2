@@ -4,7 +4,7 @@ using Random = System.Random;
 public class Weapon : MonoBehaviour
 {
 	[SerializeField]
-	public Aim aim; // test to make bullet shoot in correct direction
+	private Aim aim; // test to make bullet shoot in correct direction
 	[SerializeField] [Tooltip("How accurate the firearm is.")] [Range(0, 1)]
     private float inaccuracy = 1.0f;
     [SerializeField] [Tooltip("Rounds per second.")]
@@ -19,7 +19,7 @@ public class Weapon : MonoBehaviour
     private float projectileForce = 100.0f;
     [SerializeField]
     [Tooltip("Muzzle flash")]
-    public GameObject MuzzleFlash;
+    private GameObject MuzzleFlash;
 
     public AudioSource shootSound;
 

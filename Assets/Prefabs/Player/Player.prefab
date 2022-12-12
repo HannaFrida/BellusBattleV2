@@ -151,6 +151,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8000850111832111331}
+  - component: {fileID: 500548228673936328}
+  - component: {fileID: 8392121806893530557}
   m_Layer: 0
   m_Name: ItemInHand
   m_TagString: Untagged
@@ -166,14 +168,41 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 221333752500009539}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.018, y: 0.725, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 300225489857970639}
-  m_Father: {fileID: 2915926472710746650}
-  m_RootOrder: 3
+  m_Father: {fileID: 6431588530169345905}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &500548228673936328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 221333752500009539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 440f69ea1c96fba4684c107bfef131b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotations: 0
+  rotationsOverride: 0
+  amountOfFixedAgnles: 0
+--- !u!114 &8392121806893530557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 221333752500009539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 455a4ffad6b2c6842a637311a8be6699, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &253789353798775427
 GameObject:
   m_ObjectHideFlags: 0
@@ -2658,7 +2687,6 @@ Transform:
   - {fileID: 6742213502215092317}
   - {fileID: 243362842806509487}
   - {fileID: 2287213954126982208}
-  - {fileID: 8000850111832111331}
   m_Father: {fileID: 4919638908290413493}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8179,7 +8207,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6431588530169345905}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!2083052967 &26230028221232840
 VisualEffect:
@@ -8492,7 +8520,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5880428358489751191}
   m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
-  m_LocalPosition: {x: 0.644, y: 0, z: 0}
+  m_LocalPosition: {x: 0.679, y: 0.237, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9068,6 +9096,7 @@ Transform:
   m_LocalScale: {x: 1.1, y: 1.1, z: 1.1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 8000850111832111331}
   - {fileID: 550519761581017672}
   - {fileID: 7130087715711594001}
   - {fileID: 8357581948125345351}
@@ -9258,6 +9287,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 500548228673936328}
+        m_TargetAssemblyTypeName: Aim, Assembly-CSharp
+        m_MethodName: OverrideJoystickInputToAngleCalculation
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 73477702-9213-443f-ac46-3de09c0fe29a
     m_ActionName: Player/Aim[/XInputControllerWindows/rightStick,/XInputControllerWindows1/rightStick]
   - m_PersistentCalls:
@@ -9329,6 +9370,18 @@ MonoBehaviour:
       - m_Target: {fileID: 7604770547986073551}
         m_TargetAssemblyTypeName: DashAdvanced, Assembly-CSharp
         m_MethodName: CheckDashWithJoystickDirection
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 500548228673936328}
+        m_TargetAssemblyTypeName: Aim, Assembly-CSharp
+        m_MethodName: DefualtJoystickInputToAngleCalculation
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9694,11 +9747,12 @@ MonoBehaviour:
   canDash: 1
   stopGravityWhileDashing: 0
   isInvincibileWhileDashing: 0
-  dashingDistace: 45
-  dashingDuration: 0.05
-  bcollider: {fileID: 0}
-  airDashingDistace: 45
-  airDashingDuration: 0.05
+  canMoveWhileDashing: 1
+  dashingDistace: 43
+  dashingDuration: 0.085
+  bcollider: {fileID: 6431588530169345906}
+  airDashingDistace: 43
+  airDashingDuration: 0.085
   dashUpAngle: 90
   dashUpAngleRange: 3
   canDashDown: 0
@@ -9707,6 +9761,9 @@ MonoBehaviour:
   deadZoneAngle: -90
   deadZoneAngleRange: 85
   dashingActivationCooldown: 0.67
+  collisionLayer:
+    serializedVersion: 2
+    m_Bits: 0
   tr: {fileID: 7687228209419224627}
   CharacterGlow: {fileID: 2586055511146347963}
   playerSoundManager: {fileID: 545699144991103134}
@@ -9879,6 +9936,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponSlot: {fileID: 300225489857970639}
   equippedWeapon: {fileID: 0}
+  rightArmAimPivotpoint: {fileID: 595623164704925587}
 --- !u!114 &545699144991103134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10785,7 +10843,7 @@ Transform:
   m_Children:
   - {fileID: 1658759243020090889}
   m_Father: {fileID: 6431588530169345905}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7210684032876526358
 GameObject:
@@ -10826,7 +10884,7 @@ Transform:
   - {fileID: 2766145862736659359}
   - {fileID: 3323342986766983243}
   m_Father: {fileID: 6431588530169345905}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7395569336354759450
 GameObject:
@@ -10893,7 +10951,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6431588530169345905}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!2083052967 &3332971346311075587
 VisualEffect:
@@ -11730,7 +11788,7 @@ PrefabInstance:
     - target: {fileID: 7209866185493163395, guid: f0790b542fe5c634fba74dc67ba52a26,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7209866185493163395, guid: f0790b542fe5c634fba74dc67ba52a26,
         type: 3}
@@ -12714,7 +12772,7 @@ PrefabInstance:
     - target: {fileID: 1038247843323486100, guid: 2d839ba2e9a69134981f56816a9cae7e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1038247843323486100, guid: 2d839ba2e9a69134981f56816a9cae7e,
         type: 3}

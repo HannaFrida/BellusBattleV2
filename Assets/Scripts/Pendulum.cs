@@ -7,7 +7,6 @@ public class Pendulum : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float angle = 60f;
     private Quaternion start, end;
-    private float targetAngle;
     private float timePassed = 6;
     
     // Start is called before the first frame update

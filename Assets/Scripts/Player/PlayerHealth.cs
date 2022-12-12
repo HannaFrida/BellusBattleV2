@@ -6,8 +6,8 @@ using UnityEngine.VFX;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public delegate void OnGameOver();
-    public static event OnGameOver onGameOver;
+    //public delegate void OnGameOver();
+    //public static event OnGameOver onGameOver;
     [SerializeField] private AudioSource playerDeathSound;
     [SerializeField] private VisualEffect bloodSplatter;
     [SerializeField] private VisualEffect poisoned;
@@ -17,7 +17,7 @@ public class PlayerHealth : MonoBehaviour
    
 
     private float health = 1;
-    private bool isInvinsable=false;
+    private bool isInvinsable;
     private bool isAlive = true;
 
     [SerializeField] Transform deathPosition;

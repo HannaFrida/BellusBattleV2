@@ -12,13 +12,12 @@ public class WeaponManager : MonoBehaviour
     private WeaponData equippedWeapon;
 
     private GameObject currentWeapon;
+    bool hasflippedRight;
+    bool hasflippedLeft;
+    [SerializeField] private GameObject rightArmAimPivotpoint;
 
     public WeaponData EquippedWeapon { get => equippedWeapon; }
 
-    private void Start()
-    {
-        
-    }
 
     private void OnLevelWasLoaded(int level)
     {
@@ -34,6 +33,7 @@ public class WeaponManager : MonoBehaviour
 
     private void Update()
     {
+
         /*
         if (equippedWeapon.name == "RailGun")
         {

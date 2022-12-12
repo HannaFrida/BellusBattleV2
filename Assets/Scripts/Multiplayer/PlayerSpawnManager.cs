@@ -15,7 +15,6 @@ public class PlayerSpawnManager : MonoBehaviour
     private int playerCount;
     private bool runTimer;
     private float timer = 3;
-    private float movementTurnOnDelay = 3f;
 
     public Transform[] SpawnLocations
     {

@@ -169,7 +169,7 @@ public class Gun : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player" && !isPickedUp)
+        if (other.gameObject.tag.Equals("Player") && !isPickedUp)
         {
             PickUp(other);
         }
@@ -183,7 +183,7 @@ public class Gun : MonoBehaviour
         ownerID = other.gameObject.GetComponent<PlayerDetails>().playerID;
 
         // Get the reference for the players aim
-        ownerAim = other.gameObject.GetComponentsInChildren<Aim>();
+        ownerAim = other.gameObject.GetComponentsInParent<Aim>();
 
         weaponManager = other.gameObject.GetComponent<WeaponManager>();
         if (weaponManager != null)
