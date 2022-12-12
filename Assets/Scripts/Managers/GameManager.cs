@@ -128,6 +128,18 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
 
             //Array.Clear(targetGroup.GetComponent<CinemachineTargetGroup>().m_Targets, 0, targetGroup.GetComponent<CinemachineTargetGroup>().m_Targets.Length);
             //SpawnPlayers();
+
+            /*
+            // Used to prevent Ghost bullets 
+            foreach (GameObject player in playersAlive)
+            {
+                if (player.GetComponentInChildren<Gun>() != null)
+                {
+                    player.GetComponentInChildren<Gun>().Drop();
+                }
+                
+            }
+            */
         }
 
         if(SceneManager.GetActiveScene().name.Equals("TransitionScene") == false)
