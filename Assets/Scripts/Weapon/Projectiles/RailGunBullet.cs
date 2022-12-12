@@ -76,7 +76,6 @@ public class RailGunBullet : Projectile
 
 		if (other.gameObject.tag.Equals("Obstacle"))
 		{
-			Debug.Log("Obstacle");
 			//GameObject MuzzleFlashIns = Instantiate(collideVFX, other.gameObject.GetComponent<Collider>().ClosestPoint(transform.position), other.transform.rotation);
 			//MuzzleFlashIns.transform.Rotate(Vector3.left * 90);
 			//Destroy(gameObject);
