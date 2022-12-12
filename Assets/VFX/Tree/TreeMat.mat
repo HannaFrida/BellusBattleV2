@@ -35,8 +35,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _LeafTex:
-        m_Texture: {fileID: 7433338533053954386, guid: 0868fa8fc260b7e4185f8f183acc0c2b,
-          type: 3}
+        m_Texture: {fileID: 2800000, guid: 16ebcaf65045fd647a526646e1a35df2, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TreeTex:
@@ -57,9 +56,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _BillboardSize: 0
+    - _BillboardSize: 1
+    - _FresnelStrength: 1
     - _Inflate: 0
     - _QueueControl: 0
     - _QueueOffset: 0
-    m_Colors: []
+    m_Colors:
+    - _FresnelColor: {r: 1, g: 0, b: 0, a: 0}
+    - _LeafColor: {r: 0.17064828, g: 0.764151, b: 0.14778388, a: 0}
   m_BuildTextureStacks: []
