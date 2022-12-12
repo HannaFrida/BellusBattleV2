@@ -1778,7 +1778,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2815349822315832311}
   m_LocalRotation: {x: -0.027610335, y: 0.68702126, z: 0.026140839, w: 0.7256419}
-  m_LocalPosition: {x: -0.007938604, y: 0.10432482, z: -0.00043524313}
+  m_LocalPosition: {x: -0.007938603, y: 0.10432482, z: -0.00043524313}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9139,7 +9139,6 @@ MonoBehaviour:
   downwardForce: -22.7
   acceleration: 35444
   fallForce: -22.7
-  jumpSetting: 0
   doubleJumpDecreaser: 0.94
   downwardInputBound: -0.75
   edgeControlAmount: 0.5
@@ -9172,48 +9171,6 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: Jump
           m_BoolArgument: 0
-        m_CallState: 2
-  landEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6431588530169345916}
-        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: 
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Land
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 6431588530169345916}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: 
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  fallingEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6431588530169345916}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: 
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Falling
-          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &2786539736660453916
 MonoBehaviour:

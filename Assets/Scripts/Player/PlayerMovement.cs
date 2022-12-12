@@ -334,7 +334,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void ResetValuesOnGrounded()
     {
-        playerAnimator.SetTrigger("Land");
         /** 
          * Här ska landanimationen ligga!!!!
          * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -455,9 +454,7 @@ public class PlayerMovement : MonoBehaviour
         {
             deceleration = airDeceleration;
             isStandingOnOneWayPlatform = false;
-            playerAnimator.SetTrigger("Falling");
             return false;
-            
         }
     }
     private void UpdateCoyoteTime()
