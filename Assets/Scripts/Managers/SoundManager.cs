@@ -173,7 +173,6 @@ public class SoundManager : MonoBehaviour
     public void FullMusicVolume()
     {
         musicSource.volume = 1f;
-        Debug.Log("normal " + musicSource.volume);
     }
    
 
