@@ -127,6 +127,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnLevelWasLoaded(int level)
     {
+        IsMovedByPLatform = false;
         externalForce = Vector2.zero;
     }
 
