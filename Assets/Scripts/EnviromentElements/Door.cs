@@ -6,18 +6,11 @@ public class Door : MonoBehaviour
 {
     [SerializeField] private GameObject anchor;
     [SerializeField] private Collider[] colliders;
-    [SerializeField] private int doorHealth;
     private SoundManager soundManager;
     private List<Collider> colliderList = new List<Collider>();
     private BoxCollider boxCollider;
     private GameObject currentPlayer;
 
-
-    public int DoorHealth
-    {
-        get => doorHealth;
-        set => doorHealth = value;
-    }
     // Start is called before the first frame update
     void Start()
     {
