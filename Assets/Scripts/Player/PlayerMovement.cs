@@ -496,7 +496,6 @@ public class PlayerMovement : MonoBehaviour
                     transform.position = new Vector2(transform.position.x, hit.collider.bounds.max.y);
                     ResetValuesOnGrounded();
                 }
-                Debug.Log("jheja");
                 velocity.y = 0f;
                 movementY = 0f;
                 da.SetVelocity(Vector2.zero);
