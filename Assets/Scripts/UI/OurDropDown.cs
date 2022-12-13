@@ -8,6 +8,7 @@ public class OurDropDown : MonoBehaviour
 {
     [SerializeField] private List<GameObject> elements = new List<GameObject>();
     [SerializeField] private Button navRight, navLeft;
+    [SerializeField] private int startElement = 0;
     private GameObject activeButton;
     [SerializeField] private SettingsUIHandler settings;
 
@@ -18,8 +19,8 @@ public class OurDropDown : MonoBehaviour
         {
             element.gameObject.SetActive(false);
         }
-        elements[0].gameObject.SetActive(true);
-        activeButton = elements[0].gameObject;
+        elements[startElement].gameObject.SetActive(true);
+        activeButton = elements[startElement].gameObject;
     }
 
     // Update is called once per frame

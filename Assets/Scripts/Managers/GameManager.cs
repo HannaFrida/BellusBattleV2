@@ -73,6 +73,8 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
     [SerializeField] private Image player4Dead;
     [SerializeField] private Image player4Alive;
 
+    public bool _safeMode = false;
+
     public List<string> scenesToChooseFrom = new List<string>();
     public List<string> scenesToRemove = new List<string>();
 
@@ -114,10 +116,8 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
             
         }
         */
-        if(level == 0)
-        {
-            acceptPlayerInput = true;
-        }
+        ValidatePlayerLists();
+
         if (level != 0)
         {
             acceptPlayerInput = false;
@@ -140,7 +140,15 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
             ResetPlayerImage();
             RestorePLayer();
         }
+
+        if (level == 0)
+        {
+            
+            acceptPlayerInput = true;
+            roundCounter = 0;
+        }
         
+
     }
     private void Awake()
     {
@@ -189,6 +197,19 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
         roundTimer += Time.deltaTime;
         roundDuration = roundTimer;
 
+    }
+
+    private void ValidatePlayerLists()
+    {
+        if (players.Count == 0) return;
+
+        for(int i = 0; i < players.Count; i++)
+        {
+            if(players[i] == null)
+            {
+                players.RemoveAt(i);
+            }
+        }
     }
     private void OnApplicationQuit()
     {
@@ -376,6 +397,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
             
             GameObject winner = playersAlive[0];
             winnerID = winner.GetComponent<PlayerDetails>().playerID;
+            Debug.Log("Added " + roundCounter + " " + winnerID);
             GameDataTracker.Instance.AddWinner(roundCounter, winnerID);
             AddScore(playersAlive[0]);
             hasGivenScore = true;

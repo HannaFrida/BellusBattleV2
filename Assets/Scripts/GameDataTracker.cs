@@ -12,6 +12,7 @@ public class GameDataTracker : MonoBehaviour
     private Dictionary<int, int> roundWinnerDic = new Dictionary<int, int>();
     private Dictionary<int, List<KillEvent>> killsEachRoundDic = new Dictionary<int, List<KillEvent>>();
     private Dictionary<int, int> playerScore = new Dictionary<int, int>();
+    private Dictionary<int, int> playerKills = new Dictionary<int, int>();
     private List<KillEvent> killList = new List<KillEvent>();
     private int playersKilledByHazard;
     private int totalRoundsPlayed;
@@ -72,20 +73,34 @@ public class GameDataTracker : MonoBehaviour
     {
         if(killsEachRoundDic.ContainsKey(currentRound)== false)
         {
-            killsEachRoundDic[currentRound] = new List<KillEvent>();
+            killsEachRoundDic.Add(currentRound, new List<KillEvent>());
         }
         KillEvent killEvent = new KillEvent(killerID: killer, killedPlayerID: killed, weaponName, timeOfKill);
         killsEachRoundDic[currentRound].Add(killEvent);
         killList.Add(killEvent);
+        if(killer != killed)
+        {
+            AddNewKill(killer);
+        }
         
+
     }
 
     public void AddWinner(int roundNr, int playerID)
     {
-        roundWinnerDic[roundNr] = playerID;
+
+        if(roundWinnerDic.ContainsKey(roundNr) == false)
+        {
+            roundWinnerDic.Add(roundNr, playerID);
+        }
+        else
+        {
+            roundWinnerDic[roundNr] = playerID;
+        }
+
         if(playerScore.ContainsKey(playerID) == false)
         {
-            playerScore[playerID] = 1;
+            playerScore.Add(playerID, 1);
         }
         else
         {
@@ -94,13 +109,25 @@ public class GameDataTracker : MonoBehaviour
         
     }
 
+    public void AddNewKill(int id)
+    {
+        if(playerKills.ContainsKey(id) == false)
+        {
+            playerKills.Add(id, 1);
+        }
+        else
+        {
+            playerKills[id]++;
+        }
+    }
+
     public string StreakFinder()
     {
-        int roundWinner = 0;
+        int roundWinner = -1; // ingenting har -1 som id
         int streak = 0;
         for(int i = currentRound; i > 0; i--)
         {
-            if (roundWinner == 0)
+            if (roundWinner == -1)
             {
                 roundWinner = roundWinnerDic[i];
                 Debug.Log("roundwinner is " + roundWinner);
@@ -120,9 +147,9 @@ public class GameDataTracker : MonoBehaviour
         {
             if(roundWinner != 0)
             {
-                return $"Player {roundWinner} has won {streak} rounds in a row!";
+                return $"P{roundWinner} won {streak} rounds in a row";
             }
-            return $"The last {streak} rounds have ended in a draw!";
+            return $"{streak} rounds have ended in a draw";
             
         }
         return "nothing interesting";
@@ -132,8 +159,10 @@ public class GameDataTracker : MonoBehaviour
     {
         Dictionary<int, List<float>> killerAndTime = new Dictionary<int, List<float>>();
         KillStreak killStreak;
-        string returnValue = "Nothing interesting happened";
+        string returnValue = "nothing interesting";
         if (killsEachRoundDic.ContainsKey(currentRound) == false) return returnValue;
+
+        Debug.Log("interesting stuff");
         for (int i = 0; i < killsEachRoundDic[currentRound].Count; i++)
         {
             if (killsEachRoundDic[currentRound][i].GetKiller() == 0) continue;
@@ -182,6 +211,24 @@ public class GameDataTracker : MonoBehaviour
         }
         return playerOrder;  
     }
+
+    public int GetPlayerScore(int id)
+    {
+        if (playerScore.ContainsKey(id) == false)
+        {
+            return 0;
+        }
+        return playerScore[id];
+    }
+
+    public int GetPlayerKills(int id)
+    {
+        if(playerKills.ContainsKey(id) == false)
+        {
+            return 0;
+        }
+        return playerKills[id];
+    }
     
     private struct KillStreak
     {
@@ -198,7 +245,7 @@ public class GameDataTracker : MonoBehaviour
 
         public override string ToString()
         {
-            return $"The Player {killer} killed {kills} players in the last round!";
+            return $"P{killer} just killed {kills} players!";
         }
     }
 
@@ -249,6 +296,9 @@ public class GameDataTracker : MonoBehaviour
     {
         killList.Clear();
         roundTimeDic.Clear();
+        //roundWinnerDic.Clear();
+        killsEachRoundDic.Clear();
+        playerScore.Clear();
         playersKilledByHazard = 0;
         totalRoundsPlayed = 0;
         totalGameTime = 0;
