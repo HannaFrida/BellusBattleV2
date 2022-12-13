@@ -159,6 +159,23 @@ public class Gun : MonoBehaviour
             railGoneTime = true;
         }
 
+        /*
+        // For making last shot of gun heard
+        if (weaponSpawnerManager.GetTrashBin != null)
+        {
+            if (weaponSpawnerManager.GetTrashBin.childCount > 0)
+            {
+                for (int i = 0; i < weaponSpawnerManager.GetTrashBin.childCount; i++)
+                {
+                    Debug.Log(i);
+                    weaponSpawnerManager.GetTrashBin.transform.GetChild(i).gameObject.SetActive(true);
+                    weaponSpawnerManager.GetTrashBin.transform.GetChild(i).GetComponent<MeshRenderer>().enabled = false;
+                    
+                    //weaponSpawnerManager.GetTrashBin.transform.GetChild(i).GetComponent<MeshFilter>().gameObject.SetActive(false);
+                }
+            }
+        }
+        */
 
         /*
         if (BulletFollow && firedProjectile != null)
@@ -230,6 +247,15 @@ public class Gun : MonoBehaviour
             VisualEffect bolt = GetComponentInChildren<VisualEffect>();
             bolt.enabled = false;
             StartCoroutine(DeactivateAfterTime(2f));
+        }
+        // Because Grenade has 2 meshfilters
+        else if(weaponData.name == "Grenade")
+        {
+            MeshFilter[] meshFilter = GetComponentsInChildren<MeshFilter>();
+            foreach (MeshFilter mesh in meshFilter)
+            {
+                mesh.gameObject.SetActive(false);
+            }
         }
         else
         {

@@ -9,9 +9,12 @@ public class EndScene : MonoBehaviour
     void Update()
     {
         weaponSpawnerManager = FindObjectOfType<WeaponSpawnerManager>().GetComponent<WeaponSpawnerManager>();
-       
+        if (guns == null)
+        {
             guns = GameObject.FindGameObjectsWithTag("Weapon");
-           Debug.Log("found guns");
+            Debug.Log("found guns");
+        }
+            
         
 
         foreach (GameObject gun in guns)
