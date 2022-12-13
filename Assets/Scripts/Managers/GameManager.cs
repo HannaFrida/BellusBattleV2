@@ -217,13 +217,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
     {
         if (players.Count == 0) return;
 
-        for(int i = 0; i < players.Count; i++)
-        {
-            if(players[i] == null)
-            {
-                players.RemoveAt(i);
-            }
-        }
+        players.RemoveAll(x => x == null);
     }
     private void OnApplicationQuit()
     {
@@ -539,7 +533,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
     }
     private IEnumerator RestartGame()
     {
-        GameDataTracker.Instance.WriteToFile();
+        //GameDataTracker.Instance.WriteToFile();
         SceneManager.LoadScene("The_End");
         gameLoopFinished = true;
         DataPersistenceManager.Instance.SaveGame();

@@ -11,6 +11,7 @@ public class PlayerSpawnManager : MonoBehaviour
     [SerializeField] private Transform[] spawnLocations; // Keeps track of all the possible spawn locations
     [SerializeField] private GameObject[] players;
     [SerializeField] private TextMeshProUGUI countDownText;
+    [SerializeField] private bool spawnInScoreOrder;
 
     private int playerCount;
     private bool runTimer;
@@ -35,12 +36,8 @@ public class PlayerSpawnManager : MonoBehaviour
         {
             players = GameManager.Instance.GetAllPlayers().ToArray();
         }
-        for(int i = 0; i < players.Length; i++)
-        {
-            if (players[i] == null) continue;
-            //players[i].GetComponent<Dash>().ResetValues();
-            players[i].transform.position = spawnLocations[i].position;
-        }
+        SpawnPlayers();
+        
 
     }
     private void Update()
@@ -76,6 +73,48 @@ public class PlayerSpawnManager : MonoBehaviour
             countDownText.text = Mathf.RoundToInt(timer).ToString();
         }
         
+    }
+
+    private void SpawnPlayers()
+    {
+        if(spawnInScoreOrder == true)
+        {
+            SpawnBasedByScore();
+        }
+        else
+        {
+            SpawnPlayersBasedOnID();
+        }
+    }
+
+    private void SpawnPlayersBasedOnID()
+    {
+        for (int i = 0; i < players.Length; i++)
+        {
+            if (players[i] == null) continue;
+            //players[i].GetComponent<Dash>().ResetValues();
+            players[i].transform.position = spawnLocations[i].position;
+        }
+    }
+
+    private void SpawnBasedByScore()
+    {
+        int[] scoreOrder = GameDataTracker.Instance.GetScoreInOrder();
+        for(int i = 0; i < scoreOrder.Length; i++)
+        {
+            findPlayerToSpawn(scoreOrder[i], i);
+        }
+        GameDataTracker.Instance.WriteToFile();
+    }
+    private void findPlayerToSpawn(int id, int index)
+    {
+        for(int i = 0; i < players.Length; i++)
+        {
+            if(players[i].GetComponent<PlayerDetails>().playerID == id)
+            {
+                players[i].transform.position = spawnLocations[index].transform.position;
+            }
+        }
     }
 
     private void LookForPlayers()

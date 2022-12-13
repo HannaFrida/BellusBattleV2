@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0060169566, g: 0.060250062, b: 0.19530022, a: 1}
+  m_IndirectSpecularColor: {r: 0.005975257, g: 0.060170375, b: 0.19523841, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1104,6 +1104,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1087558503}
     m_Modifications:
+    - target: {fileID: 2905449221393081785, guid: 90b20aed440e0ad429d91dd7df98dc82,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.77000004
+      objectReference: {fileID: 0}
     - target: {fileID: 2905449221449962340, guid: 90b20aed440e0ad429d91dd7df98dc82,
         type: 3}
       propertyPath: m_RootOrder
@@ -1323,6 +1328,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1087558503}
     m_Modifications:
+    - target: {fileID: 2905449221393081785, guid: 90b20aed440e0ad429d91dd7df98dc82,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.77000004
+      objectReference: {fileID: 0}
     - target: {fileID: 2905449221449962340, guid: 90b20aed440e0ad429d91dd7df98dc82,
         type: 3}
       propertyPath: m_RootOrder
@@ -1488,6 +1498,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1087558503}
     m_Modifications:
+    - target: {fileID: 2905449221393081785, guid: 90b20aed440e0ad429d91dd7df98dc82,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.77000004
+      objectReference: {fileID: 0}
     - target: {fileID: 2905449221449962340, guid: 90b20aed440e0ad429d91dd7df98dc82,
         type: 3}
       propertyPath: m_RootOrder
@@ -5366,7 +5381,7 @@ PrefabInstance:
     - target: {fileID: 7514057479248470518, guid: 5fa35720020e5ff4bae06b6a97790489,
         type: 3}
       propertyPath: spawnWeaponsTimer
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7514057479248470518, guid: 5fa35720020e5ff4bae06b6a97790489,
         type: 3}
@@ -5376,7 +5391,7 @@ PrefabInstance:
     - target: {fileID: 7514057479248470518, guid: 5fa35720020e5ff4bae06b6a97790489,
         type: 3}
       propertyPath: numberOfWeaponsToSpawn
-      value: 2
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7514057479248470518, guid: 5fa35720020e5ff4bae06b6a97790489,
         type: 3}
@@ -6197,6 +6212,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1087558503}
     m_Modifications:
+    - target: {fileID: 2905449221393081785, guid: 90b20aed440e0ad429d91dd7df98dc82,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.77000004
+      objectReference: {fileID: 0}
     - target: {fileID: 2905449221449962340, guid: 90b20aed440e0ad429d91dd7df98dc82,
         type: 3}
       propertyPath: m_RootOrder
@@ -6432,6 +6452,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1087558503}
     m_Modifications:
+    - target: {fileID: 2905449221393081785, guid: 90b20aed440e0ad429d91dd7df98dc82,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.77000004
+      objectReference: {fileID: 0}
     - target: {fileID: 2905449221449962340, guid: 90b20aed440e0ad429d91dd7df98dc82,
         type: 3}
       propertyPath: m_RootOrder
@@ -6597,6 +6622,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1087558503}
     m_Modifications:
+    - target: {fileID: 2905449221393081785, guid: 90b20aed440e0ad429d91dd7df98dc82,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.77
+      objectReference: {fileID: 0}
     - target: {fileID: 2905449221449962340, guid: 90b20aed440e0ad429d91dd7df98dc82,
         type: 3}
       propertyPath: m_RootOrder
@@ -7121,6 +7151,7 @@ MonoBehaviour:
   - {fileID: 0}
   players: []
   countDownText: {fileID: 0}
+  spawnInScoreOrder: 0
   characterLow: {fileID: 0}
   ctrlcc: {fileID: 0}
   player1UI: {fileID: 0}
@@ -7147,6 +7178,7 @@ MonoBehaviour:
   - {fileID: 75583378}
   players: []
   countDownText: {fileID: 1316076593}
+  spawnInScoreOrder: 0
 --- !u!114 &2051820754
 MonoBehaviour:
   m_ObjectHideFlags: 0
