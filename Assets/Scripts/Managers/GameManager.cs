@@ -146,6 +146,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
             
             acceptPlayerInput = true;
             roundCounter = 0;
+            GameDataTracker.Instance.SetCurrentRound(0);
         }
         
 
@@ -398,7 +399,6 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
             
             GameObject winner = playersAlive[0];
             winnerID = winner.GetComponent<PlayerDetails>().playerID;
-            Debug.Log("Added " + roundCounter + " " + winnerID);
             GameDataTracker.Instance.AddWinner(roundCounter, winnerID);
             AddScore(playersAlive[0]);
             hasGivenScore = true;
@@ -414,13 +414,9 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
         else
         {
             winnerID = 0;
-            Debug.Log("Its a draaaaw!");
             GameDataTracker.Instance.AddWinner(roundCounter, 0);
         }
         hasGivenScore = false;
-      
-        Debug.Log(GameDataTracker.Instance.StreakFinder());
-        Debug.Log(GameDataTracker.Instance.MultiKillFinder());
         LoadNextScene();
 
     }
@@ -531,7 +527,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
     }
     private IEnumerator RestartGame()
     {
-        GameDataTracker.Instance.WriteToFile();
+        //GameDataTracker.Instance.WriteToFile();
         SceneManager.LoadScene("The_End");
         gameLoopFinished = true;
         DataPersistenceManager.Instance.SaveGame();
