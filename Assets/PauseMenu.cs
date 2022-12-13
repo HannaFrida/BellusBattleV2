@@ -72,11 +72,13 @@ public class PauseMenu : MonoBehaviour
     {
         DisplayPauseMenu(false);
         gm.ResumeGame();
+        GameDataTracker.Instance.ClearSavedData();
         gm.ReturnToMainMenu();
     }
 
     public void QuitGame()
     {
+        GameDataTracker.Instance.WriteToFile();
         Application.Quit();
     }
 

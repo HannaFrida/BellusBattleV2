@@ -58,7 +58,7 @@ public class Bullet : Projectile
 			playerGo.GetComponent<AI>().KillAI();
 		}
 
-		if (other.gameObject.tag == "Obstacle")
+		if (other.gameObject.tag.Equals("Obstacle"))
 		{
 			//Debug.Log("Obstacle");
 			ContactPoint contact = other.contacts[0];
@@ -131,7 +131,7 @@ public class Bullet : Projectile
 
 		}
 
-		if (other.gameObject.tag == "Obstacle")
+		if (other.gameObject.tag.Equals("Obstacle"))
 		{
 			Debug.Log("Obstacle");
 			//GameObject MuzzleFlashIns = Instantiate(collideVFX, other.gameObject.GetComponent<Collider>().ClosestPoint(transform.position), other.transform.rotation);

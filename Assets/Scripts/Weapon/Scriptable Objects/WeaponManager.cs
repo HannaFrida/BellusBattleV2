@@ -18,10 +18,6 @@ public class WeaponManager : MonoBehaviour
 
     public WeaponData EquippedWeapon { get => equippedWeapon; }
 
-    private void Start()
-    {
-        
-    }
 
     private void OnLevelWasLoaded(int level)
     {

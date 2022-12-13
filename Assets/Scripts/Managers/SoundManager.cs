@@ -69,16 +69,18 @@ public class SoundManager : MonoBehaviour
 
     public void FadeInLavaHazard()
     {
-        lavaHazardSource.Play();
+        poisonHazardSource.Stop();
+        lavaHazardSource.Play(); 
         StartCoroutine(FadeMixerGroup.StartFade(overallMixer, "HazardMixerGroup", 5f, 0.5f));
     }
     public void FadeOutLavaHazard()
     {
         StartCoroutine(FadeMixerGroup.StartFade(overallMixer, "HazardMixerGroup", 5f, 0f));
     }
-    public void FadeInPoisionHazard()
-    {
+    public void FadeInPoisionHazard() { 
+        lavaHazardSource.Stop();
         poisonHazardSource.Play();
+        
         StartCoroutine(FadeMixerGroup.StartFade(overallMixer, "HazardMixerGroup", 1, 0.5f));
     }
     public void FadeOutHazard()
@@ -150,7 +152,7 @@ public class SoundManager : MonoBehaviour
         trampolineSource.Play();
     }
    
-   
+   /*
     private void RandomiseSoundPlayback()
     { //Gör att ett ljud körs random.
      //   if (!zombieRoarSoundSource.isPlaying)
@@ -161,6 +163,7 @@ public class SoundManager : MonoBehaviour
 
         }
     }
+   */
 
     public void HalfMusicVolume()
     {
@@ -172,7 +175,6 @@ public class SoundManager : MonoBehaviour
     public void FullMusicVolume()
     {
         musicSource.volume = 1f;
-        Debug.Log("normal " + musicSource.volume);
     }
    
 

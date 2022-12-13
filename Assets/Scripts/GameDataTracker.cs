@@ -43,11 +43,6 @@ public class GameDataTracker : MonoBehaviour
         }
         filePath = GetFilePath();
     }
-    // Update is called once per frame
-    void Update()
-    {
-      
-    }
 
     private string GetFilePath()
     {
@@ -130,11 +125,9 @@ public class GameDataTracker : MonoBehaviour
             if (roundWinner == -1)
             {
                 roundWinner = roundWinnerDic[i];
-                Debug.Log("roundwinner is " + roundWinner);
             }
             if(roundWinner == roundWinnerDic[i])
             {
-                Debug.Log("streak is " + streak);
                 streak++;
             }
             else
@@ -162,7 +155,6 @@ public class GameDataTracker : MonoBehaviour
         string returnValue = "nothing interesting";
         if (killsEachRoundDic.ContainsKey(currentRound) == false) return returnValue;
 
-        Debug.Log("interesting stuff");
         for (int i = 0; i < killsEachRoundDic[currentRound].Count; i++)
         {
             if (killsEachRoundDic[currentRound][i].GetKiller() == 0) continue;
@@ -292,13 +284,14 @@ public class GameDataTracker : MonoBehaviour
         totalRoundsPlayed++;
     }
 
-    private void ClearSavedData()
+    public void ClearSavedData()
     {
         killList.Clear();
         roundTimeDic.Clear();
-        //roundWinnerDic.Clear();
+        roundWinnerDic.Clear();
         killsEachRoundDic.Clear();
         playerScore.Clear();
+        playerKills.Clear();
         playersKilledByHazard = 0;
         totalRoundsPlayed = 0;
         totalGameTime = 0;

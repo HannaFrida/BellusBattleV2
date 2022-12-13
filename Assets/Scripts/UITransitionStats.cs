@@ -9,18 +9,11 @@ public class UITransitionStats : MonoBehaviour
     [SerializeField] private TextMeshProUGUI[] scoreTexts;
     [SerializeField] private TextMeshProUGUI[] killsTexts;
     [SerializeField] private GameObject[] playerIcons;
-    GameDataTracker gameDataTracker;
     // Start is called before the first frame update
     void Start()
     {
         UpdateTransitionScene();
         ChooseInterestingStat();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private void UpdateTransitionScene()

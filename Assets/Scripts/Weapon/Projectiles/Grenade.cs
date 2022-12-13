@@ -10,7 +10,6 @@ public class Grenade : Projectile
     [SerializeField]
     [Tooltip("Size of the explosion.")]
     private float explosionSize = 5.0f;
-    private CameraFocus cf; //shitfx
     [SerializeField] private GameObject objectToBoom;
     [SerializeField] private AudioSource explosionSound;
     [SerializeField] private GameObject bombMesh;
@@ -74,7 +73,6 @@ public class Grenade : Projectile
                     GameDataTracker.Instance.NewKillEvent(shooterID, hits[i].GetComponent<PlayerDetails>().playerID, weaponName, GameManager.Instance.RoundDuration);
                 }
                 ph.TakeDamage(damage);
-                Debug.Log("playerfound");
                 
                 //cf.RemoveTarget(hits[i].transform); //shitfix
                 //pickUp_Proto.isHoldingWeapon = false;
@@ -106,7 +104,7 @@ public class Grenade : Projectile
         //Die();
     }
 
-
+    /*
     private void Die()
     {
         ExplodeEvent ee = new ExplodeEvent
@@ -118,4 +116,5 @@ public class Grenade : Projectile
         hits = null;
         Destroy(gameObject);
     }
+    */
 }

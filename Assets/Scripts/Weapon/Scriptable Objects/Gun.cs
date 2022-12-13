@@ -169,7 +169,7 @@ public class Gun : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player" && !isPickedUp)
+        if (other.gameObject.tag.Equals("Player") && !isPickedUp)
         {
             PickUp(other);
         }
