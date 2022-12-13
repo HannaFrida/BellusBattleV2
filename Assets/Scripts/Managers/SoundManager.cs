@@ -71,7 +71,7 @@ public class SoundManager : MonoBehaviour
     {
         poisonHazardSource.Stop();
         lavaHazardSource.Play(); 
-        StartCoroutine(FadeMixerGroup.StartFade(overallMixer, "HazardMixerGroup", 5f, 0.5f));
+        StartCoroutine(FadeMixerGroup.StartFade(overallMixer, "HazardMixerGroup", 2f, 0.5f));
     }
     public void FadeOutLavaHazard()
     {
