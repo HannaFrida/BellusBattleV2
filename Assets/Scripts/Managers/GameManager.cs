@@ -205,13 +205,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
     {
         if (players.Count == 0) return;
 
-        for(int i = 0; i < players.Count; i++)
-        {
-            if(players[i] == null)
-            {
-                players.RemoveAt(i);
-            }
-        }
+        players.RemoveAll(x => x == null);
     }
     private void OnApplicationQuit()
     {
