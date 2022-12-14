@@ -50,7 +50,7 @@ public class ControlChooser : MonoBehaviour
         {           
             foreach (PlayerInput input in playerInputs)
             {
-                input.SwitchCurrentActionMap("PlayerAccessibilityLeft");
+                //input.SwitchCurrentActionMap("PlayerAccessibilityLeft");
                 input.gameObject.GetComponent<PlayerMovement>().HasAccessibility = true;
                 input.gameObject.GetComponent<PlayerDetails>().ChosenActionMap = "PlayerAccessibilityLeft";
             }
@@ -71,7 +71,7 @@ public class ControlChooser : MonoBehaviour
             Debug.Log("Sätt in normal kotroller här");
             foreach (PlayerInput input in playerInputs)
             {
-                input.SwitchCurrentActionMap("Player");
+                //input.SwitchCurrentActionMap("Player");
                 input.gameObject.GetComponent<PlayerDetails>().ChosenActionMap = "Player";
                 input.gameObject.GetComponent<PlayerMovement>().HasAccessibility = false;
             }

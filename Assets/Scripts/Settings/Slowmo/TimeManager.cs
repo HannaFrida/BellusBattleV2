@@ -51,7 +51,7 @@ public class TimeManager : MonoBehaviour
     public void ChangeSliderValue()
     {
         if (slider == null) return;
-        slowdownAmount = slider.value;
+        slowdownAmount = slider.value /10;
 
     }
 
