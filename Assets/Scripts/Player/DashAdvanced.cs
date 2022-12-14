@@ -300,6 +300,7 @@ public class DashAdvanced : MonoBehaviour
     private IEnumerator GigaChadDashAction()
     {
         StartDashProtocol();
+       // movement.Velocity = new Vector2();
         velocity = new Vector3(direction.x * currentDashingDistace, direction.y * currentDashingDistace, 0f);
         Debug.DrawLine(transform.position + new Vector3(0f, 0.5f, 0.3f), transform.position + new Vector3(0f, 0.5f, 0.3f) + velocity * currentDashingDuration, Color.green, 5);
         yield return new WaitForSeconds(currentDashingDuration);

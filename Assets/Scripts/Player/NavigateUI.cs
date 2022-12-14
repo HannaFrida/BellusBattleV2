@@ -8,6 +8,7 @@ public class NavigateUI : MonoBehaviour
     UIMenuHandler g;
     int x = 0;
     int y = 0;
+    int z = 0;
     private void Awake()
     {
 
@@ -44,7 +45,15 @@ public class NavigateUI : MonoBehaviour
     }
     public void ExitUI(InputAction.CallbackContext context)
     {
-        g.ExitUI();
+        if (z == 0)
+        {
+            g.ExitUI();
+            z++;
+        }
+        else
+        {
+            z = 0;
+        }
     }
     public void SetConnection(GameObject gg)
     {

@@ -77,7 +77,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
 
     public List<string> scenesToChooseFrom = new List<string>();
     public List<string> scenesToRemove = new List<string>();
-
+    
     public List<string> GetScencesList()
     {
         return scenesToChooseFrom;
@@ -271,6 +271,10 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
             targetGroup.RemoveMember(players[i].transform);
             targetGroup.AddMember(players[i].transform, 1, 5); //OBS GER ERROR!
         }
+        
+        foreach (GameObject player in players) {
+            player.GetComponentInChildren<PlayerIndicatorFollow>().UnFollow();
+        }
     }
 
     private void DeactivateMovement()
@@ -297,11 +301,15 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
         }
     }
 
-    public void PlayerDeath(GameObject deadPlayer)
-    {
+    public void PlayerDeath(GameObject deadPlayer) {
+        
+        deadPlayer.GetComponentInChildren<PlayerIndicatorFollow>().Follow();
+        
         playersAlive.Remove(deadPlayer);
         targetGroup.RemoveMember(deadPlayer.transform); //OBS GER ERROR!
         SetDeathImage(deadPlayer.GetComponent<PlayerDetails>().playerID);
+        
+        
     }
 
     private void SetDeathImage(int playerID)
@@ -370,7 +378,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
         }
     }
 
-    private void AddScore(GameObject winner) //TODO anv‰nd playerID ist‰llet fˆr hela spelarobjektet
+    private void AddScore(GameObject winner) //TODO anv√§nd playerID ist√§llet f√∂r hela spelarobjektet
     {
         if (!scoreDic.ContainsKey(winner))
         {
@@ -413,7 +421,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
                 //Debug.Log(GameDataTracker.Instance.GetScoreInOrder()[0] + ", " + GameDataTracker.Instance.GetScoreInOrder()[1] + ", " + GameDataTracker.Instance.GetScoreInOrder()[2]);
                 ClearScore();
                 StartCoroutine(RestartGame());
-                //NÂn har vunnit!
+                //N√•n har vunnit!
                 return;
             }
         }
@@ -497,6 +505,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
         }
         if(nextLevel != null)StartCoroutine(AsynchronousLoad());
         soundManager.FadeInMusic();
+
     }
     /*
     private void LoadNextSceneInNumericalOrder()
@@ -545,7 +554,11 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
     {
         foreach(GameObject player in players)
         {
-            player.GetComponentInChildren<Gun>().Drop();
+            if (player.GetComponentInChildren<Gun>() != null)
+            {
+                player.GetComponentInChildren<Gun>().Drop();
+            }
+            
         }
         SceneManager.LoadScene("MainMenu");
         gameLoopFinished = true;

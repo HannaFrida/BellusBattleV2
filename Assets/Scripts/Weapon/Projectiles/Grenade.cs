@@ -45,7 +45,7 @@ public class Grenade : Projectile
             bombMesh.SetActive(false);
             explosionSound.Play();
             GameObject spawnVfx = Instantiate(objectToBoom, transform.position,transform.rotation);
-            Destroy(spawnVfx, 0.3f);
+            Destroy(spawnVfx, 0.5f);
             gameObject.GetComponent<Rigidbody>().useGravity = false;
             Rigidbody RB = GetComponent<Rigidbody>();
             RB.velocity = Vector3.zero;
