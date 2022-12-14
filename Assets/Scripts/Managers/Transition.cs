@@ -23,15 +23,15 @@ public class Transition : MonoBehaviour
     int timesTransitionHappen;
     [SerializeField] GameObject panel;
 
-    public Image getImage1 { get => image1; }
-    public Image getImage2 { get => image2; }
-    public Image getImage3 { get => image3; }
-    public Image getImage4 { get => image4; }
+    public Image GetImage1 { get => image1; }
+    public Image GetImage2 { get => image2; }
+    public Image GetImage3 { get => image3; }
+    public Image GetImage4 { get => image4; }
 
-    public TextMeshProUGUI getWinScore1 { get => winScore1; }
-    public TextMeshProUGUI getWinScore2 { get => winScore2; }
-    public TextMeshProUGUI getWinScore3 { get => winScore3; }
-    public TextMeshProUGUI getWinScore4 { get => winScore4; }
+    public TextMeshProUGUI GetWinScore1 { get => winScore1; }
+    public TextMeshProUGUI GetWinScore2 { get => winScore2; }
+    public TextMeshProUGUI GetWinScore3 { get => winScore3; }
+    public TextMeshProUGUI GetWinScore4 { get => winScore4; }
 
     private void Start()
     {
@@ -48,6 +48,7 @@ public class Transition : MonoBehaviour
     private void OnLevelWasLoaded(int level)
     {
         // MoveUpPlayer();
+        /*
         if (SceneManager.GetActiveScene().name == "TransitionScene")
         {
             panel.SetActive(true);
@@ -56,20 +57,10 @@ public class Transition : MonoBehaviour
         else
         {
             panel.SetActive(false);
-        }
+        }*/
 
     }
 
-    private void Update()
-    {
-        
-    }
 
-    void MoveUpPlayer()
-    {
-        //winner = gameManager.GetWinnerID();
-        //image1.transform.position = timesTransitionHappen;
-        RectTransform picture = image1.GetComponent<RectTransform>();
-        picture.position = new Vector2(picture.position.x, picture.position.y + 20);
-    }
+
 }

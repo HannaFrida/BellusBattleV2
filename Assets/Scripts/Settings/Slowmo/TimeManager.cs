@@ -2,26 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class TimeManager : MonoBehaviour
 {
     [SerializeField] private float slowdownAmount = 0.05f;
     [SerializeField] private bool isSlowMo;
     [SerializeField] private Slider slider;
-    [SerializeField] private Text percentageText;
+    [SerializeField] private TextMeshProUGUI percentageText;
 
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
     }
 
-    private void Start()
-    {
-        //percentageText = GetComponent<Text>();
-    }
-
     void Update()
     {
+        ChangeSliderValue();
         if (GameManager.Instance.GameIsPaused == true) return;
 
         Time.timeScale += 1f * Time.unscaledDeltaTime;
@@ -53,7 +50,7 @@ public class TimeManager : MonoBehaviour
     // Used for adjusting amount of slowmo
     public void ChangeSliderValue()
     {
-
+        if (slider == null) return;
         slowdownAmount = slider.value;
 
     }

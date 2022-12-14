@@ -57,9 +57,9 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
     [SerializeField] private float transitionTime = 5f;
     AsyncOperation asyncLoad;
     [SerializeField] Transition trans;
-    static Vector2 pos1, pos2, pos3, pos4;
-    private static Dictionary<int, GameObject> transPosDic = new Dictionary<int, GameObject>();
-    private static Dictionary<int, Image> imageDic = new Dictionary<int, Image>();
+    //static Vector2 pos1, pos2, pos3, pos4;
+    //private static Dictionary<int, GameObject> transPosDic = new Dictionary<int, GameObject>();
+    //private static Dictionary<int, Image> imageDic = new Dictionary<int, Image>();
 
     [SerializeField] private Image player1Dead;
     [SerializeField] private Image player1Alive;
@@ -77,7 +77,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
 
     public List<string> scenesToChooseFrom = new List<string>();
     public List<string> scenesToRemove = new List<string>();
-
+    
     public List<string> GetScencesList()
     {
         return scenesToChooseFrom;
@@ -128,6 +128,18 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
 
             //Array.Clear(targetGroup.GetComponent<CinemachineTargetGroup>().m_Targets, 0, targetGroup.GetComponent<CinemachineTargetGroup>().m_Targets.Length);
             //SpawnPlayers();
+
+            /*
+            // Used to prevent Ghost bullets 
+            foreach (GameObject player in playersAlive)
+            {
+                if (player.GetComponentInChildren<Gun>() != null)
+                {
+                    player.GetComponentInChildren<Gun>().Drop();
+                }
+                
+            }
+            */
         }
 
         if(SceneManager.GetActiveScene().name.Equals("TransitionScene") == false)
@@ -146,6 +158,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
             
             acceptPlayerInput = true;
             roundCounter = 0;
+            GameDataTracker.Instance.SetCurrentRound(0);
         }
         
 
@@ -166,10 +179,10 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
         //targetGroup = GameObject.FindGameObjectWithTag("targets");
         //trans = Transition.Instance;
         //trans.gameObject.SetActive(false);
-        pos1 = new Vector2(477f, 160f); 
-        pos2 = new Vector2(892f, 160f);
-        pos3 = new Vector2(1139f, 160f);
-        pos4 = new Vector2(1386f, 160f); // x = 977 - -409
+        //pos1 = new Vector2(477f, 160f); 
+        //pos2 = new Vector2(892f, 160f);
+        //pos3 = new Vector2(1139f, 160f);
+        //pos4 = new Vector2(1386f, 160f); // x = 977 - -409
         DataPersistenceManager.Instance.LoadGame();
     }
 
@@ -179,7 +192,8 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
         {
             targetGroup.AddMember(cameraTarget, 1, 5);
         }
-        else if ((targetGroup.m_Targets[0].target == cameraTarget) && targetGroup.GetComponent<CinemachineTargetGroup>().m_Targets.Length < 2) ;
+        // ska vara tom, annars freakar kameran
+        else if ((targetGroup.m_Targets[0].target == cameraTarget) && targetGroup.GetComponent<CinemachineTargetGroup>().m_Targets.Length < 2);
         else targetGroup.RemoveMember(cameraTarget);
         if (!gameHasStarted) return;
         CheckPlayersLeft();
@@ -203,13 +217,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
     {
         if (players.Count == 0) return;
 
-        for(int i = 0; i < players.Count; i++)
-        {
-            if(players[i] == null)
-            {
-                players.RemoveAt(i);
-            }
-        }
+        players.RemoveAll(x => x == null);
     }
     private void OnApplicationQuit()
     {
@@ -263,6 +271,10 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
             targetGroup.RemoveMember(players[i].transform);
             targetGroup.AddMember(players[i].transform, 1, 5); //OBS GER ERROR!
         }
+        
+        foreach (GameObject player in players) {
+            player.GetComponentInChildren<PlayerIndicatorFollow>().UnFollow();
+        }
     }
 
     private void DeactivateMovement()
@@ -289,11 +301,15 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
         }
     }
 
-    public void PlayerDeath(GameObject deadPlayer)
-    {
+    public void PlayerDeath(GameObject deadPlayer) {
+        
+        deadPlayer.GetComponentInChildren<PlayerIndicatorFollow>().Follow();
+        
         playersAlive.Remove(deadPlayer);
         targetGroup.RemoveMember(deadPlayer.transform); //OBS GER ERROR!
         SetDeathImage(deadPlayer.GetComponent<PlayerDetails>().playerID);
+        
+        
     }
 
     private void SetDeathImage(int playerID)
@@ -362,7 +378,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
         }
     }
 
-    private void AddScore(GameObject winner) //TODO anv‰nd playerID ist‰llet fˆr hela spelarobjektet
+    private void AddScore(GameObject winner) //TODO anv√§nd playerID ist√§llet f√∂r hela spelarobjektet
     {
         if (!scoreDic.ContainsKey(winner))
         {
@@ -397,7 +413,6 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
             
             GameObject winner = playersAlive[0];
             winnerID = winner.GetComponent<PlayerDetails>().playerID;
-            Debug.Log("Added " + roundCounter + " " + winnerID);
             GameDataTracker.Instance.AddWinner(roundCounter, winnerID);
             AddScore(playersAlive[0]);
             hasGivenScore = true;
@@ -406,20 +421,16 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
                 //Debug.Log(GameDataTracker.Instance.GetScoreInOrder()[0] + ", " + GameDataTracker.Instance.GetScoreInOrder()[1] + ", " + GameDataTracker.Instance.GetScoreInOrder()[2]);
                 ClearScore();
                 StartCoroutine(RestartGame());
-                //NÂn har vunnit!
+                //N√•n har vunnit!
                 return;
             }
         }
         else
         {
             winnerID = 0;
-            Debug.Log("Its a draaaaw!");
             GameDataTracker.Instance.AddWinner(roundCounter, 0);
         }
         hasGivenScore = false;
-      
-        Debug.Log(GameDataTracker.Instance.StreakFinder());
-        Debug.Log(GameDataTracker.Instance.MultiKillFinder());
         LoadNextScene();
 
     }
@@ -494,6 +505,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
         }
         if(nextLevel != null)StartCoroutine(AsynchronousLoad());
         soundManager.FadeInMusic();
+
     }
     /*
     private void LoadNextSceneInNumericalOrder()
@@ -530,7 +542,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
     }
     private IEnumerator RestartGame()
     {
-        GameDataTracker.Instance.WriteToFile();
+        //GameDataTracker.Instance.WriteToFile();
         SceneManager.LoadScene("The_End");
         gameLoopFinished = true;
         DataPersistenceManager.Instance.SaveGame();
@@ -540,6 +552,10 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
     }
     private void ReturnToLobby()
     {
+        foreach(GameObject player in players)
+        {
+            player.GetComponentInChildren<Gun>().Drop();
+        }
         SceneManager.LoadScene("MainMenu");
         gameLoopFinished = true;
         DataPersistenceManager.Instance.SaveGame();
@@ -581,6 +597,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
 
     public void MoveUpPlayer()
     {
+        /*
         if (winnerID == 0)
         {
             Debug.Log("draw or something");
@@ -623,6 +640,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
             pos4 = new Vector2(picture4.position.x, picture4.position.y + 20);
             trans.getWinScore4.SetText(scoreDic[playersAlive[0]] + "");
         }
+        */
     }
 
     public void LoadData(GameData data)

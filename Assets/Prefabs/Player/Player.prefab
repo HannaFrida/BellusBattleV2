@@ -1778,7 +1778,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2815349822315832311}
   m_LocalRotation: {x: -0.027610335, y: 0.68702126, z: 0.026140839, w: 0.7256419}
-  m_LocalPosition: {x: -0.007938603, y: 0.10432482, z: -0.00043524313}
+  m_LocalPosition: {x: -0.007938604, y: 0.10432482, z: -0.00043524313}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9158,6 +9158,7 @@ MonoBehaviour:
   playerAnimator: {fileID: 8727384561011662934}
   doubleJumpVFX: {fileID: 8357581948437241007}
   playerInput: {fileID: 2786539736660453916}
+  da: {fileID: 7604770547986073551}
   jumpEvent:
     m_PersistentCalls:
       m_Calls:
@@ -9413,6 +9414,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 500548228673936328}
+        m_TargetAssemblyTypeName: Aim, Assembly-CSharp
+        m_MethodName: OverrideJoystickInputToAngleCalculation
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: c37b60c5-a216-408a-8858-f69fe819076c
     m_ActionName: PlayerAccessibilityLeft/Aim[/XInputControllerWindows/leftStick,/XInputControllerWindows1/leftStick,/XInputControllerWindows/rightStick,/XInputControllerWindows1/rightStick]
   - m_PersistentCalls:
@@ -9432,6 +9445,18 @@ MonoBehaviour:
       - m_Target: {fileID: 7604770547986073551}
         m_TargetAssemblyTypeName: DashAdvanced, Assembly-CSharp
         m_MethodName: CheckDashWithJoystickDirection
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 500548228673936328}
+        m_TargetAssemblyTypeName: Aim, Assembly-CSharp
+        m_MethodName: DefualtJoystickInputToAngleCalculation
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9631,6 +9656,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 3178d4cd-3a7b-4b54-85e1-b3a2d3cabe49
     m_ActionName: PlayerAccessibilityLeft/Pause[/XInputControllerWindows/start,/XInputControllerWindows1/start,/XInputControllerWindows2/start]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3926757260285706939}
+        m_TargetAssemblyTypeName: NavigateUI, Assembly-CSharp
+        m_MethodName: ExitUI
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 7f569976-eba3-49f0-a1fd-7877f68cf31f
+    m_ActionName: PlayerAccessibilityLeft/ExitUI_OneHand[/XInputControllerWindows/leftStickPress,/XInputControllerWindows1/leftStickPress,/XInputControllerWindows/rightStickPress,/XInputControllerWindows1/rightStickPress]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -9721,7 +9762,7 @@ MonoBehaviour:
   dashingActivationCooldown: 0.67
   collisionLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 72
   tr: {fileID: 7687228209419224627}
   CharacterGlow: {fileID: 2586055511146347963}
   playerSoundManager: {fileID: 545699144991103134}
@@ -9894,7 +9935,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponSlot: {fileID: 300225489857970639}
   equippedWeapon: {fileID: 0}
-  rightArmAimPivotpoint: {fileID: 595623164704925587}
 --- !u!114 &545699144991103134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10780,6 +10820,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4578308698175143378}
+  - component: {fileID: 7854563033526898245}
   m_Layer: 0
   m_Name: PlayerIndicator
   m_TagString: Untagged
@@ -10803,6 +10844,19 @@ Transform:
   m_Father: {fileID: 6431588530169345905}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7854563033526898245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7200233196296036711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b7ae2121e3ead74fbb8dae7ad7792f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rigTransform: {fileID: 7182564231045683896}
 --- !u!1 &7210684032876526358
 GameObject:
   m_ObjectHideFlags: 0

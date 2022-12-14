@@ -6,6 +6,7 @@ using UnityEngine.Events;
 
 public class GameController : MonoBehaviour
 {
+    /*
     [SerializeField] CameraFocus CF;
 
     
@@ -15,11 +16,11 @@ public class GameController : MonoBehaviour
     }
     private void OnEnable()
     {
-        PlayerHealth.onGameOver += RestartGame;
+        //PlayerHealth.onGameOver += RestartGame;
     }
     private void OnDisable()
     {
-        PlayerHealth.onGameOver -= RestartGame;
+        //PlayerHealth.onGameOver -= RestartGame;
     }
 
     private void DisableInput()
@@ -28,4 +29,5 @@ public class GameController : MonoBehaviour
         gameObject.GetComponent<PlayerInputManager>().gameObject.SetActive(false);
         gameObject.SetActive(false);
     }
+    */
 }

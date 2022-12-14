@@ -6,38 +6,37 @@ using UnityEngine.SceneManagement;
 public class WeaponManager : MonoBehaviour
 {
     [SerializeField]
-    private Transform weaponSlot;
+    public Transform weaponSlot;
 
     [SerializeField]
     private WeaponData equippedWeapon;
 
     private GameObject currentWeapon;
-    bool hasflippedRight;
-    bool hasflippedLeft;
-    [SerializeField] private GameObject rightArmAimPivotpoint;
+    //[SerializeField] private GameObject rightArmAimPivotpoint;
 
     public WeaponData EquippedWeapon { get => equippedWeapon; }
 
-    private void Start()
-    {
-        
-    }
 
     private void OnLevelWasLoaded(int level)
+    {
+        OnlyOneChild();
+
+    }
+
+    public void OnlyOneChild()
     {
         if (weaponSlot.childCount > 0)
         {
             currentWeapon = weaponSlot.GetChild(0).gameObject;
             UnEquipWeapon(currentWeapon);
-            currentWeapon.SetActive(false);
-            currentWeapon.transform.SetParent(null);
+            currentWeapon.GetComponent<Gun>().Drop();
+            //currentWeapon.SetActive(false);
+            //currentWeapon.transform.SetParent(null);
         }
-        
     }
 
     private void Update()
     {
-
         /*
         if (equippedWeapon.name == "RailGun")
         {
@@ -47,7 +46,7 @@ public class WeaponManager : MonoBehaviour
             weaponSlot.transform.rotation.y = -99.742f;
         }
         */
-        
+
     }
 
     public void EquipWeapon(WeaponData weaponData, GameObject nowWeapon)
@@ -71,7 +70,9 @@ public class WeaponManager : MonoBehaviour
 
     public void UnEquipWeapon(GameObject nowWeapon)
     {
+
         //nowWeapon.GetComponent<Gun>().Drop();
+        
         equippedWeapon = null;
         nowWeapon = null;
     }

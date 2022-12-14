@@ -37,6 +37,48 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private GameObject doubleJumpVFX;
 
     [SerializeField] private PlayerInput playerInput;
+    [SerializeField] private DashAdvanced da;
+
+    private GameObject MuzzleFlashIns;
+    private BoxCollider boxCollider;
+
+    private Vector2 velocity;
+    private Vector2 externalForce;
+    private Vector2 rayCastBottomLeft, rayCastBottomRight, rayCastTopRight, rayCastTopLeft;
+    private Vector2 verticalRayOffset, horizontalRayOffset;
+
+    private int horizontalRayCount = 6;
+    private int verticalRayCount = 4;
+
+    private readonly float horizontalSkinWidth = 0.2f;
+    private readonly float verticalSkinWidth = 0.1f;
+    private readonly float knockBackTime = 0.2f;
+
+    private float movementX, movementY;
+    private float deceleration;
+    private float coyoteTimer, bufferTimer, knockBackTimer;
+    private float downwardInput;
+    private float verticalRaySpacing, horizontalRaySpacing;
+    private float verticalRayLength, horizontalRayLength;
+    private float movementAmount;
+    private float initialSpeed;
+    //private float movementAnimationSpeed;
+    private float playerHeight;
+
+    
+
+    private bool hasJumpedOnGround, hasDoubleJump, hasCoyoteTime;
+
+    private bool hasAccessibility;
+    private bool isMovingLeft, isMovingRight;
+    private bool isStandingOnOneWayPlatform;
+    private bool runBufferTimer;
+    private bool hasJumpBuffer;
+    private bool hasBeenKnockedBack;
+    private bool isGrounded;
+    private bool isMovedByPLatform;
+
+    private bool toggleJump = false;
 
 
     public PlayerInput PlayerInput => playerInput;
@@ -47,6 +89,12 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask CollisionLayer
     {
         get => collisionLayer;
+    }
+
+    public bool HasAccessibility
+    {
+        get => hasAccessibility;
+        set => hasAccessibility = value;
     }
 
     public Vector2 Velocity
@@ -77,51 +125,9 @@ public class PlayerMovement : MonoBehaviour
         set => isMovedByPLatform = value;
     }
 
-    private Vector2 velocity;
-    private Vector2 externalForce;
-    private Vector2 rayCastBottomLeft, rayCastBottomRight, rayCastTopRight, rayCastTopLeft;
-
-    private Vector2 verticalRayOffset, horizontalRayOffset;
-
-
-    private GameObject MuzzleFlashIns;
-
-    private BoxCollider boxCollider;
-
-    private int horizontalRayCount = 6;
-    private int verticalRayCount = 4;
-
-    private float movementX, movementY;
-    private float deceleration;
-
-    private float coyoteTimer, bufferTimer, knockBackTimer;
-    private float horizontalSkinWidth = 0.2f;
-    private float verticalSkinWidth = 0.1f;
-    private float downwardInput;
-    private float verticalRaySpacing, horizontalRaySpacing;
-    private float verticalRayLength, horizontalRayLength;
-    private float movementAmount;
-    private float initialSpeed;
-    private float movementAnimationSpeed;
-    private float playerHeight;
-
-    private float knockBackTime = 0.2f;
-
-    private bool hasJumpedOnGround, hasDoubleJump, hasCoyoteTime;
-
-
-    private bool isMovingLeft, isMovingRight;
-    private bool isStandingOnOneWayPlatform;
-    private bool runBufferTimer;
-    private bool hasJumpBuffer;
-    private bool hasBeenKnockedBack;
-    private bool isGrounded;
-    private bool isMovedByPLatform;
-
-    private bool toggleJump = false;
-
     private void OnLevelWasLoaded(int level)
     {
+        IsMovedByPLatform = false;
         externalForce = Vector2.zero;
     }
 
@@ -150,32 +156,24 @@ public class PlayerMovement : MonoBehaviour
         isGrounded = IsGrounded;
         UpdateRayCastOrgins();
         UpdateMovementForce();
+        AccessabilityMoveDown();
         UpdateCoyoteTime();
         RunKnockbackTimer();
 
         if (isGrounded == false)
         {
             movementY = Mathf.MoveTowards(movementY, downwardForce, airResistance * Time.deltaTime);
-
         }
 
         if (isGrounded && velocity.y < 0)
         {
-
-
             playerSoundManager.PlayerLandSound();
-
-
-
             if (hasJumpBuffer)
             {
                 Jump();
                 hasJumpBuffer = false;
                 runBufferTimer = false;
-
             }
-
-
         }
         velocity = new Vector2(movementX, movementY) + externalForce;
         JumpBuffer();
@@ -194,7 +192,6 @@ public class PlayerMovement : MonoBehaviour
 
         transform.Translate(velocity * Time.deltaTime);
         //Debug.Log(movementAmount);
-        movementAnimationSpeed = movementX;
         if (isMovedByPLatform == true && movementAmount == 0f)
         {
             playerAnimator.SetFloat("Speed", 0f);
@@ -248,8 +245,10 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    private void AccessabilityoveDown() // Ska användas om man kör med onehand-mode!
+    private void AccessabilityMoveDown() // Ska användas om man kör med onehand-mode!
     {
+        if (hasAccessibility == false) return;
+
         if (downwardInput <= downwardInputBound && isStandingOnOneWayPlatform)
         {
             transform.position += Vector3.down * playerHeight;
@@ -337,6 +336,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void ResetValuesOnGrounded()
     {
+        playerAnimator.SetTrigger("Landing");
         /** 
          * Här ska landanimationen ligga!!!!
          * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -488,10 +488,10 @@ public class PlayerMovement : MonoBehaviour
             }
             rayOrigin += Vector2.right * (verticalRaySpacing * i);
 
-            Debug.DrawRay(rayOrigin, Vector2.up * directionY * verticalRayLength, Color.red);
+            //Debug.DrawRay(rayOrigin, Vector2.up * directionY * verticalRayLength, Color.red);
 
-            RaycastHit hit;
-            if (Physics.Raycast(rayOrigin, Vector2.up * directionY, out hit, verticalRayLength, collisionLayer))
+            //RaycastHit hit;
+            if (Physics.Raycast(rayOrigin, Vector2.up * directionY, out RaycastHit hit, verticalRayLength, collisionLayer))
             {
                 if (velocity.y < 0f)
                 {
@@ -500,6 +500,7 @@ public class PlayerMovement : MonoBehaviour
                 }
                 velocity.y = 0f;
                 movementY = 0f;
+                da.SetVelocity(Vector2.zero);
                 return;
             }
             if (Physics.Raycast(rayOrigin, Vector2.up * directionY, out hit, verticalRayLength, oneWayLayer))
@@ -511,6 +512,7 @@ public class PlayerMovement : MonoBehaviour
                     transform.position = new Vector2(transform.position.x, hit.collider.bounds.max.y);
                     ResetValuesOnGrounded();
                 }
+                
                 velocity.y = 0f;
                 movementY = 0f;
                 return;
@@ -534,14 +536,15 @@ public class PlayerMovement : MonoBehaviour
             }
             rayOrigin += Vector2.up * (horizontalRaySpacing * i);
 
-            Debug.DrawRay(rayOrigin, Vector2.right * directionX * horizontalRayLength, Color.red);
-            RaycastHit hit;
-            if (Physics.Raycast(rayOrigin, Vector2.right * directionX, out hit, horizontalRayLength, collisionLayer))
+            //Debug.DrawRay(rayOrigin, Vector2.right * directionX * horizontalRayLength, Color.red);
+            //RaycastHit hit;
+            if (Physics.Raycast(rayOrigin, Vector2.right * directionX, out RaycastHit hit, horizontalRayLength, collisionLayer))
             {
                 if (i == 0)
                 {
                     EdgeControl(hit);
                 }
+                da.SetVelocity(Vector2.zero);
                 velocity.x = 0;
                 movementX = 0;
                 return;

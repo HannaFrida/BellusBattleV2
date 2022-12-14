@@ -417,6 +417,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: passable_platform_small (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 7606049154194356203, guid: fea4732a05558e948ae4ffe77af0a795,
+        type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fea4732a05558e948ae4ffe77af0a795, type: 3}
 --- !u!4 &43110343 stripped
@@ -1865,6 +1870,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 259313131}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &259313133 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8619433398501993540, guid: 3f73657c4c8861d4a88333ee8fd8dbf6,
+    type: 3}
+  m_PrefabInstance: {fileID: 259313131}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86096f013523fe240b5b4c1785bb1286, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &272583774
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1946,6 +1963,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: passable_platform_small (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7606049154194356203, guid: fea4732a05558e948ae4ffe77af0a795,
+        type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fea4732a05558e948ae4ffe77af0a795, type: 3}
@@ -2255,6 +2277,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: passable_platform_small
+      objectReference: {fileID: 0}
+    - target: {fileID: 7606049154194356203, guid: fea4732a05558e948ae4ffe77af0a795,
+        type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fea4732a05558e948ae4ffe77af0a795, type: 3}
@@ -5462,6 +5489,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: passable_platform_small (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7606049154194356203, guid: fea4732a05558e948ae4ffe77af0a795,
+        type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fea4732a05558e948ae4ffe77af0a795, type: 3}
@@ -10161,6 +10193,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: passable_platform_small (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7606049154194356203, guid: fea4732a05558e948ae4ffe77af0a795,
+        type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fea4732a05558e948ae4ffe77af0a795, type: 3}
 --- !u!4 &1445745322 stripped
@@ -13076,6 +13113,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1768763341}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1768763343 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8619433398501993540, guid: 3f73657c4c8861d4a88333ee8fd8dbf6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1768763341}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86096f013523fe240b5b4c1785bb1286, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1770627925
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13204,6 +13253,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1770627925}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1770627927 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8619433398501993540, guid: 3f73657c4c8861d4a88333ee8fd8dbf6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1770627925}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86096f013523fe240b5b4c1785bb1286, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1773653016
 GameObject:
   m_ObjectHideFlags: 0
@@ -13872,48 +13933,53 @@ PrefabInstance:
     - target: {fileID: 7514057479248470518, guid: 5fa35720020e5ff4bae06b6a97790489,
         type: 3}
       propertyPath: spawners.Array.size
-      value: 6
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7514057479248470518, guid: 5fa35720020e5ff4bae06b6a97790489,
         type: 3}
       propertyPath: numberOfWeaponsToSpawn
-      value: 2
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7514057479248470518, guid: 5fa35720020e5ff4bae06b6a97790489,
         type: 3}
       propertyPath: spawners.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 93157630}
     - target: {fileID: 7514057479248470518, guid: 5fa35720020e5ff4bae06b6a97790489,
         type: 3}
       propertyPath: spawners.Array.data[1]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 254715961}
     - target: {fileID: 7514057479248470518, guid: 5fa35720020e5ff4bae06b6a97790489,
         type: 3}
       propertyPath: spawners.Array.data[2]
       value: 
-      objectReference: {fileID: 93157630}
+      objectReference: {fileID: 1311352018}
     - target: {fileID: 7514057479248470518, guid: 5fa35720020e5ff4bae06b6a97790489,
         type: 3}
       propertyPath: spawners.Array.data[3]
       value: 
-      objectReference: {fileID: 254715961}
+      objectReference: {fileID: 1086510088}
     - target: {fileID: 7514057479248470518, guid: 5fa35720020e5ff4bae06b6a97790489,
         type: 3}
       propertyPath: spawners.Array.data[4]
       value: 
-      objectReference: {fileID: 1311352018}
+      objectReference: {fileID: 259313133}
     - target: {fileID: 7514057479248470518, guid: 5fa35720020e5ff4bae06b6a97790489,
         type: 3}
       propertyPath: spawners.Array.data[5]
       value: 
-      objectReference: {fileID: 1086510088}
+      objectReference: {fileID: 1852751112}
     - target: {fileID: 7514057479248470518, guid: 5fa35720020e5ff4bae06b6a97790489,
         type: 3}
       propertyPath: spawners.Array.data[6]
       value: 
-      objectReference: {fileID: 1086510088}
+      objectReference: {fileID: 1770627927}
+    - target: {fileID: 7514057479248470518, guid: 5fa35720020e5ff4bae06b6a97790489,
+        type: 3}
+      propertyPath: spawners.Array.data[7]
+      value: 
+      objectReference: {fileID: 1768763343}
     - target: {fileID: 7514057479248470519, guid: 5fa35720020e5ff4bae06b6a97790489,
         type: 3}
       propertyPath: m_Name
@@ -14219,6 +14285,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1852751110}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1852751112 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8619433398501993540, guid: 3f73657c4c8861d4a88333ee8fd8dbf6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1852751110}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86096f013523fe240b5b4c1785bb1286, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1855533798
 GameObject:
   m_ObjectHideFlags: 0
@@ -15927,6 +16005,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: passable_platform_small (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7606049154194356203, guid: fea4732a05558e948ae4ffe77af0a795,
+        type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fea4732a05558e948ae4ffe77af0a795, type: 3}

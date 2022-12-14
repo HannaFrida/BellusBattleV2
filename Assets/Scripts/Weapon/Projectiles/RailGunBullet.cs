@@ -8,7 +8,7 @@ public class RailGunBullet : Projectile
 	[Tooltip("For how long the bullet will exist for in seconds.")]
 	private float lifeSpan = 0f;
 	[SerializeField, Tooltip("Sound made when bullet hits something")]
-	public AudioSource[] hitSounds;
+	private AudioSource[] hitSounds;
 	[SerializeField] private GameObject colliderWallVFX;
 	[SerializeField] private GameObject colliderPlayerVFX;
 	[SerializeField] private Collider col;
@@ -30,16 +30,12 @@ public class RailGunBullet : Projectile
 			gameObject.GetComponent<Rigidbody>().freezeRotation = true;
 			gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
 			gameObject.GetComponent<Rigidbody>().useGravity = false;
-			gameObject.GetComponentInChildren<RotationXnade>().TimeToFreez();
+			gameObject.GetComponentInChildren<RotationXnade>().TimeToFreeze();
 		}
 	}
 
     private void OnTriggerEnter(Collider other)
 	{
-
-		
-
-
 		GameObject playerGo = other.gameObject;
 		if (playerGo.CompareTag("Player"))
 		{
@@ -78,9 +74,8 @@ public class RailGunBullet : Projectile
 
 		}
 
-		if (other.gameObject.tag == "Obstacle")
+		if (other.gameObject.tag.Equals("Obstacle"))
 		{
-			Debug.Log("Obstacle");
 			//GameObject MuzzleFlashIns = Instantiate(collideVFX, other.gameObject.GetComponent<Collider>().ClosestPoint(transform.position), other.transform.rotation);
 			//MuzzleFlashIns.transform.Rotate(Vector3.left * 90);
 			//Destroy(gameObject);
@@ -111,7 +106,7 @@ public class RailGunBullet : Projectile
 		yield return new WaitForSeconds(stopMove);
 		Stop();
 		yield return new WaitForSeconds(colOn);
-		killcol();
+		Killcol();
 		yield return new WaitForSeconds(seconds);
 		Die();
 	}
@@ -124,7 +119,7 @@ public class RailGunBullet : Projectile
 	{
 		stopMovement = true;
 	}
-	private void killcol()
+	private void Killcol()
 	{
 		col.enabled = true;
 		//col2.enabled = true;

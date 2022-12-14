@@ -176,6 +176,7 @@ MonoBehaviour:
   - {fileID: 0}
   players: []
   countDownText: {fileID: 0}
+  spawnInScoreOrder: 0
   characterLow: {fileID: 0}
   ctrlcc: {fileID: 0}
   player1UI: {fileID: 0}
@@ -202,6 +203,7 @@ MonoBehaviour:
   - {fileID: 1439175460}
   players: []
   countDownText: {fileID: 0}
+  spawnInScoreOrder: 0
 --- !u!114 &10651459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1024,7 +1026,7 @@ PrefabInstance:
     - target: {fileID: 971360434494686072, guid: 2ba57f7d033fd8041b15708013469dc8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7
+      value: 14.25
       objectReference: {fileID: 0}
     - target: {fileID: 971360434494686072, guid: 2ba57f7d033fd8041b15708013469dc8,
         type: 3}
@@ -1080,25 +1082,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 170541960}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &170541963
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 170541962}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8ba4898f27745d459ec071022635470, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hazardWarner: {fileID: 170541969}
-  highestPoint: {fileID: 1009532058}
-  timeBetweenMoving: 5
-  movingSpeed: 9
-  smoothTime: 2
-  boxCollider: {fileID: 0}
-  hasReachedHighestPoint: 0
 --- !u!114 &170541969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1137,7 +1120,7 @@ PrefabInstance:
     - target: {fileID: 971360434494686072, guid: 2ba57f7d033fd8041b15708013469dc8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.62816906
+      value: 1.3781691
       objectReference: {fileID: 0}
     - target: {fileID: 971360434494686072, guid: 2ba57f7d033fd8041b15708013469dc8,
         type: 3}
@@ -1670,7 +1653,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: top_platform_lvl_1
       objectReference: {fileID: 0}
-    - target: {fileID: 3178606222389077206, guid: ab284dd821738f041b164fc3b01842c6,
+    - target: {fileID: 5421436336691183008, guid: ab284dd821738f041b164fc3b01842c6,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5421436336691183008, guid: ab284dd821738f041b164fc3b01842c6,
         type: 3}
       propertyPath: m_TagString
       value: Obstacle
@@ -2356,7 +2344,7 @@ PrefabInstance:
     - target: {fileID: 971360434494686072, guid: 2ba57f7d033fd8041b15708013469dc8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7
+      value: 14.25
       objectReference: {fileID: 0}
     - target: {fileID: 971360434494686072, guid: 2ba57f7d033fd8041b15708013469dc8,
         type: 3}
@@ -2406,31 +2394,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 560403728}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &560403730 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 446181301886425538, guid: 2ba57f7d033fd8041b15708013469dc8,
-    type: 3}
-  m_PrefabInstance: {fileID: 560403728}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &560403731
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 560403730}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8ba4898f27745d459ec071022635470, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hazardWarner: {fileID: 170541969}
-  highestPoint: {fileID: 1009532058}
-  timeBetweenMoving: 5
-  movingSpeed: 9
-  smoothTime: 2
-  boxCollider: {fileID: 0}
-  hasReachedHighestPoint: 0
 --- !u!1001 &567354155
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3103,6 +3066,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2905449221393081785, guid: 90b20aed440e0ad429d91dd7df98dc82,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.782
+      objectReference: {fileID: 0}
     - target: {fileID: 2905449221449962340, guid: 90b20aed440e0ad429d91dd7df98dc82,
         type: 3}
       propertyPath: m_RootOrder
@@ -3282,7 +3250,7 @@ PrefabInstance:
     - target: {fileID: 971360434494686072, guid: 2ba57f7d033fd8041b15708013469dc8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7
+      value: 14.25
       objectReference: {fileID: 0}
     - target: {fileID: 971360434494686072, guid: 2ba57f7d033fd8041b15708013469dc8,
         type: 3}
@@ -3332,31 +3300,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 758815500}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &758815502 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 446181301886425538, guid: 2ba57f7d033fd8041b15708013469dc8,
-    type: 3}
-  m_PrefabInstance: {fileID: 758815500}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &758815503
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 758815502}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8ba4898f27745d459ec071022635470, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hazardWarner: {fileID: 170541969}
-  highestPoint: {fileID: 1009532058}
-  timeBetweenMoving: 5
-  movingSpeed: 9
-  smoothTime: 2
-  boxCollider: {fileID: 0}
-  hasReachedHighestPoint: 0
 --- !u!1001 &767929107
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4040,7 +3983,7 @@ PrefabInstance:
     - target: {fileID: 7514057479248470518, guid: 5fa35720020e5ff4bae06b6a97790489,
         type: 3}
       propertyPath: spawnWeaponsTimer
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7514057479248470518, guid: 5fa35720020e5ff4bae06b6a97790489,
         type: 3}
@@ -4050,7 +3993,7 @@ PrefabInstance:
     - target: {fileID: 7514057479248470518, guid: 5fa35720020e5ff4bae06b6a97790489,
         type: 3}
       propertyPath: numberOfWeaponsToSpawn
-      value: 2
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7514057479248470518, guid: 5fa35720020e5ff4bae06b6a97790489,
         type: 3}
@@ -4495,7 +4438,7 @@ PrefabInstance:
     - target: {fileID: 971360434494686072, guid: 2ba57f7d033fd8041b15708013469dc8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7
+      value: 14.25
       objectReference: {fileID: 0}
     - target: {fileID: 971360434494686072, guid: 2ba57f7d033fd8041b15708013469dc8,
         type: 3}
@@ -4545,31 +4488,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1400848473}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1400848475 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 446181301886425538, guid: 2ba57f7d033fd8041b15708013469dc8,
-    type: 3}
-  m_PrefabInstance: {fileID: 1400848473}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1400848476
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1400848475}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8ba4898f27745d459ec071022635470, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hazardWarner: {fileID: 170541969}
-  highestPoint: {fileID: 1009532058}
-  timeBetweenMoving: 5
-  movingSpeed: 9
-  smoothTime: 2
-  boxCollider: {fileID: 0}
-  hasReachedHighestPoint: 0
 --- !u!1001 &1418763619
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4595,7 +4513,7 @@ PrefabInstance:
     - target: {fileID: 971360434494686072, guid: 2ba57f7d033fd8041b15708013469dc8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.62816906
+      value: 1.3781691
       objectReference: {fileID: 0}
     - target: {fileID: 971360434494686072, guid: 2ba57f7d033fd8041b15708013469dc8,
         type: 3}
@@ -5332,7 +5250,7 @@ PrefabInstance:
     - target: {fileID: 971360434494686072, guid: 2ba57f7d033fd8041b15708013469dc8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.62816906
+      value: 1.3781691
       objectReference: {fileID: 0}
     - target: {fileID: 971360434494686072, guid: 2ba57f7d033fd8041b15708013469dc8,
         type: 3}
@@ -5407,7 +5325,7 @@ PrefabInstance:
     - target: {fileID: 971360434494686072, guid: 2ba57f7d033fd8041b15708013469dc8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7
+      value: 14.25
       objectReference: {fileID: 0}
     - target: {fileID: 971360434494686072, guid: 2ba57f7d033fd8041b15708013469dc8,
         type: 3}
@@ -5457,31 +5375,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1766036349}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1766036351 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 446181301886425538, guid: 2ba57f7d033fd8041b15708013469dc8,
-    type: 3}
-  m_PrefabInstance: {fileID: 1766036349}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1766036352
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1766036351}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8ba4898f27745d459ec071022635470, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hazardWarner: {fileID: 170541969}
-  highestPoint: {fileID: 1009532058}
-  timeBetweenMoving: 5
-  movingSpeed: 9
-  smoothTime: 2
-  boxCollider: {fileID: 0}
-  hasReachedHighestPoint: 0
 --- !u!1001 &1842627774
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5507,7 +5400,7 @@ PrefabInstance:
     - target: {fileID: 971360434494686072, guid: 2ba57f7d033fd8041b15708013469dc8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7
+      value: 14.25
       objectReference: {fileID: 0}
     - target: {fileID: 971360434494686072, guid: 2ba57f7d033fd8041b15708013469dc8,
         type: 3}
@@ -5557,31 +5450,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1842627774}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1842627776 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 446181301886425538, guid: 2ba57f7d033fd8041b15708013469dc8,
-    type: 3}
-  m_PrefabInstance: {fileID: 1842627774}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1842627777
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1842627776}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8ba4898f27745d459ec071022635470, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hazardWarner: {fileID: 170541969}
-  highestPoint: {fileID: 1009532058}
-  timeBetweenMoving: 5
-  movingSpeed: 9
-  smoothTime: 2
-  boxCollider: {fileID: 0}
-  hasReachedHighestPoint: 0
 --- !u!1001 &1866743472
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5676,7 +5544,7 @@ PrefabInstance:
     - target: {fileID: 971360434494686072, guid: 2ba57f7d033fd8041b15708013469dc8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7
+      value: 14.25
       objectReference: {fileID: 0}
     - target: {fileID: 971360434494686072, guid: 2ba57f7d033fd8041b15708013469dc8,
         type: 3}
@@ -5726,31 +5594,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1880474832}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1880474834 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 446181301886425538, guid: 2ba57f7d033fd8041b15708013469dc8,
-    type: 3}
-  m_PrefabInstance: {fileID: 1880474832}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1880474835
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1880474834}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8ba4898f27745d459ec071022635470, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hazardWarner: {fileID: 170541969}
-  highestPoint: {fileID: 1009532058}
-  timeBetweenMoving: 5
-  movingSpeed: 9
-  smoothTime: 2
-  boxCollider: {fileID: 0}
-  hasReachedHighestPoint: 0
 --- !u!1001 &1910405289
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5993,7 +5836,7 @@ PrefabInstance:
     - target: {fileID: 971360434494686072, guid: 2ba57f7d033fd8041b15708013469dc8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7
+      value: 14.25
       objectReference: {fileID: 0}
     - target: {fileID: 971360434494686072, guid: 2ba57f7d033fd8041b15708013469dc8,
         type: 3}
@@ -6043,31 +5886,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1951216174}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1951216176 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 446181301886425538, guid: 2ba57f7d033fd8041b15708013469dc8,
-    type: 3}
-  m_PrefabInstance: {fileID: 1951216174}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1951216177
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1951216176}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8ba4898f27745d459ec071022635470, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hazardWarner: {fileID: 170541969}
-  highestPoint: {fileID: 1009532058}
-  timeBetweenMoving: 5
-  movingSpeed: 9
-  smoothTime: 2
-  boxCollider: {fileID: 0}
-  hasReachedHighestPoint: 0
 --- !u!1001 &1977990700
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6093,7 +5911,7 @@ PrefabInstance:
     - target: {fileID: 971360434494686072, guid: 2ba57f7d033fd8041b15708013469dc8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.62816906
+      value: 1.3781691
       objectReference: {fileID: 0}
     - target: {fileID: 971360434494686072, guid: 2ba57f7d033fd8041b15708013469dc8,
         type: 3}
