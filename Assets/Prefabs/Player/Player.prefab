@@ -1778,7 +1778,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2815349822315832311}
   m_LocalRotation: {x: -0.027610335, y: 0.68702126, z: 0.026140839, w: 0.7256419}
-  m_LocalPosition: {x: -0.007938603, y: 0.10432482, z: -0.00043524313}
+  m_LocalPosition: {x: -0.007938604, y: 0.10432482, z: -0.00043524313}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9935,7 +9935,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponSlot: {fileID: 300225489857970639}
   equippedWeapon: {fileID: 0}
-  rightArmAimPivotpoint: {fileID: 595623164704925587}
 --- !u!114 &545699144991103134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10821,6 +10820,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4578308698175143378}
+  - component: {fileID: 7854563033526898245}
   m_Layer: 0
   m_Name: PlayerIndicator
   m_TagString: Untagged
@@ -10844,6 +10844,19 @@ Transform:
   m_Father: {fileID: 6431588530169345905}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7854563033526898245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7200233196296036711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b7ae2121e3ead74fbb8dae7ad7792f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rigTransform: {fileID: 7182564231045683896}
 --- !u!1 &7210684032876526358
 GameObject:
   m_ObjectHideFlags: 0
