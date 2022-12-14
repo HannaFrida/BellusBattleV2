@@ -12,9 +12,7 @@ public class WeaponManager : MonoBehaviour
     private WeaponData equippedWeapon;
 
     private GameObject currentWeapon;
-    bool hasflippedRight;
-    bool hasflippedLeft;
-    [SerializeField] private GameObject rightArmAimPivotpoint;
+    //[SerializeField] private GameObject rightArmAimPivotpoint;
 
     public WeaponData EquippedWeapon { get => equippedWeapon; }
 
@@ -25,8 +23,8 @@ public class WeaponManager : MonoBehaviour
         {
             currentWeapon = weaponSlot.GetChild(0).gameObject;
             UnEquipWeapon(currentWeapon);
-            currentWeapon.SetActive(false);
-            currentWeapon.transform.SetParent(null);
+            //currentWeapon.SetActive(false);
+            //currentWeapon.transform.SetParent(null);
         }
         
     }
