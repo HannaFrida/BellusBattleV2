@@ -100,6 +100,7 @@ public class PlayerMovement : MonoBehaviour
     public Vector2 Velocity
     {
         get => velocity;
+        set => velocity = value;
     }
 
     public float DownwardForce
