@@ -543,6 +543,10 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
     }
     private void ReturnToLobby()
     {
+        foreach(GameObject player in players)
+        {
+            player.GetComponentInChildren<Gun>().Drop();
+        }
         SceneManager.LoadScene("MainMenu");
         gameLoopFinished = true;
         DataPersistenceManager.Instance.SaveGame();
