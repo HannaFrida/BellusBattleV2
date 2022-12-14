@@ -10,7 +10,6 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private GameObject pauseMenuPanel;
     [SerializeField] private Button firstSelected;
     [SerializeField] private GameObject firstSelectedOnSettings;
-    [SerializeField] private GameObject settingsPanel;
     private bool isToggled;
     private GameManager gm;
     private EventSystem es;
@@ -46,8 +45,6 @@ public class PauseMenu : MonoBehaviour
             sm.FullMusicVolume();
             isToggled = false;
             DisplayPauseMenu(isToggled);
-            settingsPanel.SetActive(false);
-            Debug.Log("dada2");
         }
         
     }
@@ -86,7 +83,7 @@ public class PauseMenu : MonoBehaviour
     {
         if (runButtonCheck == false) return;
 
-        if(settingsPanel.activeSelf == false && es.firstSelectedGameObject != firstSelected)
+        if(es.firstSelectedGameObject != firstSelected)
         {
             es.SetSelectedGameObject(firstSelected.gameObject);
             runButtonCheck = false;
