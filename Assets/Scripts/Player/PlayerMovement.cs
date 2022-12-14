@@ -336,6 +336,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void ResetValuesOnGrounded()
     {
+        playerAnimator.SetTrigger("Landing");
         /** 
          * Här ska landanimationen ligga!!!!
          * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

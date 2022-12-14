@@ -15,6 +15,7 @@ public class SettingsUIHandler : UIMenuHandler
     [SerializeField] private AudioMixer am;
     [SerializeField] private Volume globalVolume;
     private static AudioMixer audioMixer;
+    private SoundManager sm;
     //public TMP_Dropdown resolutionDropDown;
     static Resolution[] resolutions;
     TextMeshProUGUI textPro;
@@ -23,6 +24,7 @@ public class SettingsUIHandler : UIMenuHandler
     {
         base.Start();
         SetUpResolution();
+        sm = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
         globalVolume = GameObject.FindObjectOfType<Volume>();
         audioMixer = am;
     }
@@ -46,17 +48,20 @@ public class SettingsUIHandler : UIMenuHandler
     public void SetMasterValume(float sliderValue)
     {
         audioMixer.SetFloat("MasterVolume", Mathf.Log10(sliderValue) * 20);
+        
         textPro.text = (sliderValue * 10).ToString("0#");
     }
 
     public void SetMusicValume(float sliderValue)
     {
         audioMixer.SetFloat("MusicMixerGroup", Mathf.Log10(sliderValue) * 20);
+        sm.SetHighestMusicVolume(sliderValue);
         textPro.text = (sliderValue * 10).ToString("0#");
     }
     public void SetEffectValume(float sliderValue)
     {
         audioMixer.SetFloat("EffectSounds", Mathf.Log10(sliderValue) * 20);
+        sm.SetHighestEffectVolume(sliderValue);
         textPro.text = (sliderValue *10).ToString("0#");
     }
     public void SetText(TextMeshProUGUI textPro)
