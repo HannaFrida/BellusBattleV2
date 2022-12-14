@@ -554,7 +554,11 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
     {
         foreach(GameObject player in players)
         {
-            player.GetComponentInChildren<Gun>().Drop();
+            if (player.GetComponentInChildren<Gun>() != null)
+            {
+                player.GetComponentInChildren<Gun>().Drop();
+            }
+            
         }
         SceneManager.LoadScene("MainMenu");
         gameLoopFinished = true;
