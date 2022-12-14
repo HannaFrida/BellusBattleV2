@@ -195,6 +195,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: passable_platform_small
       objectReference: {fileID: 0}
+    - target: {fileID: 7606049154194356203, guid: fea4732a05558e948ae4ffe77af0a795,
+        type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fea4732a05558e948ae4ffe77af0a795, type: 3}
 --- !u!4 &4423683 stripped
@@ -1773,6 +1778,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: passable_platform_small (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7606049154194356203, guid: fea4732a05558e948ae4ffe77af0a795,
+        type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fea4732a05558e948ae4ffe77af0a795, type: 3}
@@ -3426,6 +3436,7 @@ MonoBehaviour:
   - {fileID: 0}
   players: []
   countDownText: {fileID: 0}
+  spawnInScoreOrder: 0
   characterLow: {fileID: 0}
   ctrlcc: {fileID: 0}
   player1UI: {fileID: 0}
@@ -3452,6 +3463,7 @@ MonoBehaviour:
   - {fileID: 1788690040}
   players: []
   countDownText: {fileID: 548441697}
+  spawnInScoreOrder: 0
 --- !u!114 &809493154
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3719,7 +3731,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &845313417
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4888,6 +4900,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: passable_platform_small (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7606049154194356203, guid: fea4732a05558e948ae4ffe77af0a795,
+        type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fea4732a05558e948ae4ffe77af0a795, type: 3}
 --- !u!4 &1292811983 stripped
@@ -5667,6 +5684,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1854759138}
     m_Modifications:
+    - target: {fileID: 2905449221393081785, guid: 90b20aed440e0ad429d91dd7df98dc82,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.03
+      objectReference: {fileID: 0}
     - target: {fileID: 2905449221449962340, guid: 90b20aed440e0ad429d91dd7df98dc82,
         type: 3}
       propertyPath: m_RootOrder
@@ -6088,7 +6110,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anchor: {fileID: 1693379586}
   colliders: []
-  doorHealth: 1
 --- !u!65 &1736597717
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6550,7 +6571,7 @@ PrefabInstance:
     - target: {fileID: 7514057479248470518, guid: 5fa35720020e5ff4bae06b6a97790489,
         type: 3}
       propertyPath: spawnWeaponsTimer
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7514057479248470518, guid: 5fa35720020e5ff4bae06b6a97790489,
         type: 3}
@@ -6560,7 +6581,7 @@ PrefabInstance:
     - target: {fileID: 7514057479248470518, guid: 5fa35720020e5ff4bae06b6a97790489,
         type: 3}
       propertyPath: numberOfWeaponsToSpawn
-      value: 2
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7514057479248470518, guid: 5fa35720020e5ff4bae06b6a97790489,
         type: 3}
@@ -7148,6 +7169,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: passable_platform_small (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 7606049154194356203, guid: fea4732a05558e948ae4ffe77af0a795,
+        type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fea4732a05558e948ae4ffe77af0a795, type: 3}
 --- !u!4 &1979210840 stripped
@@ -7493,6 +7519,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1854759138}
     m_Modifications:
+    - target: {fileID: 2905449221393081785, guid: 90b20aed440e0ad429d91dd7df98dc82,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.029999971
+      objectReference: {fileID: 0}
     - target: {fileID: 2905449221449962340, guid: 90b20aed440e0ad429d91dd7df98dc82,
         type: 3}
       propertyPath: m_RootOrder
@@ -7593,7 +7624,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anchor: {fileID: 261201870}
   colliders: []
-  doorHealth: 1
 --- !u!65 &2114041659
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -67,6 +67,11 @@ public class SettingsUIHandler : UIMenuHandler
     {
         QualitySettings.SetQualityLevel(qualityIndex); // double kolla med gruppden hur vårt olika quality är
     }
+    public void SetOneHandModeText(bool toggle)
+    {
+        if (toggle) textPro.text = "ON";
+        else textPro.text = "OFF";
+    }
     public void SetFullscrean(bool isFullscrean)
     {
         Screen.fullScreen = isFullscrean;
@@ -75,7 +80,8 @@ public class SettingsUIHandler : UIMenuHandler
     }
     public void SetBlur(bool toggle)
     {
-
+        if (toggle) textPro.text = "ON";
+        else textPro.text = "OFF";
 
         VolumeProfile profile = globalVolume.sharedProfile;
         if (!profile.TryGet<DepthOfField>(out var dof))

@@ -1778,7 +1778,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2815349822315832311}
   m_LocalRotation: {x: -0.027610335, y: 0.68702126, z: 0.026140839, w: 0.7256419}
-  m_LocalPosition: {x: -0.007938604, y: 0.10432482, z: -0.00043524313}
+  m_LocalPosition: {x: -0.007938603, y: 0.10432482, z: -0.00043524313}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9158,6 +9158,7 @@ MonoBehaviour:
   playerAnimator: {fileID: 8727384561011662934}
   doubleJumpVFX: {fileID: 8357581948437241007}
   playerInput: {fileID: 2786539736660453916}
+  da: {fileID: 7604770547986073551}
   jumpEvent:
     m_PersistentCalls:
       m_Calls:
@@ -9172,48 +9173,6 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: Jump
           m_BoolArgument: 0
-        m_CallState: 2
-  landEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6431588530169345916}
-        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: 
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Land
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 6431588530169345916}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: 
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  fallingEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6431588530169345916}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: 
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Falling
-          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &2786539736660453916
 MonoBehaviour:
@@ -9455,6 +9414,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 500548228673936328}
+        m_TargetAssemblyTypeName: Aim, Assembly-CSharp
+        m_MethodName: OverrideJoystickInputToAngleCalculation
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: c37b60c5-a216-408a-8858-f69fe819076c
     m_ActionName: PlayerAccessibilityLeft/Aim[/XInputControllerWindows/leftStick,/XInputControllerWindows1/leftStick,/XInputControllerWindows/rightStick,/XInputControllerWindows1/rightStick]
   - m_PersistentCalls:
@@ -9474,6 +9445,18 @@ MonoBehaviour:
       - m_Target: {fileID: 7604770547986073551}
         m_TargetAssemblyTypeName: DashAdvanced, Assembly-CSharp
         m_MethodName: CheckDashWithJoystickDirection
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 500548228673936328}
+        m_TargetAssemblyTypeName: Aim, Assembly-CSharp
+        m_MethodName: DefualtJoystickInputToAngleCalculation
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9673,6 +9656,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 3178d4cd-3a7b-4b54-85e1-b3a2d3cabe49
     m_ActionName: PlayerAccessibilityLeft/Pause[/XInputControllerWindows/start,/XInputControllerWindows1/start,/XInputControllerWindows2/start]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3926757260285706939}
+        m_TargetAssemblyTypeName: NavigateUI, Assembly-CSharp
+        m_MethodName: ExitUI
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 7f569976-eba3-49f0-a1fd-7877f68cf31f
+    m_ActionName: PlayerAccessibilityLeft/ExitUI_OneHand[/XInputControllerWindows/leftStickPress,/XInputControllerWindows1/leftStickPress,/XInputControllerWindows/rightStickPress,/XInputControllerWindows1/rightStickPress]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -9763,7 +9762,7 @@ MonoBehaviour:
   dashingActivationCooldown: 0.67
   collisionLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 72
   tr: {fileID: 7687228209419224627}
   CharacterGlow: {fileID: 2586055511146347963}
   playerSoundManager: {fileID: 545699144991103134}

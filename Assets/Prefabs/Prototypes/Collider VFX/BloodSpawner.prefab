@@ -53,7 +53,7 @@ VisualEffect:
   m_PropertySheet:
     m_Float:
       m_Array:
-      - m_Value: 100
+      - m_Value: 35
         m_Name: Rate
         m_Overridden: 1
     m_Vector2f:
@@ -78,7 +78,10 @@ VisualEffect:
     m_NamedObject:
       m_Array: []
     m_Bool:
-      m_Array: []
+      m_Array:
+      - m_Value: 0
+        m_Name: Loop
+        m_Overridden: 1
 --- !u!73398921 &3607644808670118370
 VFXRenderer:
   serializedVersion: 1
@@ -221,8 +224,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6636759341860427935, guid: 2beb4791d6723e046a58268eac09a8b8,
         type: 3}
+      propertyPath: m_PropertySheet.m_Bool.m_Array.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6636759341860427935, guid: 2beb4791d6723e046a58268eac09a8b8,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Bool.m_Array.Array.data[0].m_Value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6636759341860427935, guid: 2beb4791d6723e046a58268eac09a8b8,
+        type: 3}
       propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Value
-      value: 100
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 6636759341860427935, guid: 2beb4791d6723e046a58268eac09a8b8,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Bool.m_Array.Array.data[0].m_Overridden
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6636759341860427935, guid: 2beb4791d6723e046a58268eac09a8b8,
         type: 3}

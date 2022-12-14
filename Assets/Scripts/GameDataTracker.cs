@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using System.Linq;
 
 
 public class GameDataTracker : MonoBehaviour
@@ -125,11 +126,9 @@ public class GameDataTracker : MonoBehaviour
             if (roundWinner == -1)
             {
                 roundWinner = roundWinnerDic[i];
-                Debug.Log("roundwinner is " + roundWinner);
             }
             if(roundWinner == roundWinnerDic[i])
             {
-                Debug.Log("streak is " + streak);
                 streak++;
             }
             else
@@ -157,7 +156,6 @@ public class GameDataTracker : MonoBehaviour
         string returnValue = "nothing interesting";
         if (killsEachRoundDic.ContainsKey(currentRound) == false) return returnValue;
 
-        Debug.Log("interesting stuff");
         for (int i = 0; i < killsEachRoundDic[currentRound].Count; i++)
         {
             if (killsEachRoundDic[currentRound][i].GetKiller() == 0) continue;
@@ -182,29 +180,31 @@ public class GameDataTracker : MonoBehaviour
         }
         return returnValue;
     }
-    
+
     public int[] GetScoreInOrder()
     {
-        int amountOfPlayers = GameManager.Instance.GetAllPlayers().Count;
-        int[] playerOrder = new int[amountOfPlayers];
-        for(int i = 1; i < amountOfPlayers; i++)
+        ValidatePlayerScore();
+        List<KeyValuePair<int, int>> scoreOrder = playerScore.ToList();
+        scoreOrder.Sort((score1, score2) => score1.Value.CompareTo(score2.Value));
+        List<int> order = new List<int>();
+        foreach(KeyValuePair<int,int> playerId in scoreOrder)
         {
-            if (playerScore.ContainsKey(i) == false) continue;
-            int order = 0;
-            for(int j = 0; j < amountOfPlayers; j++)
+            order.Add(playerId.Key);
+        }
+        order.Reverse();
+        return order.ToArray();
+    }
+
+    private void ValidatePlayerScore()
+    {
+        foreach(GameObject player in GameManager.Instance.GetAllPlayers())
+        {
+            int currentID = player.GetComponent<PlayerDetails>().playerID;
+            if (playerScore.ContainsKey(currentID) == false)
             {
-                if (playerScore.ContainsKey(j) == false) continue;
-                if (playerScore[i] < playerScore[j])
-                {
-                    order++;
-                }
-                else
-                {
-                    playerOrder[order] = i;
-                }
+                playerScore.Add(currentID, 0);
             }
         }
-        return playerOrder;  
     }
 
     public int GetPlayerScore(int id)
@@ -287,13 +287,14 @@ public class GameDataTracker : MonoBehaviour
         totalRoundsPlayed++;
     }
 
-    private void ClearSavedData()
+    public void ClearSavedData()
     {
         killList.Clear();
         roundTimeDic.Clear();
-        //roundWinnerDic.Clear();
+        roundWinnerDic.Clear();
         killsEachRoundDic.Clear();
         playerScore.Clear();
+        playerKills.Clear();
         playersKilledByHazard = 0;
         totalRoundsPlayed = 0;
         totalGameTime = 0;

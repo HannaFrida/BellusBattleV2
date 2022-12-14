@@ -141,6 +141,12 @@ public class DashAdvanced : MonoBehaviour
             CheckDashType();
         }
     }
+
+    public void SetVelocity(Vector2 nVel)
+    {
+        velocity = nVel;
+    }
+
     public void CheckDashWithJoystickDirection(InputAction.CallbackContext context)
     {
         if (GameManager.Instance.GameIsPaused == true || GameManager.Instance.AcceptPlayerInput == false || (!canDash && isDashing)) return;

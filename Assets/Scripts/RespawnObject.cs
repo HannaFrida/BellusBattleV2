@@ -26,6 +26,7 @@ public class RespawnObject : MonoBehaviour
                 respawnTimer = 0f;
                 respawn = false;
                 SpawnObj = Instantiate(respawnObject, transform.position, transform.rotation);
+                SpawnObj.transform.parent = this.transform;
             }
         }
         if (SpawnObj == null)

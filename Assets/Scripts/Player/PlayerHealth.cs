@@ -48,7 +48,7 @@ public class PlayerHealth : MonoBehaviour
         poisoned.gameObject.SetActive(false);
         UnkillPlayer();
 
-        gameObject.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
+        gameObject.GetComponent<PlayerInput>().SwitchCurrentActionMap(GetComponent<PlayerDetails>().ChosenActionMap);
     }
 
 
