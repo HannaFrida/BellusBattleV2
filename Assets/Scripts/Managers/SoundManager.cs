@@ -24,6 +24,7 @@ public class SoundManager : MonoBehaviour
     [Header("foliage")]
     [SerializeField] private AudioSource doorOpenSource;
     [SerializeField] private AudioSource doorCloseSource;
+    [SerializeField] private AudioSource glassShatterSource;
     [SerializeField] private AudioSource bellRingSource;
     [SerializeField] private AudioSource startGameBellSource;
     
@@ -164,19 +165,24 @@ public class SoundManager : MonoBehaviour
         trampolineSource.pitch = Random.Range(0.8f, highPitchRan);
         trampolineSource.Play();
     }
-   
-   /*
-    private void RandomiseSoundPlayback()
-    { //Gör att ett ljud körs random.
-     //   if (!zombieRoarSoundSource.isPlaying)
-        {
-      //      zombieRoarSoundSource.pitch = Random.Range(lowPitchRan, highPitchRan);
-            float t = Random.Range(minHumDelay, maxHumDelay);
-      //      zombieRoarSoundSource.PlayDelayed(t);
-
-        }
+    public void GlassShatterSound()
+    {
+        glassShatterSource.pitch = Random.Range(0.95f, highPitchRan);
+        glassShatterSource.Play();
     }
-   */
+
+    /*
+     private void RandomiseSoundPlayback()
+     { //Gör att ett ljud körs random.
+      //   if (!zombieRoarSoundSource.isPlaying)
+         {
+       //      zombieRoarSoundSource.pitch = Random.Range(lowPitchRan, highPitchRan);
+             float t = Random.Range(minHumDelay, maxHumDelay);
+       //      zombieRoarSoundSource.PlayDelayed(t);
+
+         }
+     }
+    */
 
     public void HalfMusicVolume()
     {
