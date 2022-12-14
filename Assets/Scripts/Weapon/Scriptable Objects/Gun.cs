@@ -132,7 +132,7 @@ public class Gun : MonoBehaviour
                     aim.enabled = true;
                 }
                 Drop();
-                gameObject.SetActive(false);
+                DeactivateAfterTime(1f);
             }
         }
 
@@ -156,7 +156,7 @@ public class Gun : MonoBehaviour
             
             Despawn();
             Drop();
-            gameObject.SetActive(false);
+            DeactivateAfterTime(1f);
         }
 
         // SPECIAL CASES 
@@ -284,12 +284,12 @@ public class Gun : MonoBehaviour
     {
         yield return new WaitForSeconds(duration);
         //Drop();
-        //gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
 
     private void Despawn()
     {
-        /*
+        
         if (weaponData.name == "Xnade")
         {
             MeshFilter meshfil = GetComponentInChildren<MeshFilter>();
@@ -302,6 +302,7 @@ public class Gun : MonoBehaviour
             bolt.enabled = false;
             StartCoroutine(DeactivateAfterTime(2f));
         }
+        /*
         // Because Grenade has 2 meshfilters
         else if(weaponData.name == "Grenade")
         {
