@@ -59,13 +59,17 @@ public class HazardMover : MonoBehaviour
 
         if (hasReachedHighestPoint == false)
         {
-            soundManager.FadeInLavaHazard();
+            if (doOnce)
+            {
+                doOnce = false;
+                soundManager.FadeInLavaHazard();
+            }
             transform.position = Vector3.SmoothDamp(transform.position, highestPosition, ref moveVector, smoothTime);
             if (boxCollider.bounds.max.y >= highestPoint.position.y)
             {
                 moveVector = Vector3.zero;
                 hasReachedHighestPoint = true;
-                
+                doOnce = true;
             }
         }
         else

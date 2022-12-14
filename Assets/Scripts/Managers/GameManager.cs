@@ -128,6 +128,18 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
 
             //Array.Clear(targetGroup.GetComponent<CinemachineTargetGroup>().m_Targets, 0, targetGroup.GetComponent<CinemachineTargetGroup>().m_Targets.Length);
             //SpawnPlayers();
+
+            /*
+            // Used to prevent Ghost bullets 
+            foreach (GameObject player in playersAlive)
+            {
+                if (player.GetComponentInChildren<Gun>() != null)
+                {
+                    player.GetComponentInChildren<Gun>().Drop();
+                }
+                
+            }
+            */
         }
 
         if(SceneManager.GetActiveScene().name.Equals("TransitionScene") == false)
@@ -531,6 +543,10 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
     }
     private void ReturnToLobby()
     {
+        foreach(GameObject player in players)
+        {
+            player.GetComponentInChildren<Gun>().Drop();
+        }
         SceneManager.LoadScene("MainMenu");
         gameLoopFinished = true;
         DataPersistenceManager.Instance.SaveGame();

@@ -12,19 +12,38 @@ public class Bullet : Projectile
 	[SerializeField] private GameObject colliderWallVFX;
 	[SerializeField] private GameObject colliderPlayerVFX;
 	[SerializeField] private bool lighting;
-
+	private float killMySelfTime = 0.4f;
+	private float timer;
+	bool canKillMyself;
 	//public float bulletDamage;
 
 	private void Start()
 	{
 		StartCoroutine(Shoot(lifeSpan));
 	}
-	void OnCollisionEnter(Collision other)
+
+    private void Update()
+    {
+		timer += Time.deltaTime;
+		if(timer >= killMySelfTime)
+        {
+			canKillMyself = true;
+        }
+    }
+    void OnCollisionEnter(Collision other)
 	{
+		
 
 		GameObject playerGo = other.gameObject;
+        if (!canKillMyself)
+        {
+			Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), playerGo.GetComponent<Collider>(), true);
+		}
+		
 		if (playerGo.CompareTag("Player")) // && Shooter != playerGo)
 		{
+			if (playerGo.GetComponent<PlayerDetails>().playerID == shooterID && canKillMyself == false) return;
+
 			if (lighting)
 			{
 				playerGo.GetComponent<PlayerHealth>().PlayLighting();
