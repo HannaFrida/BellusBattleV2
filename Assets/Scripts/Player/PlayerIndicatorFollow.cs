@@ -17,7 +17,7 @@ public class PlayerIndicatorFollow : MonoBehaviour {
         //X and Y position of indicator is overriden from default parent-child to follow the rig
         if (follow) {
             var position = rigTransform.position;
-            print(rigTransform.position);
+            //print(rigTransform.position);
             gameObject.transform.position = new Vector3(position.x, position.y+2.2f, 0f);
         }
 
@@ -30,7 +30,7 @@ public class PlayerIndicatorFollow : MonoBehaviour {
     }
 
     public void UnFollow() {
-        print("unfollowed");
+        //print("unfollowed");
         follow = false;
         gameObject.transform.localPosition = new Vector3(0f, 2.2f, 0f);
         var position = rigTransform.position;

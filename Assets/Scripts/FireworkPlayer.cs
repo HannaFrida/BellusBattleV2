@@ -6,12 +6,13 @@ using UnityEngine.VFX;
 public class FireworkPlayer : MonoBehaviour
 {
     [SerializeField] private List<VisualEffect> allFireWorks = new();
+    private SoundManager soundManager;
     private float timer = 1;
     private bool doOnce;
     // Start is called before the first frame update
     void Start()
     {
-        
+        soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
     }
 
     // Update is called once per frame
@@ -23,6 +24,7 @@ public class FireworkPlayer : MonoBehaviour
             if (timer <= 0)
             {
                 allFireWorks[Random.Range(0, allFireWorks.Count)].Play();
+                soundManager.FireWorkSound();
                 timer = Random.Range(0, 2);
                 
 
