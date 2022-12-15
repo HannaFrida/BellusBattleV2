@@ -27,7 +27,10 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioSource glassShatterSource;
     [SerializeField] private AudioSource bellRingSource;
     [SerializeField] private AudioSource startGameBellSource;
-    
+    [SerializeField] private AudioSource fireWorkSource;
+    [SerializeField] private AudioClip[] allFireworkSounds;
+
+
     [Header("UI sounds")]
     [SerializeField] private AudioSource howerMenuSource;
     [SerializeField] private AudioSource pressMenuSource;
@@ -52,11 +55,7 @@ public class SoundManager : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
     }
-    public void FadeInMusic()
-    {
-        RandomClipPlayer(allMusicSounds, musicSource);
-        StartCoroutine(FadeMixerGroup.StartFade(overallMixer, "MusicMixerGroup", 2f, highestMusicVolume));
-    }
+    
     public void SetHighestMusicVolume(float hmv)
     {
         highestMusicVolume = hmv;
@@ -64,6 +63,11 @@ public class SoundManager : MonoBehaviour
     public void SetHighestEffectVolume(float hmv)
     {
         highestEffectVolume = hmv;
+    }
+    public void FadeInMusic()
+    {
+        RandomClipPlayer(allMusicSounds, musicSource);
+        StartCoroutine(FadeMixerGroup.StartFade(overallMixer, "MusicMixerGroup", 2f, highestMusicVolume));
     }
     public void FadeOutMusic()
     {
@@ -164,6 +168,12 @@ public class SoundManager : MonoBehaviour
     {
         trampolineSource.pitch = Random.Range(0.8f, highPitchRan);
         trampolineSource.Play();
+
+    }
+    public void FireWorkSound()
+    {
+        fireWorkSource.pitch = Random.Range(0.8f, highPitchRan);
+        RandomClipPlayer(allFireworkSounds, fireWorkSource);
     }
     public void GlassShatterSound()
     {
