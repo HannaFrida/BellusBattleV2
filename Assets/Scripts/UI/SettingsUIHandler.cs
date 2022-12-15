@@ -6,9 +6,7 @@ using TMPro;
 using UnityEngine.Rendering;
 using Unity.VisualScripting;
 using UnityEngine.Rendering.Universal;
-using static UnityEngine.Rendering.DebugUI;
 using static PlayerMovement;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class SettingsUIHandler : UIMenuHandler
 {
