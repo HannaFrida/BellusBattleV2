@@ -118,24 +118,7 @@ public class Gun : MonoBehaviour
 
             }
         }
-        if (railGoneTime)
-        {
-            railGoneTimer += Time.deltaTime;
-            if (railGoneTimer >= railGunWaitForGone)
-            {
-                dropTimer = 0;
-                railGoneTime = false;
-                
-                Despawn();
-                foreach (Aim aim in ownerAim)
-                {
-                    aim.enabled = true;
-                }
-                Drop();
-                gameObject.SetActive(false);
-            }
-        }
-
+        
         /*
         // USED FOR DE-SPAWNING
         if (isStartTimerForDeSpawn)
@@ -153,16 +136,41 @@ public class Gun : MonoBehaviour
 
         if (gunsAmmo == 0 && weaponData.name != "RailGun")
         {
-            
-            Despawn();
             Drop();
-            gameObject.SetActive(false);
+            if (shootSound.isPlaying)
+            {
+                return;
+            }
+            Despawn();
+            
         }
 
         // SPECIAL CASES 
         if (gunsAmmo == 0 && weaponData.name == "RailGun")
         {
             railGoneTime = true;
+        }
+
+        if (railGoneTime)
+        {
+            railGoneTimer += Time.deltaTime;
+            if (railGoneTimer >= railGunWaitForGone)
+            {
+                dropTimer = 0;
+                railGoneTime = false;
+
+                Despawn();
+                foreach (Aim aim in ownerAim)
+                {
+                    aim.enabled = true;
+                }
+                Drop();
+                if (shootSound.isPlaying)
+                {
+                    return;
+                }
+                gameObject.SetActive(false);
+            }
         }
 
         if (weaponManager != null)
@@ -284,40 +292,41 @@ public class Gun : MonoBehaviour
     {
         yield return new WaitForSeconds(duration);
         //Drop();
-        //gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
 
     private void Despawn()
     {
-        /*
-        if (weaponData.name == "Xnade")
-        {
-            MeshFilter meshfil = GetComponentInChildren<MeshFilter>();
-            //meshfil.gameObject.SetActive(false);
-            StartCoroutine(DeactivateAfterTime(5f));
-        }
-        else if (weaponData.name == "GwynBolt")
+        if (weaponData.name == "GwynBolt")
         {
             VisualEffect bolt = GetComponentInChildren<VisualEffect>();
             bolt.enabled = false;
             StartCoroutine(DeactivateAfterTime(2f));
         }
         // Because Grenade has 2 meshfilters
-        else if(weaponData.name == "Grenade")
+        else if (weaponData.name == "Grenade")
         {
-            MeshFilter[] meshFilter = GetComponentsInChildren<MeshFilter>();
-            foreach (MeshFilter mesh in meshFilter)
+            MeshFilter[] meshFilters = GetComponentsInChildren<MeshFilter>();
+
+            foreach (MeshFilter mesh in meshFilters)
             {
+
                 mesh.gameObject.SetActive(false);
             }
         }
-        else
+
+        MeshFilter meshFilter = GetComponentInChildren<MeshFilter>();
+        meshFilter.gameObject.SetActive(false);
+
+        if (weaponData.name == "Xnade")
         {
-            MeshFilter meshFilter = GetComponentInChildren<MeshFilter>();
-            meshFilter.gameObject.SetActive(false);
-            //gameObject.SetActive(false);
+            StartCoroutine(DeactivateAfterTime(5f));
         }
-        */
+        else
+        { 
+            gameObject.SetActive(false);
+        }
+        
 
         gameObject.GetComponent<BoxCollider>().enabled = false;
         //gameObject.GetComponent<Gun>().enabled = false;
@@ -447,9 +456,7 @@ public class Gun : MonoBehaviour
             isStartTimerForDeSpawn = true;
         }
 
-
         isDropped = true;
-
 
         // So that the previous owner can't shoot this gun
         playerShoot.shootInput = null;
@@ -462,8 +469,6 @@ public class Gun : MonoBehaviour
             gameObject.transform.SetParent(weaponSpawnerManager.GetTrashBin);
             
         }
-
-        
     }
 
     IEnumerator DisableAimScript()
