@@ -15,6 +15,7 @@ public class PlayerJoinManager : PlayerSpawnManager
     [SerializeField] private GameObject player2UI;
     [SerializeField] private GameObject player3UI;
     [SerializeField] private GameObject player4UI;
+    [SerializeField] private GameObject firstTimePlayerJoinsGame;
 
     public List<PlayerInput> listOfPlayers = new List<PlayerInput>();
 
@@ -41,6 +42,10 @@ public class PlayerJoinManager : PlayerSpawnManager
         rtf = rbd.panel.gameObject.GetComponent<RectTransform>();
         if (playerDetails.playerID == 1)
         {
+            if (firstTimePlayerJoinsGame != null){
+                Destroy(firstTimePlayerJoinsGame);
+            }
+            
             rtf.SetTop(0);
             rbd.playerIDText.text = playerDetails.playerID.ToString();
             //rbd.panel.transform.position = rbd.PosP1.transform.position;
