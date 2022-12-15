@@ -176,6 +176,14 @@ public class SettingsUIHandler : UIMenuHandler
             default: break;
         }
     }
+
+    public void SetSafeMode(bool toggle)
+    {
+        if (toggle) textPro.text = "ON";
+        else textPro.text = "OFF";
+        GameManager.Instance._safeMode= toggle;
+
+    }
     override
     public void ExitUI()
     {
