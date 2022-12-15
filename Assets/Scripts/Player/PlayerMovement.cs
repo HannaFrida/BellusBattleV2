@@ -129,7 +129,7 @@ public class PlayerMovement : MonoBehaviour
     private void OnLevelWasLoaded(int level)
     {
         IsMovedByPLatform = false;
-        isGrounded = false;
+        isGrounded = true;
         externalForce = Vector2.zero;
     }
 

@@ -124,6 +124,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
             giveScoreTimer = 0f;
             gameHasStarted = true;
             playersAlive = new List<GameObject>(players);
+            ActivateMovement();
             DeactivateMovement();
 
             //Array.Clear(targetGroup.GetComponent<CinemachineTargetGroup>().m_Targets, 0, targetGroup.GetComponent<CinemachineTargetGroup>().m_Targets.Length);
@@ -283,7 +284,10 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
         {
             if (player == null) continue;
             player.GetComponent<DashAdvanced>().enabled = false;
-            player.GetComponent<PlayerMovement>().enabled = false;
+            PlayerMovement pm = player.GetComponent<PlayerMovement>();
+            pm.ResetForces();
+            pm.enabled = false;
+            
         }
     }
 
@@ -295,7 +299,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
             player.GetComponent<DashAdvanced>().enabled = true;
             PlayerMovement pm = player.GetComponent<PlayerMovement>();
             pm.enabled = true;
-            pm.ResetForces();
+            //pm.ResetForces();
 
 
 
