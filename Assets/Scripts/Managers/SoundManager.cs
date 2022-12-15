@@ -24,6 +24,7 @@ public class SoundManager : MonoBehaviour
     [Header("foliage")]
     [SerializeField] private AudioSource doorOpenSource;
     [SerializeField] private AudioSource doorCloseSource;
+    [SerializeField] private AudioSource glassShatterSource;
     [SerializeField] private AudioSource bellRingSource;
     [SerializeField] private AudioSource startGameBellSource;
     
@@ -42,6 +43,11 @@ public class SoundManager : MonoBehaviour
     private float highPitchRan = 1.0f;
     private float minHumDelay = 25.0f;
     private float maxHumDelay = 200.0f;
+
+
+    private float highestMasterVolume = 0.5f;
+    private float highestMusicVolume = 0.5f;
+    private float highestEffectVolume = 0.5f;
     void Start()
     {
         DontDestroyOnLoad(gameObject);
@@ -49,7 +55,15 @@ public class SoundManager : MonoBehaviour
     public void FadeInMusic()
     {
         RandomClipPlayer(allMusicSounds, musicSource);
-        StartCoroutine(FadeMixerGroup.StartFade(overallMixer, "MusicMixerGroup", 2f, 0.5f));
+        StartCoroutine(FadeMixerGroup.StartFade(overallMixer, "MusicMixerGroup", 2f, highestMusicVolume));
+    }
+    public void SetHighestMusicVolume(float hmv)
+    {
+        highestMusicVolume = hmv;
+    }
+    public void SetHighestEffectVolume(float hmv)
+    {
+        highestEffectVolume = hmv;
     }
     public void FadeOutMusic()
     {
@@ -71,7 +85,7 @@ public class SoundManager : MonoBehaviour
     {
         poisonHazardSource.Stop();
         lavaHazardSource.Play(); 
-        StartCoroutine(FadeMixerGroup.StartFade(overallMixer, "HazardMixerGroup", 2f, 0.5f));
+        StartCoroutine(FadeMixerGroup.StartFade(overallMixer, "HazardMixerGroup", 5f, highestEffectVolume));
     }
     public void FadeOutLavaHazard()
     {
@@ -81,7 +95,7 @@ public class SoundManager : MonoBehaviour
         lavaHazardSource.Stop();
         poisonHazardSource.Play();
         
-        StartCoroutine(FadeMixerGroup.StartFade(overallMixer, "HazardMixerGroup", 1, 0.5f));
+        StartCoroutine(FadeMixerGroup.StartFade(overallMixer, "HazardMixerGroup", 1, highestEffectVolume));
     }
     public void FadeOutHazard()
     {
@@ -151,19 +165,24 @@ public class SoundManager : MonoBehaviour
         trampolineSource.pitch = Random.Range(0.8f, highPitchRan);
         trampolineSource.Play();
     }
-   
-   /*
-    private void RandomiseSoundPlayback()
-    { //Gör att ett ljud körs random.
-     //   if (!zombieRoarSoundSource.isPlaying)
-        {
-      //      zombieRoarSoundSource.pitch = Random.Range(lowPitchRan, highPitchRan);
-            float t = Random.Range(minHumDelay, maxHumDelay);
-      //      zombieRoarSoundSource.PlayDelayed(t);
-
-        }
+    public void GlassShatterSound()
+    {
+        glassShatterSource.pitch = Random.Range(0.95f, highPitchRan);
+        glassShatterSource.Play();
     }
-   */
+
+    /*
+     private void RandomiseSoundPlayback()
+     { //Gör att ett ljud körs random.
+      //   if (!zombieRoarSoundSource.isPlaying)
+         {
+       //      zombieRoarSoundSource.pitch = Random.Range(lowPitchRan, highPitchRan);
+             float t = Random.Range(minHumDelay, maxHumDelay);
+       //      zombieRoarSoundSource.PlayDelayed(t);
+
+         }
+     }
+    */
 
     public void HalfMusicVolume()
     {

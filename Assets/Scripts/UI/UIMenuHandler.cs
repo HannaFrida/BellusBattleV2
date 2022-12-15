@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using static UnityEngine.Rendering.DebugUI;
 
 public class UIMenuHandler : MonoBehaviour
 {
@@ -21,6 +23,16 @@ public class UIMenuHandler : MonoBehaviour
         for (int i = 0; i < panels.Count; i++) panels[i].SetActive(false);
         panels[0].SetActive(true);
         activePanel = panels[0];
+        es.SetSelectedGameObject(buttonDeafaultPanel);
+    }
+    private void OnEnable()
+    {
+        switch (activePanel.name)
+        {
+            case "Defualt_Panel": es.SetSelectedGameObject(buttonDeafaultPanel); break;
+            case "MapsSelection_Panel": es.SetSelectedGameObject(buttonMapsSelectionPanel); break;
+            default: es.SetSelectedGameObject(buttonDeafaultPanel); break;
+        }
     }
     virtual public void SetPanelActive(GameObject panel)
     {
@@ -43,27 +55,30 @@ public class UIMenuHandler : MonoBehaviour
         actionMapNames.Add(name);
     }
 
-    public void ExitUI()
+    virtual public void ExitUI()
     {
-        GameObject[] obj = GameObject.FindGameObjectsWithTag("Player");
-        for(int i = 0; i < obj.Length; i++)
+        if (activePanel.name.Equals("MapsSelection_Panel"))
         {
-            if (obj[i] == null) continue;
-            if (obj[i].GetComponent<PlayerInput>().currentActionMap.name.Equals("PlayerAccessibilityLeft")) break;
-            obj[i].GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
+            SetPanelActive(panels[0]);
+            Debug.Log(panels[0].name);
+            return;
         }
-        actionMapNames.Clear();
+        else
+        {
+            Debug.Log("hahga fakk u");
+            GameObject[] obj = GameObject.FindGameObjectsWithTag("Player");
+            for (int i = 0; i < obj.Length; i++)
+            {
+                if (obj[i] == null) continue;
+                //if (obj[i].GetComponent<PlayerInput>().currentActionMap.name.Equals("PlayerAccessibilityLeft")) break;
+                obj[i].GetComponent<PlayerInput>().SwitchCurrentActionMap(obj[i].GetComponent<PlayerDetails>().ChosenActionMap);
+            }
+            actionMapNames.Clear();
 
-        //foreach(Button b in buttons)
-        //{
-        //    Debug.Log(b.spriteState);
-        //}
-        gameObject.SetActive(false);
-        soundManager.FadeInBellSounds();
-    }
-    private void OnEnable()
-    {
-        es.SetSelectedGameObject(buttonDeafaultPanel);
+
+            gameObject.SetActive(false);
+            soundManager.FadeInBellSounds();
+        }
     }
     public void NavigateRight()
     {
