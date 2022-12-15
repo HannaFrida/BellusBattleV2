@@ -102,16 +102,17 @@ public class PlayerSpawnManager : MonoBehaviour
         int[] scoreOrder = GameDataTracker.Instance.GetScoreInOrder();
         for(int i = 0; i < scoreOrder.Length; i++)
         {
-            findPlayerToSpawn(scoreOrder[i], i);
+            FindPlayerToSpawn(scoreOrder[i], i);
         }
         GameDataTracker.Instance.WriteToFile();
     }
-    private void findPlayerToSpawn(int id, int index)
+    private void FindPlayerToSpawn(int id, int index)
     {
         for(int i = 0; i < players.Length; i++)
         {
             if(players[i].GetComponent<PlayerDetails>().playerID == id)
             {
+                Debug.Log(i + " id: " + id);
                 players[i].transform.position = spawnLocations[index].transform.position;
             }
         }
