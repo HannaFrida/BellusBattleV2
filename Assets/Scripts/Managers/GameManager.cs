@@ -382,7 +382,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
     {
         if (!scoreDic.ContainsKey(winner))
         {
-            scoreDic[winner] = 1;
+            scoreDic.Add(winner, 1);
         }
         else
         {
