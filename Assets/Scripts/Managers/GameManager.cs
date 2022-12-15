@@ -382,7 +382,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
     {
         if (!scoreDic.ContainsKey(winner))
         {
-            scoreDic[winner] = 1;
+            scoreDic.Add(winner, 1);
         }
         else
         {
@@ -560,7 +560,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
             }
             
         }
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadSceneAsync("MainMenu");
         gameLoopFinished = true;
         DataPersistenceManager.Instance.SaveGame();
         //yield return new WaitForSeconds(timeTillRestartGame);
