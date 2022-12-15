@@ -70,7 +70,6 @@ public class WeaponManager : MonoBehaviour
         //nowWeapon.GetComponent<Gun>().Drop();
         equippedWeapon = null;
         nowWeapon = null;
-        Debug.Log("fuck you");
     }
     
 }

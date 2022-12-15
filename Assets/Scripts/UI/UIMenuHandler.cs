@@ -27,6 +27,8 @@ public class UIMenuHandler : MonoBehaviour
     }
     private void OnEnable()
     {
+        if (activePanel == null) return;
+
         switch (activePanel.name)
         {
             case "Defualt_Panel": es.SetSelectedGameObject(buttonDeafaultPanel); break;

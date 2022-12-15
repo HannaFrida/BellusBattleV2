@@ -26,8 +26,6 @@ public abstract class Event<T> where T : Event<T>
 
 		_hasFired = true;
 		Listeners?.Invoke(this as T);
-
-		Debug.Log(Description);
 	}
 }
 

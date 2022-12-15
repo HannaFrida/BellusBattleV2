@@ -68,7 +68,7 @@ public class Gun : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("fuck you");
+        //Debug.Log("fuck you");
         // Reload it
         gunsAmmo = weaponData.Ammo;
 

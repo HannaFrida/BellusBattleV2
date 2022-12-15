@@ -28,7 +28,7 @@ public class WeaponSpawnerManager : MonoBehaviour
         if (numberOfWeaponsToSpawn > spawners.Length)
         {
             numberOfWeaponsToSpawn = spawners.Length;
-            Debug.LogError("\"numberOfWeaponsToSpawn\" is larger than the number of spawners that exists in the Scene");
+            //Debug.LogError("\"numberOfWeaponsToSpawn\" is larger than the number of spawners that exists in the Scene");
         }
     }
     private void ÍnitialSpawnersToChooseFrom()

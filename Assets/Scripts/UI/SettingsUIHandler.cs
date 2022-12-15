@@ -41,6 +41,7 @@ public class SettingsUIHandler : UIMenuHandler
     }
     private void OnEnable()
     {
+        if (activePanel == null) return;
         switch (activePanel.name)
         {
             case "VisualsSelectedButtons": es.SetSelectedGameObject(bvs); break;

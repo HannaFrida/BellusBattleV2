@@ -131,7 +131,11 @@ public class RailGunBullet : Projectile
 	private void Killcol()
 	{
 		col.enabled = true;
-		col2.enabled = true;
+		if (col2 != null)
+        {
+			col2.enabled = true;
+		}
+		
 
 	}
 }
