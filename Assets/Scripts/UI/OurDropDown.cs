@@ -58,6 +58,9 @@ public class OurDropDown : MonoBehaviour
             case "Quality":
                 settings.SetQuality(GetActiveElementIndex());
                 break;
+            case "AutoJump":
+                settings.SetAutoJump(GetActiveElementIndex());
+                break;
             case "Resolution": 
                 settings.SetResolution(GetActiveElementIndex());
                 break;
