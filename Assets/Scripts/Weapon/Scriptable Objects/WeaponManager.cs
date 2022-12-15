@@ -75,6 +75,7 @@ public class WeaponManager : MonoBehaviour
         
         equippedWeapon = null;
         nowWeapon = null;
+        Debug.Log("fuck you");
     }
-
+    
 }
