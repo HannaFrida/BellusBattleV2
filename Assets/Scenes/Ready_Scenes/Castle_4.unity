@@ -3084,7 +3084,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &491829805
 PrefabInstance:
@@ -5063,6 +5063,8 @@ MonoBehaviour:
   player2UI: {fileID: 0}
   player3UI: {fileID: 0}
   player4UI: {fileID: 0}
+  firstTimePlayerJoinsGame: {fileID: 0}
+  StartGameEffekt: {fileID: 0}
   listOfPlayers: []
 --- !u!114 &809493153
 MonoBehaviour:
@@ -5246,7 +5248,6 @@ GameObject:
   m_Component:
   - component: {fileID: 845313420}
   - component: {fileID: 845313419}
-  - component: {fileID: 845313418}
   - component: {fileID: 845313417}
   m_Layer: 0
   m_Name: Camera
@@ -5288,14 +5289,6 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
---- !u!81 &845313418
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 845313416}
-  m_Enabled: 1
 --- !u!20 &845313419
 Camera:
   m_ObjectHideFlags: 0
@@ -5352,7 +5345,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 15, y: 0, z: 0}
 --- !u!1001 &859748803
 PrefabInstance:
@@ -6068,7 +6061,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1017499649
 GameObject:
@@ -10336,7 +10329,7 @@ Transform:
   - {fileID: 1263843134}
   - {fileID: 725823754}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1896682779
 GameObject:

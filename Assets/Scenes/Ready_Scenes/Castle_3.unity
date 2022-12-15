@@ -3347,6 +3347,8 @@ MonoBehaviour:
   player2UI: {fileID: 0}
   player3UI: {fileID: 0}
   player4UI: {fileID: 0}
+  firstTimePlayerJoinsGame: {fileID: 0}
+  StartGameEffekt: {fileID: 0}
   listOfPlayers: []
 --- !u!114 &931408565
 MonoBehaviour:
@@ -6302,7 +6304,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2009938190}
   - component: {fileID: 2009938189}
-  - component: {fileID: 2009938188}
   - component: {fileID: 2009938187}
   m_Layer: 0
   m_Name: Camera
@@ -6344,14 +6345,6 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
---- !u!81 &2009938188
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2009938186}
-  m_Enabled: 1
 --- !u!20 &2009938189
 Camera:
   m_ObjectHideFlags: 0
