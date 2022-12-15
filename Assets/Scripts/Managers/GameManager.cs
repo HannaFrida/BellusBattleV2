@@ -293,7 +293,10 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
         {
             if (player == null) continue;
             player.GetComponent<DashAdvanced>().enabled = true;
-            player.GetComponent<PlayerMovement>().enabled = true;
+            PlayerMovement pm = player.GetComponent<PlayerMovement>();
+            pm.enabled = true;
+            pm.ResetForces();
+
 
 
 

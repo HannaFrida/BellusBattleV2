@@ -108,6 +108,7 @@ public class PlayerHealth : MonoBehaviour
         anime.enabled = false;
         if (pm != null)
         {
+            pm.ResetForces();
             pm.enabled = false;
         }
         

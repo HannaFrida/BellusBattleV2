@@ -129,6 +129,7 @@ public class PlayerMovement : MonoBehaviour
     private void OnLevelWasLoaded(int level)
     {
         IsMovedByPLatform = false;
+        isGrounded = false;
         externalForce = Vector2.zero;
     }
 
@@ -621,5 +622,14 @@ public class PlayerMovement : MonoBehaviour
     void JumpCoroutine()
     {
         StartCoroutine(ToggleDoubleJump(0.25f));
+    }
+
+    public void ResetForces()
+    {
+        movementX = 0f;
+        movementY = downwardForce / 2;
+        velocity.x = 0f;
+        velocity.y = 0f;
+        externalForce = Vector2.zero;
     }
 }
