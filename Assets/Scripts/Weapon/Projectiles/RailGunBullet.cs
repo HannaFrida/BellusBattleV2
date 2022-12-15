@@ -14,6 +14,7 @@ public class RailGunBullet : Projectile
 	[SerializeField] private Collider col;
 	[SerializeField] private Collider col2;
 	[SerializeField] private float colOn = 0.015f;
+	[SerializeField] private float Gone = 0.015f;
 	[SerializeField] private bool xnade = false;
 	[SerializeField] private float stopMove = 0.1f;
 	private bool stopMovement = false;
@@ -108,6 +109,8 @@ public class RailGunBullet : Projectile
 		yield return new WaitForSeconds(colOn);
 		Killcol();
 		yield return new WaitForSeconds(seconds);
+		KillcolOff();
+		yield return new WaitForSeconds(seconds);
 		Die();
 	}
 
@@ -118,6 +121,12 @@ public class RailGunBullet : Projectile
 	private void Stop()
 	{
 		stopMovement = true;
+	}
+	private void KillcolOff()
+	{
+		col.enabled = false;
+		//col2.enabled = true;
+
 	}
 	private void Killcol()
 	{
