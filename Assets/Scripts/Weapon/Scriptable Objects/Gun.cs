@@ -237,7 +237,7 @@ public class Gun : MonoBehaviour
        
         if (gameObject.GetComponent<MeshFilter>() != null)
         {
-            Debug.Log("borde inte vara här");
+            //Debug.Log("borde inte vara här");
             Mesh mesh = GetComponent<MeshFilter>().mesh;
             GameObject despawnVFX = Instantiate(weaponData.DespawnVFX, transform.position, transform.rotation);
             despawnVFX.GetComponent<Despawn>().SetMesh(mesh);
