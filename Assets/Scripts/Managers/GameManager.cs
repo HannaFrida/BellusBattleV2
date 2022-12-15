@@ -560,7 +560,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
             }
             
         }
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadSceneAsync("MainMenu");
         gameLoopFinished = true;
         DataPersistenceManager.Instance.SaveGame();
         //yield return new WaitForSeconds(timeTillRestartGame);

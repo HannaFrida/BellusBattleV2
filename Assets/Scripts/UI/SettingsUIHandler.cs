@@ -7,6 +7,8 @@ using UnityEngine.Rendering;
 using Unity.VisualScripting;
 using UnityEngine.Rendering.Universal;
 using static UnityEngine.Rendering.DebugUI;
+using static PlayerMovement;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class SettingsUIHandler : UIMenuHandler
 {
@@ -21,7 +23,8 @@ public class SettingsUIHandler : UIMenuHandler
     //public TMP_Dropdown resolutionDropDown;
     static Resolution[] resolutions;
     TextMeshProUGUI textPro;
-    
+    List<GameObject> players;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +35,7 @@ public class SettingsUIHandler : UIMenuHandler
         globalVolume = GameObject.FindObjectOfType<Volume>();
         audioMixer = am;
         es.SetSelectedGameObject(bvs);
+        players = new List<GameObject>(GameManager.Instance.GetAllPlayers());
     }
     private void OnLevelWasLoaded(int level)
     {
@@ -146,6 +150,39 @@ public class SettingsUIHandler : UIMenuHandler
     {
         textPro.text = (sliderValue).ToString("#")+ "0%";
         if (textPro.text.Equals("100%")) textPro.text = "Normal speed";
+    }
+    public void SetAutoJump(int index)
+    {
+        switch (index)
+        {
+            case 0:
+                foreach (GameObject player in players)
+                {
+                    if (player != null) player.GetComponent<PlayerMovement>().SetJumpSetting(JumpSetting.Press);
+                }
+                break;
+            case 1:
+                foreach (GameObject player in players)
+                {
+                    if (player != null) player.GetComponent<PlayerMovement>().SetJumpSetting(JumpSetting.Hold);
+                }
+                break;
+            case 2:
+                foreach (GameObject player in players)
+                {
+                    if (player != null) player.GetComponent<PlayerMovement>().SetJumpSetting(JumpSetting.Toggle);
+                }
+                break;
+            default: break;
+        }
+    }
+
+    public void SetSafeMode(bool toggle)
+    {
+        if (toggle) textPro.text = "ON";
+        else textPro.text = "OFF";
+        GameManager.Instance._safeMode= toggle;
+
     }
     override
     public void ExitUI()

@@ -127,7 +127,7 @@ public class PlayerHealth : MonoBehaviour
         anime.enabled = true;
         hips.SetActive(false);
         hips.SetActive(true);
-        hips.transform.position = Vector3.zero;
+        hips.transform.localPosition = Vector3.zero;
         hips.SetActive(false);
         boxCollider.enabled = true;
         dash.enabled = true;
