@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.VFX;
 
 public class PlayerJoinManager : PlayerSpawnManager
 {
@@ -16,11 +17,13 @@ public class PlayerJoinManager : PlayerSpawnManager
     [SerializeField] private GameObject player3UI;
     [SerializeField] private GameObject player4UI;
     [SerializeField] private GameObject firstTimePlayerJoinsGame;
+    [SerializeField] private VisualEffect StartGameEffekt;
 
     public List<PlayerInput> listOfPlayers = new List<PlayerInput>();
 
     void OnPlayerJoined(PlayerInput playerInput)
     {
+        
         PlayerDetails playerDetails = playerInput.gameObject.GetComponent<PlayerDetails>();
         // Set the player ID, add one to the index to start at Player 1
         playerDetails.playerID = playerInput.playerIndex + 1;
@@ -43,6 +46,7 @@ public class PlayerJoinManager : PlayerSpawnManager
         if (playerDetails.playerID == 1)
         {
             if (firstTimePlayerJoinsGame != null){
+                StartGameEffekt.Play();
                 Destroy(firstTimePlayerJoinsGame);
             }
             
