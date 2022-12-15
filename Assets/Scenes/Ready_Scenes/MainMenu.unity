@@ -24262,7 +24262,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ExecuteInEditor: 1
-  m_Bindings: []
+  m_Bindings:
+  - {fileID: 740215607}
   m_VisualEffect: {fileID: 740215610}
 --- !u!73398921 &740215609
 VFXRenderer:
@@ -38214,6 +38215,51 @@ PrefabInstance:
       propertyPath: m_Name
       value: SoundManager
       objectReference: {fileID: 0}
+    - target: {fileID: 771460134917488173, guid: f57560d1b0b0dd847a95dd2476d3b89e,
+        type: 3}
+      propertyPath: allFireworkSounds.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 771460134917488173, guid: f57560d1b0b0dd847a95dd2476d3b89e,
+        type: 3}
+      propertyPath: allFireworkSounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 05c0182f0ef9f8340a3119ea75826257, type: 3}
+    - target: {fileID: 771460134917488173, guid: f57560d1b0b0dd847a95dd2476d3b89e,
+        type: 3}
+      propertyPath: allFireworkSounds.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 5e4438681293f2e41986bcbeddda1982, type: 3}
+    - target: {fileID: 771460134917488173, guid: f57560d1b0b0dd847a95dd2476d3b89e,
+        type: 3}
+      propertyPath: allFireworkSounds.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 37df2e4ac7a09b54ea177462bd37d24a, type: 3}
+    - target: {fileID: 771460134917488173, guid: f57560d1b0b0dd847a95dd2476d3b89e,
+        type: 3}
+      propertyPath: allFireworkSounds.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: 95406a4b5116dd64386a72ecc83b4879, type: 3}
+    - target: {fileID: 771460134917488173, guid: f57560d1b0b0dd847a95dd2476d3b89e,
+        type: 3}
+      propertyPath: allFireworkSounds.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: 3b1c15d4e0faefc4e9f71a93f7f9089d, type: 3}
+    - target: {fileID: 771460134917488173, guid: f57560d1b0b0dd847a95dd2476d3b89e,
+        type: 3}
+      propertyPath: allFireworkSounds.Array.data[5]
+      value: 
+      objectReference: {fileID: 8300000, guid: ff82cc74de756cc44be5dedc5ceab2bb, type: 3}
+    - target: {fileID: 771460134917488173, guid: f57560d1b0b0dd847a95dd2476d3b89e,
+        type: 3}
+      propertyPath: allFireworkSounds.Array.data[6]
+      value: 
+      objectReference: {fileID: 8300000, guid: 922f79309bb89194bb4534f1506661f2, type: 3}
+    - target: {fileID: 771460134917488173, guid: f57560d1b0b0dd847a95dd2476d3b89e,
+        type: 3}
+      propertyPath: allFireworkSounds.Array.data[7]
+      value: 
+      objectReference: {fileID: 8300000, guid: 922f79309bb89194bb4534f1506661f2, type: 3}
     - target: {fileID: 771460134917488178, guid: f57560d1b0b0dd847a95dd2476d3b89e,
         type: 3}
       propertyPath: m_RootOrder
@@ -38269,21 +38315,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4780153962410067488, guid: f57560d1b0b0dd847a95dd2476d3b89e,
+    - target: {fileID: 5030931428123994298, guid: f57560d1b0b0dd847a95dd2476d3b89e,
         type: 3}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: edf0c83f7e96c1f4eae64993b3f4570f, type: 3}
-    - target: {fileID: 8315327524486149788, guid: f57560d1b0b0dd847a95dd2476d3b89e,
+      objectReference: {fileID: 8300000, guid: ec6290a63ac9c2146b1fcbde9571239e, type: 3}
+    - target: {fileID: 5030931428123994298, guid: f57560d1b0b0dd847a95dd2476d3b89e,
         type: 3}
-      propertyPath: m_Volume
-      value: 0.5
+      propertyPath: m_PlayOnAwake
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8315327524486149788, guid: f57560d1b0b0dd847a95dd2476d3b89e,
+    - target: {fileID: 5030931428123994298, guid: f57560d1b0b0dd847a95dd2476d3b89e,
         type: 3}
-      propertyPath: m_audioClip
+      propertyPath: OutputAudioMixerGroup
       value: 
-      objectReference: {fileID: 8300000, guid: 5ec1cc6a0afe00b4d82b6888cc60f037, type: 3}
+      objectReference: {fileID: 7135143396706303518, guid: 66b12940d28b0d94ea93cc1bea189c8b,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f57560d1b0b0dd847a95dd2476d3b89e, type: 3}
 --- !u!4 &1233117453 stripped
