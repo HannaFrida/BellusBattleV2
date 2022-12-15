@@ -89,7 +89,7 @@ public class SettingsUIHandler : UIMenuHandler
     }
     public void SetQuality(int qualityIndex)
     {
-        QualitySettings.SetQualityLevel(qualityIndex); // double kolla med gruppden hur vårt olika quality är
+        QualitySettings.SetQualityLevel(qualityIndex); // double kolla med gruppden hur vï¿½rt olika quality ï¿½r
     }
     public void SetOneHandMode(bool toggle)
     {
@@ -141,10 +141,6 @@ public class SettingsUIHandler : UIMenuHandler
         Resolution resolution = resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
-    public void SetUIInicator(bool isFullscrean)
-    {
-
-    }
 
     public void SetSlowMoText(float sliderValue)
     {
@@ -182,6 +178,17 @@ public class SettingsUIHandler : UIMenuHandler
         if (toggle) textPro.text = "ON";
         else textPro.text = "OFF";
         GameManager.Instance._safeMode= toggle;
+
+    }
+
+    public void SetUIIndecator(bool toggle)
+    {
+        if (toggle) textPro.text = "ON";
+        else textPro.text = "OFF";
+        foreach (GameObject player in players)
+        {
+            if (player != null) player.transform.Find("PlayerIndicator").gameObject.SetActive(toggle);
+        }
 
     }
     override
