@@ -135,7 +135,7 @@ public class DashAdvanced : MonoBehaviour
 
     public void DashWithJoystick(InputAction.CallbackContext context)
     {
-        if (GameManager.Instance.GameIsPaused == true || GameManager.Instance.AcceptPlayerInput == false || (!canDash && isDashing)) return;
+        if (enabled == false || GameManager.Instance.GameIsPaused == true || GameManager.Instance.AcceptPlayerInput == false || (!canDash && isDashing)) return;
         if (canDash && !isDashing)
         {
             CheckDashType();

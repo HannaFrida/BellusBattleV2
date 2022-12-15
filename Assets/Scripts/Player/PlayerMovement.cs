@@ -56,7 +56,7 @@ public class PlayerMovement : MonoBehaviour
 
     private float movementX, movementY;
     private float deceleration;
-    private float coyoteTimer, bufferTimer, knockBackTimer;
+    private float coyoteTimer, bufferTimer, knockBackTimer, activationTimer;
     private float downwardInput;
     private float verticalRaySpacing, horizontalRaySpacing;
     private float verticalRayLength, horizontalRayLength;
@@ -68,7 +68,7 @@ public class PlayerMovement : MonoBehaviour
     
 
     private bool hasJumpedOnGround, hasDoubleJump, hasCoyoteTime;
-
+    private bool hasBeenActivated;
     private bool hasAccessibility;
     private bool isMovingLeft, isMovingRight;
     private bool isStandingOnOneWayPlatform;
@@ -161,6 +161,7 @@ public class PlayerMovement : MonoBehaviour
         AccessabilityMoveDown();
         UpdateCoyoteTime();
         RunKnockbackTimer();
+        ActivateMovementFirstTime();
 
         if (isGrounded == false)
         {
@@ -207,7 +208,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext ctx)
     {
-        if (GameManager.Instance.GameIsPaused == true) return;
+        if (hasBeenActivated == false || GameManager.Instance.GameIsPaused == true) return;
 
         downwardInput = ctx.ReadValue<Vector2>().y;
         movementAmount = ctx.ReadValue<Vector2>().x;
@@ -259,6 +260,16 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private void ActivateMovementFirstTime()
+    {
+        if (hasBeenActivated == true) return;
+        activationTimer += Time.deltaTime;
+        if (activationTimer >= 0.3f)
+        {
+            hasBeenActivated = true;
+        }
+    }
+
     public static void SetDownwardForce(float value, float downfroce)
     {
         float temp = downfroce;
@@ -269,7 +280,7 @@ public class PlayerMovement : MonoBehaviour
     //Autojump setting av Nyman - magic numbers beware.. >.<
     public void OnJump(InputAction.CallbackContext ctx)
     {
-        if (GameManager.Instance.GameIsPaused == true) return;
+        if (hasBeenActivated == false || GameManager.Instance.GameIsPaused == true) return;
 
         if (ctx.started && jumpSetting == JumpSetting.Press)
         {

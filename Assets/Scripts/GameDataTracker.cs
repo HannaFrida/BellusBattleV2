@@ -72,10 +72,10 @@ public class GameDataTracker : MonoBehaviour
             killsEachRoundDic.Add(currentRound, new List<KillEvent>());
         }
         KillEvent killEvent = new KillEvent(killerID: killer, killedPlayerID: killed, weaponName, timeOfKill);
-        killsEachRoundDic[currentRound].Add(killEvent);
         killList.Add(killEvent);
         if(killer != killed)
         {
+            killsEachRoundDic[currentRound].Add(killEvent);
             AddNewKill(killer);
         }
         

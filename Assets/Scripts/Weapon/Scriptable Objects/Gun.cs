@@ -249,6 +249,8 @@ public class Gun : MonoBehaviour
 
     private void Shoot()
     {
+
+        if (enabled == false || gameObject.activeSelf == false) return;
         /*
         if (gunsAmmo == 0 || weaponData.name != "BasicSword")
         {
