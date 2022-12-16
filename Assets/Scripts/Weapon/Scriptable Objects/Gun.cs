@@ -45,6 +45,7 @@ public class Gun : MonoBehaviour
     bool isStartTimerForDrop;
     float dropTimer;
     bool isDropped;
+    private bool canDrop = true;
 
     [Header("DeSpawning")]
     [Tooltip("time before the weapon can be picked up again")]
@@ -119,6 +120,7 @@ public class Gun : MonoBehaviour
             {
                 dropTimer = 0;
                 railGoneTime = false;
+                canDrop = true;
                 Drop();
                 Despawn();
                 foreach (Aim aim in ownerAim)
@@ -311,7 +313,7 @@ public class Gun : MonoBehaviour
             }
             else if (weaponData.name == "RailGun"){
                 GameObject firedProjectile = Instantiate(weaponData.projectile, muzzle.transform.position, transform.rotation);
-
+                canDrop = false;
                 _projectile = firedProjectile.GetComponent<Projectile>();
                 _projectile.SetDamage(weaponData.damage);
                 _projectile.gameObject.transform.parent = muzzle.transform;
@@ -348,6 +350,8 @@ public class Gun : MonoBehaviour
 
     public void Drop()
     {
+        if (canDrop == false) return;
+
         isPickedUp = false;
         if (weaponManager != null)
         {
