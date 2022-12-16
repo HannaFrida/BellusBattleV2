@@ -6,7 +6,7 @@ using UnityEngine;
 public class GrenadeShell : Grenade
 {
     private float energyMuliplierOnBounce = 0.5f;
-    private bool hasExploded;
+    //private bool hasExploded;
     private bool hasHitGround;
     private Rigidbody rigidBody;
     private Vector3 velocityOnImpact;
@@ -30,6 +30,7 @@ public class GrenadeShell : Grenade
         {
             if (!hasExploded && !hasHitGround)
             {
+                Debug.Log("boom");
                 Explode();
                 hasExploded = true;
             }

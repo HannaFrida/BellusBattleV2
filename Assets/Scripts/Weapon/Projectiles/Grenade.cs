@@ -16,6 +16,7 @@ public class Grenade : Projectile
     [SerializeField] Collider[] hits;
     [SerializeField] bool lighting =false;
     [SerializeField] bool fire = false;
+    protected bool hasExploded;
 
     protected virtual void Start()
     {
@@ -40,6 +41,8 @@ public class Grenade : Projectile
     public void Explode()
     {
         Destroy(gameObject, 1.5f);
+        if (hasExploded == true) return;
+
         if (bombMesh != null)
         {
             bombMesh.SetActive(false);
