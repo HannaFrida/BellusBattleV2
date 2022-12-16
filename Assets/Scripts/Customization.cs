@@ -24,22 +24,20 @@ public class Customization : MonoBehaviour
             {
                 currenthats.Add(currenthats[random]);
                 Destroy(place.transform.GetChild(0).gameObject);
-                // add
             }
             random = Random.Range(0, currenthats.Count);
             GameObject hat = Instantiate(currenthats[random], place.transform);
-            if(place != null)
+            if (place != null)
             {
                 hat.transform.parent = place.transform;
                 currenthats.Remove(currenthats[random]);
             }
+            else Debug.LogError("sök vägen är fel");
+            // solution 2
             // object.transform.GetChild(Random.Range(0, hats.Count));
             //change something if needed
         }
     }
-    // list of hats prefabs
-    // go in a box collider
-    // ge random hat
     //check boxes ...
     //ears
     // eyes
