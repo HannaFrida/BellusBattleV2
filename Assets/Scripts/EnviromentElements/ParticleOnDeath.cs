@@ -11,8 +11,11 @@ public class ParticleOnDeath : MonoBehaviour
     }
     private void OnDestroy()
     {
-        transform.parent.GetComponentInChildren<ParticleSystem>().Play();
-        sM.GlassShatterSound();
+        if (!gameObject.scene.isLoaded) //Was Deleted
+        {
+            transform.parent.GetComponentInChildren<ParticleSystem>().Play();
+            sM.GlassShatterSound();
+        } 
     }
 
 
