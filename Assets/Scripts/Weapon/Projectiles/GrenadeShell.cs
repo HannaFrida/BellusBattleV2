@@ -26,7 +26,7 @@ public class GrenadeShell : Grenade
             BounceGrenade(normal);
             
         }
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("PlayerHead"))
         {
             if (!hasExploded && !hasHitGround)
             {
