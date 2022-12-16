@@ -580,10 +580,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2488745732229595812}
+  - component: {fileID: 2488745732229595835}
   - component: {fileID: 2488745732229595815}
   - component: {fileID: 2488745732229595813}
   - component: {fileID: 2488745732229595834}
-  - component: {fileID: 2488745732229595835}
   - component: {fileID: 722224642}
   m_Layer: 5
   m_Name: TransitionManager
@@ -618,6 +618,23 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &2488745732229595835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2488745732229595814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c82f6f75544cb174c9b322eee2e0e75d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _fadeType: 5
+  _fadeOnStart: 1
+  _animationSpeed: 1
+  _randomizeFadeType: 1
+  _crossFadeOnRandom: 0
 --- !u!223 &2488745732229595815
 Canvas:
   m_ObjectHideFlags: 0
@@ -671,21 +688,6 @@ CanvasGroup:
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
---- !u!114 &2488745732229595835
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2488745732229595814}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c82f6f75544cb174c9b322eee2e0e75d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _fadeOnStart: 1
-  _fadeType: 0
-  _animationSpeed: 1
 --- !u!114 &722224642
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -8,15 +8,20 @@ using Random = UnityEngine.Random;
 public class TransitionManager : MonoBehaviour
 {
 
-    public enum FadeType {Random, FadeBlack, FadeSimon, FadeCircle, FadeSqure, FadeBomb, FadeRoll}
+    public enum FadeType { FadeBlack, FadeSimon, FadeCircle, FadeSqure, FadeBomb, FadeRoll }
     private Animator _ac;
 
+    [Header("Transition Settigns ")]
+    [SerializeField] FadeType _fadeType = FadeType.FadeSimon;
+    [Tooltip("The playbackspeed of the animator, default = 1")]
     [SerializeField] bool _fadeOnStart = true;
+    [SerializeField] float _animationSpeed = 1;
+
+    [Header("Randomization")]
+    [SerializeField] bool _randomizeFadeType = false;
     [Tooltip("Fade in same style as last fadeout while using the random FadeType")]
     [SerializeField] bool _crossFadeOnRandom = true;
-    [SerializeField] FadeType _fadeType = FadeType.Random;
-    [Tooltip("The playbackspeed of the animator, default = 1")]
-    [SerializeField] float _animationSpeed = 1;
+
 
     private FadeType lastFadeTypeUsed;
 
@@ -24,17 +29,22 @@ public class TransitionManager : MonoBehaviour
     {
         _ac = GetComponent<Animator>();
         _ac.speed = _animationSpeed;
-        if (_fadeOnStart) FadeIn(_fadeType);
+        lastFadeTypeUsed = _fadeType;
+        if (_fadeOnStart) CheckRandomFadeIn(); FadeIn();
     }
 
     //Play Fade Out Animation
-    public void FadeOut(FadeType fadeType)
+    public void FadeOut()
     {
-        switch (fadeType)
+        //Randomize fadetype
+        if (_randomizeFadeType)
         {
-            case FadeType.Random:
-                FadeOut(lastFadeTypeUsed = GetRandomFadeType());
-                break;
+            _fadeType = GetRandomFadeType();
+            lastFadeTypeUsed = _fadeType;
+        }
+
+        switch (_fadeType)
+        {
             case FadeType.FadeBlack:
                 _ac.SetTrigger("FadeOutBlack");
                 break;
@@ -57,14 +67,13 @@ public class TransitionManager : MonoBehaviour
     }
 
     //Play Fade In Animation
-    public void FadeIn(FadeType fadeType)
+    public void FadeIn()
     {
-        switch (fadeType)
+
+        CheckRandomFadeIn();
+
+        switch (_fadeType)
         {
-            case FadeType.Random:
-                if (_crossFadeOnRandom) FadeIn(lastFadeTypeUsed);
-                else FadeIn(GetRandomFadeType());
-                break;
             case FadeType.FadeBlack:
                 _ac.SetTrigger("FadeInBlack");
                 break;
@@ -88,6 +97,18 @@ public class TransitionManager : MonoBehaviour
     FadeType GetRandomFadeType()
     {
         return (FadeType)Random.Range(0, Enum.GetValues(typeof(FadeType)).Length);
+    }
+
+    private void CheckRandomFadeIn()
+    {
+        if (_randomizeFadeType && _crossFadeOnRandom)
+        {
+            _fadeType = lastFadeTypeUsed;
+        }
+        else if (_randomizeFadeType)
+        {
+            _fadeType = GetRandomFadeType();
+        }
     }
 
 }
