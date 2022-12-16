@@ -23,9 +23,10 @@ public class FireworkPlayer : MonoBehaviour
 
             if (timer <= 0)
             {
-                //soundManager.FireWorkSound();
-                allFireWorks[Random.Range(0, allFireWorks.Count)].Play();
-                timer = Random.Range(0.5f, 1.5f);
+            
+            allFireWorks[Random.Range(0, allFireWorks.Count)].Play(); 
+            soundManager.FireWorkSound();
+            timer = Random.Range(0.5f, 1.5f);
                 
 
         }
