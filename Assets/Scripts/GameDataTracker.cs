@@ -189,6 +189,7 @@ public class GameDataTracker : MonoBehaviour
         List<int> order = new List<int>();
         foreach(KeyValuePair<int,int> playerId in scoreOrder)
         {
+            if (playerId.Key == 0) continue;
             order.Add(playerId.Key);
         }
         order.Reverse();
