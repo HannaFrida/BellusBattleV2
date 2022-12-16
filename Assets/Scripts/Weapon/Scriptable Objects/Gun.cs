@@ -304,7 +304,7 @@ public class Gun : MonoBehaviour
                     _projectile = bullet.GetComponent<Projectile>();
                     _projectile.SetDamage(weaponData.damage);
                     _projectile.GetComponent<Rigidbody>().AddForce(dir += force);
-
+                    _projectile.SetShooterID(ownerID);
                     timeSinceLastShot = 0;
                 }
 
