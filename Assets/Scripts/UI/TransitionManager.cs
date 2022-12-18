@@ -78,6 +78,17 @@ public class TransitionManager : MonoBehaviour
         }
     }
 
+    public void StartFadeOutCoroutine()
+    {
+        StartCoroutine(FadeOutNum());
+    }
+
+    IEnumerator FadeOutNum()
+    {
+        FadeOut();
+        yield return new WaitForSeconds(_animationSpeed);
+    }
+
     //Play Fade In Animation
     public void FadeIn()
     {
