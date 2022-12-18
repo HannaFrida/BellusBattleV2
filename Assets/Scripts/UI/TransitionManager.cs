@@ -13,34 +13,46 @@ public class TransitionManager : MonoBehaviour
 
     [Header("Transition Settigns ")]
     [SerializeField] FadeType _fadeType = FadeType.FadeSimon;
-    [Tooltip("The playbackspeed of the animator, default = 1")]
+    [Tooltip("The playbackspeed of the animator, default = 1 ie val 2 = 2 second animation")]
     [SerializeField] bool _fadeOnStart = true;
-    [SerializeField] float _animationSpeed = 1;
+    public bool _fadeOnEnd = true;
+    public float _animationSpeed = 1;
 
     [Header("Randomization")]
     [SerializeField] bool _randomizeFadeType = false;
     [Tooltip("Fade in same style as last fadeout while using the random FadeType")]
     [SerializeField] bool _crossFadeOnRandom = true;
 
-
-    private FadeType lastFadeTypeUsed;
+    //private int _counter = 0;
+    private FadeType _lastFadeTypeUsed;
 
     private void Start()
     {
         _ac = GetComponent<Animator>();
         _ac.speed = _animationSpeed;
-        lastFadeTypeUsed = _fadeType;
+        //  _lastFadeTypeUsed = _fadeType;
+        //  if (_fadeOnStart) CheckRandomFadeIn(); FadeIn();
+    }
+
+    private void OnLevelWasLoaded(int level)
+    {
+        _lastFadeTypeUsed = _fadeType;
         if (_fadeOnStart) CheckRandomFadeIn(); FadeIn();
     }
+
 
     //Play Fade Out Animation
     public void FadeOut()
     {
+        if (_fadeOnEnd == false) return;
+        /*else if (_counter == 0) return;
+        _counter++;*/
+
         //Randomize fadetype
         if (_randomizeFadeType)
         {
             _fadeType = GetRandomFadeType();
-            lastFadeTypeUsed = _fadeType;
+            _lastFadeTypeUsed = _fadeType;
         }
 
         switch (_fadeType)
@@ -69,7 +81,7 @@ public class TransitionManager : MonoBehaviour
     //Play Fade In Animation
     public void FadeIn()
     {
-
+        if (!_fadeOnStart) { return; }
         CheckRandomFadeIn();
 
         switch (_fadeType)
@@ -103,7 +115,7 @@ public class TransitionManager : MonoBehaviour
     {
         if (_randomizeFadeType && _crossFadeOnRandom)
         {
-            _fadeType = lastFadeTypeUsed;
+            _fadeType = _lastFadeTypeUsed;
         }
         else if (_randomizeFadeType)
         {
