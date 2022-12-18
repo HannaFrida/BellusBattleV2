@@ -10,6 +10,7 @@ public class Customization : MonoBehaviour
     enum HatList {FromList, FromScene};
     [SerializeField] private HatList hatList;
     [SerializeField] private List<GameObject> hats = new List<GameObject>();
+    [SerializeField] private Vector3 positionAdjustment;
     private List<GameObject> availableHats;
     private List<GameObject> removedHats = new List<GameObject>();
     int random;
@@ -58,7 +59,7 @@ public class Customization : MonoBehaviour
     {
         random = Random.Range(0, availableHats.Count - 1);
         GameObject hat = ChooseHatList();
-        hat.transform.position = place.transform.position + new Vector3(0,1f,0);
+        hat.transform.position = place.transform.position + positionAdjustment;
         hat.transform.parent = place.transform;
         removedHats.Add(hat);
         availableHats.Remove(availableHats[random]);
