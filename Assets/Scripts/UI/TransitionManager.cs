@@ -78,7 +78,7 @@ public class TransitionManager : MonoBehaviour
         }
     }
 
-    public void StartFadeOutCoroutine()
+    public void FadeOutCoroutine()
     {
         StartCoroutine(FadeOutNum());
     }
