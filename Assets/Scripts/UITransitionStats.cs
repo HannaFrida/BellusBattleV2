@@ -6,6 +6,7 @@ using TMPro;
 public class UITransitionStats : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI FactText;
+    [SerializeField] private TextMeshProUGUI roundText;
     [SerializeField] private TextMeshProUGUI[] scoreTexts;
     [SerializeField] private TextMeshProUGUI[] killsTexts;
     [SerializeField] private GameObject[] playerIcons;
@@ -14,6 +15,7 @@ public class UITransitionStats : MonoBehaviour
     {
         UpdateTransitionScene();
         ChooseInterestingStat();
+        HowManyRounds();
     }
     // Start is called before the first frame update
     void Start()
@@ -29,6 +31,15 @@ public class UITransitionStats : MonoBehaviour
             scoreTexts[i].text = "Score: " + GameDataTracker.Instance.GetPlayerScore(i + 1);
             killsTexts[i].text = "Kills: " + GameDataTracker.Instance.GetPlayerKills(i + 1);
         }
+    }
+
+    private void HowManyRounds()
+    {
+        if (roundText == null)
+        {
+            return;
+        }
+        roundText.text = "Score to win: " + GameManager.Instance.GetScoreToWin;
     }
 
     private void ChooseInterestingStat()
