@@ -14,9 +14,11 @@ GameObject:
   - component: {fileID: 2950194858424178827}
   - component: {fileID: 3891884815410118122}
   - component: {fileID: 4597551444323043365}
+  - component: {fileID: 5491827909058061447}
+  - component: {fileID: 4146391535283090489}
   m_Layer: 6
   m_Name: SideTower
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -126,6 +128,32 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 6, y: 25, z: 15}
   m_Center: {x: -26.75, y: 101, z: 0}
+--- !u!65 &5491827909058061447
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3674144344873470005}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 15, z: 15}
+  m_Center: {x: -25, y: 81, z: 0}
+--- !u!65 &4146391535283090489
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3674144344873470005}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 15, z: 15}
+  m_Center: {x: 25, y: 81, z: 0}
 --- !u!1 &8160095278228108135
 GameObject:
   m_ObjectHideFlags: 0
