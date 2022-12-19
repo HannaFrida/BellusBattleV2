@@ -64,6 +64,11 @@ public class DashAdvanced : MonoBehaviour
         get => velocity.y;
     }
 
+    public float HorizontalDashForce
+    {
+        get => velocity.x;
+    }
+
     enum DashType { E1_BasicDash, E2_TwoStateDash, E3_AdvancedDash, E4_GigaChadDash }
     [SerializeField] private DashType dashType;
 

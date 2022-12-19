@@ -50,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
     private int horizontalRayCount = 6;
     private int verticalRayCount = 4;
 
-    private readonly float horizontalSkinWidth = 0.2f;
+    private readonly float horizontalSkinWidth = 0.4f;
     private readonly float verticalSkinWidth = 0.1f;
     private readonly float knockBackTime = 0.2f;
 
@@ -156,7 +156,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         isGrounded = IsGrounded;
-        UpdateRayCastOrgins();
+        
         UpdateMovementForce();
         AccessabilityMoveDown();
         UpdateCoyoteTime();
@@ -180,7 +180,7 @@ public class PlayerMovement : MonoBehaviour
         }
         velocity = new Vector2(movementX, movementY) + externalForce;
         JumpBuffer();
-
+        UpdateRayCastOrgins();
         if (velocity.y != 0)
         {
 
@@ -480,6 +480,18 @@ public class PlayerMovement : MonoBehaviour
     private void HandleVerticalCollisions(ref Vector2 velocity)
     {
         float directionY = Mathf.Sign(velocity.y);
+
+
+        float curRayLength;
+        if (da.IsDashing == true && da.VerticalDashForce < 0 || da.VerticalDashForce > 35f)
+        {
+            curRayLength = verticalRayLength * 1.4f;
+        }
+        else
+        {
+            curRayLength = verticalRayLength;
+        }
+
         for (int i = 0; i < verticalRayCount; i++)
         {
             Vector2 rayOrigin;
@@ -497,8 +509,9 @@ public class PlayerMovement : MonoBehaviour
             //Debug.DrawRay(rayOrigin, Vector2.up * directionY * verticalRayLength, Color.red);
 
             //RaycastHit hit;
-            if (Physics.Raycast(rayOrigin, Vector2.up * directionY, out RaycastHit hit, verticalRayLength, collisionLayer))
+            if (Physics.Raycast(rayOrigin, Vector2.up * directionY, out RaycastHit hit, curRayLength, collisionLayer))
             {
+              
                 if (velocity.y < 0f)
                 {
                     transform.position = new Vector2(transform.position.x, hit.collider.bounds.max.y);
@@ -509,7 +522,7 @@ public class PlayerMovement : MonoBehaviour
                 da.SetVelocity(Vector2.zero);
                 return;
             }
-            if (Physics.Raycast(rayOrigin, Vector2.up * directionY, out hit, verticalRayLength, oneWayLayer))
+            if (Physics.Raycast(rayOrigin, Vector2.up * directionY, out hit, curRayLength, oneWayLayer))
             {
                 if (velocity.y > 0) return;
 
@@ -529,10 +542,10 @@ public class PlayerMovement : MonoBehaviour
     private void HandleHorizontalCollisions(ref Vector2 velocity)
     {
         float curRayLength;
-        
-        if(da.IsDashing == true && da.VerticalDashForce < 10f)
+        Debug.Log(da.HorizontalDashForce);
+        if(da.IsDashing == true && da.HorizontalDashForce > 15f || da.HorizontalDashForce < -15f)
         {
-            curRayLength = horizontalRayLength * 2f;
+            curRayLength = horizontalRayLength * 2.4f;
         }
         else
         {
