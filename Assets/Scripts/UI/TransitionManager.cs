@@ -7,9 +7,10 @@ using Random = UnityEngine.Random;
 [RequireComponent(typeof(Animator))]
 public class TransitionManager : MonoBehaviour
 {
-
+    [Tooltip("FadeType")]
     public enum FadeType { FadeBlack, FadeSimon, FadeCircle, FadeSqure, FadeBomb, FadeRoll }
     private Animator _ac;
+    public static TransitionManager Instance;
 
     [Header("Transition Settigns ")]
     [SerializeField] FadeType _fadeType = FadeType.FadeSimon;
@@ -26,6 +27,12 @@ public class TransitionManager : MonoBehaviour
     //private int _counter = 0;
     private FadeType _lastFadeTypeUsed;
 
+    private void Awake()
+    {
+        if (Instance != null) Debug.LogError("Found more than one Transition Manager in scene.");
+        Instance = this;
+    }
+
     private void Start()
     {
         _ac = GetComponent<Animator>();
@@ -37,7 +44,7 @@ public class TransitionManager : MonoBehaviour
     private void OnLevelWasLoaded(int level)
     {
         _lastFadeTypeUsed = _fadeType;
-        if (_fadeOnStart) CheckRandomFadeIn(); FadeIn();
+        if (_fadeOnStart) CheckRandomFadeIn();  FadeIn(); 
     }
 
 

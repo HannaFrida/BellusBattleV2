@@ -9,11 +9,16 @@ public class UITransitionStats : MonoBehaviour
     [SerializeField] private TextMeshProUGUI[] scoreTexts;
     [SerializeField] private TextMeshProUGUI[] killsTexts;
     [SerializeField] private GameObject[] playerIcons;
-    // Start is called before the first frame update
-    void Start()
+
+    private void Awake()
     {
         UpdateTransitionScene();
         ChooseInterestingStat();
+    }
+    // Start is called before the first frame update
+    void Start()
+    {
+        
     }
 
     private void UpdateTransitionScene()
@@ -28,6 +33,7 @@ public class UITransitionStats : MonoBehaviour
 
     private void ChooseInterestingStat()
     {
+        if (FactText == null) return;
         string stat = "";
 
         if(GameDataTracker.Instance.MultiKillFinder().Equals("nothing interesting") == false)
