@@ -65,7 +65,7 @@ public class PlayerMovement : MonoBehaviour
     //private float movementAnimationSpeed;
     private float playerHeight;
 
-    
+
 
     private bool hasJumpedOnGround, hasDoubleJump, hasCoyoteTime;
     private bool hasBeenActivated;
@@ -487,15 +487,6 @@ public class PlayerMovement : MonoBehaviour
     private void HandleVerticalCollisions(ref Vector2 velocity)
     {
         float directionY = Mathf.Sign(velocity.y);
-        float curRayLength;
-        if (da.IsDashing == true)
-        {
-            curRayLength = horizontalRayLength * 1.4f;
-        }
-        else
-        {
-            curRayLength = horizontalRayLength;
-        }
         for (int i = 0; i < verticalRayCount; i++)
         {
             Vector2 rayOrigin;
@@ -513,7 +504,7 @@ public class PlayerMovement : MonoBehaviour
             //Debug.DrawRay(rayOrigin, Vector2.up * directionY * verticalRayLength, Color.red);
 
             //RaycastHit hit;
-            if (Physics.Raycast(rayOrigin, Vector2.up * directionY, out RaycastHit hit, curRayLength, collisionLayer))
+            if (Physics.Raycast(rayOrigin, Vector2.up * directionY, out RaycastHit hit, verticalRayLength, collisionLayer))
             {
                 if (velocity.y < 0f)
                 {
@@ -534,7 +525,7 @@ public class PlayerMovement : MonoBehaviour
                     transform.position = new Vector2(transform.position.x, hit.collider.bounds.max.y);
                     ResetValuesOnGrounded();
                 }
-                
+
                 velocity.y = 0f;
                 movementY = 0f;
                 return;
@@ -544,6 +535,16 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleHorizontalCollisions(ref Vector2 velocity)
     {
+        float curRayLength;
+        
+        if(da.IsDashing == true && da.VerticalDashForce < 10f)
+        {
+            curRayLength = horizontalRayLength * 2f;
+        }
+        else
+        {
+            curRayLength = horizontalRayLength;
+        }
         float directionX = Mathf.Sign(velocity.x);
         for (int i = horizontalRayCount - 1; i >= 0; i--)
         {
@@ -560,7 +561,7 @@ public class PlayerMovement : MonoBehaviour
 
             //Debug.DrawRay(rayOrigin, Vector2.right * directionX * horizontalRayLength, Color.red);
             //RaycastHit hit;
-            if (Physics.Raycast(rayOrigin, Vector2.right * directionX, out RaycastHit hit, horizontalRayLength, collisionLayer))
+            if (Physics.Raycast(rayOrigin, Vector2.right * directionX, out RaycastHit hit, curRayLength, collisionLayer))
             {
                 if (i == 0)
                 {
