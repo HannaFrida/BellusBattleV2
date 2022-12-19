@@ -8,12 +8,12 @@ using Random = UnityEngine.Random;
 [RequireComponent(typeof(Animator))]
 public class TransitionManager : MonoBehaviour
 {
-    public enum FadeType { FadeBlack, FadeSimon, FadeCircle, FadeSqure, FadeBomb, FadeRoll }
+    public enum FadeType { FadeSimon, FadeSqure, FadeBomb, FadeRoll }
     private Animator _ac;
     public static TransitionManager Instance;
     private bool hasDoneTransitionAnim;
     private float playTransAnimTimer;
-    private float playTransitionAnimationTime = 2.4f;
+    private float playTransitionAnimationTime = 2.2f;
 
     [Header("Transition Settigns ")]
     [SerializeField] FadeType _fadeType = FadeType.FadeSimon;
@@ -87,15 +87,19 @@ public class TransitionManager : MonoBehaviour
 
         switch (_fadeType)
         {
+            /*
             case FadeType.FadeBlack:
                 _ac.SetTrigger("FadeOutBlack");
                 break;
+            */
             case FadeType.FadeSimon:
                 _ac.SetTrigger("FadeOutSimon");
                 break;
+                /*
             case FadeType.FadeCircle:
                 _ac.SetTrigger("FadeOutCircle");
                 break;
+                */
             case FadeType.FadeSqure:
                 _ac.SetTrigger("FadeOutSquare");
                 break;
@@ -127,15 +131,19 @@ public class TransitionManager : MonoBehaviour
 
         switch (_fadeType)
         {
+            /*
             case FadeType.FadeBlack:
                 _ac.SetTrigger("FadeInBlack");
                 break;
+            */
             case FadeType.FadeSimon:
                 _ac.SetTrigger("FadeInSimon");
                 break;
+                /*
             case FadeType.FadeCircle:
                 _ac.SetTrigger("FadeInCircle");
                 break;
+                */
             case FadeType.FadeSqure:
                 _ac.SetTrigger("FadeInSquare");
                 break;
