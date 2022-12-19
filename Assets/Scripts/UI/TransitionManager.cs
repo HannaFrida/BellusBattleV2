@@ -54,14 +54,11 @@ public class TransitionManager : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(SceneManager.GetActiveScene().name);
         if (SceneManager.GetActiveScene().name.Equals("TransitionScene") && hasDoneTransitionAnim == false)
         {
-            Debug.Log("In trans sceen");
             playTransAnimTimer += Time.deltaTime;
             if (playTransAnimTimer >= playTransitionAnimationTime)
             {
-                Debug.Log("Fade out trans");
                 _fadeOnEnd = true;
                 hasDoneTransitionAnim = true;
                 FadeOut();

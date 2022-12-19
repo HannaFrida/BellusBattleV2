@@ -542,7 +542,6 @@ public class PlayerMovement : MonoBehaviour
     private void HandleHorizontalCollisions(ref Vector2 velocity)
     {
         float curRayLength;
-        Debug.Log(da.HorizontalDashForce);
         if(da.IsDashing == true && da.HorizontalDashForce > 15f || da.HorizontalDashForce < -15f)
         {
             curRayLength = horizontalRayLength * 2.4f;
