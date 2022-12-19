@@ -24,6 +24,11 @@ public class Customization : MonoBehaviour
         if(hatList == HatList.FromList) return Instantiate(availableHats[random], place.transform);
         return availableHats[random];
     }
+    private void RemoveHatList(GameObject placeObject)
+    {
+        if (hatList == HatList.FromList) Destroy(placeObject);
+        else placeObject.transform.parent = gameObject.transform.GetChild(0);
+    }
 
     // Start is called before the first frame update
     [System.Obsolete]
@@ -50,7 +55,7 @@ public class Customization : MonoBehaviour
             {
                 availableHats.Add(hat);
                 removedHats.Remove(hat);
-                Destroy(placeObject);
+                RemoveHatList(placeObject);
                 return;
             }
         }
@@ -60,6 +65,7 @@ public class Customization : MonoBehaviour
         random = Random.Range(0, availableHats.Count - 1);
         GameObject hat = ChooseHatList();
         hat.transform.position = place.transform.position + positionAdjustment;
+        hat.transform.rotation = place.transform.rotation;
         hat.transform.parent = place.transform;
         removedHats.Add(hat);
         //availableHats.Remove(availableHats[random]);
