@@ -6,14 +6,21 @@ using TMPro;
 public class UITransitionStats : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI FactText;
+    [SerializeField] private TextMeshProUGUI roundText;
     [SerializeField] private TextMeshProUGUI[] scoreTexts;
     [SerializeField] private TextMeshProUGUI[] killsTexts;
     [SerializeField] private GameObject[] playerIcons;
-    // Start is called before the first frame update
-    void Start()
+
+    private void Awake()
     {
         UpdateTransitionScene();
         ChooseInterestingStat();
+        HowManyRounds();
+    }
+    // Start is called before the first frame update
+    void Start()
+    {
+        
     }
 
     private void UpdateTransitionScene()
@@ -26,8 +33,18 @@ public class UITransitionStats : MonoBehaviour
         }
     }
 
+    private void HowManyRounds()
+    {
+        if (roundText == null)
+        {
+            return;
+        }
+        roundText.text = "Score to win: " + GameManager.Instance.GetScoreToWin;
+    }
+
     private void ChooseInterestingStat()
     {
+        if (FactText == null) return;
         string stat = "";
 
         if(GameDataTracker.Instance.MultiKillFinder().Equals("nothing interesting") == false)

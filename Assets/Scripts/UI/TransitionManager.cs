@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System;
 using Random = UnityEngine.Random;
 
@@ -43,6 +44,15 @@ public class TransitionManager : MonoBehaviour
 
     private void OnLevelWasLoaded(int level)
     {
+        if(SceneManager.GetActiveScene().Equals("TransitionScene"))
+        {
+            _fadeOnEnd = false;
+            return;
+        }
+        else
+        {
+            _fadeOnEnd = true;
+        }
         _lastFadeTypeUsed = _fadeType;
         if (_fadeOnStart) CheckRandomFadeIn();  FadeIn(); 
     }
