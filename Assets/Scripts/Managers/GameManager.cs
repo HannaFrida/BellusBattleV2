@@ -474,7 +474,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
 
     public void ChangeScenesToChooseFrom(LevelDetails scene)
     {
-        if (scene.GetToggle() && scenesToChooseFrom.Count > 0)
+        if (scene.GetToggle() && scenesToChooseFrom.Count != 1)
         {
             scenesToChooseFrom.Remove(scene.GetName());
             scenesToRemove.Add(scene.GetName());

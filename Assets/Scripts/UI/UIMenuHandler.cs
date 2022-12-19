@@ -62,12 +62,10 @@ public class UIMenuHandler : MonoBehaviour
         if (activePanel.name.Equals("MapsSelection_Panel"))
         {
             SetPanelActive(panels[0]);
-            Debug.Log(panels[0].name);
             return;
         }
         else
         {
-            Debug.Log("hahga fakk u");
             GameObject[] obj = GameObject.FindGameObjectsWithTag("Player");
             for (int i = 0; i < obj.Length; i++)
             {
