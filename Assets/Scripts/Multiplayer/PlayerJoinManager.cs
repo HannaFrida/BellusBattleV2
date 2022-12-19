@@ -39,47 +39,12 @@ public class PlayerJoinManager : PlayerSpawnManager
         // So Player 1 spawns at the first Trasnform in the list, Player 2 on the second, and so forth.
         playerDetails.startPos = SpawnLocations[playerInput.playerIndex].position;
 
-        // Rebind settings canvas in player posiotioning depending on PlayerID
-        RectTransform rtf;
-        rbd = GameObject.FindGameObjectWithTag("Rebind").GetComponent<RebindingDisplay>();
-        rtf = rbd.panel.gameObject.GetComponent<RectTransform>();
-        if (playerDetails.playerID == 1)
-        {
-            if (firstTimePlayerJoinsGame != null){
-                StartGameEffekt.Play();
-                Destroy(firstTimePlayerJoinsGame);
-            }
-            
-            rtf.SetTop(0);
-            rbd.playerIDText.text = playerDetails.playerID.ToString();
-            //rbd.panel.transform.position = rbd.PosP1.transform.position;
-        }
-        else if (playerDetails.playerID == 2)
-        {
-            //rbd.panel.transform.position = rbd.PosP2.transform.position;
-            rtf.SetLeft(960);
-            rtf.sizeDelta = new Vector2(1920, 1080);
-            rbd.playerIDText.text = playerDetails.playerID.ToString();
-        }
-        else if (playerDetails.playerID == 3)
-        {
-            //rbd.panel.transform.position = rbd.PosP3.transform.position;
-            rtf.SetBottom(540);
-            rtf.sizeDelta = new Vector2(1920, 1080);
-            rbd.playerIDText.text = playerDetails.playerID.ToString();
-        }
-        else if (playerDetails.playerID == 4)
-        {
-            //rbd.panel.transform.position = rbd.PosP4.transform.position;
-            rtf.SetLeft(960);
-            rtf.SetBottom(540);
-            rtf.sizeDelta = new Vector2(1920, 1080);
-            rbd.playerIDText.text = playerDetails.playerID.ToString();
-        }
-        ActivateUI(playerDetails.playerID);
 
-        rtf = null;
-        rbd = null; 
+        if (playerDetails.playerID == 1 && firstTimePlayerJoinsGame != null)
+        {
+            StartGameEffekt.Play();
+            Destroy(firstTimePlayerJoinsGame);
+        }
 
         Renderer renderer = playerInput.gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
         TextMeshPro indicatorText = playerInput.gameObject.GetComponentInChildren<TextMeshPro>();
