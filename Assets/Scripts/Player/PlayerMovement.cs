@@ -477,6 +477,15 @@ public class PlayerMovement : MonoBehaviour
     private void HandleVerticalCollisions(ref Vector2 velocity)
     {
         float directionY = Mathf.Sign(velocity.y);
+        float curRayLength;
+        if (da.IsDashing == true)
+        {
+            curRayLength = horizontalRayLength * 1.4f;
+        }
+        else
+        {
+            curRayLength = horizontalRayLength;
+        }
         for (int i = 0; i < verticalRayCount; i++)
         {
             Vector2 rayOrigin;
@@ -494,7 +503,7 @@ public class PlayerMovement : MonoBehaviour
             //Debug.DrawRay(rayOrigin, Vector2.up * directionY * verticalRayLength, Color.red);
 
             //RaycastHit hit;
-            if (Physics.Raycast(rayOrigin, Vector2.up * directionY, out RaycastHit hit, verticalRayLength, collisionLayer))
+            if (Physics.Raycast(rayOrigin, Vector2.up * directionY, out RaycastHit hit, curRayLength, collisionLayer))
             {
                 
                 if (velocity.y < 0f)
