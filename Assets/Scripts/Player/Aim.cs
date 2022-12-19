@@ -8,6 +8,7 @@ public class Aim : MonoBehaviour
     enum AngleRotations{ FullAngleRotation, HalvAngleRotation, FixedAnglesRotation }
     [SerializeField] private AngleRotations rotations;
     [SerializeField] private AngleRotations rotationsOverride;
+    [SerializeField] private PlayerHealth ph;
     [Range (1, 360)][SerializeField] private int amountOfFixedAgnles;
     private const float FULLCIRCLE = 360f;
     private const float HALFCIRCLE = 180f;
@@ -33,6 +34,7 @@ public class Aim : MonoBehaviour
     }
     public void DefualtJoystickInputToAngleCalculation(InputAction.CallbackContext context)
     {
+        if (ph.IsAlive == false) return;
         if (GameManager.Instance.GameIsPaused == true) return;
 
         Vector2 t = context.ReadValue<Vector2>();
@@ -43,6 +45,7 @@ public class Aim : MonoBehaviour
     }
     public void OverrideJoystickInputToAngleCalculation(InputAction.CallbackContext context)
     {
+        if (ph.IsAlive == false) return;
         if (GameManager.Instance.GameIsPaused == true) return;
 
         Vector2 t = context.ReadValue<Vector2>();

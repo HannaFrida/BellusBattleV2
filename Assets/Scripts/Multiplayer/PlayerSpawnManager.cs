@@ -112,7 +112,6 @@ public class PlayerSpawnManager : MonoBehaviour
         {
             if(players[i].GetComponent<PlayerDetails>().playerID == id)
             {
-                Debug.Log(i + " id: " + id);
                 players[i].transform.position = spawnLocations[index].transform.position;
             }
         }

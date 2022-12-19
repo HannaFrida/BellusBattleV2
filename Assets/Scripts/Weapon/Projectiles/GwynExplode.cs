@@ -5,19 +5,13 @@ using UnityEngine;
 
 public class GwynExplode : Grenade
 {
-    private bool hasExploded;
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player") && !hasExploded)
         {
-            if (!hasExploded)
-            {
-                Explode();
-                hasExploded = true;
-            }
-        }
-            
-     }
-        
+            Explode();
+            hasExploded = true;
+        }     
+     }    
 }
 

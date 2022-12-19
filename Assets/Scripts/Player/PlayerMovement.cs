@@ -349,15 +349,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void ResetValuesOnGrounded()
     {
-        playerAnimator.SetTrigger("Landing");
-        /** 
-         * Här ska landanimationen ligga!!!!
-         * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-         * ->            Här!             <-
-         * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-         * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-         * Här ska landanimationen ligga!!!!
-         */
+        //playerAnimator.SetTrigger("Landing");
+      
 
         coyoteTimer = 0;
         hasCoyoteTime = true;

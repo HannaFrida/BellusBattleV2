@@ -30,7 +30,6 @@ public class GrenadeShell : Grenade
         {
             if (!hasExploded && !hasHitGround)
             {
-                Debug.Log("boom");
                 Explode();
                 hasExploded = true;
             }
