@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Linq;
 
 
 
@@ -75,6 +76,17 @@ public class PlayerSpawnManager : MonoBehaviour
         
     }
 
+    private void SpawnPlayersInRandomOrder()
+    {
+        List<Transform> randomSpawns = new List<Transform>(spawnLocations);
+        randomSpawns = randomSpawns.OrderBy(i => Random.value).ToList();
+        for(int i = 0; i < players.Length; i++)
+        {
+            if (players[i] == null) continue;
+            players[i].transform.position = randomSpawns[i].transform.position;
+        }
+    }
+
     private void SpawnPlayers()
     {
         if(spawnInScoreOrder == true)
@@ -83,7 +95,8 @@ public class PlayerSpawnManager : MonoBehaviour
         }
         else
         {
-            SpawnPlayersBasedOnID();
+            //SpawnPlayersBasedOnID();
+            SpawnPlayersInRandomOrder();
         }
     }
 
