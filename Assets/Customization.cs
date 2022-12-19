@@ -64,9 +64,10 @@ public class Customization : MonoBehaviour
     {
         random = Random.Range(0, availableHats.Count - 1);
         GameObject hat = ChooseHatList();
-        hat.transform.position = place.transform.position + positionAdjustment;
-        hat.transform.rotation = place.transform.rotation;
         hat.transform.parent = place.transform;
+        hat.transform.localPosition = Vector3.zero+positionAdjustment;
+        hat.transform.localRotation = Quaternion.Euler(0, 0, 0);
+        hat.transform.localScale = new Vector3(1, 1, 1);
         removedHats.Add(hat);
         //availableHats.Remove(availableHats[random]);
     }
