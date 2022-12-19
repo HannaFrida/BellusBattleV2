@@ -41,6 +41,7 @@ public class PlayerHealth : MonoBehaviour
     private void Start()
     {
         pm = GetComponent<PlayerMovement>();
+        UnkillPlayer();
     }
 
     private void OnLevelWasLoaded(int level)

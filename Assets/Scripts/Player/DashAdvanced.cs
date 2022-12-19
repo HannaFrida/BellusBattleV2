@@ -54,6 +54,16 @@ public class DashAdvanced : MonoBehaviour
     private float gravity;
     public UnityEvent dashEvent;
 
+    public bool IsDashing
+    {
+        get => isDashing;
+    }
+
+    public float VerticalDashForce
+    {
+        get => velocity.y;
+    }
+
     enum DashType { E1_BasicDash, E2_TwoStateDash, E3_AdvancedDash, E4_GigaChadDash }
     [SerializeField] private DashType dashType;
 
@@ -133,10 +143,6 @@ public class DashAdvanced : MonoBehaviour
     //}
     ////#endregion
 
-    public bool IsDashing
-    {
-        get => isDashing;
-    }
     public void DashWithJoystick(InputAction.CallbackContext context)
     {
         if (enabled == false || GameManager.Instance.GameIsPaused == true || GameManager.Instance.AcceptPlayerInput == false || (!canDash && isDashing)) return;
