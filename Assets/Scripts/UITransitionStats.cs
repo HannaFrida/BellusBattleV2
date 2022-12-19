@@ -11,6 +11,11 @@ public class UITransitionStats : MonoBehaviour
     [SerializeField] private TextMeshProUGUI[] killsTexts;
     [SerializeField] private GameObject[] playerIcons;
 
+
+    public GameObject[] PlayerIcons
+    {
+        get => playerIcons;
+    }
     private void Awake()
     {
         UpdateTransitionScene();
