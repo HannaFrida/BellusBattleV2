@@ -438,6 +438,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
             GameDataTracker.Instance.AddWinner(roundCounter, 0);
         }
         hasGivenScore = false;
+        TransitionManager.Instance.FadeOutCoroutine();
         LoadNextScene();
 
     }
