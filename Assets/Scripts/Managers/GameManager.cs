@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
     [SerializeField] private GameObject welcomePanel;
 
     [Header("Transition")]
-    [SerializeField] private float transitionTime = 7f;
+    [SerializeField] private float transitionTime = 2f;
     AsyncOperation asyncLoad;
     [SerializeField] Transition trans;
     //static Vector2 pos1, pos2, pos3, pos4;

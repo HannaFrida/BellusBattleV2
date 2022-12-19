@@ -13,6 +13,7 @@ public class PlayerSpawnManager : MonoBehaviour
     [SerializeField] private GameObject[] players;
     [SerializeField] private TextMeshProUGUI countDownText;
     [SerializeField] private bool spawnInScoreOrder;
+    [SerializeField] private UITransitionStats ustats;
 
     private int playerCount;
     private bool runTimer;
@@ -126,6 +127,7 @@ public class PlayerSpawnManager : MonoBehaviour
             if(players[i].GetComponent<PlayerDetails>().playerID == id)
             {
                 players[i].transform.position = spawnLocations[index].transform.position;
+                ustats.PlayerIcons[i].transform.position = spawnLocations[index].transform.position;
             }
         }
     }
