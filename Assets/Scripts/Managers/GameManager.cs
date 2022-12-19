@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
     private bool gameHasStarted;
     [SerializeField] private bool gameIsPaused;
 
+    private bool hasRunTransition = false;
     private bool runRoundTimer;
     private bool acceptPlayerInput = true;
     [SerializeField] private float roundDuration;
@@ -54,7 +55,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
     [SerializeField] private GameObject welcomePanel;
 
     [Header("Transition")]
-    [SerializeField] private float transitionTime = 5f;
+    [SerializeField] private float transitionTime = 7f;
     AsyncOperation asyncLoad;
     [SerializeField] Transition trans;
     //static Vector2 pos1, pos2, pos3, pos4;
@@ -418,7 +419,14 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
     {
 
         giveScoreTimer += Time.deltaTime;
+        if (giveScoreTimer >= giveScoreTime -1f && hasRunTransition == false)
+        {
+            hasRunTransition = true;
+            TransitionManager.Instance.FadeOutCoroutine();
+        }
+
         if (giveScoreTimer <= giveScoreTime) return;
+        
         GameDataTracker.Instance.SaveRoundTime(roundCounter, roundDuration);
         
         if (playersAlive.Count != 0)
@@ -435,6 +443,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
                 ClearScore();
                 StartCoroutine(RestartGame());
                 //Nån har vunnit!
+                hasRunTransition = false;
                 return;
             }
         }
@@ -444,7 +453,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
             GameDataTracker.Instance.AddWinner(roundCounter, 0);
         }
         hasGivenScore = false;
-        TransitionManager.Instance.FadeOutCoroutine();
+        hasRunTransition = false;
         LoadNextScene();
 
     }
