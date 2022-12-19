@@ -15,6 +15,7 @@ public class Customization : MonoBehaviour
     private List<GameObject> removedHats = new List<GameObject>();
     int random;
     GameObject place;
+    GameObject currentHat;
     private void Start()
     {
         availableHats = new List<GameObject>(hats);
@@ -53,6 +54,7 @@ public class Customization : MonoBehaviour
         {
             if (placeObject == hat)
             {
+                currentHat = hat;
                 availableHats.Add(hat);
                 removedHats.Remove(hat);
                 RemoveHatList(placeObject);
@@ -62,8 +64,12 @@ public class Customization : MonoBehaviour
     }
     private void PutHat()
     {
-        random = Random.Range(0, availableHats.Count - 1);
-        GameObject hat = ChooseHatList();
+        GameObject hat;
+        do
+        {
+            random = Random.Range(0, availableHats.Count - 1);
+            hat = ChooseHatList();
+        } while (currentHat == hat);
         hat.transform.parent = place.transform;
         hat.transform.localPosition = Vector3.zero+positionAdjustment;
         hat.transform.localRotation = Quaternion.Euler(0, 0, 0);
