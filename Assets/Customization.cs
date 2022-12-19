@@ -62,7 +62,7 @@ public class Customization : MonoBehaviour
         hat.transform.position = place.transform.position + positionAdjustment;
         hat.transform.parent = place.transform;
         removedHats.Add(hat);
-        availableHats.Remove(availableHats[random]);
+        //availableHats.Remove(availableHats[random]);
     }
     //check boxes ...
     //ears
