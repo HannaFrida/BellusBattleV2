@@ -133,10 +133,6 @@ public class DashAdvanced : MonoBehaviour
     //}
     ////#endregion
 
-    public bool IsDashing
-    {
-        get => isDashing;
-    }
     public void DashWithJoystick(InputAction.CallbackContext context)
     {
         if (enabled == false || GameManager.Instance.GameIsPaused == true || GameManager.Instance.AcceptPlayerInput == false || (!canDash && isDashing)) return;
