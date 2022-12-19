@@ -108,6 +108,12 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
     {
         get => roundDuration;
     }
+
+    public int GetScoreToWin
+    {
+        get => scoreToWin;
+    }
+
     private void OnLevelWasLoaded(int level)
     {
         /*
