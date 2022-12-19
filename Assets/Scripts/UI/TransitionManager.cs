@@ -8,10 +8,12 @@ using Random = UnityEngine.Random;
 [RequireComponent(typeof(Animator))]
 public class TransitionManager : MonoBehaviour
 {
-    [Tooltip("FadeType")]
     public enum FadeType { FadeBlack, FadeSimon, FadeCircle, FadeSqure, FadeBomb, FadeRoll }
     private Animator _ac;
     public static TransitionManager Instance;
+    private bool hasDoneTransitionAnim;
+    private float playTransAnimTimer;
+    private float playTransitionAnimationTime = 2.4f;
 
     [Header("Transition Settigns ")]
     [SerializeField] FadeType _fadeType = FadeType.FadeSimon;
@@ -38,25 +40,36 @@ public class TransitionManager : MonoBehaviour
     {
         _ac = GetComponent<Animator>();
         _ac.speed = _animationSpeed;
+        
         //  _lastFadeTypeUsed = _fadeType;
         //  if (_fadeOnStart) CheckRandomFadeIn(); FadeIn();
     }
 
     private void OnLevelWasLoaded(int level)
     {
-        if(SceneManager.GetActiveScene().Equals("TransitionScene"))
-        {
-            _fadeOnEnd = false;
-            return;
-        }
-        else
-        {
-            _fadeOnEnd = true;
-        }
         _lastFadeTypeUsed = _fadeType;
+        hasDoneTransitionAnim = false;
         if (_fadeOnStart) CheckRandomFadeIn();  FadeIn(); 
     }
 
+    private void Update()
+    {
+        Debug.Log(SceneManager.GetActiveScene().name);
+        if (SceneManager.GetActiveScene().name.Equals("TransitionScene") && hasDoneTransitionAnim == false)
+        {
+            Debug.Log("In trans sceen");
+            playTransAnimTimer += Time.deltaTime;
+            if (playTransAnimTimer >= playTransitionAnimationTime)
+            {
+                Debug.Log("Fade out trans");
+                _fadeOnEnd = true;
+                hasDoneTransitionAnim = true;
+                FadeOut();
+                playTransAnimTimer = 0f;
+            }
+        }
+        
+    }
 
     //Play Fade Out Animation
     public void FadeOut()
