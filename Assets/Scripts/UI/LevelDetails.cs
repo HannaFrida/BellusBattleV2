@@ -37,6 +37,11 @@ public class LevelDetails : MonoBehaviour
     }
     public void ToggleValueChanged()
     {
+        print(GameManager.Instance.scenesToChooseFrom.Count);
+        if (GameManager.Instance.scenesToChooseFrom.Count - 1 == 1 && toggle.isOn == true)
+        {
+            return;
+        }
         GameManager.Instance.ChangeScenesToChooseFrom(this);
         if(toggle.isOn)image.color = color1;
         else image.color = color2;
