@@ -567,9 +567,11 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
     {
         //GameDataTracker.Instance.WriteToFile();
         SceneManager.LoadScene("The_End");
+        soundManager.FadeInEndSceneSounds();
         gameLoopFinished = true;
         DataPersistenceManager.Instance.SaveGame();
         yield return new WaitForSeconds(timeTillRestartGame);
+        soundManager.FadeOutEndSceneSounds();
         Destroy(transform.parent.gameObject);
         SceneManager.LoadScene(System.IO.Path.GetFileNameWithoutExtension(SceneUtility.GetScenePathByBuildIndex(0)));
     }

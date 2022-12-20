@@ -30,7 +30,6 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioSource fireWorkSource;
     [SerializeField] private AudioClip[] allFireworkSounds;
 
-
     [Header("UI sounds")]
     [SerializeField] private AudioSource howerMenuSource;
     [SerializeField] private AudioSource pressMenuSource;
@@ -39,7 +38,13 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioSource pressMenu4Source;
     [SerializeField] private AudioSource pressBackButtonSource;
     [SerializeField] private AudioSource pressingBattleButtonSource;
-   
+
+    [Header("End scene sounds")]
+    [SerializeField] private AudioSource applauseSource;
+    [SerializeField] private AudioSource drumsSource;
+    //fyrverkerier ligger under foliage
+
+
     private float volLowRan = 0.3f;
     private float volHighRan = 1.0f;
     private float lowPitchRan = 0.3f;
@@ -72,6 +77,16 @@ public class SoundManager : MonoBehaviour
     public void FadeOutMusic()
     {
         StartCoroutine(FadeMixerGroup.StartFade(overallMixer, "MusicMixerGroup", 1f, 0f));
+    }
+    public void FadeInEndSceneSounds()
+    {
+        applauseSource.Play();
+        drumsSource.Play();
+        StartCoroutine(FadeMixerGroup.StartFade(overallMixer, "EndSceneGroup", 1f, highestEffectVolume));
+    }
+    public void FadeOutEndSceneSounds()
+    {
+        StartCoroutine(FadeMixerGroup.StartFade(overallMixer, "EndSceneGroup", 2f, 0f));
     }
     public void FadeInBellSounds()
     {
