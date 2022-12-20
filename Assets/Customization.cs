@@ -73,7 +73,12 @@ public class Customization : MonoBehaviour, IDataPersistenceManagerHats
         availableHats.Remove(availableHats[random]);
         DataPersistenceManager.Instance.SaveHatsData();
     }
-
+    private void OnApplicationQuit()
+    {
+        availableHats = hats;
+        removedHats.Clear();
+        DataPersistenceManager.Instance.SaveHatsData();
+    }
     public void LoadData(HatsData data)
     {
         this.availableHats = data.availableHats;

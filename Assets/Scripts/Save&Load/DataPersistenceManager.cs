@@ -21,7 +21,6 @@ public class DataPersistenceManager : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log(Application.dataPath);
         if (Instance != null) Debug.LogError("Found more than one Game Persistence Manager in scene.");
         Instance = this;
         this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
