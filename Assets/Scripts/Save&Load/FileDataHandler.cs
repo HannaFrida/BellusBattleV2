@@ -6,8 +6,10 @@ using System.IO;
 
 public class FileDataHandler
 {
-    private string dataDirPath = "C:\\Users\\khal6952\\Documents\\GitHub\\BellusBattleV2\\Assets\\Scripts\\Save&Load\\Data\\Here";
+    private string dataDirPath = Application.dataPath;
     private string dataFileName = "temp.game";
+    private string playerDataFileName = "player.game";
+    private string hatsDataFileName = "hats.game";
 
     public FileDataHandler(string dataDirPath, string dataDileName)
     {
@@ -39,6 +41,58 @@ public class FileDataHandler
         }
         return loadedData;
     }
+    public PlayerData LoadPlayerData()
+    {
+        string fullPath = Path.Combine(dataDirPath, playerDataFileName);
+        PlayerData loadedData = null;
+        if (File.Exists(fullPath))
+        {
+            try
+            {
+                string dataToLoad = "";
+                using (FileStream stream = new FileStream(fullPath, FileMode.Open))
+                {
+                    using (StreamReader reader = new StreamReader(stream))
+                    {
+                        dataToLoad = reader.ReadToEnd();
+                    }
+                }
+
+                loadedData = JsonUtility.FromJson<PlayerData>(dataToLoad);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError("Error occured when trying to load data to fiel: " + fullPath + "\n" + e);
+            }
+        }
+        return loadedData;
+    }
+    public HatsData LoadHatsData()
+    {
+        string fullPath = Path.Combine(dataDirPath, hatsDataFileName);
+        HatsData loadedData = null;
+        if (File.Exists(fullPath))
+        {
+            try
+            {
+                string dataToLoad = "";
+                using (FileStream stream = new FileStream(fullPath, FileMode.Open))
+                {
+                    using (StreamReader reader = new StreamReader(stream))
+                    {
+                        dataToLoad = reader.ReadToEnd();
+                    }
+                }
+
+                loadedData = JsonUtility.FromJson<HatsData>(dataToLoad);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError("Error occured when trying to load data to fiel: " + fullPath + "\n" + e);
+            }
+        }
+        return loadedData;
+    }
     public void Save(GameData data)
     {
         string fullPath = Path.Combine(dataDirPath, dataFileName);
@@ -55,6 +109,48 @@ public class FileDataHandler
                 }
             }
         }catch(Exception e)
+        {
+            Debug.LogError("Error occured when trying to save data to fiel: " + fullPath + "\n" + e);
+        }
+    }
+    public void SavePlayerData(PlayerData data)
+    {
+        string fullPath = Path.Combine(dataDirPath, playerDataFileName);
+        try
+        {
+            Directory.CreateDirectory(Path.GetDirectoryName(fullPath));
+
+            string dataToStore = JsonUtility.ToJson(data, true);
+            using (FileStream stream = new FileStream(fullPath, FileMode.Create))
+            {
+                using (StreamWriter writer = new StreamWriter(stream))
+                {
+                    writer.Write(dataToStore);
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("Error occured when trying to save data to fiel: " + fullPath + "\n" + e);
+        }
+    }
+    public void SaveHatsdata(HatsData data)
+    {
+        string fullPath = Path.Combine(dataDirPath, hatsDataFileName);
+        try
+        {
+            Directory.CreateDirectory(Path.GetDirectoryName(fullPath));
+
+            string dataToStore = JsonUtility.ToJson(data, true);
+            using (FileStream stream = new FileStream(fullPath, FileMode.Create))
+            {
+                using (StreamWriter writer = new StreamWriter(stream))
+                {
+                    writer.Write(dataToStore);
+                }
+            }
+        }
+        catch (Exception e)
         {
             Debug.LogError("Error occured when trying to save data to fiel: " + fullPath + "\n" + e);
         }

@@ -5,7 +5,7 @@ using System.Xml;
 using UnityEngine;
 using static UnityEngine.EventSystems.EventTrigger;
 
-public class Customization : MonoBehaviour
+public class Customization : MonoBehaviour, IDataPersistenceManagerHats
 {
     enum HatList {FromList, FromScene};
     [SerializeField] private HatList hatList;
@@ -17,6 +17,7 @@ public class Customization : MonoBehaviour
     GameObject place;
     private void Start()
     {
+        DataPersistenceManager.Instance.LoadHatsData();
         availableHats = new List<GameObject>(hats);
     }
     private GameObject ChooseHatList()
@@ -70,6 +71,19 @@ public class Customization : MonoBehaviour
         hat.transform.localScale = new Vector3(1, 1, 1);
         removedHats.Add(hat);
         availableHats.Remove(availableHats[random]);
+        DataPersistenceManager.Instance.SaveHatsData();
+    }
+
+    public void LoadData(HatsData data)
+    {
+        this.availableHats = data.availableHats;
+        this.removedHats = data.removedHats;
+    }
+
+    public void SaveData(ref HatsData data)
+    {
+        data.availableHats = this.availableHats;
+        data.removedHats = this.removedHats;
     }
     //check boxes ...
     //ears
