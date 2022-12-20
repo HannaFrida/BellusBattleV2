@@ -10,6 +10,7 @@ using System.Linq;
 public class PlayerSpawnManager : MonoBehaviour
 {
     [SerializeField] private Transform[] spawnLocations; // Keeps track of all the possible spawn locations
+    [SerializeField] private Transform[] spawnIconsLocations; // Keeps track of all the possible spawn locations
     [SerializeField] private GameObject[] players;
     [SerializeField] private TextMeshProUGUI countDownText;
     [SerializeField] private bool spawnInScoreOrder;
@@ -127,7 +128,7 @@ public class PlayerSpawnManager : MonoBehaviour
             if(players[i].GetComponent<PlayerDetails>().playerID == id)
             {
                 players[i].transform.position = spawnLocations[index].transform.position;
-                ustats.PlayerIcons[i].transform.position = spawnLocations[index].transform.position;
+                ustats.PlayerIcons[i].transform.position = spawnIconsLocations[index].transform.position;
             }
         }
     }

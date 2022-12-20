@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using TMPro;
+using System;
 using UnityEngine.Rendering;
 using Unity.VisualScripting;
 using UnityEngine.Rendering.Universal;
@@ -66,8 +67,17 @@ public class SettingsUIHandler : UIMenuHandler
     public void SetMasterValume(float sliderValue)
     {
         audioMixer.SetFloat("MasterVolume", Mathf.Log10(sliderValue) * 20);
+        PlayerPrefs.SetFloat("MasterVolume", sliderValue);
         
         textPro.text = (sliderValue * 10).ToString("0#");
+    }
+    public void GetMasterValume()
+    {
+        float value = PlayerPrefs.GetFloat("MasterVolume");
+        audioMixer.SetFloat("MasterVolume", Mathf.Log10(value) * 20);
+        
+        
+        textPro.text = (value * 10).ToString("0#");
     }
 
     public void SetMusicValume(float sliderValue)
@@ -75,12 +85,14 @@ public class SettingsUIHandler : UIMenuHandler
         audioMixer.SetFloat("MusicMixerGroup", Mathf.Log10(sliderValue) * 20);
         sm.SetHighestMusicVolume(sliderValue);
         textPro.text = (sliderValue * 10).ToString("0#");
+        PlayerPrefs.SetFloat("MusicVolume", sliderValue);
     }
     public void SetEffectValume(float sliderValue)
     {
         audioMixer.SetFloat("EffectSounds", Mathf.Log10(sliderValue) * 20);
         sm.SetHighestEffectVolume(sliderValue);
         textPro.text = (sliderValue *10).ToString("0#");
+        PlayerPrefs.SetFloat("EffectVolume", sliderValue);
     }
     public void SetText(TextMeshProUGUI textPro)
     {
@@ -89,12 +101,15 @@ public class SettingsUIHandler : UIMenuHandler
     public void SetQuality(int qualityIndex)
     {
         QualitySettings.SetQualityLevel(qualityIndex); // double kolla med gruppden hur v�rt olika quality �r
+        PlayerPrefs.SetInt("QualitySetting", qualityIndex);
     }
     public void SetOneHandMode(bool toggle)
     {
         if (toggle) textPro.text = "ON";
         else textPro.text = "OFF";
         cc.LeftControllerMode();
+        int boolean = Convert.ToInt32(toggle);
+        PlayerPrefs.SetInt("OneHandMode", boolean);
         
     }
     public void SetFullscrean(bool isFullscrean)
@@ -102,6 +117,9 @@ public class SettingsUIHandler : UIMenuHandler
         Screen.fullScreen = isFullscrean;
         if(isFullscrean)textPro.text = "ON";
         else textPro.text = "OFF";
+
+        int boolean = Convert.ToInt32(isFullscrean);
+        PlayerPrefs.SetInt("FullScreenSetting", boolean);
     }
     public void SetBlur(bool toggle)
     {
@@ -114,6 +132,8 @@ public class SettingsUIHandler : UIMenuHandler
             dof = profile.Add<DepthOfField>(toggle);
         }
         dof.active = toggle;
+        int boolean = Convert.ToInt32(toggle);
+        PlayerPrefs.SetInt("BlurSetting", boolean);
 
     }
     private void SetUpResolution()
@@ -145,6 +165,7 @@ public class SettingsUIHandler : UIMenuHandler
     {
         textPro.text = (sliderValue).ToString("#")+ "0%";
         if (textPro.text.Equals("100%")) textPro.text = "Normal speed";
+        PlayerPrefs.SetFloat("SlowMoValue", sliderValue);
     }
     public void SetAutoJump(int index)
     {
@@ -170,6 +191,7 @@ public class SettingsUIHandler : UIMenuHandler
                 break;
             default: break;
         }
+        PlayerPrefs.SetInt("AutoJumpSetting", index);
     }
 
     public void SetSafeMode(bool toggle)
@@ -177,6 +199,8 @@ public class SettingsUIHandler : UIMenuHandler
         if (toggle) textPro.text = "ON";
         else textPro.text = "OFF";
         GameManager.Instance._safeMode= toggle;
+        int boolean = Convert.ToInt32(toggle);
+        PlayerPrefs.SetInt("SafeModeSetting", boolean);
 
     }
 
@@ -188,11 +212,14 @@ public class SettingsUIHandler : UIMenuHandler
         {
             if (player != null) player.transform.Find("PlayerIndicator").gameObject.SetActive(toggle);
         }
+        int boolean = Convert.ToInt32(toggle);
+        PlayerPrefs.SetInt("UIindicatorSetting", boolean);
 
     }
     override
     public void ExitUI()
     {
+        PlayerPrefs.Save();
         base.ExitUI();
 
     }
