@@ -14,6 +14,7 @@ public class AI : MonoBehaviour
     public UnityEvent deathEvent;
     [SerializeField] Mesh mesh;
     public UnityEvent delayedDeathEvent;
+    bool dead = false;
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +41,8 @@ public class AI : MonoBehaviour
     }
     public void KillAI()
     {
+        if(dead) return;
+        dead = true;
         moving = false;
         deathEvent.Invoke();
         StartCoroutine(Wait());
