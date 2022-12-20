@@ -49,7 +49,11 @@ public class TransitionManager : MonoBehaviour
     {
         _lastFadeTypeUsed = _fadeType;
         hasDoneTransitionAnim = false;
-        if (_fadeOnStart) CheckRandomFadeIn();  FadeIn(); 
+        if(level != 0)
+        {
+            if (_fadeOnStart) CheckRandomFadeIn(); FadeIn();
+        }
+        
     }
 
     private void Update()
