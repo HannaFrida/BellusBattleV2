@@ -52,6 +52,10 @@ public class WeaponManager : MonoBehaviour
         {
             return;
         }
+        if (weaponSlot.transform.childCount == 1)
+        {
+            return;
+        }
         equippedWeapon = weaponData;
 
         if (equippedWeapon.pickupSound != null)

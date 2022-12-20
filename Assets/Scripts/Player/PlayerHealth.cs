@@ -116,7 +116,12 @@ public class PlayerHealth : MonoBehaviour
         dash.enabled = false;
         if (gameObject.GetComponentInChildren<Gun>() != null)
         {
-            gameObject.GetComponentInChildren<Gun>().Drop();
+            Gun gun = gameObject.GetComponentInChildren<Gun>();
+            if (gun.canDrop == false)
+            {
+                gun.canDrop = true;
+            }
+            gun.Drop();
         }
     
     }
