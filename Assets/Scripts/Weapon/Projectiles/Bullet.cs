@@ -75,6 +75,7 @@ public class Bullet : Projectile
 		else if (playerGo.CompareTag("AI"))
 		{
 			playerGo.GetComponent<AI>().KillAI();
+			Destroy(gameObject);
 		}
 
 		if (other.gameObject.tag.Equals("Obstacle"))
