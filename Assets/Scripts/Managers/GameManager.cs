@@ -281,7 +281,11 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
         }
         
         foreach (GameObject player in players) {
-            player.GetComponentInChildren<PlayerIndicatorFollow>().UnFollow();
+            if (player.GetComponentInChildren<PlayerIndicatorFollow>() != null)
+            {
+                player.GetComponentInChildren<PlayerIndicatorFollow>().UnFollow();
+            }
+            
         }
     }
 
@@ -316,8 +320,12 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
     }
 
     public void PlayerDeath(GameObject deadPlayer) {
+
+        if (deadPlayer.GetComponentInChildren<PlayerIndicatorFollow>() != null)
+        {
+            deadPlayer.GetComponentInChildren<PlayerIndicatorFollow>().Follow();
+        }
         
-        deadPlayer.GetComponentInChildren<PlayerIndicatorFollow>().Follow();
         
         playersAlive.Remove(deadPlayer);
         targetGroup.RemoveMember(deadPlayer.transform); //OBS GER ERROR!
