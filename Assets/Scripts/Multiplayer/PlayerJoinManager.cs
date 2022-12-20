@@ -19,6 +19,8 @@ public class PlayerJoinManager : PlayerSpawnManager
     [SerializeField] private GameObject firstTimePlayerJoinsGame;
     [SerializeField] private VisualEffect StartGameEffekt;
 
+    [SerializeField] private GameObject playMenu;
+    [SerializeField] private GameObject settingsMenu;
     public List<PlayerInput> listOfPlayers = new List<PlayerInput>();
 
     void OnPlayerJoined(PlayerInput playerInput)
@@ -38,7 +40,7 @@ public class PlayerJoinManager : PlayerSpawnManager
         // Set the start spawn position of the player using the location at the associated element into the array.
         // So Player 1 spawns at the first Trasnform in the list, Player 2 on the second, and so forth.
         playerDetails.startPos = SpawnLocations[playerInput.playerIndex].position;
-
+        ChooseActionMap(playerInput);
 
         if (playerDetails.playerID == 1 && firstTimePlayerJoinsGame != null)
         {
@@ -51,6 +53,14 @@ public class PlayerJoinManager : PlayerSpawnManager
         //Activates Player characteraccessories and assigns material based on characterIndex
         playerInput.gameObject.GetComponentInChildren<CharacterCustimization>().ActivateAccessories(playerInput.playerIndex, renderer, indicatorText);
 
+    }
+
+    private void ChooseActionMap(PlayerInput input)
+    {
+        if(settingsMenu.activeSelf == true || playMenu.activeSelf == true)
+        {
+            input.SwitchCurrentActionMap("Menu");
+        }
     }
 
     private void ActivateUI(int playerID)

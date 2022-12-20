@@ -45,6 +45,8 @@ public class NavigateUI : MonoBehaviour
     }
     public void ExitUI(InputAction.CallbackContext context)
     {
+        if (g == null) return; 
+
         if (z == 0)
         {
             g.ExitUI();
