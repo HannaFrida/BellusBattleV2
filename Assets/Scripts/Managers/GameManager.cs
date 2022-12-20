@@ -183,6 +183,8 @@ public class GameManager : MonoBehaviour, IDataPersistenceManagerPlayer
 
     private void Start()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         cameraTarget = GameObject.FindGameObjectWithTag("CameraTarget").transform;  
         //targetGroup = GameObject.FindGameObjectWithTag("targets");
         //trans = Transition.Instance;
