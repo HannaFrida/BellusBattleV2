@@ -6406,6 +6406,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 659413049}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &659413051 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3321090144690143331, guid: 4aad44fc53638da49b55d8d86f0cc09c,
+    type: 3}
+  m_PrefabInstance: {fileID: 659413049}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &660123743
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9313,6 +9319,95 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1091232437}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1091349874
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 659413051}
+    m_Modifications:
+    - target: {fileID: 6994818788375722505, guid: 0b00150947c789f4bb65793c375b8a28,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 28
+      objectReference: {fileID: 0}
+    - target: {fileID: 6994818788375722505, guid: 0b00150947c789f4bb65793c375b8a28,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6994818788375722505, guid: 0b00150947c789f4bb65793c375b8a28,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6994818788375722505, guid: 0b00150947c789f4bb65793c375b8a28,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6994818788375722505, guid: 0b00150947c789f4bb65793c375b8a28,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.199998
+      objectReference: {fileID: 0}
+    - target: {fileID: 6994818788375722505, guid: 0b00150947c789f4bb65793c375b8a28,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -22.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6994818788375722505, guid: 0b00150947c789f4bb65793c375b8a28,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 6994818788375722505, guid: 0b00150947c789f4bb65793c375b8a28,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.70710677
+      objectReference: {fileID: 0}
+    - target: {fileID: 6994818788375722505, guid: 0b00150947c789f4bb65793c375b8a28,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6994818788375722505, guid: 0b00150947c789f4bb65793c375b8a28,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6994818788375722505, guid: 0b00150947c789f4bb65793c375b8a28,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 6994818788375722505, guid: 0b00150947c789f4bb65793c375b8a28,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6994818788375722505, guid: 0b00150947c789f4bb65793c375b8a28,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6994818788375722509, guid: 0b00150947c789f4bb65793c375b8a28,
+        type: 3}
+      propertyPath: m_Name
+      value: Plane Fog (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6994818788375722511, guid: 0b00150947c789f4bb65793c375b8a28,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6994818788375722511, guid: 0b00150947c789f4bb65793c375b8a28,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 59e8922fa6f8bbc45b3ecade177ef4c1, type: 2}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0b00150947c789f4bb65793c375b8a28, type: 3}
 --- !u!1001 &1103269519
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15516,7 +15611,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 15
+  field of view: 23
   orthographic: 0
   orthographic size: 5
   m_Depth: 0

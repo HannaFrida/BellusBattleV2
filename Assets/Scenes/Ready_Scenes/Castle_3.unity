@@ -1838,8 +1838,8 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 0.2735849, g: 0.026366394, b: 0, a: 1}
-  m_Intensity: 1.5
+  m_Color: {r: 0.16571732, g: 0.17556067, b: 0.26415092, a: 1}
+  m_Intensity: 2
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -3538,6 +3538,7 @@ MonoBehaviour:
   players: []
   countDownText: {fileID: 0}
   spawnInScoreOrder: 0
+  ustats: {fileID: 0}
   characterLow: {fileID: 0}
   ctrlcc: {fileID: 0}
   player1UI: {fileID: 0}
@@ -3567,6 +3568,7 @@ MonoBehaviour:
   players: []
   countDownText: {fileID: 1223715351}
   spawnInScoreOrder: 0
+  ustats: {fileID: 0}
 --- !u!114 &931408566
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6871,7 +6873,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -6906,7 +6908,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 24.7
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6931,14 +6933,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2009938186}
-  m_LocalRotation: {x: 0.13052616, y: 0, z: 0, w: 0.9914449}
-  m_LocalPosition: {x: 3.5059595, y: 21.992378, z: -37.464893}
+  m_LocalRotation: {x: 0.043619405, y: 0, z: 0, w: 0.9990483}
+  m_LocalPosition: {x: 3.5059595, y: 21.992378, z: -100}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 16
-  m_LocalEulerAnglesHint: {x: 15, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 5, y: 0, z: 0}
 --- !u!1001 &2015574221
 PrefabInstance:
   m_ObjectHideFlags: 0
