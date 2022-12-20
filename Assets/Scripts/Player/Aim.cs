@@ -18,6 +18,11 @@ public class Aim : MonoBehaviour
     private float angle;
     private bool usingOverride = false;
 
+
+    private void OnLevelWasLoaded(int level)
+    {
+        usingOverride = false;
+    }
     private void Update()
     {
         //MouseInputToAngleCalculation();
@@ -36,7 +41,6 @@ public class Aim : MonoBehaviour
     {
         if (ph.IsAlive == false) return;
         if (GameManager.Instance.GameIsPaused == true) return;
-
         Vector2 t = context.ReadValue<Vector2>();
         if (t.x == 0 && t.y == 0 || usingOverride) return;
         direction.Normalize();
@@ -47,7 +51,6 @@ public class Aim : MonoBehaviour
     {
         if (ph.IsAlive == false) return;
         if (GameManager.Instance.GameIsPaused == true) return;
-
         Vector2 t = context.ReadValue<Vector2>();
         if (t.x == 0 && t.y == 0)
         {

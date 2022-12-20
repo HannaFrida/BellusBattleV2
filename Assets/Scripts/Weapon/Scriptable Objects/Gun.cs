@@ -45,7 +45,7 @@ public class Gun : MonoBehaviour
     bool isStartTimerForDrop;
     float dropTimer;
     bool isDropped;
-    private bool canDrop = true;
+    public bool canDrop = true;
 
     [Header("DeSpawning")]
     [Tooltip("time before the weapon can be picked up again")]
@@ -251,7 +251,7 @@ public class Gun : MonoBehaviour
 
     private void Shoot()
     {
-
+        // Spökskott
         if (enabled == false || gameObject.activeSelf == false) return;
         /*
         if (gunsAmmo == 0 || weaponData.name != "BasicSword")
@@ -319,7 +319,7 @@ public class Gun : MonoBehaviour
                 _projectile.gameObject.transform.parent = muzzle.transform;
 
                 // Lock aim
-                StartCoroutine("DisableAimScript");
+                //StartCoroutine("DisableAimScript");
 
                 timeSinceLastShot = 0;
             }
