@@ -356,6 +356,9 @@ public class SettingsUIHandler : UIMenuHandler
         foreach (GameObject player in players)
         {
             if (player != null) player.transform.Find("PlayerIndicator").gameObject.SetActive(toggle);
+            //Renderer renderer = player.GetComponentInChildren<SkinnedMeshRenderer>();
+            //TextMeshPro indicatorText = player.GetComponentInChildren<TextMeshPro>();
+            //player.GetComponentInChildren<CharacterCustimization>().ActivateAccessories(player.GetComponent<PlayerDetails>().playerID - 1, renderer, indicatorText);
         }
         int boolean = Convert.ToInt32(toggle);
         PlayerPrefs.SetInt("UIindicatorSetting", boolean);
