@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Audio;
 using TMPro;
 using System;
@@ -24,6 +25,31 @@ public class SettingsUIHandler : UIMenuHandler
     TextMeshProUGUI textPro;
     List<GameObject> players;
 
+    [Header("Master")]
+    [SerializeField] TextMeshProUGUI masterVolumeText;
+    [SerializeField] Slider masterVolumeSlider;
+    
+    [Header("Music")]
+    [SerializeField] TextMeshProUGUI musicVolumeText;
+    [SerializeField] Slider musicVolumeSlider;
+
+    [Header("Effects")]
+    [SerializeField] TextMeshProUGUI effectVolumeText;
+    [SerializeField] Slider effectVolumeSlider;
+
+    [Header("Quality")]
+    [SerializeField] TextMeshProUGUI qualityText;
+    
+    [Header("OneHandMode")]
+    [SerializeField] TextMeshProUGUI oneHandText;
+    
+    [Header("Blur")]
+    [SerializeField] TextMeshProUGUI dofText;
+
+    [Header("Slowmo")]
+    [SerializeField] TextMeshProUGUI slowmoText;
+    [SerializeField] Slider slowmoSlider;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -46,8 +72,22 @@ public class SettingsUIHandler : UIMenuHandler
         switch (activePanel.name)
         {
             case "VisualsSelectedButtons": es.SetSelectedGameObject(bvs); break;
-            case "AudioSelectedButtons": es.SetSelectedGameObject(bas); break;
-            case "GameplaySelectedButtons": es.SetSelectedGameObject(bgs); break;
+            case "AudioSelectedButtons": 
+                es.SetSelectedGameObject(bas); 
+                GetMasterValume();
+                GetMusicValume();
+                GetEffectValume();
+                break;
+            case "GameplaySelectedButtons": 
+                es.SetSelectedGameObject(bgs);
+                //GetQuality();
+                GetOneHandMode();
+                GetFullscrean();
+                //GetBlur();
+                GetSlowMoText();
+                GetSafeMode();
+                GetUIIndecator();
+                break;
             default: es.SetSelectedGameObject(bvs); break;
         }
     }
@@ -59,8 +99,22 @@ public class SettingsUIHandler : UIMenuHandler
         switch (panel.name)
         {
             case "VisualsSelectedButtons": es.SetSelectedGameObject(bvs); break;
-            case "AudioSelectedButtons": es.SetSelectedGameObject(bas); break;
-            case "GameplaySelectedButtons": es.SetSelectedGameObject(bgs); break;
+            case "AudioSelectedButtons": 
+                es.SetSelectedGameObject(bas); 
+                GetMasterValume();
+                GetMusicValume();
+                GetEffectValume();
+                break;
+            case "GameplaySelectedButtons": 
+                es.SetSelectedGameObject(bgs);
+                //GetQuality();
+                GetOneHandMode();
+                GetFullscrean();
+                //GetBlur();
+                GetSlowMoText();
+                GetSafeMode();
+                GetUIIndecator();
+                break;
         }
     }
 
@@ -68,16 +122,17 @@ public class SettingsUIHandler : UIMenuHandler
     {
         audioMixer.SetFloat("MasterVolume", Mathf.Log10(sliderValue) * 20);
         PlayerPrefs.SetFloat("MasterVolume", sliderValue);
+        PlayerPrefs.Save();
         
-        textPro.text = (sliderValue * 10).ToString("0#");
+        masterVolumeText.text = (sliderValue * 10).ToString("0#");
     }
     public void GetMasterValume()
     {
         float value = PlayerPrefs.GetFloat("MasterVolume");
         audioMixer.SetFloat("MasterVolume", Mathf.Log10(value) * 20);
-        
-        
-        textPro.text = (value * 10).ToString("0#");
+
+        masterVolumeSlider.value = value;
+        masterVolumeText.text = (value * 10).ToString("0#");
     }
 
     public void SetMusicValume(float sliderValue)
@@ -87,6 +142,15 @@ public class SettingsUIHandler : UIMenuHandler
         textPro.text = (sliderValue * 10).ToString("0#");
         PlayerPrefs.SetFloat("MusicVolume", sliderValue);
     }
+    public void GetMusicValume()
+    {
+        float value = PlayerPrefs.GetFloat("MusicVolume");
+        audioMixer.SetFloat("MusicMixerGroup", Mathf.Log10(value) * 20);
+
+        musicVolumeSlider.value = value;
+        musicVolumeText.text = (value * 10).ToString("0#");
+    }
+
     public void SetEffectValume(float sliderValue)
     {
         audioMixer.SetFloat("EffectSounds", Mathf.Log10(sliderValue) * 20);
@@ -94,24 +158,60 @@ public class SettingsUIHandler : UIMenuHandler
         textPro.text = (sliderValue *10).ToString("0#");
         PlayerPrefs.SetFloat("EffectVolume", sliderValue);
     }
+    public void GetEffectValume()
+    {
+        float value = PlayerPrefs.GetFloat("EffectVolume");
+        audioMixer.SetFloat("EffectSounds", Mathf.Log10(value) * 20);
+
+        effectVolumeSlider.value = value;
+        effectVolumeText.text = (value * 10).ToString("0#");
+    }
+
     public void SetText(TextMeshProUGUI textPro)
     {
         this.textPro = textPro;
     }
+
     public void SetQuality(int qualityIndex)
     {
         QualitySettings.SetQualityLevel(qualityIndex); // double kolla med gruppden hur v�rt olika quality �r
         PlayerPrefs.SetInt("QualitySetting", qualityIndex);
     }
+    /*
+    private void GetQuality()
+    {
+        int i = PlayerPrefs.GetInt("QualitySetting");
+        QualitySettings.SetQualityLevel(i);
+        if (i==1)
+        {
+            qualityText.text = "Low";
+        }
+        else if( i == 2)
+        {
+            qualityText.text = "Medium";
+        }
+        else
+        {
+            qualityText.text = "High";
+        }
+    }
+    */
     public void SetOneHandMode(bool toggle)
     {
-        if (toggle) textPro.text = "ON";
-        else textPro.text = "OFF";
+        if (toggle) oneHandText.text = "ON";
+        else oneHandText.text = "OFF";
         cc.LeftControllerMode();
         int boolean = Convert.ToInt32(toggle);
         PlayerPrefs.SetInt("OneHandMode", boolean);
         
     }
+    public void GetOneHandMode()
+    {
+        int toggle = PlayerPrefs.GetInt("OneHandMode");
+        if (toggle == 1) oneHandText.text = "ON";
+        else oneHandText.text = "OFF";
+    }
+
     public void SetFullscrean(bool isFullscrean)
     {
         Screen.fullScreen = isFullscrean;
@@ -121,10 +221,16 @@ public class SettingsUIHandler : UIMenuHandler
         int boolean = Convert.ToInt32(isFullscrean);
         PlayerPrefs.SetInt("FullScreenSetting", boolean);
     }
+    public void GetFullscrean()
+    {
+        int isFullscrean = PlayerPrefs.GetInt("FullScreenSetting");
+        if (isFullscrean == 1) textPro.text = "ON";
+        else textPro.text = "OFF";
+    }
     public void SetBlur(bool toggle)
     {
-        if (toggle) textPro.text = "ON";
-        else textPro.text = "OFF";
+        if (toggle) dofText.text = "ON";
+        else dofText.text = "OFF";
 
         VolumeProfile profile = globalVolume.sharedProfile;
         if (!profile.TryGet<DepthOfField>(out var dof))
@@ -134,6 +240,24 @@ public class SettingsUIHandler : UIMenuHandler
         dof.active = toggle;
         int boolean = Convert.ToInt32(toggle);
         PlayerPrefs.SetInt("BlurSetting", boolean);
+
+    }
+
+    public void GetBlur()
+    {
+        /*
+        int boolean = PlayerPrefs.GetInt("BlurSetting");
+        bool integer = Convert.ToBoolean(boolean);
+        if (boolean == 1) dofText.text = "ON";
+        else dofText.text = "OFF";
+
+        VolumeProfile profile = globalVolume.sharedProfile;
+        if (!profile.TryGet<DepthOfField>(out var dof))
+        {
+            dof = profile.Add<DepthOfField>(integer);
+        }
+        dof.active = integer;
+        */
 
     }
     private void SetUpResolution()
@@ -163,9 +287,18 @@ public class SettingsUIHandler : UIMenuHandler
 
     public void SetSlowMoText(float sliderValue)
     {
-        textPro.text = (sliderValue).ToString("#")+ "0%";
-        if (textPro.text.Equals("100%")) textPro.text = "Normal speed";
+        slowmoText.text = (sliderValue).ToString("#")+ "0%";
+        if (slowmoText.text.Equals("100%")) slowmoText.text = "Normal speed";
         PlayerPrefs.SetFloat("SlowMoValue", sliderValue);
+    }
+    
+    public void GetSlowMoText()
+    {
+        float value = PlayerPrefs.GetFloat("SlowMoValue");
+        slowmoSlider.value = value;
+        slowmoText.text = (value).ToString("#")+ "0%";
+        if (slowmoText.text.Equals("100%")) slowmoText.text = "Normal speed";
+        
     }
     public void SetAutoJump(int index)
     {
@@ -204,6 +337,18 @@ public class SettingsUIHandler : UIMenuHandler
 
     }
 
+    public void GetSafeMode()
+    {
+        int integer = PlayerPrefs.GetInt("SafeModeSetting");
+        bool boolean = Convert.ToBoolean(integer);
+        
+        if (boolean) textPro.text = "ON";
+        else textPro.text = "OFF";
+        GameManager.Instance._safeMode = boolean;
+        
+
+    }
+
     public void SetUIIndecator(bool toggle)
     {
         if (toggle) textPro.text = "ON";
@@ -216,6 +361,20 @@ public class SettingsUIHandler : UIMenuHandler
         PlayerPrefs.SetInt("UIindicatorSetting", boolean);
 
     }
+    public void GetUIIndecator()
+    {
+        int integer = PlayerPrefs.GetInt("UIindicatorSetting");
+        bool boolean = Convert.ToBoolean(integer);
+
+        if (boolean) textPro.text = "ON";
+        else textPro.text = "OFF";
+        foreach (GameObject player in players)
+        {
+            if (player != null) player.transform.Find("PlayerIndicator").gameObject.SetActive(boolean);
+        }
+
+    }
+
     override
     public void ExitUI()
     {
