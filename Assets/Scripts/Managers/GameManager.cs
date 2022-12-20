@@ -9,7 +9,7 @@ using Random = UnityEngine.Random;
 using Cinemachine;
 using UnityEngine.InputSystem;
 
-public class GameManager : MonoBehaviour, IDataPersistenceManager
+public class GameManager : MonoBehaviour, IDataPersistenceManagerPlayer
 {
 
     [SerializeField] private CinemachineTargetGroup targetGroup;
@@ -191,7 +191,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
         //pos2 = new Vector2(892f, 160f);
         //pos3 = new Vector2(1139f, 160f);
         //pos4 = new Vector2(1386f, 160f); // x = 977 - -409
-        DataPersistenceManager.Instance.LoadGame();
+        DataPersistenceManager.Instance.LoadPlayerData();
     }
 
     private void Update()
@@ -229,7 +229,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
     }
     private void OnApplicationQuit()
     {
-        DataPersistenceManager.Instance.SaveGame();
+        DataPersistenceManager.Instance.SavePlayerData();
     }
 
     public void PauseGame()
@@ -281,7 +281,11 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
         }
         
         foreach (GameObject player in players) {
-            player.GetComponentInChildren<PlayerIndicatorFollow>().UnFollow();
+            if (player.GetComponentInChildren<PlayerIndicatorFollow>() != null)
+            {
+                player.GetComponentInChildren<PlayerIndicatorFollow>().UnFollow();
+            }
+            
         }
     }
 
@@ -316,8 +320,12 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
     }
 
     public void PlayerDeath(GameObject deadPlayer) {
+
+        if (deadPlayer.GetComponentInChildren<PlayerIndicatorFollow>() != null)
+        {
+            deadPlayer.GetComponentInChildren<PlayerIndicatorFollow>().Follow();
+        }
         
-        deadPlayer.GetComponentInChildren<PlayerIndicatorFollow>().Follow();
         
         playersAlive.Remove(deadPlayer);
         targetGroup.RemoveMember(deadPlayer.transform); //OBS GER ERROR!
@@ -570,7 +578,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
         SceneManager.LoadScene("The_End");
         soundManager.FadeInEndSceneSounds();
         gameLoopFinished = true;
-        DataPersistenceManager.Instance.SaveGame();
+        DataPersistenceManager.Instance.SavePlayerData();
         yield return new WaitForSeconds(timeTillRestartGame);
         soundManager.FadeOutEndSceneSounds();
         Destroy(transform.parent.gameObject);
@@ -588,7 +596,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
         }
         SceneManager.LoadSceneAsync("MainMenu");
         gameLoopFinished = true;
-        DataPersistenceManager.Instance.SaveGame();
+        DataPersistenceManager.Instance.SavePlayerData();
         //yield return new WaitForSeconds(timeTillRestartGame);
         Destroy(transform.parent.gameObject);
         SceneManager.LoadScene(System.IO.Path.GetFileNameWithoutExtension(SceneUtility.GetScenePathByBuildIndex(0)));
@@ -673,7 +681,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
         */
     }
 
-    public void LoadData(GameData data)
+    public void LoadData(PlayerData data)
     {
         players = data.players;
         playersAlive = new List<GameObject>(players);
@@ -688,7 +696,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
 
     }
 
-    public void SaveData(ref GameData data)
+    public void SaveData(ref PlayerData data)
     {
         if(!gameLoopFinished) players.Clear();
         data.players = players;
