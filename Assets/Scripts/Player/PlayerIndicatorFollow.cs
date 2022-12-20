@@ -32,7 +32,7 @@ public class PlayerIndicatorFollow : MonoBehaviour {
     public void UnFollow() {
         //print("unfollowed");
         follow = false;
-        gameObject.transform.localPosition = new Vector3(0f, 2.2f, 0f);
+        gameObject.transform.localPosition = new Vector3(0f, 2.8f, 0f);
         var position = rigTransform.position;
         
         
