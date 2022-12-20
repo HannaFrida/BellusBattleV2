@@ -38,7 +38,7 @@ public class LevelDetails : MonoBehaviour
     public void ToggleValueChanged()
     {
         print(GameManager.Instance.scenesToChooseFrom.Count);
-        if (GameManager.Instance.scenesToChooseFrom.Count - 1 == 1 && toggle.isOn == true)
+        if (GameManager.Instance.scenesToChooseFrom.Count == 1 && toggle.isOn == true)
         {
             return;
         }

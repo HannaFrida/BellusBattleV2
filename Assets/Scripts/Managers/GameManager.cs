@@ -497,6 +497,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManager
         }
         else
         {
+            if (scenesToChooseFrom.Contains(scene.GetName())) return;
             scenesToChooseFrom.Add(scene.GetName());
             scenesToRemove.Remove(scene.GetName());
         }
