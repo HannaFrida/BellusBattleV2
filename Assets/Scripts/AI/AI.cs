@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class AI : MonoBehaviour
 {
@@ -8,6 +9,12 @@ public class AI : MonoBehaviour
     private Vector3 direction;
     [SerializeField] private float checkDistance = 1;
     [SerializeField] private LayerMask layerM;
+    [SerializeField] private float timetUntilDeath = 2f;
+    private bool moving = true;
+    public UnityEvent deathEvent;
+    [SerializeField] Mesh mesh;
+    public UnityEvent delayedDeathEvent;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +28,7 @@ public class AI : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        transform.position += direction * speed * Time.deltaTime;
+        if(moving)transform.position += direction * speed * Time.deltaTime;
     }
     private void CheckCollision()
     {
@@ -33,6 +40,27 @@ public class AI : MonoBehaviour
     }
     public void KillAI()
     {
+        moving = false;
+        deathEvent.Invoke();
+        StartCoroutine(Wait());
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Bullet")
+        {
+            KillAI();
+            Destroy(other.gameObject);
+        }
+    }
+
+    IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(1);
+        GetComponent<Despawn>().SetMesh(mesh);
+        delayedDeathEvent.Invoke();
+        yield return new WaitForSeconds(1);
         Destroy(gameObject);
     }
+               
 }
