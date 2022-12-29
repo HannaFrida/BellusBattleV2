@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Events;
-using UnityEngine.VFX;
-using Unity.VisualScripting;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -37,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private GameObject doubleJumpVFX;
 
     [SerializeField] private PlayerInput playerInput;
-    [SerializeField] private DashAdvanced da;
+    [SerializeField] private DashAdvanced dash;
 
     private GameObject MuzzleFlashIns;
     private BoxCollider boxCollider;
@@ -162,12 +160,42 @@ public class PlayerMovement : MonoBehaviour
         UpdateCoyoteTime();
         RunKnockbackTimer();
         ActivateMovementFirstTime();
+        AddGravity();
+        ResetJump();
+        velocity = new Vector2(movementX, movementY) + externalForce;
+        JumpBuffer();
+        RunCollisionDetection();
+        transform.Translate(velocity * Time.deltaTime);
+        RunWalkAnimation();
+    }
 
-        if (isGrounded == false)
+    private void RunWalkAnimation()
+    {
+        if (isMovedByPLatform == true && movementAmount == 0f)
         {
-            movementY = Mathf.MoveTowards(movementY, downwardForce, airResistance * Time.deltaTime);
+            playerAnimator.SetFloat("Speed", 0f);
         }
+        else
+        {
+            playerAnimator.SetFloat("Speed", movementX);
+        }
+    }
 
+    private void RunCollisionDetection()
+    {
+        UpdateRayCastOrgins();
+        if (velocity.y != 0)
+        {
+            HandleVerticalCollisions(ref velocity);
+        }
+        if (velocity.x != 0)
+        {
+            HandleHorizontalCollisions(ref velocity);
+        }
+    }
+
+    private void ResetJump()
+    {
         if (isGrounded && velocity.y < 0)
         {
             playerSoundManager.PlayerLandSound();
@@ -178,32 +206,14 @@ public class PlayerMovement : MonoBehaviour
                 runBufferTimer = false;
             }
         }
-        velocity = new Vector2(movementX, movementY) + externalForce;
-        JumpBuffer();
-        UpdateRayCastOrgins();
-        if (velocity.y != 0)
+    }
+
+    private void AddGravity()
+    {
+        if (isGrounded == false)
         {
-
+            movementY = Mathf.MoveTowards(movementY, downwardForce, airResistance * Time.deltaTime);
         }
-        HandleVerticalCollisions(ref velocity);
-
-        if (velocity.x != 0)
-        {
-            HandleHorizontalCollisions(ref velocity);
-        }
-
-
-        transform.Translate(velocity * Time.deltaTime);
-        //Debug.Log(movementAmount);
-        if (isMovedByPLatform == true && movementAmount == 0f)
-        {
-            playerAnimator.SetFloat("Speed", 0f);
-        }
-        else
-        {
-            playerAnimator.SetFloat("Speed", movementX);
-        }
-
     }
 
     public void OnMove(InputAction.CallbackContext ctx)
@@ -350,8 +360,6 @@ public class PlayerMovement : MonoBehaviour
     private void ResetValuesOnGrounded()
     {
         //playerAnimator.SetTrigger("Landing");
-      
-
         coyoteTimer = 0;
         hasCoyoteTime = true;
         hasDoubleJump = true;
@@ -399,7 +407,6 @@ public class PlayerMovement : MonoBehaviour
         Bounds col = platformCollider.bounds;
 
         float colliderDif = col.max.y - hitpointY;
-        //Debug.Log(colliderDif);
 
         if (colliderDif >= -.01f && colliderDif <= edgeControlAmount)
         {
@@ -420,21 +427,13 @@ public class PlayerMovement : MonoBehaviour
 
         if (movementAmount > 0.1f || movementAmount < -0.1f)
         {
-            if (isMovingRight)
-            {
-                movementX = Mathf.MoveTowards(initialSpeed, moveSpeed, acceleration * Time.deltaTime);
-            }
-            if (isMovingLeft)
-            {
-                movementX = Mathf.MoveTowards(initialSpeed, moveSpeed, acceleration * Time.deltaTime);
-            }
-            movementX *= movementAmount;
+            movementX = moveSpeed * movementAmount;
         }
-        else
+        else if (isMovedByPLatform == false)
         {
-            if (isMovedByPLatform) return;
             movementX = Mathf.MoveTowards(movementX, 0, deceleration * Time.deltaTime);
         }
+
         if (externalForce.x != 0f)
         {
             externalForce.x = Mathf.MoveTowards(externalForce.x, 0, deceleration * Time.deltaTime);
@@ -444,6 +443,7 @@ public class PlayerMovement : MonoBehaviour
             externalForce.y = Mathf.MoveTowards(externalForce.y, 0, deceleration * Time.deltaTime);
         }
     }
+
     private bool CheckIsGrounded()
     {
 
@@ -483,7 +483,7 @@ public class PlayerMovement : MonoBehaviour
 
 
         float curRayLength;
-        if (da.IsDashing == true && da.VerticalDashForce < 0 || da.VerticalDashForce > 35f)
+        if (dash.IsDashing == true && dash.VerticalDashForce < 0 || dash.VerticalDashForce > 35f)
         {
             curRayLength = verticalRayLength * 1.4f;
         }
@@ -519,7 +519,7 @@ public class PlayerMovement : MonoBehaviour
                 }
                 velocity.y = 0f;
                 movementY = 0f;
-                da.SetVelocity(Vector2.zero);
+                dash.SetVelocity(Vector2.zero);
                 return;
             }
             if (Physics.Raycast(rayOrigin, Vector2.up * directionY, out hit, curRayLength, oneWayLayer))
@@ -542,7 +542,7 @@ public class PlayerMovement : MonoBehaviour
     private void HandleHorizontalCollisions(ref Vector2 velocity)
     {
         float curRayLength;
-        if(da.IsDashing == true && da.HorizontalDashForce > 15f || da.HorizontalDashForce < -15f)
+        if(dash.IsDashing == true && dash.HorizontalDashForce > 15f || dash.HorizontalDashForce < -15f)
         {
             curRayLength = horizontalRayLength * 2.4f;
         }
@@ -572,7 +572,7 @@ public class PlayerMovement : MonoBehaviour
                 {
                     EdgeControl(hit);
                 }
-                da.SetVelocity(Vector2.zero);
+                dash.SetVelocity(Vector2.zero);
                 velocity.x = 0;
                 movementX = 0;
                 return;
