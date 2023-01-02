@@ -6,10 +6,9 @@ using UnityEngine.EventSystems;
 
 public class PauseMenu : MonoBehaviour
 {
-    
-    [SerializeField] private GameObject pauseMenuPanel;
     [SerializeField] private Button firstSelected;
     [SerializeField] private Button quitCanvasFirstSelected, lobbyCanvasFirstSelected;
+    [SerializeField] private GameObject pauseMenuPanel;
     [SerializeField] private GameObject firstSelectedOnSettings;
     [SerializeField] private GameObject quitCanvas, lobbyCanvas;
     private bool isToggled;
@@ -35,13 +34,11 @@ public class PauseMenu : MonoBehaviour
         CheckSelectedButton();
         if(quitCanvas.activeSelf == true && isQuitCanvasToggled == false)
         {
-            print("ayy");
             es.SetSelectedGameObject(quitCanvasFirstSelected.gameObject);
             isQuitCanvasToggled = true;
         }
         if (lobbyCanvas.activeSelf == true && isLobbyCanvasToggled == false)
         {
-            print("ayy");
             es.SetSelectedGameObject(lobbyCanvasFirstSelected.gameObject);
             isLobbyCanvasToggled = true;
         }

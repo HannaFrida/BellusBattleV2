@@ -26,7 +26,7 @@ public class Portal : MonoBehaviour
     {
 
         if (canTeleport == false) return;
-        if (other.gameObject.tag == "Player" || other.gameObject.tag.Equals("Grenade") || other.gameObject.tag.Equals("Bullet"))
+        if (other.gameObject.tag.Equals("Player") || other.gameObject.tag.Equals("Grenade") || other.gameObject.tag.Equals("Bullet"))
         {
             if (teleportDestination == null) return;
             other.gameObject.transform.position = teleportDestination.transform.position;

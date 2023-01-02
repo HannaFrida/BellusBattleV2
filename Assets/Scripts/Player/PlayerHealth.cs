@@ -31,6 +31,7 @@ public class PlayerHealth : MonoBehaviour
 
     //USCH
     [SerializeField] private BoxCollider boxCollider;
+    [SerializeField] private Collider headCollider;
     [SerializeField] private GameObject rightArm;
     [SerializeField] private SkinnedMeshRenderer skr;
     [SerializeField] private GameObject hips;
@@ -102,6 +103,7 @@ public class PlayerHealth : MonoBehaviour
     {
         isAlive = false;
         GameManager.Instance.PlayerDeath(gameObject);
+        headCollider.enabled = false;
         GetComponent<PlayerDetails>().Rumble(0.5f,0.5f);
         boxCollider.enabled = false;
         bloodSplatter.Play();
@@ -131,6 +133,7 @@ public class PlayerHealth : MonoBehaviour
         isAlive = true;
         health = 1f;
         skr.enabled = true;
+        headCollider.enabled = true;
         anime.enabled = true;
         hips.SetActive(false);
         hips.SetActive(true);
