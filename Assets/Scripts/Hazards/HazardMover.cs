@@ -16,7 +16,7 @@ public class HazardMover : MonoBehaviour
     private Vector3 lowestPosition, highestPosition;
     [SerializeField] private bool hasReachedHighestPoint;
     private bool runTimer = true;
-    private bool doOnce = true;
+    private bool hasPlayedSound;
     private float warningTime = 3f;
     // Start is called before the first frame update
     void Start()
@@ -52,45 +52,41 @@ public class HazardMover : MonoBehaviour
     private void MoveHazard()
     {
         ToggleHazardWarner(false);
-
-
-       
-
-
+        PlaySound();
         if (hasReachedHighestPoint == false)
         {
-            if (doOnce)
-            {
-                doOnce = false;
-                soundManager.FadeInLavaHazard();
-            }
             transform.position = Vector3.SmoothDamp(transform.position, highestPosition, ref moveVector, smoothTime);
             if (boxCollider.bounds.max.y >= highestPoint.position.y)
             {
                 moveVector = Vector3.zero;
                 hasReachedHighestPoint = true;
-                doOnce = true;
+                hasPlayedSound = false;
             }
         }
         else
         {
-            if (doOnce)
-            {
-                doOnce = false;
-                soundManager.FadeOutLavaHazard();
-            }
-           
             transform.position = Vector3.SmoothDamp(transform.position, lowestPosition, ref moveVector, smoothTime);
             if (transform.position.y <= lowestPosition.y + 0.2f)
             {
                 moveVector = Vector3.zero;
                 hasReachedHighestPoint = false;
                 runTimer = true;
-                doOnce = true;
-
-
-
+                hasPlayedSound = false;
             }
+        }
+    }
+
+    private void PlaySound()
+    {
+        if (hasPlayedSound) return;
+
+        if(hasReachedHighestPoint == true)
+        {
+            soundManager.FadeOutLavaHazard();
+        }
+        else
+        {
+            soundManager.FadeInLavaHazard();
         }
     }
 
