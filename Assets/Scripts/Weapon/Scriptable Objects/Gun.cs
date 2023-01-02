@@ -50,8 +50,8 @@ public class Gun : MonoBehaviour
     [Header("DeSpawning")]
     [Tooltip("time before the weapon can be picked up again")]
     [SerializeField] float timeToWaitForDeSpawn = 0.1f;
-    bool isStartTimerForDeSpawn;
-    float deSpawnTimer;
+    //bool isStartTimerForDeSpawn;
+    //float deSpawnTimer;
 
     [Header("Special cases")]
     [SerializeField] GameObject swordMesh;
@@ -176,6 +176,10 @@ public class Gun : MonoBehaviour
         {
             PickUp(other);
         }
+        if (other.gameObject.tag.Equals("Deathzone") && !isPickedUp)
+        {
+            Despawn();
+        }
     }
 
     public void PickUp(Collider other)
@@ -199,8 +203,8 @@ public class Gun : MonoBehaviour
                 weaponManager.EquipWeapon(weaponData, gameObject);
 
                 isStartTimerForDrop = false;
-                isStartTimerForDeSpawn = false;
-                deSpawnTimer = 0f;
+                //isStartTimerForDeSpawn = false;
+                //deSpawnTimer = 0f;
                 dropTimer = 0f;
 
                 isPickedUp = true;
@@ -359,10 +363,12 @@ public class Gun : MonoBehaviour
         }
 
         isStartTimerForDrop = true;
+        /*
         if (gunsAmmo == 0)
         {
             isStartTimerForDeSpawn = true;
         }
+        */
 
         gameObject.transform.SetParent(null);
         // Otherwise it stays in DontDestroyOnLoad
