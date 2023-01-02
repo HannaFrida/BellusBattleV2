@@ -9,12 +9,16 @@ public class PauseMenu : MonoBehaviour
     
     [SerializeField] private GameObject pauseMenuPanel;
     [SerializeField] private Button firstSelected;
+    [SerializeField] private Button quitCanvasFirstSelected, lobbyCanvasFirstSelected;
     [SerializeField] private GameObject firstSelectedOnSettings;
+    [SerializeField] private GameObject quitCanvas, lobbyCanvas;
     private bool isToggled;
     private GameManager gm;
     private EventSystem es;
     private SoundManager sm;
     private bool runButtonCheck;
+    private bool isQuitCanvasToggled;
+    private bool isLobbyCanvasToggled;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +33,18 @@ public class PauseMenu : MonoBehaviour
     {
         TogglePauseMenu();
         CheckSelectedButton();
+        if(quitCanvas.activeSelf == true && isQuitCanvasToggled == false)
+        {
+            print("ayy");
+            es.SetSelectedGameObject(quitCanvasFirstSelected.gameObject);
+            isQuitCanvasToggled = true;
+        }
+        if (lobbyCanvas.activeSelf == true && isLobbyCanvasToggled == false)
+        {
+            print("ayy");
+            es.SetSelectedGameObject(lobbyCanvasFirstSelected.gameObject);
+            isLobbyCanvasToggled = true;
+        }
     }
 
     private void TogglePauseMenu()
@@ -44,9 +60,19 @@ public class PauseMenu : MonoBehaviour
         {
             sm.FullMusicVolume();
             isToggled = false;
+            isQuitCanvasToggled = false;
+            quitCanvas.SetActive(false);
+            isLobbyCanvasToggled = false;
+            lobbyCanvas.SetActive(false);
             DisplayPauseMenu(isToggled);
         }
         
+    }
+
+    public void ResetSelectedButton()
+    {
+        isQuitCanvasToggled = false;
+        es.SetSelectedGameObject(firstSelected.gameObject);
     }
 
     private void DisplayPauseMenu(bool toggle)
