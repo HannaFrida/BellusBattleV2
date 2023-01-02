@@ -254,6 +254,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManagerPlayer
         scenesToRemove.Add("MainMenu");
         scenesToRemove.Add("The_End");
         scenesToRemove.Add("TransitionScene");
+        scenesToRemove.Add("Platformer");
         LoadScenesList();
     }
 
