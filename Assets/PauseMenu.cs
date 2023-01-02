@@ -69,6 +69,7 @@ public class PauseMenu : MonoBehaviour
     public void ResetSelectedButton()
     {
         isQuitCanvasToggled = false;
+        isLobbyCanvasToggled = false;
         es.SetSelectedGameObject(firstSelected.gameObject);
     }
 
