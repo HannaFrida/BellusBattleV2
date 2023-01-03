@@ -406,6 +406,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManagerPlayer
             hasOnePlayerLeft = true;
             soundManager.FadeOutMusic();
             soundManager.FadeOutHazard();
+            Debug.Log("jaaaaa");
         }
         else if (playersAlive.Count > 1)
         {
