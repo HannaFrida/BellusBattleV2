@@ -34,6 +34,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip[] allFireworkSounds;
 
     [Header("UI sounds")]
+    [SerializeField] private AudioSource firstPlayerSpawnedInSource;
     [SerializeField] private AudioSource howerMenuSource;
     [SerializeField] private AudioSource pressMenuSource;
     [SerializeField] private AudioSource pressMenu2Source;
@@ -101,8 +102,13 @@ public class SoundManager : MonoBehaviour
     {
         StartCoroutine(FadeMixerGroup.StartFade(overallMixer, "BellSounds", 3f, 0f));
     }
-   
-
+    //Weapons
+    public void PickUpWeaponSound()
+    {
+        pickUpWeaponSource.pitch = Random.Range(0.94f, highPitchRan);
+        pickUpWeaponSource.Play();
+    }
+    //Hazards
     public void FadeInLavaHazard()
     {
         poisonHazardSource.Stop();
@@ -119,11 +125,13 @@ public class SoundManager : MonoBehaviour
         
         StartCoroutine(FadeMixerGroup.StartFade(overallMixer, "HazardMixerGroup", 1, highestEffectVolume));
     }
+    
     public void FadeOutHazard()
     {
         
         StartCoroutine(FadeMixerGroup.StartFade(overallMixer, "HazardMixerGroup", 2, 0f));
     }
+    //UI & menues
     public void HazardWarningSound()
     {
         hazardWarningSource.Play();     
@@ -142,13 +150,11 @@ public class SoundManager : MonoBehaviour
         howerMenuSource.pitch = Random.Range(0.93f, highPitchRan);
         howerMenuSource.Play();
     }
-    public void PickUpWeaponSound()
+    public void FirstPlayerSpawnedInSound()
     {
-        pickUpWeaponSource.pitch = Random.Range(0.94f, highPitchRan);
-        pickUpWeaponSource.Play();
+        
+        firstPlayerSpawnedInSource.Play();
     }
-
-
     public void PressUiSound()
     {
         howerMenuSource.pitch = Random.Range(0.96f, highPitchRan);
@@ -178,6 +184,8 @@ public class SoundManager : MonoBehaviour
     {
         pressingBattleButtonSource.Play();
     }
+
+    //foliage
     public void OpenDoorSound()
     {
         doorOpenSource.pitch = Random.Range(0.95f, highPitchRan);

@@ -18,6 +18,7 @@ public class PlayerJoinManager : PlayerSpawnManager
     [SerializeField] private GameObject player4UI;
     [SerializeField] private GameObject firstTimePlayerJoinsGame;
     [SerializeField] private VisualEffect StartGameEffekt;
+    [SerializeField] private SoundManager soundManager;
 
     [SerializeField] private GameObject playMenu;
     [SerializeField] private GameObject settingsMenu;
@@ -44,6 +45,7 @@ public class PlayerJoinManager : PlayerSpawnManager
 
         if (playerDetails.playerID == 1 && firstTimePlayerJoinsGame != null)
         {
+            soundManager.FirstPlayerSpawnedInSound();
             StartGameEffekt.Play();
             Destroy(firstTimePlayerJoinsGame);
         }
