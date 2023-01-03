@@ -12,6 +12,7 @@ public class OpenPlatformer : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             SceneManager.LoadScene("Platformer");
+            GameManager.Instance.setIsinMiniGame(true);
         }
     }
 }

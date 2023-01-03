@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManagerPlayer
 
     [SerializeField] private CinemachineTargetGroup targetGroup;
     [SerializeField] private Transform cameraTarget;
+    private bool isInMiniGame = false;
     private bool gameLoopFinished = false;
     public static GameManager Instance;
     [SerializeField] private List<GameObject> players = new List<GameObject>();
@@ -114,7 +115,10 @@ public class GameManager : MonoBehaviour, IDataPersistenceManagerPlayer
     {
         get => scoreToWin;
     }
-
+    public void setIsinMiniGame(bool value)
+    {
+        isInMiniGame = value;
+    }
     private void OnLevelWasLoaded(int level)
     {
         /*
@@ -208,9 +212,12 @@ public class GameManager : MonoBehaviour, IDataPersistenceManagerPlayer
         if (!gameHasStarted) return;
         CheckPlayersLeft();
 
-        if (hasOnePlayerLeft && !hasGivenScore && gameHasStarted)
+        if (hasOnePlayerLeft && !hasGivenScore && gameHasStarted && !isInMiniGame)
         {
             GiveScoreAfterTimer();
+        }else if(playersAlive.Count <= 0)
+        {
+            StartCoroutine(WaitAndGoToLobby());
         }
 
         if (!runRoundTimer) return;
@@ -222,7 +229,11 @@ public class GameManager : MonoBehaviour, IDataPersistenceManagerPlayer
         roundDuration = roundTimer;
 
     }
-
+    IEnumerator WaitAndGoToLobby()
+    {
+        yield return new WaitForSeconds(giveScoreTime);
+        ReturnToLobby();
+    }
     private void ValidatePlayerLists()
     {
         if (players.Count == 0) return;
