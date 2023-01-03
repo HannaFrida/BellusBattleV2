@@ -46,12 +46,11 @@ public class PlayerJoinManager : PlayerSpawnManager
 
         if (playerDetails.playerID == 1 && firstTimePlayerJoinsGame != null)
         {
-            if (!onceAGame)
-            {
+            
                 soundManager.FirstPlayerSpawnedInSound();
                 StartGameEffect.Play();
                 onceAGame = true;
-            }
+            
            
             
             Destroy(firstTimePlayerJoinsGame);
