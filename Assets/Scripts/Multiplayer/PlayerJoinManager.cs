@@ -17,7 +17,7 @@ public class PlayerJoinManager : PlayerSpawnManager
     [SerializeField] private GameObject player3UI;
     [SerializeField] private GameObject player4UI;
     [SerializeField] private GameObject firstTimePlayerJoinsGame;
-    private static bool onceAGame;
+    private bool onceAGame;
     [SerializeField] private VisualEffect StartGameEffekt;
     [SerializeField] private SoundManager soundManager;
 
