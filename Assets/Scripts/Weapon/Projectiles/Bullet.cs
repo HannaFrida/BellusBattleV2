@@ -42,7 +42,8 @@ public class Bullet : Projectile
 		
 		if (playerGo.CompareTag("Player")) // && Shooter != playerGo)
 		{
-			if (playerGo.GetComponent<PlayerDetails>().playerID == shooterID && canKillMyself == false) return;
+            Debug.Log("hehe31");
+            if (playerGo.GetComponent<PlayerDetails>().playerID == shooterID && canKillMyself == false) return;
 
 			if (lighting)
 			{
@@ -62,8 +63,10 @@ public class Bullet : Projectile
 				Destroy(MuzzleFlashIns, 3f);
             }
 			PlayerHealth ph = playerGo.GetComponent<PlayerHealth>();
+			
 			if(ph.IsAlive == true && damage >= 1)
             {
+				Debug.Log("HUHDA");
 				GameDataTracker.Instance.NewKillEvent(shooterID, playerGo.GetComponent<PlayerDetails>().playerID, weaponName, GameManager.Instance.RoundDuration);
 			}
 			ph.TakeDamage(damage);
@@ -121,24 +124,16 @@ public class Bullet : Projectile
 		GameObject playerGo = other.gameObject;
 		if (playerGo.CompareTag("Player") && shooter != playerGo)
 		{
-			playerGo.GetComponent<PlayerHealth>().TakeDamage(damage);
+			PlayerHealth ph = playerGo.GetComponent<PlayerHealth>();
+			Debug.Log("hehe");
+            if (ph.IsAlive == true && damage >= 1)
+            {
+                Debug.Log("HUHDA");
+                GameDataTracker.Instance.NewKillEvent(shooterID, playerGo.GetComponent<PlayerDetails>().playerID, weaponName, GameManager.Instance.RoundDuration);
+            }
+			ph.TakeDamage(damage);
 
-			if (playerGo.GetComponent<PlayerHealth>().Health <= 0)
-			{
-				//playerGo.SetActive(false);
-				//playerGo.GetComponent<PlayerHealth>().KillPlayer();
-			}
-
-			PlayerDeathEvent pde = new PlayerDeathEvent
-			{
-				PlayerGo = other.gameObject,
-				Kille = other.name,
-				KilledBy = "No Idea-chan",
-				KilledWith = "Bullets",
-			};
-			pde.FireEvent();
-
-			Die();
+            Die();
 		}
 		else if (playerGo.CompareTag("AI"))
 		{

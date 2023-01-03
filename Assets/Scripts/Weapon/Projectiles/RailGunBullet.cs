@@ -40,12 +40,15 @@ public class RailGunBullet : Projectile
 		GameObject playerGo = other.gameObject;
 		if (playerGo.CompareTag("Player"))
 		{
-			PlayerHealth ph = playerGo.GetComponent<PlayerHealth>();
+            PlayerHealth ph = playerGo.GetComponent<PlayerHealth>();
 			if(ph.IsAlive == true)
             {
+				Debug.Log(weaponName);
 				GameDataTracker.Instance.NewKillEvent(shooterID, playerGo.GetComponent<PlayerDetails>().playerID, weaponName, GameManager.Instance.RoundDuration);
+				Debug.Log($"{shooterID} SHOT {playerGo.GetComponent<PlayerDetails>().playerID} WITH {weaponName}");
 			}
-			ph.TakeDamage(damage);
+
+            //ph.TakeDamage(damage);
 			ph.PlayFire();
 
 			
