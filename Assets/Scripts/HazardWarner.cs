@@ -13,7 +13,7 @@ public class HazardWarner : MonoBehaviour
 
     private void Start()
     {
-        soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
+        //soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
         DisplayWarning(false);
     }
     void Update()
@@ -43,7 +43,7 @@ public class HazardWarner : MonoBehaviour
                 warningIcon.color = new Color(warningIcon.color.r, warningIcon.color.g, warningIcon.color.b, 1);
                 if (soundManager != null)
                 {
-                    soundManager.HazardWarningSound();
+                    SoundManager.Instance.HazardWarningSound();
                 }
                 break;
         }
