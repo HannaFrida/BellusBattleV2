@@ -20,7 +20,10 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioSource lavaHazardSource;
     [SerializeField] private AudioSource hazardWarningSource;
     [SerializeField] private AudioSource trampolineSource; //ligger för närvarande på trampolinprefab. används ej av soundManager
-   
+
+    [Header("WeaponSounds")]
+    [SerializeField] private AudioSource pickUpWeaponSource;
+
     [Header("foliage")]
     [SerializeField] private AudioSource doorOpenSource;
     [SerializeField] private AudioSource doorCloseSource;
@@ -139,7 +142,13 @@ public class SoundManager : MonoBehaviour
         howerMenuSource.pitch = Random.Range(0.93f, highPitchRan);
         howerMenuSource.Play();
     }
-    
+    public void PickUpSound()
+    {
+        pickUpWeaponSource.pitch = Random.Range(0.94f, highPitchRan);
+        pickUpWeaponSource.Play();
+    }
+
+
     public void PressUiSound()
     {
         howerMenuSource.pitch = Random.Range(0.96f, highPitchRan);
