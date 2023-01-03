@@ -48,7 +48,7 @@ public class RailGunBullet : Projectile
 				Debug.Log($"{shooterID} SHOT {playerGo.GetComponent<PlayerDetails>().playerID} WITH {weaponName}");
 			}
 
-            //ph.TakeDamage(damage);
+            ph.TakeDamage(damage);
 			ph.PlayFire();
 
 			
