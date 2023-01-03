@@ -17,7 +17,7 @@ public class PlayerJoinManager : PlayerSpawnManager
     [SerializeField] private GameObject player3UI;
     [SerializeField] private GameObject player4UI;
     [SerializeField] private GameObject firstTimePlayerJoinsGame;
-    private bool onceAGame;
+    private bool onceAGame = true;
     [SerializeField] private VisualEffect StartGameEffekt;
     [SerializeField] private SoundManager soundManager;
 
@@ -44,12 +44,16 @@ public class PlayerJoinManager : PlayerSpawnManager
         playerDetails.startPos = SpawnLocations[playerInput.playerIndex].position;
         ChooseActionMap(playerInput);
 
-        if (playerDetails.playerID == 1 && firstTimePlayerJoinsGame != null && !onceAGame)
+        if (playerDetails.playerID == 1 && firstTimePlayerJoinsGame != null)
         {
-
-            soundManager.FirstPlayerSpawnedInSound();
-            StartGameEffekt.Play();
-            //onceAGame = true;
+            if (onceAGame)
+            {
+                soundManager.FirstPlayerSpawnedInSound();
+                StartGameEffekt.Play();
+                onceAGame = false;
+            }
+           
+            
             Destroy(firstTimePlayerJoinsGame);
         }
 
