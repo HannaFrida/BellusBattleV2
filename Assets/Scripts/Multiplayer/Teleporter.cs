@@ -34,8 +34,12 @@ public class Teleporter : MonoBehaviour
         if (playerJoinManager.listOfPlayers.Count >= 1 && playerAmountOnTeleporter == playerJoinManager.listOfPlayers.Count && other.gameObject.GetComponent<PlayerMovement>() != null)//playerSpawnManager.listOfPlayers.Count >= 2 && playerAmountOnTeleporter == playerSpawnManager.listOfPlayers.Count)
         {
             playPanel.SetActive(true);
-            other.gameObject.GetComponent<PlayerInput>().SwitchCurrentActionMap("Menu");
-            other.gameObject.GetComponent<NavigateUI>().SetConnection(playPanel);
+            foreach(GameObject player in GameManager.Instance.GetAllPlayers())
+            {
+                player.gameObject.GetComponent<PlayerInput>().SwitchCurrentActionMap("Menu");
+                player.gameObject.GetComponent<NavigateUI>().SetConnection(playPanel);
+            }
+            
         }
         if (playerAmountOnTeleporter == playerJoinManager.listOfPlayers.Count)
         {
