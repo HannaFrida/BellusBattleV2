@@ -7,6 +7,7 @@ public class WeaponManager : MonoBehaviour
 {
     [SerializeField]
     private Transform weaponSlot;
+    private SoundManager soundManager;
 
     [SerializeField]
     private WeaponData equippedWeapon;
@@ -18,7 +19,10 @@ public class WeaponManager : MonoBehaviour
 
     public WeaponData EquippedWeapon { get => equippedWeapon; }
 
-
+    private void Start()
+    {
+        soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
+    }
     private void OnLevelWasLoaded(int level)
     {
         if (weaponSlot.childCount > 0)
@@ -57,11 +61,13 @@ public class WeaponManager : MonoBehaviour
             return;
         }
         equippedWeapon = weaponData;
-
+        /*
         if (equippedWeapon.pickupSound != null)
         {
-            equippedWeapon.pickupSound.Play();
+            
         }
+        */
+        soundManager.PickUpWeaponSound();
 
         nowWeapon.transform.SetParent(weaponSlot);
         nowWeapon.transform.localPosition = Vector3.zero;

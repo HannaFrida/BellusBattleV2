@@ -142,7 +142,7 @@ public class SoundManager : MonoBehaviour
         howerMenuSource.pitch = Random.Range(0.93f, highPitchRan);
         howerMenuSource.Play();
     }
-    public void PickUpSound()
+    public void PickUpWeaponSound()
     {
         pickUpWeaponSource.pitch = Random.Range(0.94f, highPitchRan);
         pickUpWeaponSource.Play();
