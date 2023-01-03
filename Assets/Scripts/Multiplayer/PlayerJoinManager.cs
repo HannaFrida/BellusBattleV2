@@ -44,12 +44,15 @@ public class PlayerJoinManager : PlayerSpawnManager
         playerDetails.startPos = SpawnLocations[playerInput.playerIndex].position;
         ChooseActionMap(playerInput);
 
-        if (playerDetails.playerID == 1 && firstTimePlayerJoinsGame != null && !onceAGame)
+        if (playerDetails.playerID == 1 && firstTimePlayerJoinsGame != null  )
         {
-            
+            if (!onceAGame)
+            {
                 soundManager.FirstPlayerSpawnedInSound();
                 StartGameEffect.Play();
                 onceAGame = true;
+            }
+                
             
            
             
