@@ -11,21 +11,14 @@ public class PCamera : MonoBehaviour
      private Vector3 bounds;
      private float t = 0;
      private float t2 = 0;
-    private Camera cam;
+    [SerializeField] private Camera cam;
     [SerializeField] private GameObject platform;
     // Start is called before the first frame update
     void Start()
     {
-        cam = Camera.main;
         bounds = cam.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, GetComponent<Camera>().transform.position.z));
     }
-    private void OnLevelWasLoaded(int level)
-    {
-        foreach (GameObject player in GameManager.Instance.GetAllPlayers())
-        {
-            player.AddComponent<PScreenWrapper>();
-        }
-    }
+
     // Update is called once per frame
     void LateUpdate()
     {
