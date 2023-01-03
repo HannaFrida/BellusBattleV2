@@ -2167,14 +2167,22 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  spawnIconsLocations: []
   players: []
   countDownText: {fileID: 0}
+  spawnInScoreOrder: 0
+  ustats: {fileID: 0}
   characterLow: {fileID: 0}
   ctrlcc: {fileID: 0}
   player1UI: {fileID: 0}
   player2UI: {fileID: 0}
   player3UI: {fileID: 0}
   player4UI: {fileID: 0}
+  firstTimePlayerJoinsGame: {fileID: 0}
+  StartGameEffect: {fileID: 0}
+  soundManager: {fileID: 0}
+  playMenu: {fileID: 0}
+  settingsMenu: {fileID: 0}
   listOfPlayers: []
 --- !u!114 &1043277769
 MonoBehaviour:
@@ -2193,8 +2201,11 @@ MonoBehaviour:
   - {fileID: 1465782880}
   - {fileID: 268965520}
   - {fileID: 2043252137}
+  spawnIconsLocations: []
   players: []
   countDownText: {fileID: 689514908}
+  spawnInScoreOrder: 0
+  ustats: {fileID: 0}
 --- !u!114 &1043277770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3165,6 +3176,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Wind
+      objectReference: {fileID: 0}
+    - target: {fileID: 6905323298159064487, guid: 761e8ef253114344fa0a49ec3dc85b54,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 761e8ef253114344fa0a49ec3dc85b54, type: 3}
