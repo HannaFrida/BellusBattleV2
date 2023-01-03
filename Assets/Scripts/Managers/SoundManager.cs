@@ -5,6 +5,7 @@ using UnityEngine.Audio;
    
 public class SoundManager : MonoBehaviour
 {
+    public static SoundManager Instance;
     [Header("audio mixers")]
     [SerializeField] private AudioMixer overallMixer;
 
@@ -60,9 +61,21 @@ public class SoundManager : MonoBehaviour
     private float highestMasterVolume = 0.5f;
     private float highestMusicVolume = 0.5f;
     private float highestEffectVolume = 0.5f;
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
     void Start()
     {
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
     }
     
     public void SetHighestMusicVolume(float hmv)
