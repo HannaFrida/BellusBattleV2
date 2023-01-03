@@ -28,9 +28,6 @@ public class PCamera : MonoBehaviour
             start = true;
         }
 
-
-
-
         if (start)
         {
             if (t < platformSpawnTimer) t += Time.deltaTime;
