@@ -24,6 +24,17 @@ public class SoundManager : MonoBehaviour
 
     [Header("WeaponSounds")]
     [SerializeField] private AudioSource pickUpWeaponSource;
+    [SerializeField] private AudioSource electricShotgunSource;
+    [SerializeField] private AudioSource assaultRifleSource;
+    [SerializeField] private AudioSource gunSource;
+    [SerializeField] private AudioSource shitGunSource;
+    [SerializeField] private AudioSource lobbyGunSource;
+    [SerializeField] private AudioSource gwynSource;
+    [SerializeField] private AudioSource grenadeSource;
+    [SerializeField] private AudioSource xBombSource;
+    [SerializeField] private AudioSource railGunSource;
+    [SerializeField] private AudioSource grenadeLaucherSource;
+
 
     [Header("foliage")]
     [SerializeField] private AudioSource doorOpenSource;
@@ -120,6 +131,56 @@ public class SoundManager : MonoBehaviour
     {
         pickUpWeaponSource.pitch = Random.Range(0.94f, highPitchRan);
         pickUpWeaponSource.Play();
+    }
+    public void electricShotgunSound()
+    {
+        electricShotgunSource.pitch = Random.Range(0.98f, highPitchRan);
+        electricShotgunSource.Play();
+    }
+    public void assaultRifleSound()
+    {
+        assaultRifleSource.pitch = Random.Range(0.98f, highPitchRan);
+        assaultRifleSource.Play();
+    }
+    public void gunSound()
+    {
+        gunSource.pitch = Random.Range(0.98f, highPitchRan);
+        gunSource.Play();
+    }
+    public void shitGunSound()
+    {
+        shitGunSource.pitch = Random.Range(0.98f, highPitchRan);
+        shitGunSource.Play();
+    }
+    public void lobbyGunSound()
+    {
+        lobbyGunSource.pitch = Random.Range(0.98f, highPitchRan);
+        lobbyGunSource.Play();
+    }
+    public void gwynSound()
+    {
+        gwynSource.pitch = Random.Range(0.98f, highPitchRan);
+        gwynSource.Play();
+    }
+    public void grenadeSound()
+    {
+        grenadeSource.pitch = Random.Range(0.98f, highPitchRan);
+        grenadeSource.Play();
+    }
+    public void xBombSound()
+    {
+        xBombSource.pitch = Random.Range(0.98f, highPitchRan);
+        xBombSource.Play();
+    }
+    public void railGunSound()
+    {
+        railGunSource.pitch = Random.Range(0.98f, highPitchRan);
+        railGunSource.Play();
+    }
+    public void grenadeLauncherSound()
+    {
+        grenadeLaucherSource.pitch = Random.Range(0.98f, highPitchRan);
+        grenadeLaucherSource.Play();
     }
     //Hazards
     public void FadeInLavaHazard()
