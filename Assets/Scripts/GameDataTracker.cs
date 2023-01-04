@@ -183,17 +183,44 @@ public class GameDataTracker : MonoBehaviour
 
     public int[] GetScoreInOrder()
     {
+        int index = 0;
+        int previousPlayerID = 0;
         ValidatePlayerScore();
         List<KeyValuePair<int, int>> scoreOrder = playerScore.ToList();
         scoreOrder.Sort((score1, score2) => score1.Value.CompareTo(score2.Value));
         List<int> order = new List<int>();
         foreach(KeyValuePair<int,int> playerId in scoreOrder)
         {
+            Debug.Log(previousPlayerID);
             if (playerId.Key == 0) continue;
-            order.Add(playerId.Key);
+            if(playerScore.ContainsKey(previousPlayerID) && playerId.Value == playerScore[previousPlayerID])
+            {
+                Debug.Log(previousPlayerID);
+                SwapListPosition(order, playerId.Key, previousPlayerID, index);
+            }
+            else
+            {
+                order.Add(playerId.Key);
+            }
+
+            previousPlayerID = order.Last();
+            index++;
         }
         order.Reverse();
         return order.ToArray();
+    }
+
+    private void SwapListPosition(List<int> list, int currentPlayer, int previousPlayer, int previousIndex)
+    {
+        if(list.Count != 1 && playerKills.ContainsKey(currentPlayer) && playerKills.ContainsKey(previousPlayer) == false || playerKills[currentPlayer] <= playerKills[previousPlayer])
+        {
+            list[previousIndex] = currentPlayer;
+            list.Add(previousPlayer); 
+        }
+        else
+        {
+            list.Add(currentPlayer);
+        }
     }
 
     private void ValidatePlayerScore()
