@@ -42,7 +42,6 @@ public class Bullet : Projectile
 		
 		if (playerGo.CompareTag("Player")) // && Shooter != playerGo)
 		{
-            Debug.Log("hehe31");
             if (playerGo.GetComponent<PlayerDetails>().playerID == shooterID && canKillMyself == false) return;
 
 			if (lighting)
@@ -66,7 +65,6 @@ public class Bullet : Projectile
 			
 			if(ph.IsAlive == true && damage >= 1)
             {
-				Debug.Log("HUHDA");
 				GameDataTracker.Instance.NewKillEvent(shooterID, playerGo.GetComponent<PlayerDetails>().playerID, weaponName, GameManager.Instance.RoundDuration);
 			}
 			ph.TakeDamage(damage);

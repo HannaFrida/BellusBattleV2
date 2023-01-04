@@ -19,7 +19,6 @@ public class PlayerJoinManager : PlayerSpawnManager
     [SerializeField] private GameObject firstTimePlayerJoinsGame;
     private static bool onceAGame;
     [SerializeField] private VisualEffect StartGameEffect;
-    [SerializeField] private SoundManager soundManager;
 
     [SerializeField] private GameObject playMenu;
     [SerializeField] private GameObject settingsMenu;
@@ -48,7 +47,7 @@ public class PlayerJoinManager : PlayerSpawnManager
         {
             if (!onceAGame)
             {
-                soundManager.FirstPlayerSpawnedInSound();
+                SoundManager.Instance.FirstPlayerSpawnedInSound();
                 StartGameEffect.Play();
                 onceAGame = true;
             }

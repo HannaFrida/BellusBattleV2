@@ -12,18 +12,15 @@ public class PoisionManager : MonoBehaviour
     [SerializeField] private float waitBetweenPoision;
     [SerializeField, Tooltip("Aktiverar en random poisionzon istället för att aktivera alla")] private bool chooseRandomZone;
 
-    private SoundManager soundManager;
     private PoisonZone chosenZone;// Används bara om chooseRandomZone är aktiverat
 
     private bool isPoisionActive;
-
     private float timeBeforeHazard = 3f;
     private float poisionTimer;
    
     // Start is called before the first frame update
     void Start()
     {
-        soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
         foreach (PoisonZone poisionZone in poisionZones)
         {
             poisionZone.gameObject.SetActive(false);
@@ -41,7 +38,7 @@ public class PoisionManager : MonoBehaviour
         }
         if(isPoisionActive == true && poisionTimer >= poisionDuration-1.5f)
         {
-            soundManager.FadeOutHazard();
+            SoundManager.Instance.FadeOutHazard();
         }
         if ((isPoisionActive == false && poisionTimer >= waitBetweenPoision) || (isPoisionActive == true && poisionTimer >= poisionDuration))
         {
@@ -57,7 +54,7 @@ public class PoisionManager : MonoBehaviour
             {
                 hazardWarner.DisplayWarning(false);
                 poisionZone.gameObject.SetActive(true);
-                soundManager.FadeInPoisionHazard();
+                SoundManager.Instance.FadeInPoisionHazard();
             }
             else
             {
