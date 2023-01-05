@@ -7,11 +7,20 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 using Cinemachine;
+using TMPro;
 using UnityEngine.InputSystem;
 
-public class GameManager : MonoBehaviour, IDataPersistenceManagerPlayer
-{
+public class GameManager : MonoBehaviour, IDataPersistenceManagerPlayer {
 
+    [Header("Win or Draw Text")]
+    [SerializeField] private TextMeshProUGUI winnerText;
+    [SerializeField] private TextMeshProUGUI winDrawText;
+    [SerializeField] private GameObject winnerParent;
+    private bool extraDrawTime = true;
+    [SerializeField] private Material winnerMatBlue, winnerMatRed, winnerMatYellow, winnerMatGreen;
+    
+    
+    
     [SerializeField] private CinemachineTargetGroup targetGroup;
     [SerializeField] private Transform cameraTarget;
     private bool isInMiniGame = false;
@@ -79,6 +88,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManagerPlayer
 
     public List<string> scenesToChooseFrom = new List<string>();
     public List<string> scenesToRemove = new List<string>();
+    
     
     public List<string> GetScencesList()
     {
@@ -437,8 +447,40 @@ public class GameManager : MonoBehaviour, IDataPersistenceManagerPlayer
         scoreToWin = value;
     }
 
-    private void GiveScoreAfterTimer()
-    {
+    private void GiveScoreAfterTimer() {
+        
+        if (playersAlive.Count != 0) {
+            //announce who won
+            winnerID = playersAlive[0].GetComponent<PlayerDetails>().playerID;
+            winnerParent.SetActive(true);
+            winnerText.text = ("Player " + winnerID);
+            switch (winnerID) {
+                case 1:
+                    winnerText.fontMaterial = winnerMatBlue;
+                    break;
+                case 2: 
+                    winnerText.fontMaterial = winnerMatRed;
+                    break;
+                case 3:
+                    winnerText.fontMaterial = winnerMatYellow;
+                    break;
+                case 4: 
+                    winnerText.fontMaterial = winnerMatGreen;
+                    break;
+            }
+            winDrawText.text = "WON";
+        }
+        else {
+            //announce draw
+            if (extraDrawTime) {
+                giveScoreTimer -= 1f;
+                extraDrawTime = false;
+            }
+            winnerParent.SetActive(true);
+            winnerText.text = "";
+            winDrawText.text = "DRAW";
+        }
+        
 
         giveScoreTimer += Time.deltaTime;
         if (giveScoreTimer >= giveScoreTime -1f && hasRunTransition == false)
@@ -456,6 +498,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManagerPlayer
             
             GameObject winner = playersAlive[0];
             winnerID = winner.GetComponent<PlayerDetails>().playerID;
+
             GameDataTracker.Instance.AddWinner(roundCounter, winnerID);
             AddScore(playersAlive[0]);
             hasGivenScore = true;
@@ -472,10 +515,15 @@ public class GameManager : MonoBehaviour, IDataPersistenceManagerPlayer
         else
         {
             winnerID = 0;
+            
+            
+            
             GameDataTracker.Instance.AddWinner(roundCounter, 0);
         }
         hasGivenScore = false;
         hasRunTransition = false;
+        winnerParent.SetActive(false);
+        extraDrawTime = true;
         LoadNextScene();
 
     }

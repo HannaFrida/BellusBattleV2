@@ -141,7 +141,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        initialSpeed = moveSpeed - 5; //Används för acceleration
+        initialSpeed = moveSpeed - 5; //AnvÃ¤nds fÃ¶r acceleration
         boxCollider = GetComponent<BoxCollider>();
         CalculateRayLength();
         playerHeight = verticalRayLength * 2;
@@ -258,7 +258,7 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    private void AccessabilityMoveDown() // Ska användas om man kör med onehand-mode!
+    private void AccessabilityMoveDown() // Ska anvÃ¤ndas om man kÃ¶r med onehand-mode!
     {
         if (hasAccessibility == false) return;
 
@@ -401,7 +401,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void EdgeControl(RaycastHit hit)
     {
-        float hitColliderBuffer = 0.1f; // Avståndet spelaren kommer att placeras över den träffade colliderns största y-värde
+        float hitColliderBuffer = 0.1f; // AvstÃ¥ndet spelaren kommer att placeras Ã¶ver den trÃ¤ffade colliderns stÃ¶rsta y-vÃ¤rde
         float hitpointY = hit.point.y;
         Collider platformCollider = hit.collider;
         Bounds col = platformCollider.bounds;
