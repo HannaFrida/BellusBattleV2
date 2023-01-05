@@ -88,6 +88,7 @@ public class HazardMover : MonoBehaviour
             SoundManager.Instance.FadeInLavaHazard();
             Debug.Log("hehe400");
         }
+        hasPlayedSound = true;
     }
 
     private void ToggleHazardWarner(bool toggle)
