@@ -61,15 +61,8 @@ public class Gun : MonoBehaviour
     private float railGoneTimer = 0;
     private float railGunWaitForGone = 1.6f;
 
-    /// <summary>
-    /// Gets the ID of the one who is currently holding the weapon
-    /// </summary>
-    public int OwnerID { get => ownerID; }
-
-
     private void Start()
     {
-        //Debug.Log("fuck you");
         // Reload it
         gunsAmmo = weaponData.Ammo;
 
@@ -99,7 +92,6 @@ public class Gun : MonoBehaviour
         {
             _nextTimeToFire = timeSinceLastShot / (weaponData.fireRate / 60f);
         }
-
         
         // USED FOR DROP
         if (isStartTimerForDrop)
@@ -113,6 +105,7 @@ public class Gun : MonoBehaviour
 
             }
         }
+
         if (railGoneTime)
         {
             railGoneTimer += Time.deltaTime;
@@ -155,19 +148,7 @@ public class Gun : MonoBehaviour
         if (gunsAmmo == 0 && weaponData.name == "RailGun")
         {
             railGoneTime = true;
-        }
-
-
-        /*
-        if (BulletFollow && firedProjectile != null)
-        {
-            Debug.Log("RAIL");
-            firedProjectile.transform.position = muzzle.transform.position;
-            firedProjectile.transform.rotation = transform.rotation;
-        }
-        */
-        
-
+        }      
     }
 
     private void OnTriggerEnter(Collider other)

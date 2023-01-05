@@ -30,7 +30,7 @@ public class BasicSwordBehaviour : MonoBehaviour
             if (other.transform.tag == "Player")
             {
                 // Find the ID of the player it's colliding with
-                playerHoldingThisWeaponID = gun.OwnerID;
+                //playerHoldingThisWeaponID = gun.OwnerID;
 
                 if (!other.gameObject.GetComponent<PlayerDetails>().playerID.Equals(playerHoldingThisWeaponID))
                 {
