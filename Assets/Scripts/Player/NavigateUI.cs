@@ -21,7 +21,8 @@ public class NavigateUI : MonoBehaviour
     }
     public void NavigateRight(InputAction.CallbackContext context)
     {
-        if(x == 0)
+        if (g == null) return;
+        if (x == 0)
         {
             g.NavigateRight();
             x++;
@@ -33,6 +34,7 @@ public class NavigateUI : MonoBehaviour
     }
     public void NavigateLeft(InputAction.CallbackContext context)
     {
+        if (g == null) return;
         if (y == 0)
         {
             g.NavigateLeft();
@@ -59,6 +61,7 @@ public class NavigateUI : MonoBehaviour
     }
     public void SetConnection(GameObject gg)
     {
+        Debug.Log("yee");
         g = gg.GetComponent<UIMenuHandler>();
 
     }

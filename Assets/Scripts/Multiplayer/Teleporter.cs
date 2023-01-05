@@ -33,11 +33,17 @@ public class Teleporter : MonoBehaviour
         // All players in game needs to be in the Teleporter for the game to start
         if (playerJoinManager.listOfPlayers.Count >= 1 && playerAmountOnTeleporter == playerJoinManager.listOfPlayers.Count && other.gameObject.GetComponent<PlayerMovement>() != null)//playerSpawnManager.listOfPlayers.Count >= 2 && playerAmountOnTeleporter == playerSpawnManager.listOfPlayers.Count)
         {
+            bool hasSetNavigator = false;
             playPanel.SetActive(true);
             foreach(GameObject player in GameManager.Instance.GetAllPlayers())
             {
+                if(hasSetNavigator == false)
+                {
+                    player.gameObject.GetComponent<NavigateUI>().SetConnection(playPanel);
+                    hasSetNavigator = true;
+                }
                 player.gameObject.GetComponent<PlayerInput>().SwitchCurrentActionMap("Menu");
-                player.gameObject.GetComponent<NavigateUI>().SetConnection(playPanel);
+               
             }
             
         }

@@ -56,7 +56,7 @@ public class SettingsUIHandler : UIMenuHandler
         base.Start();
         SetUpResolution();
         cc = GetComponent<ControlChooser>();
-        sm = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
+        sm = SoundManager.Instance;
         globalVolume = GameObject.FindObjectOfType<Volume>();
         audioMixer = am;
         es.SetSelectedGameObject(bvs);
