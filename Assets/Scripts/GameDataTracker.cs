@@ -209,7 +209,6 @@ public class GameDataTracker : MonoBehaviour
 
     private void SwapListPosition(List<int> list, int currentPlayer, int previousPlayer, int index)
     {
-        Debug.Log(list.Count());
         if(playerKills[currentPlayer] <= playerKills[previousPlayer])
         {
             list[index - 1] = currentPlayer;
