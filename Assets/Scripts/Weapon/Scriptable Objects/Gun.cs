@@ -277,7 +277,7 @@ public class Gun : MonoBehaviour
 
             if (shootSound != null)
             {
-                shootSound.Play();
+                SoundManager.Instance.assaultRifleSound();
             }
 
             //Sound
