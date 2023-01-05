@@ -131,6 +131,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManagerPlayer {
     }
     private void OnLevelWasLoaded(int level)
     {
+        SoundManager.Instance.FadeOutLavaHazard(0.1f);
         /*
         if(SceneManager.GetSceneAt(level).name.Equals("TranisitionScene") == false)
         {

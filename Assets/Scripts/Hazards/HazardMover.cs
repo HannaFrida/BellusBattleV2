@@ -80,7 +80,7 @@ public class HazardMover : MonoBehaviour
 
         if(hasReachedHighestPoint == true)
         {
-            SoundManager.Instance.FadeOutLavaHazard();
+            SoundManager.Instance.FadeOutLavaHazard(5f);
         }
         else
         {

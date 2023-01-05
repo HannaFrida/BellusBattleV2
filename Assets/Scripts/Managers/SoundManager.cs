@@ -189,9 +189,9 @@ public class SoundManager : MonoBehaviour
         lavaHazardSource.Play(); 
         StartCoroutine(FadeMixerGroup.StartFade(overallMixer, "HazardMixerGroup", 5f, highestEffectVolume));
     }
-    public void FadeOutLavaHazard()
+    public void FadeOutLavaHazard(float timeToFadeOut)
     {
-        StartCoroutine(FadeMixerGroup.StartFade(overallMixer, "HazardMixerGroup", 5f, 0f));
+        StartCoroutine(FadeMixerGroup.StartFade(overallMixer, "HazardMixerGroup", timeToFadeOut, 0f));
     }
     public void FadeInPoisionHazard() { 
         lavaHazardSource.Stop();
