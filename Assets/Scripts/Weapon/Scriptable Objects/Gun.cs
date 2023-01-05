@@ -356,45 +356,45 @@ public class Gun : MonoBehaviour
     }
     private void ShootSoundPlaying()
     {
-        if (weaponData.name == "ElectricShotgun")
+        if (weaponData.name == "Shotgun")
         {
-            SoundManager.Instance.electricShotgunSound();
+            SoundManager.Instance.ElectricShotgunSound();
         }
-        if (weaponData.name == "assaultRifleSource")
+        if (weaponData.name == "AR")
         {
-            SoundManager.Instance.assaultRifleSound();
+            SoundManager.Instance.AssaultRifleSound();
         }
-        if (weaponData.name == "Gun")
+        if (weaponData.name == "Revolver")
         {
-            SoundManager.Instance.gunSound();
+            SoundManager.Instance.RevolverSound();
         }
         if (weaponData.name == "ShitGun")
         {
-            SoundManager.Instance.shitGunSound();
+            SoundManager.Instance.ShitGunSound();
         }
-        if (weaponData.name == "LobbyGun")
+        if (weaponData.name == "Lobby Gun")
         {
-            SoundManager.Instance.lobbyGunSound();
+            SoundManager.Instance.LobbyGunSound();
         }
-        if (weaponData.name == "Gwyn")
+        if (weaponData.name == "GwynBolt")
         {
-            SoundManager.Instance.gwynSound();
+            SoundManager.Instance.GwynSound();
         }
         if (weaponData.name == "Launcher")
         {
-            SoundManager.Instance.grenadeSound();
+            SoundManager.Instance.GrenadeSound();
         }
         if (weaponData.name == "Xnade")
         {
-            SoundManager.Instance.xBombSound();
+            SoundManager.Instance.XBombSound();
         }
         if (weaponData.name == "RailGun")
         {
-            SoundManager.Instance.railGunSound();
+            SoundManager.Instance.RailGunSound();
         }
-        if (weaponData.name == "GrenadeLaucher")
+        if (weaponData.name == "GrenadeLauncher")
         {
-            SoundManager.Instance.grenadeLauncherSound();
+            SoundManager.Instance.GrenadeLauncherSound();
         }
     }
     public void Drop()

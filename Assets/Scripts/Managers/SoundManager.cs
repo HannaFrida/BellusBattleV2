@@ -132,52 +132,52 @@ public class SoundManager : MonoBehaviour
         pickUpWeaponSource.pitch = Random.Range(0.94f, highPitchRan);
         pickUpWeaponSource.Play();
     }
-    public void electricShotgunSound()
+    public void ElectricShotgunSound()
     {
         electricShotgunSource.pitch = Random.Range(0.98f, highPitchRan);
         electricShotgunSource.Play();
     }
-    public void assaultRifleSound()
+    public void AssaultRifleSound()
     {
         assaultRifleSource.pitch = Random.Range(0.98f, highPitchRan);
         assaultRifleSource.Play();
     }
-    public void gunSound()
+    public void RevolverSound()
     {
         gunSource.pitch = Random.Range(0.98f, highPitchRan);
         gunSource.Play();
     }
-    public void shitGunSound()
+    public void ShitGunSound()
     {
         shitGunSource.pitch = Random.Range(0.98f, highPitchRan);
         shitGunSource.Play();
     }
-    public void lobbyGunSound()
+    public void LobbyGunSound()
     {
         lobbyGunSource.pitch = Random.Range(0.98f, highPitchRan);
         lobbyGunSource.Play();
     }
-    public void gwynSound()
+    public void GwynSound()
     {
         gwynSource.pitch = Random.Range(0.98f, highPitchRan);
         gwynSource.Play();
     }
-    public void grenadeSound()
+    public void GrenadeSound()
     {
         grenadeSource.pitch = Random.Range(0.98f, highPitchRan);
         grenadeSource.Play();
     }
-    public void xBombSound()
+    public void XBombSound()
     {
         xBombSource.pitch = Random.Range(0.98f, highPitchRan);
         xBombSource.Play();
     }
-    public void railGunSound()
+    public void RailGunSound()
     {
         railGunSource.pitch = Random.Range(0.98f, highPitchRan);
         railGunSource.Play();
     }
-    public void grenadeLauncherSound()
+    public void GrenadeLauncherSound()
     {
         grenadeLaucherSource.pitch = Random.Range(0.98f, highPitchRan);
         grenadeLaucherSource.Play();
@@ -189,9 +189,9 @@ public class SoundManager : MonoBehaviour
         lavaHazardSource.Play(); 
         StartCoroutine(FadeMixerGroup.StartFade(overallMixer, "HazardMixerGroup", 5f, highestEffectVolume));
     }
-    public void FadeOutLavaHazard()
+    public void FadeOutLavaHazard(float timeToFadeOut)
     {
-        StartCoroutine(FadeMixerGroup.StartFade(overallMixer, "HazardMixerGroup", 5f, 0f));
+        StartCoroutine(FadeMixerGroup.StartFade(overallMixer, "HazardMixerGroup", timeToFadeOut, 0f));
     }
     public void FadeInPoisionHazard() { 
         lavaHazardSource.Stop();
