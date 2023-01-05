@@ -17,8 +17,9 @@ public class OpenSettingsMenu : MonoBehaviour
             for (int i = 0; i < obj.Length; i++)
             {
                 obj[i].GetComponent<PlayerInput>().SwitchCurrentActionMap("Menu");
+                obj[i].GetComponent<NavigateUI>().SetConnection(settingsMenuPanel);
             }
-            other.gameObject.GetComponent<NavigateUI>().SetConnection(settingsMenuPanel);
+            
         }
     }
 

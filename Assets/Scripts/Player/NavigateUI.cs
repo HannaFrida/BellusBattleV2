@@ -61,8 +61,6 @@ public class NavigateUI : MonoBehaviour
     }
     public void SetConnection(GameObject gg)
     {
-        Debug.Log("yee");
         g = gg.GetComponent<UIMenuHandler>();
-
     }
 }

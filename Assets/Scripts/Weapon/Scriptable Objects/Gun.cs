@@ -277,7 +277,10 @@ public class Gun : MonoBehaviour
 
             if (shootSound != null)
             {
-                shootSound.Play();
+
+                ShootSoundPlaying();
+               
+
             }
 
             //Sound
@@ -351,7 +354,49 @@ public class Gun : MonoBehaviour
             _projectile.SetWeaponName(weaponData.name);
         }
     }
-
+    private void ShootSoundPlaying()
+    {
+        if (weaponData.name == "ElectricShotgun")
+        {
+            SoundManager.Instance.electricShotgunSound();
+        }
+        if (weaponData.name == "assaultRifleSource")
+        {
+            SoundManager.Instance.assaultRifleSound();
+        }
+        if (weaponData.name == "Gun")
+        {
+            SoundManager.Instance.gunSound();
+        }
+        if (weaponData.name == "ShitGun")
+        {
+            SoundManager.Instance.shitGunSound();
+        }
+        if (weaponData.name == "LobbyGun")
+        {
+            SoundManager.Instance.lobbyGunSound();
+        }
+        if (weaponData.name == "Gwyn")
+        {
+            SoundManager.Instance.gwynSound();
+        }
+        if (weaponData.name == "Launcher")
+        {
+            SoundManager.Instance.grenadeSound();
+        }
+        if (weaponData.name == "Xnade")
+        {
+            SoundManager.Instance.xBombSound();
+        }
+        if (weaponData.name == "RailGun")
+        {
+            SoundManager.Instance.railGunSound();
+        }
+        if (weaponData.name == "GrenadeLaucher")
+        {
+            SoundManager.Instance.grenadeLauncherSound();
+        }
+    }
     public void Drop()
     {
         if (canDrop == false) return;
