@@ -13,14 +13,9 @@ using UnityEngine.InputSystem;
 public class GameManager : MonoBehaviour, IDataPersistenceManagerPlayer {
 
     [Header("Win or Draw Text")]
-    [SerializeField] private TextMeshProUGUI winnerText;
-    [SerializeField] private TextMeshProUGUI winDrawText;
     [SerializeField] private GameObject winnerParent;
     private bool extraDrawTime = true;
-    [SerializeField] private Material winnerMatBlue, winnerMatRed, winnerMatYellow, winnerMatGreen;
-    
-    
-    
+
     [SerializeField] private CinemachineTargetGroup targetGroup;
     [SerializeField] private Transform cameraTarget;
     private bool isInMiniGame = false;
@@ -450,38 +445,14 @@ public class GameManager : MonoBehaviour, IDataPersistenceManagerPlayer {
 
     private void GiveScoreAfterTimer() {
         
-        if (playersAlive.Count != 0) {
-            //announce who won
-            winnerID = playersAlive[0].GetComponent<PlayerDetails>().playerID;
-            winnerParent.SetActive(true);
-            winnerText.text = ("Player " + winnerID);
-            switch (winnerID) {
-                case 1:
-                    winnerText.fontMaterial = winnerMatBlue;
-                    break;
-                case 2: 
-                    winnerText.fontMaterial = winnerMatRed;
-                    break;
-                case 3:
-                    winnerText.fontMaterial = winnerMatYellow;
-                    break;
-                case 4: 
-                    winnerText.fontMaterial = winnerMatGreen;
-                    break;
-            }
-            winDrawText.text = "WON";
-        }
-        else {
-            //announce draw
+        //Show when a draw occurs
+        if (playersAlive.Count == 0) {
             if (extraDrawTime) {
                 giveScoreTimer -= 1f;
                 extraDrawTime = false;
             }
             winnerParent.SetActive(true);
-            winnerText.text = "";
-            winDrawText.text = "DRAW";
         }
-        
 
         giveScoreTimer += Time.deltaTime;
         if (giveScoreTimer >= giveScoreTime -1f && hasRunTransition == false)
