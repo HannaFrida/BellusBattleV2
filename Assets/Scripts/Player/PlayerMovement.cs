@@ -427,6 +427,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (movementAmount > 0.1f || movementAmount < -0.1f)
         {
+            //movementX = Mathf.MoveTowards(initialSpeed, moveSpeed, acceleration * Time.deltaTime);
             movementX = moveSpeed * movementAmount;
         }
         else if (isMovedByPLatform == false)
