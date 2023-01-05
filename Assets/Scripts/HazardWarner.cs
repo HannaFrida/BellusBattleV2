@@ -41,10 +41,10 @@ public class HazardWarner : MonoBehaviour
                 break;
             case "0":
                 warningIcon.color = new Color(warningIcon.color.r, warningIcon.color.g, warningIcon.color.b, 1);
-                if (soundManager != null)
-                {
+                
+                
                     SoundManager.Instance.HazardWarningSound();
-                }
+                
                 break;
         }
         blinkTimer = 0f;
