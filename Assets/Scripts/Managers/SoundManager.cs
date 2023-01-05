@@ -70,7 +70,7 @@ public class SoundManager : MonoBehaviour
 
 
     private float highestMasterVolume = 0.5f;
-    private float highestMusicVolume = 0.5f;
+    private float highestMusicVolume = 1f;
     private float highestEffectVolume = 0.5f;
 
     private void Awake()
