@@ -188,21 +188,18 @@ public class GameDataTracker : MonoBehaviour
         ValidatePlayerScore();
         List<KeyValuePair<int, int>> scoreOrder = playerScore.ToList();
         scoreOrder.Sort((score1, score2) => score1.Value.CompareTo(score2.Value));
-        List<int> order = new List<int>();
+        List<int> order = new List<int>(GameManager.Instance.GetAllPlayers().Count());
         foreach(KeyValuePair<int,int> playerId in scoreOrder)
         {
-            Debug.Log(previousPlayerID);
             if (playerId.Key == 0) continue;
-            if(playerScore.ContainsKey(previousPlayerID) && playerId.Value == playerScore[previousPlayerID])
+            if(previousPlayerID != 0 && playerId.Value == playerScore[previousPlayerID])
             {
-                Debug.Log(previousPlayerID);
                 SwapListPosition(order, playerId.Key, previousPlayerID, index);
             }
             else
             {
                 order.Add(playerId.Key);
             }
-
             previousPlayerID = order.Last();
             index++;
         }
@@ -210,11 +207,12 @@ public class GameDataTracker : MonoBehaviour
         return order.ToArray();
     }
 
-    private void SwapListPosition(List<int> list, int currentPlayer, int previousPlayer, int previousIndex)
+    private void SwapListPosition(List<int> list, int currentPlayer, int previousPlayer, int index)
     {
-        if(list.Count != 1 && playerKills.ContainsKey(currentPlayer) && playerKills.ContainsKey(previousPlayer) == false || playerKills[currentPlayer] <= playerKills[previousPlayer])
+        Debug.Log(list.Count());
+        if(playerKills[currentPlayer] <= playerKills[previousPlayer])
         {
-            list[previousIndex] = currentPlayer;
+            list[index - 1] = currentPlayer;
             list.Add(previousPlayer); 
         }
         else
@@ -231,6 +229,10 @@ public class GameDataTracker : MonoBehaviour
             if (playerScore.ContainsKey(currentID) == false)
             {
                 playerScore.Add(currentID, 0);
+            }
+            if(playerKills.ContainsKey(currentID) == false)
+            {
+                playerKills.Add(currentID, 0);
             }
         }
     }
