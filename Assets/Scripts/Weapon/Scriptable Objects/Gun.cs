@@ -280,7 +280,7 @@ public class Gun : MonoBehaviour
 
             if (shootSound != null)
             {
-                if(gunsAmmo != 0 || !weaponData.name.Equals("RailGun") & !weaponData.name.Equals("Xnade") & !weaponData.name.Equals("ShotGun"))
+                if(gunsAmmo != 0 || !weaponData.name.Equals("RailGun") & !weaponData.name.Equals("Xnade") & !weaponData.name.Equals("Shotgun") & !weaponData.name.Equals("GwynBolt"))
                 {
                     ShootSoundPlaying();
                 }
@@ -288,8 +288,6 @@ public class Gun : MonoBehaviour
                 {
                     shootSound.Play();
                 }
-               
-               
 
             }
 
