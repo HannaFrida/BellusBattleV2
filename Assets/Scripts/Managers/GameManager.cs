@@ -120,7 +120,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManagerPlayer {
     {
         get => scoreToWin;
     }
-    public void setIsinMiniGame(bool value)
+    public void SetIsinMiniGame(bool value)
     {
         isInMiniGame = value;
     }

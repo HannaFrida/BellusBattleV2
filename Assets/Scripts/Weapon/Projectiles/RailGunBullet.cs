@@ -43,29 +43,11 @@ public class RailGunBullet : Projectile
             PlayerHealth ph = playerGo.GetComponent<PlayerHealth>();
 			if(ph.IsAlive == true)
             {
-				Debug.Log(weaponName);
 				GameDataTracker.Instance.NewKillEvent(shooterID, playerGo.GetComponent<PlayerDetails>().playerID, weaponName, GameManager.Instance.RoundDuration);
-				Debug.Log($"{shooterID} SHOT {playerGo.GetComponent<PlayerDetails>().playerID} WITH {weaponName}");
 			}
 
             ph.TakeDamage(damage);
 			ph.PlayFire();
-
-			
-
-		
-			/*
-			PlayerDeathEvent pde = new PlayerDeathEvent
-			{
-				PlayerGo = other.gameObject,
-				Kille = other.name,
-				KilledBy = "No Idea-chan",
-				KilledWith = "Bullets",
-			};
-			pde.FireEvent();
-			*/
-
-			//Die();
 		}
 		else if (playerGo.CompareTag("AI"))
 		{

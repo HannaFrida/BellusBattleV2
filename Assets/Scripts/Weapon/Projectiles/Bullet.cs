@@ -123,10 +123,8 @@ public class Bullet : Projectile
 		if (playerGo.CompareTag("Player") && shooter != playerGo)
 		{
 			PlayerHealth ph = playerGo.GetComponent<PlayerHealth>();
-			Debug.Log("hehe");
             if (ph.IsAlive == true && damage >= 1)
             {
-                Debug.Log("HUHDA");
                 GameDataTracker.Instance.NewKillEvent(shooterID, playerGo.GetComponent<PlayerDetails>().playerID, weaponName, GameManager.Instance.RoundDuration);
             }
 			ph.TakeDamage(damage);

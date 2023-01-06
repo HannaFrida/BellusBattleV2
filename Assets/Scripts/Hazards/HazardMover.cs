@@ -77,8 +77,6 @@ public class HazardMover : MonoBehaviour
     private void PlaySound()
     {
         if (hasPlayedSound) return;
-        Debug.Log("hehe41");
-
         if(hasReachedHighestPoint == true)
         {
             SoundManager.Instance.FadeOutLavaHazard(5f);
@@ -86,7 +84,6 @@ public class HazardMover : MonoBehaviour
         else
         {
             SoundManager.Instance.FadeInLavaHazard();
-            Debug.Log("hehe400");
         }
         hasPlayedSound = true;
     }

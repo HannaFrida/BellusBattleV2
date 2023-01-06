@@ -223,7 +223,10 @@ public class Gun : MonoBehaviour
         if (weaponData.name == "Xnade")
         {
             MeshFilter meshfil = GetComponentInChildren<MeshFilter>();
-            meshfil.gameObject.SetActive(false);
+            if(meshfil != null)
+            {
+                meshfil.gameObject.SetActive(false);
+            }
             StartCoroutine(DeactivateAfterTime(5f));
         }
         else if (weaponData.name == "GwynBolt")
@@ -356,6 +359,8 @@ public class Gun : MonoBehaviour
     }
     private void ShootSoundPlaying()
     {
+        SoundManager.Instance.PlayGunSound(weaponData.name);
+        /*
         if (weaponData.name == "Shotgun")
         {
             SoundManager.Instance.ElectricShotgunSound();
@@ -396,6 +401,7 @@ public class Gun : MonoBehaviour
         {
             SoundManager.Instance.GrenadeLauncherSound();
         }
+        */
     }
     public void Drop()
     {

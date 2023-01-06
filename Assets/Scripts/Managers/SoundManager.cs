@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using System.Linq;
    
 public class SoundManager : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip victoryMusic;
     [SerializeField] private AudioSource ambience;
     [SerializeField] private AudioClip[] allAmbienceSounds;
+    private AudioClip[] randomSongOrderList;
+    private int randomSongIndex = 0;
 
     [Header("hazards")]
     [SerializeField] private AudioSource poisonHazardSource;
@@ -86,6 +89,7 @@ public class SoundManager : MonoBehaviour
     }
     void Start()
     {
+        createRandomSongOrder();
         //DontDestroyOnLoad(gameObject);
     }
     
@@ -99,7 +103,7 @@ public class SoundManager : MonoBehaviour
     }
     public void FadeInMusic()
     {
-        RandomClipPlayer(allMusicSounds, musicSource);
+        RandomClipPlayer(randomSongOrderList, musicSource);
         StartCoroutine(FadeMixerGroup.StartFade(overallMixer, "MusicMixerGroup", 2f, highestMusicVolume));
     }
     public void FadeOutMusic()
@@ -287,6 +291,53 @@ public class SoundManager : MonoBehaviour
         glassShatterSource.Play();
     }
 
+    public void PlayGunSound(string weaponName)
+    {
+        switch (weaponName)
+        {
+            case "Shotgun":
+                ElectricShotgunSound();
+                break;
+           
+            case "AR":
+                AssaultRifleSound();
+                break;
+
+            case "Revolver":
+                RevolverSound();
+                break;
+
+            case "ShitGun":
+                ShitGunSound();
+                break;
+        
+            case "Lobby Gun":
+                LobbyGunSound();
+                break;
+
+            case "GwynBolt":
+                GwynSound();
+                break;
+
+            case "Launcher":
+                GrenadeSound();
+                break;
+
+            case "Xnade":
+                XBombSound();
+                break;
+
+            case "RailGun":
+                RailGunSound();
+                break;
+
+            case "GrenadeLauncher":
+                GrenadeLauncherSound();
+                break;
+        }
+    }
+    
+
     /*
      private void RandomiseSoundPlayback()
      { //Gör att ett ljud körs random.
@@ -323,13 +374,26 @@ public class SoundManager : MonoBehaviour
     }
     private void RandomClipPlayer(AudioClip[] sounds, AudioSource source)
     {
-        int randomIndex = Random.Range(0, sounds.Length);
-      //  if (source.clip == sounds[randomIndex])
-      //  {
-         //   RandomClipPlayer(sounds, source);
-      //  }
-        source.clip = sounds[randomIndex];
+        Debug.Log("i love music");
+        if (randomSongIndex >= sounds.Length)
+        {
+            randomSongIndex = 0;
+        }
+        //int randomIndex = Random.Range(0, sounds.Length);
+        //  if (source.clip == sounds[randomIndex])
+        //  {
+        //   RandomClipPlayer(sounds, source);
+        //  }
+        source.clip = sounds[randomSongIndex];
         source.Play();
+        randomSongIndex++;
+    }
+
+    private void createRandomSongOrder()
+    {
+        List<AudioClip> songList = new List<AudioClip>(allMusicSounds);
+        songList = songList.OrderBy(i => Random.value).ToList();
+        randomSongOrderList = songList.ToArray();
     }
     public static class FadeMixerGroup
     {
