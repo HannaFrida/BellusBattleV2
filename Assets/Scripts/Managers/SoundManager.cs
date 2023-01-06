@@ -374,7 +374,6 @@ public class SoundManager : MonoBehaviour
     }
     private void RandomClipPlayer(AudioClip[] sounds, AudioSource source)
     {
-        Debug.Log("i love music");
         if (randomSongIndex >= sounds.Length)
         {
             randomSongIndex = 0;

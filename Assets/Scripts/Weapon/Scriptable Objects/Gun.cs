@@ -280,8 +280,15 @@ public class Gun : MonoBehaviour
 
             if (shootSound != null)
             {
-
-                ShootSoundPlaying();
+                if(gunsAmmo != 1 || !weaponData.name.Equals("RailGun") & !weaponData.name.Equals("Xnade") & !weaponData.name.Equals("ShotGun"))
+                {
+                    ShootSoundPlaying();
+                }
+                else
+                {
+                    shootSound.Play();
+                }
+               
                
 
             }
