@@ -23,7 +23,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioSource poisonHazardSource;
     [SerializeField] private AudioSource lavaHazardSource;
     [SerializeField] private AudioSource hazardWarningSource;
-    [SerializeField] private AudioSource trampolineSource; //ligger för närvarande på trampolinprefab. används ej av soundManager
+   
 
     [Header("WeaponSounds")]
     [SerializeField] private AudioSource pickUpWeaponSource;
@@ -44,7 +44,9 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioSource doorOpenSource;
     [SerializeField] private AudioSource doorCloseSource;
     [SerializeField] private AudioSource glassShatterSource;
+	[SerializeField] private AudioSource portalSource;
     [SerializeField] private AudioSource bellRingSource;
+	[SerializeField] private AudioSource trampolineSource; //ligger för närvarande på trampolinprefab. används ej av soundManager
     [SerializeField] private AudioSource startGameBellSource;
     [SerializeField] private AudioSource fireWorkSource;
     [SerializeField] private AudioClip[] allFireworkSounds;
@@ -345,6 +347,11 @@ public class SoundManager : MonoBehaviour
     {
         glassShatterSource.pitch = Random.Range(0.95f, highPitchRan);
         glassShatterSource.Play();
+    }
+	public void PortalSound()
+    {
+        portalSource.pitch = Random.Range(0.90f, highPitchRan);
+        portalSource.Play();
     }
 
     
