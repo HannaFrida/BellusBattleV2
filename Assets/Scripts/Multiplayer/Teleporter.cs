@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-
+/*
+* Author Hanna Rudöfors
+*/
 public class Teleporter : MonoBehaviour
 {
     private int playerAmountOnTeleporter = 0; // Amount of players on the Teleporter

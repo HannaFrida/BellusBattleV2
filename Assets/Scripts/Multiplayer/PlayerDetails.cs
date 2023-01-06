@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+/*
+* Author Hanna Rudöfors
+*/
 public class PlayerDetails : MonoBehaviour
 {
     public int playerID; // Stores the players ID
@@ -63,7 +65,9 @@ public class PlayerDetails : MonoBehaviour
     {
         this.device = device;
     }
-
+    /*
+* Author Martin Wallmark
+*/
     public void Rumble(float lowF, float highF)
     {
         isRumbling = true;

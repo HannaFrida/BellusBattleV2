@@ -1,5 +1,7 @@
 using UnityEngine;
-
+/*
+* Author Hanna Rudöfors
+*/
 //Collection class containing all projectiles.
 public class Projectile : MonoBehaviour{
 	protected GameObject shooter;

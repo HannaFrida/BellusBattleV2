@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+/*
+* Authors Martin Wallmark, Simon Hessling
+*/
 public class ControlChooser : MonoBehaviour
 {
     [SerializeField] private List<PlayerInput> playerInputs = new List<PlayerInput>();

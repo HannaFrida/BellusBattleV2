@@ -1,7 +1,9 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+/*
+* Author Hanna Rudöfors
+*/
 public class Grenade : Projectile
 {
     [SerializeField]

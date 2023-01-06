@@ -3,7 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+/*
+* Author Hanna Rudöfors
+*/
 public class PlayerShoot : MonoBehaviour
 {
     public Action shootInput;

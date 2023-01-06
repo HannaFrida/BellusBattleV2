@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/*
+ * Author Martin Wallmark
+ */
 public class HazardMover : MonoBehaviour
 {
     [SerializeField] private HazardWarner hazardWarner; //OBS om det finns flera movingdeathzones är det bara en som kan ha en hazardWarner!

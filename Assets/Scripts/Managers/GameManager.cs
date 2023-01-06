@@ -9,7 +9,9 @@ using Random = UnityEngine.Random;
 using Cinemachine;
 using TMPro;
 using UnityEngine.InputSystem;
-
+/*
+* Authors Martin Wallmark, Hanna Rudöfors, Khaled Alraas
+*/
 public class GameManager : MonoBehaviour, IDataPersistenceManagerPlayer {
 
     [Header("Win or Draw Text")]
@@ -308,6 +310,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManagerPlayer {
             
         }
     }
+
 
     private void DeactivateMovement()
     {

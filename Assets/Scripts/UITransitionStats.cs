@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+/*
+* Author Hanna Rudöfors, Martin Wallmark
+*/
 public class UITransitionStats : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI FactText;

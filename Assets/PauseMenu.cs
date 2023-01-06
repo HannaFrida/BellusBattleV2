@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-
+/*
+* Author Martin Wallmark
+*/
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField] private Button firstSelected;

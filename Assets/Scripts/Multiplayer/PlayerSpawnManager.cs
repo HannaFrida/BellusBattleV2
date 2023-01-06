@@ -5,7 +5,9 @@ using UnityEngine.UI;
 using TMPro;
 using System.Linq;
 
-
+/*
+* Authors Martin Wallmark, Hanna Rudöfors
+*/
 
 public class PlayerSpawnManager : MonoBehaviour
 {

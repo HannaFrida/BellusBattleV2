@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/*
+ * Author Martin Wallmark
+ */
 public class MovingPlatform : MonoBehaviour
 {
     [SerializeField] private List<Collider> attachedColliders = new List<Collider>();

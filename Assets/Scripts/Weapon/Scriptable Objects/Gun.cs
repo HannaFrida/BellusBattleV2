@@ -7,7 +7,9 @@ using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
 using UnityEngine.VFX;
-
+/*
+* Author Hanna Rudöfors
+*/
 /// <summary>
 /// Put on every weapon
 /// </summary>

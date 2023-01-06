@@ -5,7 +5,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.VFX;
-
+/*
+* Author Hanna Rudöfors
+*/
 public class PlayerJoinManager : PlayerSpawnManager
 {
     [SerializeField] GameObject characterLow;
@@ -73,23 +75,4 @@ public class PlayerJoinManager : PlayerSpawnManager
         }
     }
 
-    private void ActivateUI(int playerID)
-    {
-        if (playerID == 1)
-        {
-            player1UI.SetActive(true);
-        }
-        if (playerID == 2)
-        {
-            player2UI.SetActive(true);
-        }
-        if (playerID == 3)
-        {
-            player3UI.SetActive(true);
-        }
-        if (playerID == 4)
-        {
-            player4UI.SetActive(true);
-        }
-    }
 }

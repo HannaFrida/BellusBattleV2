@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
-
+/*
+ * Author Martin Wallmark
+ */
 public class JumpPad : MonoBehaviour
 {
     [SerializeField] private float forceAmountY;

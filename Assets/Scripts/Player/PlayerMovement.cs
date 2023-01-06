@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Events;
-
+/*
+* Author Martin Wallmark
+*/
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Forces")]

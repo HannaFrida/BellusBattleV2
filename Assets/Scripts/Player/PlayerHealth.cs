@@ -3,7 +3,9 @@ using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 using UnityEngine.Events;
 using UnityEngine.VFX;
-
+/*
+* Author Martin Wallmark, Khaled Alraas
+*/
 public class PlayerHealth : MonoBehaviour
 {
     //public delegate void OnGameOver();
@@ -13,6 +15,14 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private VisualEffect poisoned;
     [SerializeField] private VisualEffect lighting;
     [SerializeField] private VisualEffect fire;
+
+    [SerializeField] private BoxCollider boxCollider;
+    [SerializeField] private Collider headCollider;
+    [SerializeField] private GameObject rightArm;
+    [SerializeField] private SkinnedMeshRenderer skr;
+    [SerializeField] private GameObject hips;
+    [SerializeField] private Animator anime;
+    [SerializeField] private DashAdvanced dash;
     private PlayerMovement pm;
    
 
@@ -28,17 +38,6 @@ public class PlayerHealth : MonoBehaviour
     {
         get => isAlive;
     }
-
-    //USCH
-    [SerializeField] private BoxCollider boxCollider;
-    [SerializeField] private Collider headCollider;
-    [SerializeField] private GameObject rightArm;
-    [SerializeField] private SkinnedMeshRenderer skr;
-    [SerializeField] private GameObject hips;
-    [SerializeField] private Animator anime;
-    [SerializeField] private DashAdvanced dash;
-
-
     private void Start()
     {
         pm = GetComponent<PlayerMovement>();

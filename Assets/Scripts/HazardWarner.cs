@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+/*
+* Author Martin Wallmark
+*/
 public class HazardWarner : MonoBehaviour
 {
     [SerializeField] private Image warningIcon;

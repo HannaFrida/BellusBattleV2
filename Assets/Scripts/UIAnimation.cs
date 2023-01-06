@@ -4,7 +4,9 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-
+/*
+* Author Khaled Alraas
+*/
 public class UIAnimation : MonoBehaviour, IPointerEnterHandler, ISelectHandler
 {
     private Button b;

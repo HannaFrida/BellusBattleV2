@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-
+/*
+* Author Simon Hessling
+*/
 public class MenuSoundHandler : MonoBehaviour
 {
     private SoundManager soundManager;

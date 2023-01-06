@@ -2,6 +2,9 @@
 using System.Collections;
 using UnityEngine;
 using Random = System.Random;
+/*
+* Author Hanna Rudöfors
+*/
 public class Bullet : Projectile
 {
 	[SerializeField]

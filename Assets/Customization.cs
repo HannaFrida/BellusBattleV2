@@ -4,7 +4,9 @@ using System.Linq;
 using System.Xml;
 using UnityEngine;
 using static UnityEngine.EventSystems.EventTrigger;
-
+/*
+* Author Khaled Alraas
+*/
 public class Customization : MonoBehaviour, IDataPersistenceManagerHats
 {
     enum HatList {FromList, FromScene};

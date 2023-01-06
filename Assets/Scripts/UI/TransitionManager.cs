@@ -4,7 +4,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System;
 using Random = UnityEngine.Random;
-
+/*
+* Author Martin Nyman
+*/
 [RequireComponent(typeof(Animator))]
 public class TransitionManager : MonoBehaviour
 {

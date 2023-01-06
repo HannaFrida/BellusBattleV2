@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
-
+/*
+* Author Hanna Rudöfors
+*/
 public class GrenadeShell : Grenade
 {
     private float energyMuliplierOnBounce = 0.5f;

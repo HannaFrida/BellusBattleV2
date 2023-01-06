@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-
+/*
+* Author Hanna Rudöfors
+*/
 public class TimeManager : MonoBehaviour
 {
     [SerializeField] private float slowdownAmount = 0.05f;

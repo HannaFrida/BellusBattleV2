@@ -6,7 +6,9 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using static UnityEngine.Rendering.DebugUI;
-
+/*
+* Author Khaled Alraas
+*/
 public class UIMenuHandler : MonoBehaviour
 {
     [SerializeField] private List<GameObject> panels = new List<GameObject>();

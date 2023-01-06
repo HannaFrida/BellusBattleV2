@@ -9,7 +9,10 @@ using UnityEngine.Rendering;
 using Unity.VisualScripting;
 using UnityEngine.Rendering.Universal;
 using static PlayerMovement;
-
+/*
+* Author Khaled Alraas
+* Author playerprefs save, Hanna Rudöfors, Martin Wallmark
+*/
 public class SettingsUIHandler : UIMenuHandler
 {
     [SerializeField] private GameObject bvs;

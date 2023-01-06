@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/*
+* Author Martin Wallmark
+*/
 public class Pendulum : MonoBehaviour
 {
     [SerializeField] private float speed;

@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/*
+ * Author Martin Wallmark
+ */
 
 public class PoisonZone : MonoBehaviour
 {

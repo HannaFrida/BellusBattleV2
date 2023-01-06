@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/*
+* Author Hanna Rudöfors
+*/
 public class EndScene : MonoBehaviour
 {
     public GameObject[] guns;

@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
+/*
+ * Author Martin Wallmark
+ */
 public class PoisionManager : MonoBehaviour
 {
     [SerializeField] private PoisonZone[] poisionZones;
