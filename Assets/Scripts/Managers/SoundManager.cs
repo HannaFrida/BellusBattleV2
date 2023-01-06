@@ -28,6 +28,7 @@ public class SoundManager : MonoBehaviour
     [Header("WeaponSounds")]
     [SerializeField] private AudioSource pickUpWeaponSource;
     [SerializeField] private AudioSource electricShotgunSource;
+    [SerializeField] private AudioClip[] shotgunSounds;
     [SerializeField] private AudioSource assaultRifleSource;
     [SerializeField] private AudioSource gunSource;
     [SerializeField] private AudioSource shitGunSource;
@@ -139,6 +140,14 @@ public class SoundManager : MonoBehaviour
     public void ElectricShotgunSound()
     {
         electricShotgunSource.pitch = Random.Range(0.98f, highPitchRan);
+        electricShotgunSource.clip = shotgunSounds[0];
+        electricShotgunSource.Play();
+    }
+
+    public void ElectricShotgunLastBulletSound()
+    {
+        electricShotgunSource.pitch = Random.Range(0.98f, highPitchRan);
+        electricShotgunSource.clip = shotgunSounds[1];
         electricShotgunSource.Play();
     }
     public void AssaultRifleSound()

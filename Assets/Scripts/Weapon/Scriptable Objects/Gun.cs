@@ -280,9 +280,13 @@ public class Gun : MonoBehaviour
 
             if (shootSound != null)
             {
-                if(gunsAmmo != 0 || !weaponData.name.Equals("RailGun") & !weaponData.name.Equals("Xnade") & !weaponData.name.Equals("GwynBolt"))
+                if(gunsAmmo != 0 || !weaponData.name.Equals("RailGun") & !weaponData.name.Equals("Shotgun") & !weaponData.name.Equals("Xnade") & !weaponData.name.Equals("GwynBolt"))
                 {
                     ShootSoundPlaying();
+                }
+                else if(weaponData.name.Equals("Shotgun") && gunsAmmo == 0)
+                {
+                    SoundManager.Instance.ElectricShotgunLastBulletSound();
                 }
                 else
                 {
