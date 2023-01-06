@@ -277,23 +277,27 @@ public class Gun : MonoBehaviour
         if (CanShoot())
         {
             gunsAmmo--;
-
-            if (shootSound != null)
-            {
-                if(gunsAmmo != 0 || !weaponData.name.Equals("RailGun") & !weaponData.name.Equals("Xnade") & !weaponData.name.Equals("GwynBolt"))
-                {
-                    ShootSoundPlaying();
-                }
-                else if(weaponData.name.Equals("Shotgun") && gunsAmmo == 0)
-                {
-                    SoundManager.Instance.ElectricShotgunLastBulletSound();
-                }
-                else
-                {
-                    shootSound.Play();
-                }
-
-            }
+			
+			
+			
+			if(weaponData.name.Equals("Shotgun")|| weaponData.name.Equals("RailGun") || weaponData.name.Equals("Xnade") ||weaponData.name.Equals("GwynBolt")){
+				if(weaponData.name.Equals("Shotgun") && gunsAmmo == 0)
+				{
+				SoundManager.Instance.ElectricShotgunLastBulletSound();
+				}
+				else
+				{
+				shootSound.Play();
+				}
+			}
+			else
+			{
+			ShootSoundPlaying();
+			}
+			
+			
+			
+			
 
             //Sound
             if (weaponData.shootAttackSound != null)
@@ -369,48 +373,6 @@ public class Gun : MonoBehaviour
     private void ShootSoundPlaying()
     {
         SoundManager.Instance.PlayGunSound(weaponData.name);
-        /*
-        if (weaponData.name == "Shotgun")
-        {
-            SoundManager.Instance.ElectricShotgunSound();
-        }
-        if (weaponData.name == "AR")
-        {
-            SoundManager.Instance.AssaultRifleSound();
-        }
-        if (weaponData.name == "Revolver")
-        {
-            SoundManager.Instance.RevolverSound();
-        }
-        if (weaponData.name == "ShitGun")
-        {
-            SoundManager.Instance.ShitGunSound();
-        }
-        if (weaponData.name == "Lobby Gun")
-        {
-            SoundManager.Instance.LobbyGunSound();
-        }
-        if (weaponData.name == "GwynBolt")
-        {
-            SoundManager.Instance.GwynSound();
-        }
-        if (weaponData.name == "Launcher")
-        {
-            SoundManager.Instance.GrenadeSound();
-        }
-        if (weaponData.name == "Xnade")
-        {
-            SoundManager.Instance.XBombSound();
-        }
-        if (weaponData.name == "RailGun")
-        {
-            SoundManager.Instance.RailGunSound();
-        }
-        if (weaponData.name == "GrenadeLauncher")
-        {
-            SoundManager.Instance.GrenadeLauncherSound();
-        }
-        */
     }
     public void Drop()
     {

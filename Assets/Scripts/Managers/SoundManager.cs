@@ -195,6 +195,53 @@ public class SoundManager : MonoBehaviour
         grenadeLaucherSource.pitch = Random.Range(0.98f, highPitchRan);
         grenadeLaucherSource.Play();
     }
+	
+	public void PlayGunSound(string weaponName)
+    {
+        switch (weaponName)
+        {
+            case "Shotgun":
+                ElectricShotgunSound();
+                break;
+           
+            case "AR":
+                AssaultRifleSound();
+                break;
+
+            case "Revolver":
+                RevolverSound();
+                break;
+
+            case "ShitGun":
+                ShitGunSound();
+                break;
+        
+            case "Lobby Gun":
+                LobbyGunSound();
+                break;
+
+            case "GwynBolt":
+                GwynSound();
+                break;
+
+            case "Launcher":
+                GrenadeSound();
+                break;
+
+            case "Xnade":
+                XBombSound();
+                break;
+
+            case "RailGun":
+                RailGunSound();
+                break;
+
+            case "GrenadeLauncher":
+                GrenadeLauncherSound();
+                break;
+        }
+    }
+	
     //Hazards
     public void FadeInLavaHazard()
     {
@@ -300,51 +347,7 @@ public class SoundManager : MonoBehaviour
         glassShatterSource.Play();
     }
 
-    public void PlayGunSound(string weaponName)
-    {
-        switch (weaponName)
-        {
-            case "Shotgun":
-                ElectricShotgunSound();
-                break;
-           
-            case "AR":
-                AssaultRifleSound();
-                break;
-
-            case "Revolver":
-                RevolverSound();
-                break;
-
-            case "ShitGun":
-                ShitGunSound();
-                break;
-        
-            case "Lobby Gun":
-                LobbyGunSound();
-                break;
-
-            case "GwynBolt":
-                GwynSound();
-                break;
-
-            case "Launcher":
-                GrenadeSound();
-                break;
-
-            case "Xnade":
-                XBombSound();
-                break;
-
-            case "RailGun":
-                RailGunSound();
-                break;
-
-            case "GrenadeLauncher":
-                GrenadeLauncherSound();
-                break;
-        }
-    }
+    
     
 
     /*
