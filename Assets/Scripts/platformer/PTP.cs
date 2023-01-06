@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+/*
+* Author Khaled Alraas
+*/
 public class PTP : MonoBehaviour
 {
     [SerializeField] private Transform pos;

@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI;
-
+/*
+* Author Khaled Alraas
+*/
 public class GridMap : MonoBehaviour
 {
     [SerializeField] private int width = 20;

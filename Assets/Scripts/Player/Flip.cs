@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
-
+/*
+* Author Khaled Alraas
+*/
 public class Flip : MonoBehaviour
 {
     [SerializeField] private GameObject gameObj;

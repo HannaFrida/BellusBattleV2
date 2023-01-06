@@ -4,7 +4,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
-
+/*
+* Author Khaled Alraas
+*/
 public class LevelDetails : MonoBehaviour
 {
     [SerializeField] private string scene;

@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/*
+* Author Khaled Alraas
+*/
 public interface IDataPersistenceManager
 {
     void LoadData(GameData data);

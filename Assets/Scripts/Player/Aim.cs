@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+/*
+* Author Khaled Alraas
+*/
 public class Aim : MonoBehaviour
 {
     enum AngleRotations{ FullAngleRotation, HalvAngleRotation, FixedAnglesRotation }

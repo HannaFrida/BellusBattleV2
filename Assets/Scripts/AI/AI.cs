@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-
+/*
+* Author Khaled Alraas
+*/
 public class AI : MonoBehaviour
 {
     [SerializeField] private float speed = 10;

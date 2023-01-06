@@ -5,7 +5,9 @@ using TMPro;
 using UnityEditor;
 using UnityEngine.UI;
 using System.Linq;
-
+/*
+* Author Khaled Alraas
+*/
 [ExecuteAlways]
 public class ContentX : MonoBehaviour
 {

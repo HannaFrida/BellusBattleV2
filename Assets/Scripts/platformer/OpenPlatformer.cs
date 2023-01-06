@@ -4,7 +4,9 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 //using static UnityEditor.Experimental.GraphView.GraphView;
-
+/*
+* Author Khaled Alraas
+*/
 public class OpenPlatformer : MonoBehaviour
 {
 

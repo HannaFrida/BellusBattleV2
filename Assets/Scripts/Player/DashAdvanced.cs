@@ -10,6 +10,9 @@ using UnityEngine.UIElements;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
+/*
+* Author Khaled Alraas
+*/
 public class DashAdvanced : MonoBehaviour
 {
     [Header("Bools")]

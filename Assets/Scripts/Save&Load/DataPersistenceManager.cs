@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+/*
+* Author Khaled Alraas
+*/
 public class DataPersistenceManager : MonoBehaviour
 {
     [Header("File Storage Config")]

@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/*
+* Author Khaled Alraas
+*/
 public class PCamera : MonoBehaviour
 {
     [SerializeField] private float startingAfter;

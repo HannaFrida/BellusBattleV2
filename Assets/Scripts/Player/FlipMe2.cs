@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/*
+* Author Khaled Alraas
+*/
 public class FlipMe2 : MonoBehaviour
 {
     Aim da;
