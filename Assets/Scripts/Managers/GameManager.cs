@@ -242,6 +242,10 @@ public class GameManager : MonoBehaviour, IDataPersistenceManagerPlayer {
         yield return new WaitForSeconds(giveScoreTime);
         ReturnToLobby();
     }
+
+    /*
+     * Author Martin Wallmark
+     */
     private void ValidatePlayerLists()
     {
         if (players.Count == 0) return;
@@ -253,6 +257,9 @@ public class GameManager : MonoBehaviour, IDataPersistenceManagerPlayer {
         DataPersistenceManager.Instance.SavePlayerData();
     }
 
+    /*
+    * Author Martin Wallmark
+    */
     public void PauseGame()
     {
         soundManager.HalfMusicVolume();
@@ -260,6 +267,9 @@ public class GameManager : MonoBehaviour, IDataPersistenceManagerPlayer {
         Time.timeScale = 0; 
     }
 
+    /*
+    * Author Martin Wallmark
+    */
     public void ResumeGame()
     {
         soundManager.FullMusicVolume();
@@ -281,7 +291,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManagerPlayer {
     {
         if(welcomePanel != null) welcomePanel.SetActive(false);
         players.Add(player);
-        targetGroup.AddMember(player.transform, 1, 5); //OBS GER ERROR!
+        targetGroup.AddMember(player.transform, 1, 5); 
     }
 
     public void AddInput(PlayerInput input)
@@ -299,7 +309,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManagerPlayer {
         {
             if (players[i] == null) continue;
             targetGroup.RemoveMember(players[i].transform);
-            targetGroup.AddMember(players[i].transform, 1, 5); //OBS GER ERROR!
+            targetGroup.AddMember(players[i].transform, 1, 5); 
         }
         
         foreach (GameObject player in players) {
@@ -311,7 +321,9 @@ public class GameManager : MonoBehaviour, IDataPersistenceManagerPlayer {
         }
     }
 
-
+    /*
+    * Author Martin Wallmark
+    */
     private void DeactivateMovement()
     {
         foreach (GameObject player in players)
@@ -325,6 +337,9 @@ public class GameManager : MonoBehaviour, IDataPersistenceManagerPlayer {
         }
     }
 
+    /*
+    * Author Martin Wallmark
+    */
     public void ActivateMovement()
     {
         foreach (GameObject player in players)
@@ -408,6 +423,9 @@ public class GameManager : MonoBehaviour, IDataPersistenceManagerPlayer {
         return players;
     }
 
+    /*
+    * Author Martin Wallmark
+    */
     private void CheckPlayersLeft()
     {
         if (playersAlive.Count <= 1)
@@ -423,7 +441,10 @@ public class GameManager : MonoBehaviour, IDataPersistenceManagerPlayer {
         }
     }
 
-    private void AddScore(GameObject winner) //TODO använd playerID istället för hela spelarobjektet
+    /*
+    * Author Martin Wallmark
+    */
+    private void AddScore(GameObject winner) 
     {
         if (!scoreDic.ContainsKey(winner))
         {
@@ -436,19 +457,28 @@ public class GameManager : MonoBehaviour, IDataPersistenceManagerPlayer {
 
     }
 
+    /*
+    * Author Martin Wallmark
+    */
     public int GetScore(GameObject player)
     {
         return !scoreDic.ContainsKey(player) ? 0 : scoreDic[player];
     }
 
+    /*
+    * Author Martin Wallmark
+    */
     public void SetPointsToWin(int value)
     {
         scoreToWin = value;
     }
 
+    /*
+    * Author Martin Wallmark
+    */
     private void GiveScoreAfterTimer() {
         
-        //Show when a draw occurs
+        //Show when a draw occurs - Gregory 
         if (playersAlive.Count == 0) {
             if (extraDrawTime) {
                 giveScoreTimer -= 1f;

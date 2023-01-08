@@ -15,8 +15,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField, Range(25f, 150f)] private float groundDeceleration;
     [SerializeField, Range(10f, 300f)] private float airResistance;
     [SerializeField, Range(-100f, 0f)] private float downwardForce;
-    [SerializeField, Range(1f, 50000f)] private float acceleration;
-    [SerializeField, Range(-1f, -50000f)] private float fallForce;
 
     [Header("Jump & Edgecontrol")]
     [SerializeField] JumpSetting jumpSetting = JumpSetting.Press;
@@ -61,16 +59,11 @@ public class PlayerMovement : MonoBehaviour
     private float verticalRaySpacing, horizontalRaySpacing;
     private float verticalRayLength, horizontalRayLength;
     private float movementAmount;
-    private float initialSpeed;
-    //private float movementAnimationSpeed;
     private float playerHeight;
-
-
 
     private bool hasJumpedOnGround, hasDoubleJump, hasCoyoteTime;
     private bool hasBeenActivated;
     private bool hasAccessibility;
-    private bool isMovingLeft, isMovingRight;
     private bool isStandingOnOneWayPlatform;
     private bool runBufferTimer;
     private bool hasJumpBuffer;
@@ -79,10 +72,7 @@ public class PlayerMovement : MonoBehaviour
     private bool isMovedByPLatform;
 
     private bool toggleJump = false;
-
-
     public PlayerInput PlayerInput => playerInput;
-
 
     public UnityEvent jumpEvent;
 
@@ -107,12 +97,6 @@ public class PlayerMovement : MonoBehaviour
     {
         get => downwardForce;
         set => downwardForce = value;
-    }
-
-    public float FallForce
-    {
-        get => fallForce;
-        set => fallForce = value;
     }
 
     public bool IsGrounded
@@ -143,7 +127,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        initialSpeed = moveSpeed - 5; //Används för acceleration
         boxCollider = GetComponent<BoxCollider>();
         CalculateRayLength();
         playerHeight = verticalRayLength * 2;
@@ -156,7 +139,6 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         isGrounded = IsGrounded;
-        
         UpdateMovementForce();
         AccessabilityMoveDown();
         UpdateCoyoteTime();
@@ -221,43 +203,12 @@ public class PlayerMovement : MonoBehaviour
     public void OnMove(InputAction.CallbackContext ctx)
     {
         if (hasBeenActivated == false || GameManager.Instance.GameIsPaused == true) return;
-
         downwardInput = ctx.ReadValue<Vector2>().y;
         movementAmount = ctx.ReadValue<Vector2>().x;
-
-        if (ctx.ReadValue<Vector2>().x > 0.1f)
-        {
-            isMovingRight = true;
-            isMovingLeft = false;
-        }
-        else if (ctx.ReadValue<Vector2>().x < -0.1f)
-        {
-            isMovingRight = false;
-            isMovingLeft = true;
-        }
-        else if (ctx.ReadValue<Vector2>().x < 0.1f || ctx.ReadValue<Vector2>().x > -0.1f)
-        {
-            isMovingRight = false;
-            isMovingLeft = false;
-        }
-
         if (movementAmount < 0.1f && movementAmount > -0.1f)
         {
             movementAmount = 0f;
         }
-
-        // Hold down to fall faster
-        if (!IsGrounded && -downwardInput > 0.1f)
-        {
-            float temp = DownwardForce;
-            temp = fallForce;
-            DownwardForce = temp;
-        }
-        else
-        {
-            SetDownwardForce(downwardForce, DownwardForce);
-        }
-
     }
 
     private void AccessabilityMoveDown() // Ska användas om man kör med onehand-mode!
@@ -282,13 +233,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    public static void SetDownwardForce(float value, float downfroce)
-    {
-        float temp = downfroce;
-        temp = value;
-        downfroce = temp;
-    }
-
     //Autojump setting av Nyman - magic numbers beware.. >.<
     public void OnJump(InputAction.CallbackContext ctx)
     {
@@ -298,6 +242,9 @@ public class PlayerMovement : MonoBehaviour
         {
             Jump();
         }
+        /*
+         * Author Martin Nyman
+         */
         else if (ctx.canceled && jumpSetting == JumpSetting.Hold)
         {
             CancelInvoke();
@@ -324,7 +271,7 @@ public class PlayerMovement : MonoBehaviour
     private void Jump()
     {
         float jumpDecreaser = 1f;
-        if (downwardInput <= downwardInputBound && isStandingOnOneWayPlatform)
+        if (downwardInput <= downwardInputBound && isStandingOnOneWayPlatform) // Hoppa ned genom two-way-plattformar
         {
             transform.position += Vector3.down * playerHeight;
             isStandingOnOneWayPlatform = false;
@@ -336,8 +283,6 @@ public class PlayerMovement : MonoBehaviour
             {
                 hasJumpedOnGround = true;
                 playerSoundManager.PlayerJumpSound();
-
-
             }
             if (!hasCoyoteTime && hasDoubleJump)
             {
@@ -353,7 +298,6 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-
             runBufferTimer = true;
             bufferTimer = 0;
         }
@@ -429,7 +373,6 @@ public class PlayerMovement : MonoBehaviour
 
         if (movementAmount > 0.1f || movementAmount < -0.1f)
         {
-            //movementX = Mathf.MoveTowards(initialSpeed, moveSpeed, acceleration * Time.deltaTime);
             movementX = moveSpeed * movementAmount;
         }
         else if (isMovedByPLatform == false)
@@ -449,7 +392,6 @@ public class PlayerMovement : MonoBehaviour
 
     private bool CheckIsGrounded()
     {
-
         if (Physics.Raycast(boxCollider.bounds.center, Vector2.down, verticalRayLength, oneWayLayer))
         {
             isStandingOnOneWayPlatform = true;
@@ -484,7 +426,6 @@ public class PlayerMovement : MonoBehaviour
     {
         float directionY = Mathf.Sign(velocity.y);
 
-
         float curRayLength;
         if (dash.IsDashing == true && dash.VerticalDashForce < 0 || dash.VerticalDashForce > 35f)
         {
@@ -509,12 +450,8 @@ public class PlayerMovement : MonoBehaviour
             }
             rayOrigin += Vector2.right * (verticalRaySpacing * i);
 
-            //Debug.DrawRay(rayOrigin, Vector2.up * directionY * verticalRayLength, Color.red);
-
-            //RaycastHit hit;
             if (Physics.Raycast(rayOrigin, Vector2.up * directionY, out RaycastHit hit, curRayLength, collisionLayer))
             {
-              
                 if (velocity.y < 0f)
                 {
                     transform.position = new Vector2(transform.position.x, hit.collider.bounds.max.y);
@@ -567,8 +504,6 @@ public class PlayerMovement : MonoBehaviour
             }
             rayOrigin += Vector2.up * (horizontalRaySpacing * i);
 
-            //Debug.DrawRay(rayOrigin, Vector2.right * directionX * horizontalRayLength, Color.red);
-            //RaycastHit hit;
             if (Physics.Raycast(rayOrigin, Vector2.right * directionX, out RaycastHit hit, curRayLength, collisionLayer))
             {
                 if (i == 0)
@@ -588,7 +523,6 @@ public class PlayerMovement : MonoBehaviour
         Bounds bounds = boxCollider.bounds;
         horizontalRayCount = Mathf.Clamp(horizontalRayCount, 2, int.MaxValue);
         verticalRayCount = Mathf.Clamp(verticalRayCount, 2, int.MaxValue);
-
         horizontalRaySpacing = bounds.size.y / (horizontalRayCount - 1);
         verticalRaySpacing = bounds.size.x / (verticalRayCount - 1);
     }
@@ -617,12 +551,10 @@ public class PlayerMovement : MonoBehaviour
 
     public void AddExternalForce(Vector2 force)
     {
-        //Debug.Log("jdjada");
         hasBeenKnockedBack = true;
         knockBackTimer = 0f;
         movementY = force.y;
         movementX = force.x;
-
     }
     public void AddConstantExternalForce(Vector2 force)
     {
