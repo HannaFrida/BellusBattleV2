@@ -59,8 +59,11 @@ public class PlayerSpawnManager : MonoBehaviour
             GameManager.Instance.IsRunningRoundTimer = true;
         }
         timer -= Time.deltaTime;  
-    } 
+    }
 
+    /*
+    * Author Martin Wallmark
+    */
     private void UpdateText()
     {
         if (countDownText == null) return;
@@ -80,6 +83,9 @@ public class PlayerSpawnManager : MonoBehaviour
         
     }
 
+    /*
+    * Author Martin Wallmark
+    */
     private void SpawnPlayersInRandomOrder()
     {
         List<Transform> randomSpawns = new List<Transform>(spawnLocations);
@@ -114,6 +120,9 @@ public class PlayerSpawnManager : MonoBehaviour
         }
     }
 
+    /*
+    * Author Martin Wallmark
+    */
     private void SpawnBasedByScore()
     {
         int[] scoreOrder = GameDataTracker.Instance.GetScoreInOrder();
