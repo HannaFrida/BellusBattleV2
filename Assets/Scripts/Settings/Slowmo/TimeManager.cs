@@ -9,6 +9,7 @@ using TMPro;
 public class TimeManager : MonoBehaviour
 {
     [SerializeField] private float slowdownAmount = 0.05f;
+    [SerializeField] SettingsUIHandler suih;
     [SerializeField] private bool isSlowMo;
     [SerializeField] private Slider slider;
     [SerializeField] private TextMeshProUGUI percentageText;
@@ -16,6 +17,10 @@ public class TimeManager : MonoBehaviour
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
+        if(!suih.slowmoText.Equals( "Normal speed"))
+        {
+            isSlowMo = true;
+        }else isSlowMo= false;
     }
 
     void Update()

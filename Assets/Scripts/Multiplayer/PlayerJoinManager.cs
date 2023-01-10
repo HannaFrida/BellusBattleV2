@@ -13,6 +13,7 @@ public class PlayerJoinManager : PlayerSpawnManager
     [SerializeField] GameObject characterLow;
     RebindingDisplay rbd;
     [SerializeField] private ControlChooser ctrlcc;
+    [SerializeField] private SettingsUIHandler suih;
 
     [SerializeField] private GameObject player1UI;
     [SerializeField] private GameObject player2UI;
@@ -33,6 +34,8 @@ public class PlayerJoinManager : PlayerSpawnManager
         // Set the player ID, add one to the index to start at Player 1
         playerDetails.playerID = playerInput.playerIndex + 1;
         playerDetails.SetDevice(playerInput.devices[0]);
+        Debug.Log(suih.oneHandText.text + "is text");
+        
 
         GameManager.Instance.AddPLayer(playerInput.gameObject);
         GameManager.Instance.AddInput(playerInput);
@@ -64,6 +67,13 @@ public class PlayerJoinManager : PlayerSpawnManager
         TextMeshPro indicatorText = playerInput.gameObject.GetComponentInChildren<TextMeshPro>();
         //Activates Player characteraccessories and assigns material based on characterIndex
         playerInput.gameObject.GetComponentInChildren<CharacterCustimization>().ActivateAccessories(playerInput.playerIndex, renderer, indicatorText);
+
+
+        if (PlayerPrefs.GetInt("OneHandMode") == 1)
+        {
+            Debug.Log("ydada");
+            playerInput.SwitchCurrentActionMap("PlayerAccessibilityLeft");
+        }
 
     }
 
