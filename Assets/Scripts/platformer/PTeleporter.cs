@@ -4,7 +4,7 @@ using UnityEngine;
 /*
 * Author Khaled Alraas
 */
-public class PTP : MonoBehaviour
+public class PTeleporter : MonoBehaviour
 {
     [SerializeField] private Transform pos;
     [SerializeField] private bool left;
