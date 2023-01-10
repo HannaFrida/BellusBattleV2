@@ -8,7 +8,7 @@ using UnityEngine.Events;
 public class AI : MonoBehaviour
 {
     [SerializeField] private float speed = 10;
-    private Vector3 direction;
+    private Vector3 direction = Vector3.right;
     [SerializeField] private float checkDistance = 1;
     [SerializeField] private LayerMask layerM;
     [SerializeField] private float timetUntilDeath = 2f;
@@ -17,12 +17,6 @@ public class AI : MonoBehaviour
     [SerializeField] Mesh mesh;
     public UnityEvent delayedDeathEvent;
     bool dead = false;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        direction = Vector3.right;
-    }
 
     // Update is called once per frame
     void Update()

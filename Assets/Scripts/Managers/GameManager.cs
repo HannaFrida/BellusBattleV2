@@ -18,10 +18,13 @@ public class GameManager : MonoBehaviour, IDataPersistenceManagerPlayer {
     [SerializeField] private GameObject winnerParent;
     private bool extraDrawTime = true;
 
+    [Header("Camera")]
     [SerializeField] private CinemachineTargetGroup targetGroup;
     [SerializeField] private Transform cameraTarget;
+    //MiniGame
     private bool isInMiniGame = false;
     private bool gameLoopFinished = false;
+
     public static GameManager Instance;
     [SerializeField] private List<GameObject> players = new List<GameObject>();
     [SerializeField] private List<GameObject> playersAlive = new List<GameObject>();
@@ -50,16 +53,13 @@ public class GameManager : MonoBehaviour, IDataPersistenceManagerPlayer {
     [SerializeField] WhichScenesListToPlay scenceToPlay;
     [SerializeField] WhichOrderToPlayScenes playingScenesOrder;
     [SerializeField] private string[] scenes;
-    [SerializeField] private List<LevelDetails> levels = new List<LevelDetails>();
     [SerializeField] private float timeTillRestartGame;
-    [SerializeField] private GameObject content;
-    [SerializeField] private GameObject levelXPrefab;
     private int sceneCount;
     private enum WhichScenesListToPlay { ScenesFromBuild, ScenesFromList, ScenesFromBuildAndList };
     private enum WhichOrderToPlayScenes { Random, NumiricalOrder };
     private string nextLevel;
-    [Header("UI")]
-    [SerializeField] private GameObject welcomePanel;
+    private List<string> scenesToChooseFrom = new List<string>();
+    private List<string> scenesToRemove = new List<string>();
 
     [Header("Transition")]
     [SerializeField] private float transitionTime = 2f;
@@ -69,8 +69,6 @@ public class GameManager : MonoBehaviour, IDataPersistenceManagerPlayer {
 
     public bool _safeMode = false;
 
-    public List<string> scenesToChooseFrom = new List<string>();
-    public List<string> scenesToRemove = new List<string>();
     
     
     public List<string> GetScencesList()
@@ -241,7 +239,6 @@ public class GameManager : MonoBehaviour, IDataPersistenceManagerPlayer {
 
     public void AddPLayer(GameObject player)
     {
-        if(welcomePanel != null) welcomePanel.SetActive(false);
         players.Add(player);
         targetGroup.AddMember(player.transform, 1, 5); 
     }
