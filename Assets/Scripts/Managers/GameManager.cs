@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManagerPlayer {
     [SerializeField] private int roundCounter;
 
     [Header("Points")]
-    private static Dictionary<GameObject, int> scoreDic = new Dictionary<GameObject, int>();
+    private Dictionary<GameObject, int> scoreDic = new Dictionary<GameObject, int>();
     [SerializeField] private int scoreToWin;
     [SerializeField] private bool hasGivenScore;
     [SerializeField] private float giveScoreTimer;
@@ -541,6 +541,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManagerPlayer {
             }
             
         }
+        ClearScore();
         SceneManager.LoadSceneAsync("MainMenu");
         gameLoopFinished = true;
         DataPersistenceManager.Instance.SavePlayerData();

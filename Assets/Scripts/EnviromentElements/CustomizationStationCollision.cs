@@ -13,6 +13,7 @@ public class CustomizationStationCollision : MonoBehaviour
        List<GameObject> players = GameManager.Instance.GetAllPlayers();
        for(int i = 0; i < players.Count; i++)
         {
+            if (tempPlayerCollider[i] == null) continue;
             tempPlayerCollider[i].transform.position = players[i].transform.position;
         }
     }
