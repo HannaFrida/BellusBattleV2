@@ -111,12 +111,7 @@ public class Dash : MonoBehaviour
         canDash = true;
 
     }
-    private IEnumerator Invincibility()
-    {
-        health.SetInvincible(true);
-        yield return new WaitForSeconds(dashingInvincibilityDuration);
-        health.SetInvincible(false);
-    }
+ 
     private void Flip()
     {
         if (isFacingRight && movement.Velocity.x < 0f || !isFacingRight && movement.Velocity.x > 0f)
@@ -143,7 +138,7 @@ public class Dash : MonoBehaviour
         CheckForCollision();
         canDash = false;
         isDashing = true;
-        StartCoroutine(Invincibility());
+        //StartCoroutine(Invincibility());
         dashEvent.Invoke();
     }
     private void EndDashProtocol()

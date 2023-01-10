@@ -29,7 +29,6 @@ public class PlayerSpawnManager : MonoBehaviour
 
     private void Start()
     {
-        
         timer = 3f;
         runTimer = true;
         playerCount = GameManager.Instance.GetAllPlayers().Count;
@@ -42,8 +41,6 @@ public class PlayerSpawnManager : MonoBehaviour
             players = GameManager.Instance.GetAllPlayers().ToArray();
         }
         SpawnPlayers();
-        
-
     }
     private void Update()
     {
@@ -105,7 +102,6 @@ public class PlayerSpawnManager : MonoBehaviour
         }
         else
         {
-            //SpawnPlayersBasedOnID();
             SpawnPlayersInRandomOrder();
         }
     }
@@ -115,7 +111,6 @@ public class PlayerSpawnManager : MonoBehaviour
         for (int i = 0; i < players.Length; i++)
         {
             if (players[i] == null) continue;
-            //players[i].GetComponent<Dash>().ResetValues();
             players[i].transform.position = spawnLocations[i].position;
         }
     }

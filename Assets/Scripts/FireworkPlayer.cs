@@ -7,7 +7,6 @@ public class FireworkPlayer : MonoBehaviour
 {
     [SerializeField] private List<VisualEffect> allFireWorks = new();
     private float timer = 1;
-    // Start is called before the first frame update
   
     // Update is called once per frame
     void Update()

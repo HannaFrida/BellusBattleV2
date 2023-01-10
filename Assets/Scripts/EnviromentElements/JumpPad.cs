@@ -37,8 +37,5 @@ public class JumpPad : MonoBehaviour
             Rigidbody rb = go.GetComponent<Rigidbody>();
             rb.AddForce(force * rb.mass, ForceMode.Impulse);
         }
-
-
-    }
-    
+    }  
 }

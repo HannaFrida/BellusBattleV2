@@ -28,12 +28,10 @@ public class PlayerDetails : MonoBehaviour
         return headGearSlot;
     }
     
-   
     void Start()
     {
         transform.position = startPos; // Puts the player on the spawn position
         isAlive = true;
-        //headGearSlot = GameObject.FindGameObjectWithTag("HeadSlot").transform;
     }
 
 
@@ -46,16 +44,14 @@ public class PlayerDetails : MonoBehaviour
     {
         if (ctx.started)
         {
-            //Debug.Log("joppa");
             if (GameManager.Instance.GameIsPaused == false)
             {
                 GameManager.Instance.PauseGame();
-                //Debug.Log("jii");
             }
             else
             {
                 GameManager.Instance.ResumeGame();
-                //Debug.Log("hAAA");
+                
             }
         }
         
@@ -86,10 +82,5 @@ public class PlayerDetails : MonoBehaviour
             isRumbling = false;
             timer = 0f;
         }
-
     }
-
-
-
-   
 }

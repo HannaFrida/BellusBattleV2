@@ -16,7 +16,6 @@ public class ControlChooser : MonoBehaviour
     {
         foreach(PlayerInput input in GameManager.Instance.GetInputs())
         {
-            //Debug.Log("wjaja");
             if (!playerInputs.Contains(input))
             {
                 playerInputs.Add(input);
@@ -33,13 +32,7 @@ public class ControlChooser : MonoBehaviour
 
 
     }
-    public void RightControllerMode()
-    {
-        toggledRight = !toggledRight;
-        toggledLeft = false;
-        ControlScheme();
-    }
-
+   
     public void AddToList(PlayerInput input)
     {
         playerInputs.Add(input);
@@ -56,12 +49,9 @@ public class ControlChooser : MonoBehaviour
                 input.gameObject.GetComponent<PlayerMovement>().HasAccessibility = true;
                 input.gameObject.GetComponent<PlayerDetails>().ChosenActionMap = "PlayerAccessibilityLeft";
             }
-            
-            Debug.Log("sätt in left controller control scheme här");
         }
         if (toggledRight)
         {
-            Debug.Log("sätt in right controller control scheme här");
             foreach (PlayerInput input in playerInputs)
             {
                 input.SwitchCurrentActionMap("PlayerAccessibilityRight");
@@ -70,7 +60,6 @@ public class ControlChooser : MonoBehaviour
         }
         if (!toggledRight && !toggledLeft)
         {
-            Debug.Log("Sätt in normal kotroller här");
             foreach (PlayerInput input in playerInputs)
             {
                 //input.SwitchCurrentActionMap("Player");

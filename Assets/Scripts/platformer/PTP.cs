@@ -14,12 +14,11 @@ public class PTP : MonoBehaviour
         if (other.gameObject.tag == "Player" && !left)
         {
             other.gameObject.transform.position = new Vector3(pos.position.x + 2, other.gameObject.transform.position.y, other.gameObject.transform.position.z);
-            //other.gameObject.GetComponent<NavigateUI>().SetConnection(settingsMenuPanel);
+
         }
         else if (other.gameObject.tag == "Player" && left)
         {
             other.gameObject.transform.position = new Vector3(pos.position.x - 2, other.gameObject.transform.position.y, other.gameObject.transform.position.z);
-            //other.gameObject.GetComponent<NavigateUI>().SetConnection(settingsMenuPanel);
         }
     }
 }

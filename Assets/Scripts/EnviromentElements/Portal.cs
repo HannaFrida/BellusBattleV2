@@ -8,9 +8,8 @@ public class Portal : MonoBehaviour
 {
     [SerializeField] private Portal teleportDestination;
     [SerializeField] private float teleportCoolDownTime;
-    private float timer;
     [SerializeField]private bool canTeleport;
-
+    private float timer;
 
     public bool CanTeleport
     {
@@ -22,7 +21,6 @@ public class Portal : MonoBehaviour
     {
         teleporterCoolDown();
     }
-
 
     private void OnTriggerEnter(Collider other)
     {
@@ -36,7 +34,6 @@ public class Portal : MonoBehaviour
             teleportDestination.CanTeleport = false;
         }
     }
-
     private void teleporterCoolDown()
     {
         if (canTeleport) return;
@@ -48,8 +45,4 @@ public class Portal : MonoBehaviour
             timer = 0f;
         }
     }
-
-
-
-   
 }
