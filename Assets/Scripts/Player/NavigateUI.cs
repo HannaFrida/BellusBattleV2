@@ -11,16 +11,6 @@ public class NavigateUI : MonoBehaviour
     int x = 0;
     int y = 0;
     int z = 0;
-    private void Awake()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     public void NavigateRight(InputAction.CallbackContext context)
     {
         if (g == null) return;
