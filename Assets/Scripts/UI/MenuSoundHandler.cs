@@ -15,7 +15,7 @@ public class MenuSoundHandler : MonoBehaviour
     void Start()
     {
         eventSystem = GameObject.FindGameObjectWithTag("EventSystem").GetComponent<EventSystem>();
-        soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
+        soundManager = SoundManager.Instance;
     }
 
     // Update is called once per frame

@@ -17,6 +17,7 @@ public class Customization : MonoBehaviour, IDataPersistenceManagerHats
     private List<GameObject> removedHats = new List<GameObject>();
     int random;
     GameObject place;
+
     private void Start()
     {
         DataPersistenceManager.Instance.LoadHatsData();
@@ -42,8 +43,6 @@ public class Customization : MonoBehaviour, IDataPersistenceManagerHats
             place = other.gameObject.GetComponentInChildren<CharacterCustimization>().transform.FindChild("Headslot").gameObject;
             EntryProtocol(place);
             PutHat();
-            // object.transform.GetChild(Random.Range(0, hats.Count));
-            //change something if needed
         }
     }
 

@@ -17,14 +17,7 @@ public class LevelSlider : MonoBehaviour
     void Start()
     {
         nmrOfLevels = 5;
-        /*
-        slider = GetComponent<Slider>();
-        slider.minValue = 1;
-        slider.maxValue = levelManager.GetScencesList().Count;
-        */
     }
-
-    // Update is called once per frame
     void FixedUpdate()
     {
         textS.text = nmrOfLevels.ToString();
@@ -45,10 +38,7 @@ public class LevelSlider : MonoBehaviour
     public void OnPlay()
     {
         GameManager.Instance.SetPointsToWin(nmrOfLevels);
-
-        //PlaySceneChangeAnimation();
         StartCoroutine(Timer(1));
-        //GameManager.Instance.LoadNextScene();
     }
     public void PlaySceneChangeAnimation()
     {

@@ -52,8 +52,6 @@ public class Gun : MonoBehaviour
     [Header("DeSpawning")]
     [Tooltip("time before the weapon can be picked up again")]
     [SerializeField] float timeToWaitForDeSpawn = 0.1f;
-    //bool isStartTimerForDeSpawn;
-    //float deSpawnTimer;
 
     [Header("Special cases")]
     [SerializeField] GameObject swordMesh;
@@ -71,7 +69,6 @@ public class Gun : MonoBehaviour
 
     private void Start()
     {
-        //Debug.Log("fuck you");
         // Reload it
         gunsAmmo = weaponData.Ammo;
 
@@ -158,18 +155,6 @@ public class Gun : MonoBehaviour
         {
             railGoneTime = true;
         }
-
-
-        /*
-        if (BulletFollow && firedProjectile != null)
-        {
-            Debug.Log("RAIL");
-            firedProjectile.transform.position = muzzle.transform.position;
-            firedProjectile.transform.rotation = transform.rotation;
-        }
-        */
-        
-
     }
 
     private void OnTriggerEnter(Collider other)
@@ -205,10 +190,7 @@ public class Gun : MonoBehaviour
                 weaponManager.EquipWeapon(weaponData, gameObject);
 
                 isStartTimerForDrop = false;
-                //isStartTimerForDeSpawn = false;
-                //deSpawnTimer = 0f;
                 dropTimer = 0f;
-
                 isPickedUp = true;
             }
         }
@@ -248,7 +230,6 @@ public class Gun : MonoBehaviour
        
         if (gameObject.GetComponent<MeshFilter>() != null)
         {
-            //Debug.Log("borde inte vara här");
             Mesh mesh = GetComponent<MeshFilter>().mesh;
             GameObject despawnVFX = Instantiate(weaponData.DespawnVFX, transform.position, transform.rotation);
             despawnVFX.GetComponent<Despawn>().SetMesh(mesh);
@@ -256,31 +237,16 @@ public class Gun : MonoBehaviour
         
     }
 
-    private bool CanShoot() => timeSinceLastShot > 1f / (weaponData.fireRate / 60f) && gunsAmmo > 0 && isPickedUp;//!gunData.reloading && timeSinceLastShot > 1f / (gunData.fireRate / 60f); //weaponData.Ammo > 0
+    private bool CanShoot() => timeSinceLastShot > 1f / (weaponData.fireRate / 60f) && gunsAmmo > 0 && isPickedUp;
 
     private void Shoot()
     {
         // Spökskott
         if (enabled == false || gameObject.activeSelf == false) return;
-        /*
-        if (gunsAmmo == 0 || weaponData.name != "BasicSword")
-        {
-             // Play click sound to indicate no ammo left
-             if (emptyGunSound != null)
-               {
-                  emptyGunSound.Play();
-
-              }
-            Debug.Log("Click clack");
-        }
-        */
-
-
+     
         if (CanShoot())
         {
             gunsAmmo--;
-			
-			
 			
 			if(weaponData.name.Equals("Shotgun")|| weaponData.name.Equals("RailGun") || weaponData.name.Equals("Xnade") ||weaponData.name.Equals("GwynBolt")){
 				if(weaponData.name.Equals("Shotgun") && gunsAmmo == 0)
@@ -343,9 +309,6 @@ public class Gun : MonoBehaviour
                 _projectile.SetDamage(weaponData.damage);
                 _projectile.gameObject.transform.parent = muzzle.transform;
 
-                // Lock aim
-                //StartCoroutine("DisableAimScript");
-
                 timeSinceLastShot = 0;
             }
             else if (weaponData.name == "Xnade")
@@ -387,13 +350,6 @@ public class Gun : MonoBehaviour
         }
 
         isStartTimerForDrop = true;
-        /*
-        if (gunsAmmo == 0)
-        {
-            isStartTimerForDeSpawn = true;
-        }
-        */
-
         gameObject.transform.SetParent(null);
         // Otherwise it stays in DontDestroyOnLoad
         if (weaponSpawnerManager.GetTrashBin != null)
@@ -403,26 +359,9 @@ public class Gun : MonoBehaviour
 
         isDropped = true;
         
-
         // So that the previous owner can't shoot this gun
         playerShoot.shootInput = null;
         playerShoot.dropInput = null;
-    }
-
-    IEnumerator DisableAimScript()
-    {
-        yield return new WaitForSeconds(0.6f);
-        foreach (Aim aim in ownerAim)
-        {
-            aim.enabled = false;
-        }
-
-        yield return new WaitForSeconds(1f);
-
-        foreach (Aim aim in ownerAim)
-        {
-            aim.enabled = true;
-        }
     }
 
 }

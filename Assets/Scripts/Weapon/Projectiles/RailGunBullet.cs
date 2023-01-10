@@ -18,7 +18,6 @@ public class RailGunBullet : Projectile
 	[SerializeField] private bool xnade = false;
 	[SerializeField] private float stopMove = 0.1f;
 	private bool stopMovement = false;
-	//public float bulletDamage;
 
 	private void Start()
 	{
@@ -80,13 +79,6 @@ public class RailGunBullet : Projectile
 
 	}
 
-	/*
-	public void SetDamage(float setTo)
-    {
-		bulletDamage = setTo;
-    }
-	*/
-
 	private IEnumerator Shoot(float seconds)
 	{
 		yield return new WaitForSeconds(stopMove);
@@ -114,7 +106,6 @@ public class RailGunBullet : Projectile
 		{
 			col2.enabled = false;
 		}
-		//col2.enabled = true;
 
 	}
 	private void Killcol()
@@ -124,8 +115,6 @@ public class RailGunBullet : Projectile
         {
 			col2.enabled = true;
 		}
-		
-
 	}
 }
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 /*
-* Author Hanna Rudöfors
+* Author Khaled Alraas
 */
 public class WeaponSpawnerManager : MonoBehaviour
 {
@@ -30,7 +30,6 @@ public class WeaponSpawnerManager : MonoBehaviour
         if (numberOfWeaponsToSpawn > spawners.Length)
         {
             numberOfWeaponsToSpawn = spawners.Length;
-            //Debug.LogError("\"numberOfWeaponsToSpawn\" is larger than the number of spawners that exists in the Scene");
         }
     }
     private void ÍnitialSpawnersToChooseFrom()
@@ -69,9 +68,7 @@ public class WeaponSpawnerManager : MonoBehaviour
         {
             temporaryNumber = Random.Range(0, spawnersToChooseFrom.Count);
             choosenSpawners.Add(spawnersToChooseFrom.ElementAt(temporaryNumber));
-            //spawnersToChooseFrom.RemoveAt(temporaryNumber);
         }
-        //Debug.Log(spawnersToChooseFrom.Count);
     }
     private void SpawnWeaponsInSpawners()
     {
@@ -88,5 +85,4 @@ public class WeaponSpawnerManager : MonoBehaviour
     {
         spawnersToChooseFrom.Add(spawner);
     }
-
 }

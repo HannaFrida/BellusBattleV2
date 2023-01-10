@@ -68,16 +68,7 @@ public class SettingsUIHandler : UIMenuHandler
         audioMixer = am;
         es.SetSelectedGameObject(bvs);
         players = new List<GameObject>(GameManager.Instance.GetAllPlayers());
-        //GetQuality();
-        GetOneHandMode();
-        //GetFullscrean();
-        //GetBlur();
-        GetSlowMoText();
-        //GetSafeMode();
-        GetUIIndecator();
-        GetMasterValume();
-        GetMusicValume();
-        GetEffectValume();
+       
         
     }
     private void OnLevelWasLoaded(int level)
@@ -220,14 +211,12 @@ public class SettingsUIHandler : UIMenuHandler
         else oneHandText.text = "OFF";
         cc.LeftControllerMode();
         int boolean = Convert.ToInt32(toggle);
-        Debug.Log(boolean);
         PlayerPrefs.SetInt("OneHandMode", boolean);
         
     }
     public void GetOneHandMode()
     {
         int toggle = PlayerPrefs.GetInt("OneHandMode");
-        Debug.Log(toggle);
         if (toggle == 1) oneHandText.text = "ON";
         else oneHandText.text = "OFF";
     }

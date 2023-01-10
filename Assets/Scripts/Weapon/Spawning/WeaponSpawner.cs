@@ -15,10 +15,9 @@ public class WeaponSpawner : MonoBehaviour
     }
     public void SpawnRandomWeapon()
     {
-        //if (isholdingWeapon) return;
         Instantiate(weapons[Random.Range(0, weapons.Length)], transform);
     }
-    public void WeaponIsPicked() // Den här ska försättas med PickUp Script
+    public void WeaponIsPicked()
     {
         manager.AddEmptySpawnerToChooseFrom(this);
     }
