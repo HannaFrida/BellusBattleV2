@@ -15,20 +15,17 @@ public class PCamera : MonoBehaviour
      private float t2 = 0;
     [SerializeField] private Camera cam;
     [SerializeField] private GameObject platform;
-    // Start is called before the first frame update
+
+
     void Start()
     {
         bounds = cam.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, GetComponent<Camera>().transform.position.z));
     }
 
-    // Update is called once per frame
     void LateUpdate()
     {
         if (t2 < startingAfter) t2 += Time.deltaTime;
-        else
-        {
-            start = true;
-        }
+        else start = true;
 
         if (start)
         {

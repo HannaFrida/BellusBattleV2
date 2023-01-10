@@ -18,10 +18,13 @@ public class GameManager : MonoBehaviour, IDataPersistenceManagerPlayer {
     [SerializeField] private GameObject winnerParent;
     private bool extraDrawTime = true;
 
+    [Header("Camera")]
     [SerializeField] private CinemachineTargetGroup targetGroup;
     [SerializeField] private Transform cameraTarget;
+    //MiniGame
     private bool isInMiniGame = false;
     private bool gameLoopFinished = false;
+
     public static GameManager Instance;
     [SerializeField] private List<GameObject> players = new List<GameObject>();
     [SerializeField] private List<GameObject> playersAlive = new List<GameObject>();
@@ -38,7 +41,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManagerPlayer {
     [SerializeField] private int roundCounter;
 
     [Header("Points")]
-    private static Dictionary<GameObject, int> scoreDic = new Dictionary<GameObject, int>();
+    private Dictionary<GameObject, int> scoreDic = new Dictionary<GameObject, int>();
     [SerializeField] private int scoreToWin;
     [SerializeField] private bool hasGivenScore;
     [SerializeField] private float giveScoreTimer;
@@ -50,41 +53,22 @@ public class GameManager : MonoBehaviour, IDataPersistenceManagerPlayer {
     [SerializeField] WhichScenesListToPlay scenceToPlay;
     [SerializeField] WhichOrderToPlayScenes playingScenesOrder;
     [SerializeField] private string[] scenes;
-    [SerializeField] private List<LevelDetails> levels = new List<LevelDetails>();
     [SerializeField] private float timeTillRestartGame;
-    [SerializeField] private GameObject content;
-    [SerializeField] private GameObject levelXPrefab;
     private int sceneCount;
     private enum WhichScenesListToPlay { ScenesFromBuild, ScenesFromList, ScenesFromBuildAndList };
     private enum WhichOrderToPlayScenes { Random, NumiricalOrder };
     private string nextLevel;
-    [Header("UI")]
-    [SerializeField] private GameObject welcomePanel;
+    private List<string> scenesToChooseFrom = new List<string>();
+    private List<string> scenesToRemove = new List<string>();
 
     [Header("Transition")]
     [SerializeField] private float transitionTime = 2f;
     AsyncOperation asyncLoad;
     [SerializeField] Transition trans;
-    //static Vector2 pos1, pos2, pos3, pos4;
-    //private static Dictionary<int, GameObject> transPosDic = new Dictionary<int, GameObject>();
-    //private static Dictionary<int, Image> imageDic = new Dictionary<int, Image>();
-
-    [SerializeField] private Image player1Dead;
-    [SerializeField] private Image player1Alive;
-    
-    [SerializeField] private Image player2Dead;
-    [SerializeField] private Image player2Alive;
-    
-    [SerializeField] private Image player3Dead;
-    [SerializeField] private Image player3Alive;
-    
-    [SerializeField] private Image player4Dead;
-    [SerializeField] private Image player4Alive;
+   
 
     public bool _safeMode = false;
 
-    public List<string> scenesToChooseFrom = new List<string>();
-    public List<string> scenesToRemove = new List<string>();
     
     
     public List<string> GetScencesList()
@@ -129,12 +113,6 @@ public class GameManager : MonoBehaviour, IDataPersistenceManagerPlayer {
     private void OnLevelWasLoaded(int level)
     {
         SoundManager.Instance.FadeOutLavaHazard(0.1f);
-        /*
-        if(SceneManager.GetSceneAt(level).name.Equals("TranisitionScene") == false)
-        {
-            
-        }
-        */
         ValidatePlayerLists();
 
         if (level != 0)
@@ -145,21 +123,6 @@ public class GameManager : MonoBehaviour, IDataPersistenceManagerPlayer {
             playersAlive = new List<GameObject>(players);
             ActivateMovement();
             DeactivateMovement();
-
-            //Array.Clear(targetGroup.GetComponent<CinemachineTargetGroup>().m_Targets, 0, targetGroup.GetComponent<CinemachineTargetGroup>().m_Targets.Length);
-            //SpawnPlayers();
-
-            /*
-            // Used to prevent Ghost bullets 
-            foreach (GameObject player in playersAlive)
-            {
-                if (player.GetComponentInChildren<Gun>() != null)
-                {
-                    player.GetComponentInChildren<Gun>().Drop();
-                }
-                
-            }
-            */
         }
 
         if(SceneManager.GetActiveScene().name.Equals("TransitionScene") == false)
@@ -169,7 +132,6 @@ public class GameManager : MonoBehaviour, IDataPersistenceManagerPlayer {
             runRoundTimer = false;
             roundTimer = 0f;
             roundDuration = 0f;
-            ResetPlayerImage();
             RestorePLayer();
         }
 
@@ -180,8 +142,6 @@ public class GameManager : MonoBehaviour, IDataPersistenceManagerPlayer {
             roundCounter = 0;
             GameDataTracker.Instance.SetCurrentRound(0);
         }
-        
-
     }
     private void Awake()
     {
@@ -190,21 +150,11 @@ public class GameManager : MonoBehaviour, IDataPersistenceManagerPlayer {
         gameLoopFinished = false;
         DontDestroyOnLoad(this);
         AddScenesToPlay();
-
     }
 
     private void Start()
     {
-        //Cursor.lockState = CursorLockMode.Locked;
-        //Cursor.visible = false;
         cameraTarget = GameObject.FindGameObjectWithTag("CameraTarget").transform;  
-        //targetGroup = GameObject.FindGameObjectWithTag("targets");
-        //trans = Transition.Instance;
-        //trans.gameObject.SetActive(false);
-        //pos1 = new Vector2(477f, 160f); 
-        //pos2 = new Vector2(892f, 160f);
-        //pos3 = new Vector2(1139f, 160f);
-        //pos4 = new Vector2(1386f, 160f); // x = 977 - -409
         DataPersistenceManager.Instance.LoadPlayerData();
     }
 
@@ -242,6 +192,10 @@ public class GameManager : MonoBehaviour, IDataPersistenceManagerPlayer {
         yield return new WaitForSeconds(giveScoreTime);
         ReturnToLobby();
     }
+
+    /*
+     * Author Martin Wallmark
+     */
     private void ValidatePlayerLists()
     {
         if (players.Count == 0) return;
@@ -253,6 +207,9 @@ public class GameManager : MonoBehaviour, IDataPersistenceManagerPlayer {
         DataPersistenceManager.Instance.SavePlayerData();
     }
 
+    /*
+    * Author Martin Wallmark
+    */
     public void PauseGame()
     {
         soundManager.HalfMusicVolume();
@@ -260,6 +217,9 @@ public class GameManager : MonoBehaviour, IDataPersistenceManagerPlayer {
         Time.timeScale = 0; 
     }
 
+    /*
+    * Author Martin Wallmark
+    */
     public void ResumeGame()
     {
         soundManager.FullMusicVolume();
@@ -279,9 +239,8 @@ public class GameManager : MonoBehaviour, IDataPersistenceManagerPlayer {
 
     public void AddPLayer(GameObject player)
     {
-        if(welcomePanel != null) welcomePanel.SetActive(false);
         players.Add(player);
-        targetGroup.AddMember(player.transform, 1, 5); //OBS GER ERROR!
+        targetGroup.AddMember(player.transform, 1, 5); 
     }
 
     public void AddInput(PlayerInput input)
@@ -299,7 +258,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManagerPlayer {
         {
             if (players[i] == null) continue;
             targetGroup.RemoveMember(players[i].transform);
-            targetGroup.AddMember(players[i].transform, 1, 5); //OBS GER ERROR!
+            targetGroup.AddMember(players[i].transform, 1, 5); 
         }
         
         foreach (GameObject player in players) {
@@ -311,7 +270,9 @@ public class GameManager : MonoBehaviour, IDataPersistenceManagerPlayer {
         }
     }
 
-
+    /*
+    * Author Martin Wallmark
+    */
     private void DeactivateMovement()
     {
         foreach (GameObject player in players)
@@ -325,6 +286,9 @@ public class GameManager : MonoBehaviour, IDataPersistenceManagerPlayer {
         }
     }
 
+    /*
+    * Author Martin Wallmark
+    */
     public void ActivateMovement()
     {
         foreach (GameObject player in players)
@@ -334,11 +298,6 @@ public class GameManager : MonoBehaviour, IDataPersistenceManagerPlayer {
             PlayerMovement pm = player.GetComponent<PlayerMovement>();
             pm.enabled = true;
             //pm.ResetForces();
-
-
-
-
-
         }
     }
 
@@ -348,54 +307,9 @@ public class GameManager : MonoBehaviour, IDataPersistenceManagerPlayer {
         {
             deadPlayer.GetComponentInChildren<PlayerIndicatorFollow>().Follow();
         }
-        
-        
         playersAlive.Remove(deadPlayer);
-        targetGroup.RemoveMember(deadPlayer.transform); //OBS GER ERROR!
-        SetDeathImage(deadPlayer.GetComponent<PlayerDetails>().playerID);
-        
-        
+        targetGroup.RemoveMember(deadPlayer.transform); 
     }
-
-    private void SetDeathImage(int playerID)
-    {
-        if(playerID == 1)
-        {
-            player1Dead.enabled = true;
-            player1Alive.enabled = false;
-        }
-        if(playerID == 2)
-        {
-            player2Dead.enabled = true;
-            player2Alive.enabled = false;
-        }
-        if (playerID == 3)
-        {
-            player3Dead.enabled = true;
-            player3Alive.enabled = false;
-        }
-        if (playerID == 4)
-        {
-            player4Dead.enabled = true;
-            player4Alive.enabled = false;
-        }
-    }
-
-    private void ResetPlayerImage()
-    {
-        player1Dead.enabled = false;
-        player1Alive.enabled = true;
-
-        player2Dead.enabled = false;
-        player2Alive.enabled = true;
-
-        player3Dead.enabled = false;
-        player3Alive.enabled = true;
-
-        player4Dead.enabled = false;
-        player4Alive.enabled = true;
-    }
-
     private void ClearScore()
     {
         scoreDic.Clear();
@@ -408,6 +322,9 @@ public class GameManager : MonoBehaviour, IDataPersistenceManagerPlayer {
         return players;
     }
 
+    /*
+    * Author Martin Wallmark
+    */
     private void CheckPlayersLeft()
     {
         if (playersAlive.Count <= 1)
@@ -423,7 +340,10 @@ public class GameManager : MonoBehaviour, IDataPersistenceManagerPlayer {
         }
     }
 
-    private void AddScore(GameObject winner) //TODO använd playerID istället för hela spelarobjektet
+    /*
+    * Author Martin Wallmark
+    */
+    private void AddScore(GameObject winner) 
     {
         if (!scoreDic.ContainsKey(winner))
         {
@@ -436,19 +356,28 @@ public class GameManager : MonoBehaviour, IDataPersistenceManagerPlayer {
 
     }
 
+    /*
+    * Author Martin Wallmark
+    */
     public int GetScore(GameObject player)
     {
         return !scoreDic.ContainsKey(player) ? 0 : scoreDic[player];
     }
 
+    /*
+    * Author Martin Wallmark
+    */
     public void SetPointsToWin(int value)
     {
         scoreToWin = value;
     }
 
+    /*
+    * Author Martin Wallmark
+    */
     private void GiveScoreAfterTimer() {
         
-        //Show when a draw occurs
+        //Show when a draw occurs - Gregory 
         if (playersAlive.Count == 0) {
             if (extraDrawTime) {
                 giveScoreTimer -= 1f;
@@ -479,10 +408,8 @@ public class GameManager : MonoBehaviour, IDataPersistenceManagerPlayer {
             hasGivenScore = true;
             if (GetScore(winner) == scoreToWin)
             {
-                //Debug.Log(GameDataTracker.Instance.GetScoreInOrder()[0] + ", " + GameDataTracker.Instance.GetScoreInOrder()[1] + ", " + GameDataTracker.Instance.GetScoreInOrder()[2]);
                 ClearScore();
                 StartCoroutine(RestartGame());
-                //Nån har vunnit!
                 hasRunTransition = false;
                 return;
             }
@@ -502,8 +429,6 @@ public class GameManager : MonoBehaviour, IDataPersistenceManagerPlayer {
         LoadNextScene();
 
     }
-
-
     public void LoadScenesList()
     {
         if (scenceToPlay == WhichScenesListToPlay.ScenesFromBuild) CreateListOfScenesFromBuild();
@@ -514,7 +439,6 @@ public class GameManager : MonoBehaviour, IDataPersistenceManagerPlayer {
             scenesToChooseFrom.Remove(scene);
         }
     }
-    // ahhaa
     private void CreateListOfScenesFromBuild()
     {
         for (int i = 0; i < sceneCount; i++)
@@ -576,19 +500,6 @@ public class GameManager : MonoBehaviour, IDataPersistenceManagerPlayer {
         soundManager.FadeInMusic();
 
     }
-    /*
-    private void LoadNextSceneInNumericalOrder()
-    {
-        SceneManager.LoadScene(scenesToChooseFrom.ElementAt(0));
-        scenesToChooseFrom.RemoveAt(0);
-    }
-    private void LoadNextSceneInRandomOrder()
-    {
-        int randomNumber = Random.Range(0, scenesToChooseFrom.Count);
-        SceneManager.LoadScene(scenesToChooseFrom.ElementAt(randomNumber));
-        scenesToChooseFrom.RemoveAt(randomNumber);
-    }
-    */
 
     private string LoadNextSceneInNumericalOrder()
     {
@@ -611,7 +522,6 @@ public class GameManager : MonoBehaviour, IDataPersistenceManagerPlayer {
     }
     private IEnumerator RestartGame()
     {
-        //GameDataTracker.Instance.WriteToFile();
         SceneManager.LoadScene("The_End");
         soundManager.FadeInEndSceneSounds();
         gameLoopFinished = true;
@@ -631,10 +541,10 @@ public class GameManager : MonoBehaviour, IDataPersistenceManagerPlayer {
             }
             
         }
+        ClearScore();
         SceneManager.LoadSceneAsync("MainMenu");
         gameLoopFinished = true;
         DataPersistenceManager.Instance.SavePlayerData();
-        //yield return new WaitForSeconds(timeTillRestartGame);
         Destroy(transform.parent.gameObject);
         SceneManager.LoadScene(System.IO.Path.GetFileNameWithoutExtension(SceneUtility.GetScenePathByBuildIndex(0)));
     }
@@ -644,6 +554,10 @@ public class GameManager : MonoBehaviour, IDataPersistenceManagerPlayer {
     {
         return winnerID;
     }
+
+    /*
+     * Author Hanna Rudöfors
+     */
 
     // The Application loads the Scene in the background as the current Scene runs.
     // transitionTime is how long the TransitionScene is shown before continuing
@@ -670,54 +584,6 @@ public class GameManager : MonoBehaviour, IDataPersistenceManagerPlayer {
         yield return null;
     }
 
-    public void MoveUpPlayer()
-    {
-        /*
-        if (winnerID == 0)
-        {
-            Debug.Log("draw or something");
-        }
-        else if(winnerID == 1)
-        {
-            //Debug.Log(scoreDic[playersAlive[0]] + "");
-            //Debug.Log(winnerID);
-            //Debug.Log("winnah");
-            imageDic[winnerID] = trans.getImage1;
-            RectTransform picture1 = trans.getImage1.GetComponent<RectTransform>();
-            picture1.transform.position = pos1;
-            pos1 = new Vector2(picture1.position.x, picture1.position.y + 20);
-            trans.getWinScore1.SetText(scoreDic[playersAlive[0]] + "");
-        }
-        else if (winnerID == 2)
-        {
-            //Debug.Log(scoreDic[playersAlive[0]] + "");
-            //Debug.Log(winnerID);
-            //Debug.Log("ahhhhhhh");
-            imageDic[winnerID] = trans.getImage2;
-            RectTransform picture2 = trans.getImage2.GetComponent<RectTransform>();
-            picture2.transform.position = pos2;
-            pos2 = new Vector2(picture2.position.x, picture2.position.y + 20);
-            trans.getWinScore2.SetText(scoreDic[playersAlive[0]] + "");
-        }
-        else if (winnerID == 3)
-        {
-            imageDic[winnerID] = trans.getImage3;
-            RectTransform picture3 = trans.getImage3.GetComponent<RectTransform>();
-            picture3.transform.position = pos3;
-            pos3 = new Vector2(picture3.position.x, picture3.position.y + 20);
-            trans.getWinScore3.SetText(scoreDic[playersAlive[0]] + "");
-        }
-        else if (winnerID == 4)
-        {
-            imageDic[winnerID] = trans.getImage4;
-            RectTransform picture4 = trans.getImage4.GetComponent<RectTransform>();
-            picture4.transform.position = pos4;
-            pos4 = new Vector2(picture4.position.x, picture4.position.y + 20);
-            trans.getWinScore4.SetText(scoreDic[playersAlive[0]] + "");
-        }
-        */
-    }
-
     public void LoadData(PlayerData data)
     {
         players = data.players;
@@ -727,10 +593,8 @@ public class GameManager : MonoBehaviour, IDataPersistenceManagerPlayer {
             if(players[i] != null)
             {
                 targetGroup.AddMember(players[i].transform, 1, 5);
-            }
-            
+            } 
         }
-
     }
 
     public void SaveData(ref PlayerData data)

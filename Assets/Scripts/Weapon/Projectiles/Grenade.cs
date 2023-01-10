@@ -22,7 +22,6 @@ public class Grenade : Projectile
 
     protected virtual void Start()
     {
-        //cf = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFocus>(); //shitfix
         StartCoroutine(StartFuse());
     }
 
@@ -60,7 +59,6 @@ public class Grenade : Projectile
         hits = Physics.OverlapSphere(transform.position, explosionSize);
         for (int i = 0; i < hits.Length; i++)
         {
-            //Debug.Log(hits[i].name);
             if (hits[i].CompareTag("Player"))
             {
                 if(lighting)
@@ -79,18 +77,6 @@ public class Grenade : Projectile
                 }
                 ph.TakeDamage(damage);
                 
-                //cf.RemoveTarget(hits[i].transform); //shitfix
-                //pickUp_Proto.isHoldingWeapon = false;
-
-                /*
-				PlayerDeathEvent pde = new PlayerDeathEvent{
-					PlayerGo = hits[i].gameObject,
-					Kille = hits[i].name,
-					KilledBy = "No Idea-chan",
-					KilledWith = "Bullets",
-				};
-				pde.FireEvent();
-				*/
             }
             if (hits[i].CompareTag("Door"))
             {
@@ -101,25 +87,6 @@ public class Grenade : Projectile
                 Destroy(hits[i].gameObject);
             }
         }
-
-        //hits = null;
-
-        // Delay before destroy
-        
-        //Die();
     }
 
-    /*
-    private void Die()
-    {
-        ExplodeEvent ee = new ExplodeEvent
-        {
-            Description = "Grenade " + name + " exploded!",
-            ExplosionGo = gameObject
-        };
-        ee.FireEvent();
-        hits = null;
-        Destroy(gameObject);
-    }
-    */
 }

@@ -75,81 +75,7 @@ public class DashAdvanced : MonoBehaviour
     enum DashType { E1_BasicDash, E2_TwoStateDash, E3_AdvancedDash, E4_GigaChadDash }
     [SerializeField] private DashType dashType;
 
-    //#region Editor
-    //[CustomEditor(typeof(DashAdvanced))]
-    //public class DashAdvancedEditor : Editor
-    //{
-    //    DashAdvanced dash;
-    //    public float dashingDistac;
-    //    public override void OnInspectorGUI()
-    //    {
-    //        dash = (DashAdvanced)target;
-    //        base.OnInspectorGUI();
-    //        switch (dash.dashType)
-    //        {
-    //            case DashType.E1_BasicDash:
-    //                DrawDetailsE1();
-    //                break;
-    //            case DashType.E2_TwoStateDash:
-    //                DrawDetailsE2();
-    //                break;
-    //            case DashType.E3_AdvancedDash:
-    //                DrawDetailsE3();
-    //                break;
-    //            case DashType.E4_GigaChadDash:
-    //                DrawDetailsE4();
-    //                break;
-    //        }
-    //    }
-
-    //    private void DrawDetailsE1()
-    //    {
-    //        EditorGUILayout.LabelField("Details E1", EditorStyles.boldLabel);
-    //        EditorGUILayout.BeginHorizontal();
-    //        GUILayout.Label("Distace", GUILayout.MaxWidth(100));
-    //        //dash.SetDashingDistance(EditorGUILayout.FloatField(dash.dashingDistace));
-    //        dashingDistac = EditorGUILayout.FloatField("", dashingDistac);
-    //        DashAdvanced.dashingDistace = dashingDistac;
-    //        EditorGUILayout.LabelField("Duration", GUILayout.MaxWidth(100));
-    //        dash.dashingDuration = EditorGUILayout.FloatField(dash.dashingDuration);
-    //        EditorGUILayout.EndHorizontal();
-    //    }
-    //    private void DrawDetailsE2()
-    //    {
-    //        DrawDetailsE1();
-    //        EditorGUILayout.LabelField("Details E2", EditorStyles.boldLabel);
-    //        EditorGUILayout.BeginHorizontal();
-    //        EditorGUILayout.LabelField("AirDistace", GUILayout.MaxWidth(100));
-    //        dash.airDashingDistace = EditorGUILayout.FloatField(dash.airDashingDistace);
-    //        EditorGUILayout.LabelField("AirDuration", GUILayout.MaxWidth(100));
-    //        dash.airDashingDuration = EditorGUILayout.FloatField(dash.airDashingDuration);
-    //        EditorGUILayout.EndHorizontal();
-    //    }
-    //    private void DrawDetailsE3()
-    //    {
-    //        DrawDetailsE2();
-    //        EditorGUILayout.LabelField("Details E3", EditorStyles.boldLabel);
-    //        EditorGUILayout.BeginHorizontal();
-    //        EditorGUILayout.LabelField("Up Angle", GUILayout.MaxWidth(100));
-    //        dash.dashUpAngle = EditorGUILayout.FloatField(dash.dashUpAngle);
-    //        EditorGUILayout.LabelField("Down Angle", GUILayout.MaxWidth(100));
-    //        dash.dashDownAngle = EditorGUILayout.FloatField(dash.dashDownAngle);
-    //        EditorGUILayout.EndHorizontal();
-    //    }
-    //    private void DrawDetailsE4()
-    //    {
-    //        DrawDetailsE3();
-    //        EditorGUILayout.LabelField("Details E4", EditorStyles.boldLabel);
-    //        EditorGUILayout.BeginHorizontal();
-    //        EditorGUILayout.EndHorizontal();
-    //    }
-    //    //private void TextIO(string title, float widthSpacing, DashAdvanced d)
-    //    //{
-    //    //    EditorGUILayout.LabelField(title, GUILayout.MaxWidth(widthSpacing));
-    //    //    dash.airDashingDuration = EditorGUILayout.FloatField(dash.airDashingDuration);
-    //    //}
-    //}
-    ////#endregion
+   
 
     public void DashWithJoystick(InputAction.CallbackContext context)
     {
@@ -179,12 +105,8 @@ public class DashAdvanced : MonoBehaviour
         movement = GetComponent<PlayerMovement>();
         health = GetComponent<PlayerHealth>();
         gravity = movement.DownwardForce;
-       // tr.time = dashingDuration;
     }
-    //void Update()
-    //{
-    //    //DashWithKeyboard();
-    //}
+  
 
     private void Update()
     {
@@ -197,7 +119,6 @@ public class DashAdvanced : MonoBehaviour
             else if (!stopGravityWhileDashing) transform.position += (velocity - new Vector3(movement.Velocity.x, 0f, 0f)) * Time.deltaTime;
             else transform.position += (velocity - (Vector3)movement.Velocity) * Time.deltaTime;
         }
-        //velocity = new Vector3(0, velocity.y, velocity.z);
     }
     private void CheckDashType()
     {
@@ -236,7 +157,7 @@ public class DashAdvanced : MonoBehaviour
     }
     private void StartDashProtocol()
     {
-        //currentDashingDuration *= 2;
+        
         playerSoundManager.PlayerDashSound();
         CheckForCollision();
         canDash = false;
@@ -250,7 +171,7 @@ public class DashAdvanced : MonoBehaviour
         }
         if (isInvincibileWhileDashing)
         {
-            health.SetInvincible(true);
+            //health.SetInvincible(true);
         }
         isDashing = true;
     }
@@ -263,7 +184,7 @@ public class DashAdvanced : MonoBehaviour
         currentCanDashDown = canDashDown;
         movement.DownwardForce = gravity;
         onControlOverride = false;
-        health.SetInvincible(false);
+        //health.SetInvincible(false);
     }
     private void SetDirection()
     {
@@ -318,7 +239,6 @@ public class DashAdvanced : MonoBehaviour
     private IEnumerator GigaChadDashAction()
     {
         StartDashProtocol();
-       // movement.Velocity = new Vector2();
         velocity = new Vector3(direction.x * currentDashingDistace, direction.y * currentDashingDistace, 0f);
         Debug.DrawLine(transform.position + new Vector3(0f, 0.5f, 0.3f), transform.position + new Vector3(0f, 0.5f, 0.3f) + velocity * currentDashingDuration, Color.green, 5);
         yield return new WaitForSeconds(currentDashingDuration);
@@ -356,29 +276,10 @@ public class DashAdvanced : MonoBehaviour
             }
             else
             {
-                //currentDashingDistace = hit.distance / currentDashingDuration - 2 * Mathf.Abs(movement.Velocity.x) - 5;
                 currentDashingDistace = hit.distance / currentDashingDuration - Mathf.Abs(movement.Velocity.x) - bcollider.size.x / currentDashingDuration;
-                //currentDashingDuration = currentDashingDuration * ((hit.distance / currentDashingDuration - 2 * Mathf.Abs(movement.Velocity.x)-7) / dashingDistace);
             }
         }
     }
-    //private void CheckForCollision2()
-    //{
-    //    RaycastHit hit;
-    //    if (Physics.BoxCast(transform.position, bcollider.size/2, direction, out hit, transform.rotation, currentDashingDistace * currentDashingDuration + bcollider.size.x, movement.CollisionLayer)) //10 is a the number that make dash distance works correct 
-    //    {
-    //        if (onControlOverride)
-    //        {
-    //            currentDashingDistace = hit.distance / currentDashingDuration - Mathf.Sqrt(Mathf.Pow(movement.Velocity.x, 2) + Mathf.Pow(movement.Velocity.y, 2)) - Mathf.Abs(movement.Velocity.x) - Mathf.Abs(movement.Velocity.y);
-    //            currentDashingDistace = Mathf.Abs(currentDashingDistace);
-    //        }
-    //        else
-    //        {
-    //            currentDashingDistace = hit.distance / currentDashingDuration - bcollider.size.x / currentDashingDuration;
-    //            //currentDashingDuration = currentDashingDuration * ((hit.distance / currentDashingDuration - 2 * Mathf.Abs(movement.Velocity.x)-7) / dashingDistace);
-    //        }
-    //    }
-    //}
     public bool GetISFacingRight()
     {
         return isFacingRight;

@@ -5,7 +5,7 @@ using UnityEngine;
 public class RotationXnade : MonoBehaviour
 {
     public bool freeze = false;
-    // Start is called before the first frame update
+  
     // Update is called once per frame
     void Update()
     {
@@ -13,8 +13,6 @@ public class RotationXnade : MonoBehaviour
             Vector3 rotate = new Vector3(0f,0f,1f);
             gameObject.transform.Rotate(rotate);
         }
-        
-
     }
     public void TimeToFreeze()
     {

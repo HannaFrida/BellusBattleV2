@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 /*
 * Author Hanna Rudöfors
 */
@@ -9,16 +8,10 @@ public class WeaponManager : MonoBehaviour
 {
     [SerializeField]
     private Transform weaponSlot;
-    private SoundManager soundManager;
-
     [SerializeField]
     private WeaponData equippedWeapon;
-
     private GameObject currentWeapon;
-    bool hasflippedRight;
-    bool hasflippedLeft;
     [SerializeField] private GameObject rightArmAimPivotpoint;
-
     public WeaponData EquippedWeapon { get => equippedWeapon; }
 
     
@@ -30,23 +23,7 @@ public class WeaponManager : MonoBehaviour
             UnEquipWeapon(currentWeapon);
             currentWeapon.SetActive(false);
             currentWeapon.transform.SetParent(null);
-        }
-        
-    }
-
-    private void Update()
-    {
-
-        /*
-        if (equippedWeapon.name == "RailGun")
-        {
-            weaponSlot.transform.rotation.y = -80f;
-        }
-        else{
-            weaponSlot.transform.rotation.y = -99.742f;
-        }
-        */
-        
+        }  
     }
 
     public void EquipWeapon(WeaponData weaponData, GameObject nowWeapon)
@@ -60,12 +37,6 @@ public class WeaponManager : MonoBehaviour
             return;
         }
         equippedWeapon = weaponData;
-        /*
-        if (equippedWeapon.pickupSound != null)
-        {
-            
-        }
-        */
         SoundManager.Instance.PickUpWeaponSound();
 
         nowWeapon.transform.SetParent(weaponSlot);
@@ -76,7 +47,6 @@ public class WeaponManager : MonoBehaviour
 
     public void UnEquipWeapon(GameObject nowWeapon)
     {
-        //nowWeapon.GetComponent<Gun>().Drop();
         equippedWeapon = null;
         nowWeapon = null;
     }

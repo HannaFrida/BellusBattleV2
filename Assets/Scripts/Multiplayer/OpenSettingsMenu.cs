@@ -11,7 +11,6 @@ public class OpenSettingsMenu : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // When a player stands on the Teleporter the playerAmountOnTeleporter goes up
         if (other.gameObject.tag == "Player")
         {
             settingsMenuPanel.SetActive(true);
@@ -20,10 +19,7 @@ public class OpenSettingsMenu : MonoBehaviour
             {
                 obj[i].GetComponent<PlayerInput>().SwitchCurrentActionMap("Menu");
                 obj[i].GetComponent<NavigateUI>().SetConnection(settingsMenuPanel);
-            }
-            
+            }  
         }
-    }
-
-    
+    } 
 }

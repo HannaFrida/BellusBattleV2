@@ -18,7 +18,6 @@ public class Bullet : Projectile
 	private float killMySelfTime = 0.4f;
 	private float timer;
 	bool canKillMyself;
-	//public float bulletDamage;
 
 	private void Start()
 	{
@@ -58,10 +57,6 @@ public class Bullet : Projectile
 			if (colliderPlayerVFX != null)
 			{
                 GameObject MuzzleFlashIns = Instantiate(colliderPlayerVFX, pos, rot);
-				//MuzzleFlashIns.transform.Rotate(Vector3.forward * -90);
-				//MuzzleFlashIns.transform.Rotate(Vector3.right * 90);
-				//MuzzleFlashIns.transform.Rotate(Vector3.up * );
-
 				Destroy(MuzzleFlashIns, 3f);
             }
 			PlayerHealth ph = playerGo.GetComponent<PlayerHealth>();
@@ -71,9 +66,6 @@ public class Bullet : Projectile
 				GameDataTracker.Instance.NewKillEvent(shooterID, playerGo.GetComponent<PlayerDetails>().playerID, weaponName, GameManager.Instance.RoundDuration);
 			}
 			ph.TakeDamage(damage);
-			
-			
-			
 			Die();
 		}
 		else if (playerGo.CompareTag("AI"))
@@ -84,7 +76,6 @@ public class Bullet : Projectile
 
 		if (other.gameObject.tag.Equals("Obstacle"))
 		{
-			//Debug.Log("Obstacle");
 			ContactPoint contact = other.contacts[0];
 			Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
 			Vector3 pos = contact.point;
@@ -93,11 +84,6 @@ public class Bullet : Projectile
                 GameObject MuzzleFlashIns = Instantiate(colliderWallVFX, pos, rot);
                 Destroy(MuzzleFlashIns, 3f);
             }
-			
-			
-
-			//GameObject MuzzleFlashIns = Instantiate(collideVFX, gameObject.transform.position, transform.rotation);
-			//MuzzleFlashIns.transform.Rotate(Vector3.left * 90);
 			Destroy(gameObject);
 			return;
 		}
@@ -120,6 +106,7 @@ public class Bullet : Projectile
 		}
 
 	}
+	
 	private void OnTriggerEnter(Collider other)
 	{
 		GameObject playerGo = other.gameObject;
@@ -166,13 +153,6 @@ public class Bullet : Projectile
 		}
 
 	}
-
-	/*
-	public void SetDamage(float setTo)
-    {
-		bulletDamage = setTo;
-    }
-	*/
 
 	private IEnumerator Shoot(float seconds)
 	{

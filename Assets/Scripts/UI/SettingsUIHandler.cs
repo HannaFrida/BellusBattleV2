@@ -27,6 +27,9 @@ public class SettingsUIHandler : UIMenuHandler
     static Resolution[] resolutions;
     TextMeshProUGUI textPro;
     List<GameObject> players;
+    [SerializeField] GameObject settingspanel;
+
+
 
     [Header("Master")]
     [SerializeField] TextMeshProUGUI masterVolumeText;
@@ -44,18 +47,19 @@ public class SettingsUIHandler : UIMenuHandler
     [SerializeField] TextMeshProUGUI qualityText;
     
     [Header("OneHandMode")]
-    [SerializeField] TextMeshProUGUI oneHandText;
+    [SerializeField] public TextMeshProUGUI oneHandText;
     
     [Header("Blur")]
     [SerializeField] TextMeshProUGUI dofText;
 
     [Header("Slowmo")]
-    [SerializeField] TextMeshProUGUI slowmoText;
+    [SerializeField] public TextMeshProUGUI slowmoText;
     [SerializeField] Slider slowmoSlider;
 
     // Start is called before the first frame update
     void Start()
     {
+        
         base.Start();
         SetUpResolution();
         cc = GetComponent<ControlChooser>();
@@ -64,6 +68,8 @@ public class SettingsUIHandler : UIMenuHandler
         audioMixer = am;
         es.SetSelectedGameObject(bvs);
         players = new List<GameObject>(GameManager.Instance.GetAllPlayers());
+       
+        
     }
     private void OnLevelWasLoaded(int level)
     {
@@ -290,8 +296,9 @@ public class SettingsUIHandler : UIMenuHandler
 
     public void SetSlowMoText(float sliderValue)
     {
-        slowmoText.text = (sliderValue).ToString("#")+ "0%";
+        
         if (slowmoText.text.Equals("100%")) slowmoText.text = "Normal speed";
+        else slowmoText.text = (sliderValue).ToString("#") + "0%";
         PlayerPrefs.SetFloat("SlowMoValue", sliderValue);
     }
     
@@ -299,9 +306,10 @@ public class SettingsUIHandler : UIMenuHandler
     {
         float value = PlayerPrefs.GetFloat("SlowMoValue");
         slowmoSlider.value = value;
-        slowmoText.text = (value).ToString("#")+ "0%";
-        if (slowmoText.text.Equals("100%")) slowmoText.text = "Normal speed";
         
+        if (slowmoText.text.Equals("100%")) slowmoText.text = "Normal speed";
+        else slowmoText.text = (value).ToString("#") + "0%";
+
     }
     public void SetAutoJump(int index)
     {
@@ -356,12 +364,20 @@ public class SettingsUIHandler : UIMenuHandler
     {
         if (toggle) textPro.text = "ON";
         else textPro.text = "OFF";
-        foreach (GameObject player in players)
+        foreach (GameObject player in GameManager.Instance.GetAllPlayers())
         {
+            Debug.Log("DADA");
             if (player != null) player.transform.Find("PlayerIndicator").gameObject.SetActive(toggle);
-            //Renderer renderer = player.GetComponentInChildren<SkinnedMeshRenderer>();
-            //TextMeshPro indicatorText = player.GetComponentInChildren<TextMeshPro>();
-            //player.GetComponentInChildren<CharacterCustimization>().ActivateAccessories(player.GetComponent<PlayerDetails>().playerID - 1, renderer, indicatorText);
+            /*
+            Renderer renderer = player.GetComponentInChildren<SkinnedMeshRenderer>();
+            Debug.Log("DADA");
+            TextMeshPro indicatorText = player.transform.Find("PlayerIndicator").GetComponent<TextMeshPro>();
+            Debug.Log("DADA");
+            player.GetComponentInChildren<CharacterCustimization>().ActivateAccessories(player.GetComponent<PlayerDetails>().playerID -1, renderer, indicatorText);
+            Debug.Log("DADA");
+            */
+           
+
         }
         int boolean = Convert.ToInt32(toggle);
         PlayerPrefs.SetInt("UIindicatorSetting", boolean);
@@ -374,7 +390,7 @@ public class SettingsUIHandler : UIMenuHandler
 
         if (boolean) textPro.text = "ON";
         else textPro.text = "OFF";
-        foreach (GameObject player in players)
+        foreach (GameObject player in GameManager.Instance.GetAllPlayers())
         {
             if (player != null) player.transform.Find("PlayerIndicator").gameObject.SetActive(boolean);
         }

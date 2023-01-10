@@ -8,7 +8,7 @@ using UnityEngine;
 public class PoisonZone : MonoBehaviour
 {
     [SerializeField] private float timeToKill;
-    [SerializeField] private string hazardName; // Anvönds för att logga
+    [SerializeField] private string hazardName; // Används för att logga
     private static Dictionary<GameObject, float> poisonDic = new Dictionary<GameObject, float>();
     private static Dictionary<GameObject, bool> isInZoneDic = new Dictionary<GameObject, bool>();
     
