@@ -3512,6 +3512,11 @@ PrefabInstance:
       objectReference: {fileID: 1656595240}
     - target: {fileID: 4401542679982079947, guid: 6bbf5b6599b5f714ea352cfb4677488f,
         type: 3}
+      propertyPath: suih
+      value: 
+      objectReference: {fileID: 1947459015}
+    - target: {fileID: 4401542679982079947, guid: 6bbf5b6599b5f714ea352cfb4677488f,
+        type: 3}
       propertyPath: camera
       value: 
       objectReference: {fileID: 0}
@@ -26454,8 +26459,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ExecuteInEditor: 1
-  m_Bindings:
-  - {fileID: 740215607}
+  m_Bindings: []
   m_VisualEffect: {fileID: 740215610}
 --- !u!73398921 &740215609
 VFXRenderer:
@@ -28007,18 +28011,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1947459015}
-        m_TargetAssemblyTypeName: SettingsUIHandler, Assembly-CSharp
-        m_MethodName: SetText
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 1401076087}
-          m_ObjectArgumentAssemblyTypeName: TMPro.TextMeshProUGUI, Unity.TextMeshPro
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 1947459015}
         m_TargetAssemblyTypeName: SettingsUIHandler, Assembly-CSharp
         m_MethodName: SetSlowMoText
@@ -40095,18 +40087,6 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1947459015}
-        m_TargetAssemblyTypeName: SettingsUIHandler, Assembly-CSharp
-        m_MethodName: SetText
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 114072712}
-          m_ObjectArgumentAssemblyTypeName: TMPro.TextMeshProUGUI, Unity.TextMeshPro
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 1947459015}
         m_TargetAssemblyTypeName: SettingsUIHandler, Assembly-CSharp
         m_MethodName: SetOneHandMode
@@ -61982,6 +61962,7 @@ MonoBehaviour:
   am: {fileID: 24100000, guid: 66b12940d28b0d94ea93cc1bea189c8b, type: 2}
   cc: {fileID: 0}
   globalVolume: {fileID: 1490821644}
+  settingspanel: {fileID: 1947459013}
   masterVolumeText: {fileID: 363815034}
   masterVolumeSlider: {fileID: 431233499}
   musicVolumeText: {fileID: 1242421502}
@@ -64532,6 +64513,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slowdownAmount: 0.5
+  suih: {fileID: 1947459015}
   isSlowMo: 1
   slider: {fileID: 784308156}
   percentageText: {fileID: 1401076087}

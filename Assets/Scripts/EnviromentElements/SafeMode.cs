@@ -20,8 +20,5 @@ public class SafeMode : MonoBehaviour
                 obj.SetActive(true);
             }
         }
-
     }
-
-
 }

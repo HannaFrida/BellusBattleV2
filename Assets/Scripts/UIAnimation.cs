@@ -9,11 +9,11 @@ using UnityEngine.UI;
 */
 public class UIAnimation : MonoBehaviour, IPointerEnterHandler, ISelectHandler
 {
-    private Button b;
+    private Button button;
     // Start is called before the first frame update
     void Start()
     {
-        b = GetComponent<Button>();
+        button = GetComponent<Button>();
     }
 
     // Update is called once per frame

@@ -9,18 +9,12 @@ public class RespawnObject : MonoBehaviour
     [SerializeField] private float respawWait = 5f;
     [SerializeField] private GameObject respawnObject;
     GameObject SpawnObj;
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
         if (respawn)
         {
             respawnTimer += Time.deltaTime;
-            //Debug.Log("droppper: " + dropTimer + " poda " + timeToWaitForPickup);
             if (respawnTimer >= respawWait)
             {
                 respawnTimer = 0f;

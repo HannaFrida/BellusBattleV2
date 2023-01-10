@@ -1,15 +1,11 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
-using UnityEngine.Events;
 using UnityEngine.VFX;
 /*
 * Author Martin Wallmark, Khaled Alraas
 */
 public class PlayerHealth : MonoBehaviour
 {
-    //public delegate void OnGameOver();
-    //public static event OnGameOver onGameOver;
     [SerializeField] private AudioSource playerDeathSound;
     [SerializeField] private VisualEffect bloodSplatter;
     [SerializeField] private VisualEffect poisoned;
@@ -27,7 +23,6 @@ public class PlayerHealth : MonoBehaviour
    
 
     private float health = 1;
-    private bool isInvinsable;
     private bool isAlive = true;
 
     [SerializeField] Transform deathPosition;
@@ -55,27 +50,18 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        //Debug.Log("ajajaj" + " " + gameObject.GetComponent<PlayerDetails>().playerID);
-        //if(isInvinsable) return;
         health -= damage;
         if (health <= 0)
         {
-            //Debug.Log("ajajaj" + " " + gameObject.GetComponent<PlayerDetails>().playerID + " dEAD " + Health);
             KillPlayer();
             playerDeathSound.Play();
-            //onGameOver.Invoke();
         }
     }
-    public void SetInvincible( bool value)
-    {
-        isInvinsable = value;
-    }
+   
 
     public void PlayPoisoned()
     {
         poisoned.gameObject.SetActive(true);
-        //poisoned.Play();
-
     }
     public void PlayLighting()
     {
@@ -88,7 +74,6 @@ public class PlayerHealth : MonoBehaviour
     {
         fire.gameObject.SetActive(true);
         fire.Play();
-
     }
 
     public void StopPoisoned()

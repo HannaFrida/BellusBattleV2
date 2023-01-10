@@ -25,12 +25,6 @@ public class UITransitionStats : MonoBehaviour
         ChooseInterestingStat();
         HowManyRounds();
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     private void UpdateTransitionScene()
     {
         for(int i = 0; i < GameManager.Instance.GetAllPlayers().Count; i++)

@@ -7,7 +7,8 @@ public class PlayerIndicatorFollow : MonoBehaviour {
     [SerializeField] private Transform rigTransform;
 
     private bool follow;
-    private void Awake() {
+    private void Awake() 
+    {
         follow = false;
     }
 
@@ -17,14 +18,10 @@ public class PlayerIndicatorFollow : MonoBehaviour {
         //X and Y position of indicator is overriden from default parent-child to follow the rig
         if (follow) {
             var position = rigTransform.position;
-            //print(rigTransform.position);
             gameObject.transform.position = new Vector3(position.x, position.y+2.2f, 0f);
         }
 
     }
-
-    
-    
     public void Follow() {
         follow = true;
     }
@@ -33,9 +30,6 @@ public class PlayerIndicatorFollow : MonoBehaviour {
         //print("unfollowed");
         follow = false;
         gameObject.transform.localPosition = new Vector3(0f, 2.8f, 0f);
-        var position = rigTransform.position;
-        
-        
-    }
-    
+        var position = rigTransform.position;  
+    }  
 }

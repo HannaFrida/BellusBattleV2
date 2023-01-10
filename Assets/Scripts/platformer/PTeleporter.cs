@@ -4,7 +4,7 @@ using UnityEngine;
 /*
 * Author Khaled Alraas
 */
-public class PTP : MonoBehaviour
+public class PTeleporter : MonoBehaviour
 {
     [SerializeField] private Transform pos;
     [SerializeField] private bool left;
@@ -14,12 +14,11 @@ public class PTP : MonoBehaviour
         if (other.gameObject.tag == "Player" && !left)
         {
             other.gameObject.transform.position = new Vector3(pos.position.x + 2, other.gameObject.transform.position.y, other.gameObject.transform.position.z);
-            //other.gameObject.GetComponent<NavigateUI>().SetConnection(settingsMenuPanel);
+
         }
         else if (other.gameObject.tag == "Player" && left)
         {
             other.gameObject.transform.position = new Vector3(pos.position.x - 2, other.gameObject.transform.position.y, other.gameObject.transform.position.z);
-            //other.gameObject.GetComponent<NavigateUI>().SetConnection(settingsMenuPanel);
         }
     }
 }

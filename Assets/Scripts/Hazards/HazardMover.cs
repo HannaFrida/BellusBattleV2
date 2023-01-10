@@ -12,13 +12,15 @@ public class HazardMover : MonoBehaviour
     [SerializeField] private float movingSpeed;
     [SerializeField] private float smoothTime;
     [SerializeField] private BoxCollider boxCollider;
-    private float timer;
+    [SerializeField] private bool hasReachedHighestPoint;
+    
     private Vector3 moveVector;
     private Vector3 lowestPosition, highestPosition;
-    [SerializeField] private bool hasReachedHighestPoint;
+    
     private bool runTimer = true;
     private bool hasPlayedSound;
     private float warningTime = 3f;
+    private float timer;
     // Start is called before the first frame update
     void Start()
     {
