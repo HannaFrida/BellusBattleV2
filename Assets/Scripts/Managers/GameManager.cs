@@ -148,7 +148,7 @@ public class GameManager : MonoBehaviour, IDataPersistenceManagerPlayer {
         if (Instance != null) Debug.LogError("Found more than one Game Manager in scene.");
         Instance = this;
         gameLoopFinished = false;
-        DontDestroyOnLoad(this);
+        //DontDestroyOnLoad(this);
         AddScenesToPlay();
     }
 

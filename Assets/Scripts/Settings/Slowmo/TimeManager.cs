@@ -16,7 +16,7 @@ public class TimeManager : MonoBehaviour
 
     private void Awake()
     {
-        DontDestroyOnLoad(this.gameObject);
+        //DontDestroyOnLoad(this.gameObject);
         if(!suih.slowmoText.Equals( "Normal speed"))
         {
             isSlowMo = true;

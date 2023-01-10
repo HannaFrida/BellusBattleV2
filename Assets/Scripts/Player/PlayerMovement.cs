@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField, Range(25f, 150f)] private float groundDeceleration;
     [SerializeField, Range(10f, 300f)] private float airResistance;
     [SerializeField, Range(-100f, 0f)] private float downwardForce;
+    [SerializeField, Range(1f, 50000f)] private float acceleration;
 
     [Header("Jump & Edgecontrol")]
     [SerializeField] JumpSetting jumpSetting = JumpSetting.Press;
@@ -60,6 +61,7 @@ public class PlayerMovement : MonoBehaviour
     private float verticalRayLength, horizontalRayLength;
     private float movementAmount;
     private float playerHeight;
+    private float initialMovementSpeed;
 
     private bool hasJumpedOnGround, hasDoubleJump, hasCoyoteTime;
     private bool hasBeenActivated;
@@ -127,6 +129,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        initialMovementSpeed = moveSpeed - 5; //Används för acceleration
         boxCollider = GetComponent<BoxCollider>();
         CalculateRayLength();
         playerHeight = verticalRayLength * 2;
@@ -373,7 +376,8 @@ public class PlayerMovement : MonoBehaviour
 
         if (movementAmount > 0.1f || movementAmount < -0.1f)
         {
-            movementX = moveSpeed * movementAmount;
+            movementX = Mathf.MoveTowards(initialMovementSpeed, moveSpeed, acceleration * Time.deltaTime) * movementAmount;
+            //movementX = moveSpeed * movementAmount ;
         }
         else if (isMovedByPLatform == false)
         {

@@ -1376,7 +1376,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2815349822315832311}
   m_LocalRotation: {x: -0.027610335, y: 0.68702126, z: 0.026140839, w: 0.7256419}
-  m_LocalPosition: {x: -0.007938603, y: 0.10432482, z: -0.00043524313}
+  m_LocalPosition: {x: -0.007938604, y: 0.10432482, z: -0.00043524313}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8470,12 +8470,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 837ef830bb7cb304d9f92158dee6a699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 16.69
-  jumpForce: 20.82
+  moveSpeed: 16.7
+  jumpForce: 21
   airDeceleration: 30.9
   groundDeceleration: 150
   airResistance: 75
   downwardForce: -22.7
+  acceleration: 35500
   jumpSetting: 0
   doubleJumpDecreaser: 0.94
   downwardInputBound: -0.75
@@ -8613,10 +8614,6 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: fee1f234-7f70-425c-b842-d6bbc553708a
     m_ActionName: Player/Dash[/XInputControllerWindows/buttonEast,/XInputControllerWindows1/buttonEast]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 52c2fe1d-c404-48cb-a437-57678f1c68f9
-    m_ActionName: Player/Join Game[/XInputControllerWindows/buttonWest]
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 151876198800240814}
@@ -8941,10 +8938,6 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 14d37e9a-ba5b-4124-8bb7-cdbed672bc00
     m_ActionName: Menu/New action
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 009e2a8d-b73d-419b-a2da-6b3edcca3e38
-    m_ActionName: Player/Rebind[/XInputControllerWindows/select]
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3926757260285706939}
